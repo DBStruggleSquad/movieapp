@@ -1,1 +1,18 @@
-<h2>Welcome</h2>
+<!doctype html>
+<html>
+   <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+   </head>
+   <body ng-app="ourapp">
+		<div ng-controller="HelloController" >
+         <h2>Welcome DB Struggle Squad to the world of AngularJS!</h2>
+      </div>
+   </body>
+         <script>
+         angular.module("ourapp", [])
+         .controller("HelloController", function($scope) {
+            $scope.helloTo = {}; //js object
+            $scope.helloTo.title = "DB Struggle Squad"; //object property
+         });
+      </script>
+</html>
