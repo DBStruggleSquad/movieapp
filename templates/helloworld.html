@@ -5,7 +5,7 @@
    </head>
    <body ng-app="ourapp">
       <div ng-controller="HelloController" >
-         <h2>Welcome {{helloTo.title}} to the world of AngularJS!</h2>
+         <h2>Welcome {{helloTo.title | angular}} to the world of AngularJS!</h2>
       </div>
       <script>
          angular.module("ourapp", [])
