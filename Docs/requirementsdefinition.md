@@ -12,7 +12,7 @@ The intended user audience will consist of casual and frequent movie watchers al
 
 **IV. Functional Requirements**
 
-	-**Essential**
+	-_**Essential**
 		1. Non-Business Users:
 			a. The user will be able to create or delete their account, and edit their account information.
 			b. User accounts will be categorized in the following:
@@ -49,7 +49,7 @@ The intended user audience will consist of casual and frequent movie watchers al
 			e. A compilation of movies (list) can be created by non-business users.
 			f. Movie lists can be share, updated and deleted by non-business users.
 
-	-**Desirable**
+	-_**Desirable**
 		1. Non-business Users:
 			a. Users will be able to reply to other users’ posts.
 			b. Users will be able to instant message each other.
