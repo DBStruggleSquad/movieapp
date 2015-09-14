@@ -1,18 +1,18 @@
-I. Description
+**I. Description**
 
 FilmShack is a web application that provides movie enthusiasts with a place where they can connect with each other. Its aim is to have users review movies and share their favorite movies with others. The social network will allow users to create their personal profile, put together movie lists, and follow other users with whom they may have common film interests. Through these features, FilmShackers may discover new movies to enjoy. 
 
-II. Scope
+**II. Scope**
 
-FilmShack will be developed using AngularJS for the front-end. This will allow it to be accessed from a desktop and provides a responsive application that can be easily adapted to a mobile device. The connection between front-end and back-end will be handled by the Flask microfamework. Its Database Management System of choice is MySQL and the application will be through the Heroku Cloud Application Platform.
+FilmShack will be developed using AngularJS for the front-end. This will allow it to be accessed from a desktop and provides a responsive application that can be easily adapted to a mobile device. The connection between front-end and back-end will be handled by the Flask microfamework. Its Database Management System of choice is MySQL and the application will be available through the Heroku Cloud Application Platform.
 
-III. Stakeholders - User
+**III. Stakeholders - User**
 
 The intended user audience will consist of casual and frequent movie watchers alike.
 
-IV. Functional Requirements
+**IV. Functional Requirements**
 
-	Essential
+	-**Essential**
 		1. Non-Business Users:
 			a. The user will be able to create or delete their account, and edit their account information.
 			b. User accounts will be categorized in the following:
@@ -21,7 +21,7 @@ IV. Functional Requirements
 				iii. Director
 				iv. Reviewer
 				v. Cinematographer
-			c. An user will be able to "follow" other users in order to keep up with their latest activity.
+			c. An user will be able to "follow" *other* users in order to keep up with their latest activity.
 			d. An email notification will be sent out to an user notifying them of any new followers.
 			e. The user will be able to have and edit their personal profiles. They can also visit other users' profiles.
 			f. User profiles will consist of a profile image, favorite movie quote and the user’s latest activity.
@@ -49,7 +49,7 @@ IV. Functional Requirements
 			e. A compilation of movies (list) can be created by non-business users.
 			f. Movie lists can be share, updated and deleted by non-business users.
 
-	Desirable
+	-**Desirable**
 		1. Non-business Users:
 			a. Users will be able to reply to other users’ posts.
 			b. Users will be able to instant message each other.
