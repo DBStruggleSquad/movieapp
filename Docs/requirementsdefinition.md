@@ -4,11 +4,11 @@ FilmShack is a web application that provides movie enthusiasts with a place wher
 
 ## **II. Scope**
 
-FilmShack will be developed using AngularJS for the front-end. This will allow it to be accessed from a desktop and provides a responsive application that can be easily adapted to a mobile device. The connection between front-end and back-end will be handled by the Flask microfamework. Its Database Management System of choice is MySQL and the application will be available through the Heroku Cloud Application Platform.
+FilmShack will be developed using AngularJS (with some possible bootstrap later on)for the front-end. This will allow it to be accessed from a desktop and provides a responsive application that can be easily adapted to a mobile device. The connection between front-end and back-end will be handled by the Flask microfamework. Its Database Management System of choice is MySQL and the application will be available through the Heroku Cloud Application Platform.
 
 ## **III. Stakeholders - User**
 
-The intended user audience will consist of casual and frequent movie watchers alike.
+The intended user audience will consist of casual and frequent movie watchers alike as well Movies studios looking to promote their latest offering.
 
 ## **IV. Functional Requirements**
 
@@ -36,20 +36,24 @@ The intended user audience will consist of casual and frequent movie watchers al
   e. The user will be able to have and edit their personal profiles. They can also visit other users' profiles.
 
   f. User profiles will consist of a profile image, favorite movie quote and the user’s latest activity.
+  
+  g. A post will be either a list, a review, or a text post. 
+  
+  h. A post can contain of text, links and/or images.
 
-  g. A post can consist of text, links and/or images.
+  i. Public or private events can be created by any user. These can be updated and deleted by their creator.
 
-  h. Public or private events can be created by any user. These can be updated and deleted by their creator.
+  j. The user can invite to and RSVP to an event.
 
-  i. The user can invite to and RSVP to an event.
+  k. As a way to create a sense of community, users can create fanclubs (groups).
 
-  j. As a way to create a sense of community, users can create fanclubs (groups).
+  l. The creator of the fanclub will be the only user able to moderate the group.
+  
+  m. An email notification will be sent out to an user notifying them of any new followers to their fan club.
 
-  k. The creator of the fanclub will be the only user able to moderate the group.
+  n. The user will be able to keep up with all of the entities they follow, including friends, groups and events updates.
 
-  l. The user will be able to keep up with all of the entities they follow, including friends, groups and events updates.
-
-  m. A simultaneous search feature will be provided to easily look through friends, groups and events.
+  o. A simultaneous search feature will be provided to easily look through friends, groups and events.
 
   2. Business Users:
 
