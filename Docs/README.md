@@ -1,0 +1,1 @@
+All documents were written out in Google Docs as a team collaboration and formatted in GitHub Flavored Markdown by Katya.
