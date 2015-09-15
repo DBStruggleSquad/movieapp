@@ -18,3 +18,11 @@ We were able to learn about the different technologies available to us in these 
 as decided which wanted we wanted to use based and our needs and the benefits of each teachnologies. We 
 planed out the differents aspects of our web app through the development of our functional requierements
 and set out to plan our different sprints based on these requierements.
+
+Planned work for Sprint 1.
+ER Mapping and working DBMS instance hosted somewhere on the Cloud\
+App (client side) mock screenshots and/or wire frames with matching
+requirements and task descriptions
+Updated Gantt chart with percent completion for each task
+Detailed Project Development Plan for Sprint II
+Updated Master Project Development Plan
