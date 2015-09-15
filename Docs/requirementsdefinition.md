@@ -8,11 +8,11 @@ FilmShack will be developed using AngularJS (with some possible bootstrap later 
 
 ## **III. Stakeholders - User**
 
-The intended user audience will consist of casual and frequent movie watchers alike as well Movies studios looking to promote their latest offering.
+The intended user audience will consist of casual and frequent movie watchers alike as well as movies studios looking to promote their latest offering.
 
 ## **IV. Functional Requirements**
 
-# Essential
+### Essential
   1. Non-Business Users:
 
   a. The user will be able to create or delete their account, and edit their account information.
@@ -62,6 +62,7 @@ The intended user audience will consist of casual and frequent movie watchers al
   b. A business will be able to have and edit a business page (profile), which can be accessed by non-business users.
 
   c. Business accounts will be categorized in the following:
+  
   i. Indie
 
   ii. Cinematographic Studio
@@ -82,7 +83,7 @@ The intended user audience will consist of casual and frequent movie watchers al
 
   f. Movie lists can be share, updated and deleted by non-business users.
 
-# Desirable
+### Desirable
 
   1. Non-business Users:
 
