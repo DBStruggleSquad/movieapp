@@ -9,16 +9,16 @@
 | Task Name  | Duration | Start | Finish | Resource Names | Work |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | **Sprint 1** | **10 days** | **Wed, 9/16/15** | **Tue, 9/29/15** | - | **170 hrs** |
-| *ER Mapping and DBMS Instance* | *6 days* | *Wed, 9/16/15* | *Wed, 9/23/15* | *Antoine, Glorimar* | *72 hrs* |
-| *GUI Design and Wire Frame* | *8 days* | *Wed, 9/16/15* | *Fri, 9/25/15* | *Antoine, Katya* | *96 hrs* |
-| *Update Project Development Plan* | *2 days* | *Sun, 9/27/15* | *Mon, 9/28/15* | *Antoine, Glorimar, Katya* | *2 hrs* |
+| ~~*ER Mapping and DBMS instance*~~ | ~~*6 days*~~ | ~~*Wed, 9/16/15*~~ | ~~*Wed, 9/23/15*~~ | ~~*Antoine, Glorimar*~~ | ~~*72 hrs*~~ |
+| ~~*GUI wireframes and/or mockups*~~ | ~~*8 days*~~ | ~~*Wed, 9/16/15*~~ | ~~*Fri, 9/25/15*~~ | ~~*Antoine, Katya*~~ | ~~*96 hrs*~~ |
+| ~~*Update Project Development Plan*~~ | ~~*2 days*~~ | ~~*Sun, 9/27/15*~~ | ~~*Mon, 9/28/15*~~ | ~~*Antoine, Glorimar, Katya*~~ | ~~*2 hrs*~~ |
 
 ### Sprint 2
 
 | Task Name  | Duration | Start | Finish | Resource Names | Work |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| **Sprint 2** | **11 days** | **Wed, 9/30/15** | **Tue, 10/13/15** | - | **110 hrs** |
-| **GUI** | **8 days** | **Wed, 9/30/15** | **Thu, 10/8/15** | - | **54 hrs** |
+| **Sprint 2** | **11 days** | **Wed, 9/30/15** | **Tue, 10/13/15** | - | **123 hrs** |
+| **Front-End** | **8 days** | **Wed, 9/30/15** | **Thu, 10/8/15** | - | **54 hrs** |
 | **User Profile** | **5 days** | **Wed, 9/30/15** | **Mon, 10/5/15** | - | **27 hrs** |
 | *User Account* | *4 days* | *Wed, 9/30/15* | *Sat, 10/3/15* | - | *5 hrs* |
 | *User Personal Profile* | *4 days* | *Wed, 9/30/15* | *Sat, 10/3/14* | - | *9 hrs* |
@@ -29,6 +29,7 @@
 | **Movies** | **5 days** | **Fri, 10/2/15** | **Wed, 10/7/15** | - | **15 hrs** |
 | *Movie Page* | *5 days* | *Fri, 10/2/15* | *Wed, 10/7/15* | - | *10 hrs* |
 | *Movie Search* | *5 days* | *Fri, 10/2/15* | *Wed, 10/7/15* | - | *5 hrs* |
+| **Dummy Data** | **3 days** | **Wed, 9/30/15** | **Thu, 10/8/15** | - | **13 hrs** |
 | **RESTful** | **8 days** | **Wed, 9/30/15** | **Thu, 10/8/15** | - | **54 hrs** |
 | *Update Project Development Plan* | *2 days* | *Sun, 10/11/15* | *Mon, 10/12/15* | *Antoine, Glorimar, Katya* | *2 hrs* |
 
