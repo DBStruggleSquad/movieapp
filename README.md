@@ -26,3 +26,20 @@ requirements and task descriptions
 * Updated Gantt chart with percent completion for each task
 * Detailed Project Development Plan for Sprint II
 Updated Master Project Development Plan
+
+# Sprint 1
+
+#####What worked well? #####
+The team development of how the app was supposed to look went great as well as our division of work.
+
+#####What didn't work well? #####
+ Instalation of some software needed as well as their dependencies on ubuntu was somewhat of a pain.
+ 
+#####What we learned? #####
+The software needed to succesfully host the DBMS as well as the necessary set up to access it.
+
+#####Planned work for Sprint 1.#####
+* Finish the whole front end.
+* Updated Gantt chart with percent completion for each task
+* Detailed Project Development Plan for Sprint II
+Updated Master Project Development Plan
