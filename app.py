@@ -7,6 +7,7 @@ Created on Sep 12, 2015
 from flask import Flask
 from flask import render_template
 from flask.ext.triangle import Triangle
+from flask.ext.bootstrap import Bootstrap
 from flask.ext.mysql import MySQL
 import os
 import urlparse
@@ -16,7 +17,7 @@ import sys
 
 app = Flask(__name__)
 Triangle(app)
-
+bootstrap = Bootstrap(app)
 mysql = MySQL()
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
@@ -31,7 +32,7 @@ cursor = conn.cursor()
 
 @app.route('/')
 def hello():
-    return render_template('helloworld.html')
+    return render_template('profile.html')
 
 if __name__ == '__main__':
     app.run()

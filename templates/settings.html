@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="static/css/settings.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+  </head>
+  <body ng-app="myApp">
+
+    <!-- Header, indicates where the user is located. -->
+    <div class="header">
+        Settings
+    </div>
+
+    <div class="enclosure" ng-controller="settings">
+
+      <div class="account-settings">
+        <h4>Account</h4>
+        <ul>
+          <li ng-repeat="option in accountOptions.accOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+            {{ option.type }}<br>{{ option.current }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="profile-settings">
+        <h4>Profile</h4>
+        <ul>
+          <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+            {{ option.type }}<br><img src="{{ option.current }}"/>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Navigation, contains buttons that navigate user through app.-->
+    <nav class="navigation" ng-include="'static/directives/navigation.html'"></nav>
+
+    <!-- Modules -->
+    <script src="static/js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="static/js/controllers/settingsController.js"></script>
+
+    <!-- Directives -->
+    <script src="static/js/directives/activityPost.js"></script>
+    <script src="static/js/directives/installApp.js"></script>
+
+  </body>
+</html>

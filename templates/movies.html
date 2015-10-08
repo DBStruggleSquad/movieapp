@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="static/css/movies.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+  </head>
+  <body ng-app="myApp">
+
+    <!-- Header, indicates where the user is located. -->
+    <div class="header">
+        Movies
+    </div>
+
+    <div class="enclosure" ng-controller="movies">
+      <!-- User-Info, offers user details. -->
+      <div class="movies-header">
+        <div class="banner"></div>
+        <div class="movie-search">
+          <input class="search-bar" type="text" placeholder="Search..."/>
+          <div class="search-button"></div>
+        </div>
+      </div>
+
+      <!-- Profile-Tabs, allow navigation in profile.-->
+      <div class="profile-tabs">
+
+        <div ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)" >
+          <img src="static/img/active-{{ tab.title | lowercase }}-icon.svg"/> {{ tab.title }}
+        </div>
+      
+      </div>
+
+        <div class="content">
+            <div ng-include="currentTab"></div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="mostreviewed.tpl.html">
+        <div class="movie-entry" ng-repeat="movie in movies">
+          <a href="#">{{ movie.name }}<br><img src="{{ movie.img }}"/></a>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="bygenre.tpl.html">
+      <div id="listsView">
+        <h1>View Two</h1>
+        Lists go here
+      </div>
+    </script>
+    
+    <script type="text/ng-template" id="toprated.tpl.html">
+      <div id="reviewsView">
+        <h1>View Three</h1>
+        Reviews go here
+      </div>
+    </script>
+
+    </div>
+
+    <!-- Navigation, contains buttons that navigate user through app.-->
+    <nav class="navigation" ng-include="'static/directives/navigation.html'"></nav>
+
+    <!-- Modules -->
+    <script src="static/js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="static/js/controllers/moviesController.js"></script>
+
+    <!-- Directives -->
+    <script src="static/js/directives/activityPost.js"></script>
+    <script src="static/js/directives/installApp.js"></script>
+
+  </body>
+</html>
