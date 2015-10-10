@@ -28,6 +28,7 @@ mysql = MySQL()
 #cursor = conn.cursor()
 # Update with environment configuration.
 
+
 @app.route('/')
 def hello():
     return render_template('profile.html')
