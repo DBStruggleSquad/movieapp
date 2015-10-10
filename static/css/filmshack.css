@@ -206,13 +206,13 @@ a {
 	height: 50px;
 }
 
-ul {
+.account-settings ul, .profile-settings ul, .lists ul, .my-fanclubs ul, .public-fanclubs ul, .my-events ul, .public-events ul {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
 }
 
-ul li {
+.account-settings ul li, .profile-settings ul li, .lists ul li, .my-fanclubs ul li, .public-fanclubs ul li, .my-events ul li, .public-events ul li {
     border-bottom: 1px solid black;
     background-image: url(../img/arrow-icon.svg);
     background-repeat:no-repeat;
@@ -221,7 +221,7 @@ ul li {
     padding: 5px;
 }
 
-ul li:hover {
+.account-settings ul li:hover, .profile-settings ul li:hover, .lists ul li:hover, .my-fanclubs ul li:hover, .public-fanclubs ul li:hover, .my-events ul li:hover, .public-events ul li:hover {
 	cursor: pointer;
 }
 
