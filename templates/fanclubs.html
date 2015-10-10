@@ -11,28 +11,38 @@
 
     <!-- Header, indicates where the user is located. -->
     <div class="header">
-        Settings
+        Fanclubs
     </div>
 
-    <div class="enclosure" ng-controller="settings">
+    <div class="enclosure" ng-controller="fanclubs">
 
-      <div class="account-settings">
-        <h4>Account</h4>
+      <div class="fanclub-tools">
+        <div class="create">
+          <button class="create-fanclub">Create a New Fanclub</button>
+        </div>
+        <div class="fanclub-search">
+          <input class="search-bar" type="text" placeholder="Search..."/>
+          <div class="search-button"></div>
+        </div>        
+      </div>
+
+      <div class="my-fanclubs">
+        <h4>My Fanclubs</h4>
         <ul>
-          <li ng-repeat="option in accountOptions.accOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            {{ option.type }}<br>{{ option.current }}
+          <li ng-repeat="fanclub in myFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+            {{ fanclub.name }} <br> {{ fanclub.type }} <br> Directed by <a href="#"> {{ fanclub.creator }} </a>
           </li>
         </ul>
       </div>
 
-      <div class="profile-settings">
-        <h4>Profile</h4>
+      <div class="public-fanclubs">
+        <h4>Public Fanclubs</h4>
         <ul>
-          <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            {{ option.type }}<br><img src="{{ option.current }}"/>
+          <li ng-repeat="fanclub in publicFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+            {{ fanclub.name }} <br> {{ fanclub.type }} <br> Directed by <a href="#"> {{ fanclub.creator }} </a>
           </li>
         </ul>
-      </div>
+      </div>      
 
     </div>
 
@@ -43,7 +53,7 @@
     <script src="static/js/app.js"></script>
 
     <!-- Controllers -->
-    <script src="static/js/controllers/settingsController.js"></script>
+    <script src="static/js/controllers/fanclubsController.js"></script>
 
     <!-- Directives -->
     <script src="static/directives/activityPost.js"></script>
