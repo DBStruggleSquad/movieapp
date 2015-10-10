@@ -4,6 +4,6 @@ app.directive('activity-post', function() {
     scope: { 
       obj: '=' 
     }, 
-    templateUrl: 'js/directives/activityPost.html' 
+    templateUrl: '/static/js/directives/activityPost.html' 
   }; 
 });

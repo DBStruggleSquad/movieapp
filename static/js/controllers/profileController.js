@@ -19,6 +19,24 @@ app.controller('profile', ['$scope', function($scope) {
     ]
   }
 
+$scope.userLists = {
+    List_name: 'My top ten',
+    movies: [ 
+      { 
+        title: 'Avatar',
+        poster: '/static/img/movie-placeholder.svg',
+      }, 
+      { 
+        title: 'Avengers',
+        poster: '/static/img/movie-placeholder.svg',
+      }, 
+      { 
+        title: 'Pokemon',
+        poster: '/static/img/movie-placeholder.svg', 
+      }
+    ]
+  }
+
 $scope.tabs = [{
             title: 'Activity',
             url: 'activity.tpl.html'

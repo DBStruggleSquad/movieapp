@@ -95,6 +95,12 @@ a {
 	display: flex;
 }
 
+.movie-list {
+	background-color: white;
+	margin-top: 15px;
+	display: inline;
+}
+
 .profile-picture-thmb {
 	padding-left: 10px;
 	width: 5%;
@@ -105,6 +111,15 @@ a {
 	height: 50px;
 }
 
+.list-picture-thmb {
+	padding-left: 1px;
+	width: 5%;
+}
+
+.list-picture-thmb img {
+	width: 95px;
+	height: 95px;
+}
 .post-content {
 	flex-grow: 1;
 }
