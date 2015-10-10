@@ -28,6 +28,7 @@ mysql = MySQL()
 #cursor = conn.cursor()
 # Update with environment configuration.
 
+
 @app.route('/')
 def hello():
     return render_template('profile.html')
@@ -64,9 +65,9 @@ def fanclub_page():
 def fanclubs():
     return render_template('fanclubs.html')
 
-@app.route('/movie-page')
+@app.route('/movie-profile')
 def movie_page():
-    return render_template('movie-page.html')
+    return render_template('movie-profile.html')
 
 if __name__ == '__main__':
     app.run()

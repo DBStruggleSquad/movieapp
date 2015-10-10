@@ -1,4 +1,4 @@
-app.controller('profile', ['$scope', function($scope) {
+app.controller('profile', ['$scope', '$http', function($scope,$http) {
   $scope.userDetails = {
     name: 'katrific',
     rating: 5,
@@ -17,7 +17,7 @@ app.controller('profile', ['$scope', function($scope) {
         pubdate: new Date('2015', '09', '15'), 
       }
     ]
-  }
+  };
 
 $scope.userLists = {
     List_name: 'My top ten',
@@ -35,7 +35,7 @@ $scope.userLists = {
         poster: '/static/img/movie-placeholder.svg', 
       }
     ]
-  }
+  };
 
   $scope.userReview = {
     movies: [ 
@@ -58,7 +58,7 @@ $scope.userLists = {
         review: '/static/img/movie-placeholder.svg', 
       }
     ]
-  }
+  };
 
 $scope.tabs = [{
             title: 'Activity',
@@ -75,10 +75,12 @@ $scope.tabs = [{
 
     $scope.onClickTab = function (tab) {
         $scope.currentTab = tab.url;
-    }
+    };
     
     $scope.isActiveTab = function(tabUrl) {
         return tabUrl == $scope.currentTab;
-    }
+    };
+    $http.get('movie.json').success(function(data) {
+        $scope.movies = data;});
 
 }]);
