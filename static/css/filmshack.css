@@ -57,42 +57,41 @@ a {
 /*	Profile */
 /*			*/
 
-
-.user-info {
+.user-info, .movie-info {
 	background-color: white;
 	display: flex;
 	flex-direction: row;
 }
 
-.user-info div:first-child {
+.user-info div:first-child, .movie-info div:first-child {
 	display: inline-block;
 	flex-grow: 1;
 }
 
-.profile-picture {
+.profile-picture, .movie-poster {
 	width: 25%;
 }
 
-.profile-picture img {
+.profile-picture img, .movie-poster img {
 	width: 250px;
 	height: 250px;
 }
 
-.user-details {
+.user-details, .movie-details {
 	flex-grow: 1;
 	padding-top: 15px;
 }
 
-.user-details div {
+.user-details div, .movie-details div {
 	padding-top: 10px;
 }
 
-.user-name {
+.user-name, .movie-name {
 	font-size: 250%;
 	font-weight: bold;
 }
 
-.user-rating img {
+.user-rating img, .movie-rating img {
 	width: 35px;
 	height: 35px;
 }
@@ -101,7 +100,7 @@ a {
 	font-size: 150%;
 }
 
-.follow-button {
+.follow-button, .add-button {
    color: white;
    font-size: 14px;
    padding:2px 10px;
@@ -113,13 +112,13 @@ a {
    background-position:center;	
 }
 
-.follow-button:hover {
+.follow-button:hover, .add-button:hover {
    color: rgb(255,80,80);
    background: rgba(255,80,80,0.25);
    transition: background 500ms;
 }
 
-.follow-button {
+.follow-button, .add-button {
 	background-image: url(../img/plus-button-background.svg);
 }
 
@@ -210,13 +209,13 @@ a {
 	height: 50px;
 }
 
-ul {
+.account-settings ul, .profile-settings ul, .lists ul, .my-fanclubs ul, .public-fanclubs ul, .my-events ul, .public-events ul {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
 }
 
-ul li {
+.account-settings ul li, .profile-settings ul li, .lists ul li, .my-fanclubs ul li, .public-fanclubs ul li, .my-events ul li, .public-events ul li {
     border-bottom: 1px solid black;
     background-image: url(../img/arrow-icon.svg);
     background-repeat:no-repeat;
@@ -225,7 +224,7 @@ ul li {
     padding: 5px;
 }
 
-ul li:hover {
+.account-settings ul li:hover, .profile-settings ul li:hover, .lists ul li:hover, .my-fanclubs ul li:hover, .public-fanclubs ul li:hover, .my-events ul li:hover, .public-events ul li:hover {
 	cursor: pointer;
 }
 
