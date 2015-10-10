@@ -2,7 +2,7 @@
 <html>
   <head>
     <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../static/bower_components/flexslider/flexslider.css">
+    <link rel="stylesheet" type="text/css" href="/static/bower_components/flexslider/flexslider.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
     <link href="/static/css/filmshack.css" rel="stylesheet" />
    
@@ -23,11 +23,10 @@
 
     <div class="enclosure" ng-controller="profile">
       <!-- User-Info, offers user details. -->
-      <div class="movie-info" ng-include="'static/directives/movieInfo.html'"></div>
+      <div class="movie-info" ng-include="'/static/directives/movieInfo.html'"></div>
 
       <!-- Profile-Tabs, allow navigation in profile.-->
       <div class="profile-tabs">
-
         <div ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)" ><img src="/static/img/active-{{ tab.title | lowercase }}-icon.svg"/> {{ tab.title }}</div>
       </div>
 
@@ -36,16 +35,24 @@
         </div>
     </div>
 
-    <script type="text/ng-template" id="activity.tpl.html">
-        <div class="activity-post" ng-repeat="activity in userDetails.activity" ng-include="'/static/directives/activityPost.html'"></div>
-    </script>
-    
-    <script type="text/ng-template" id="lists.tpl.html">
-      <div class="activity-post" ng-repeat="activity in userDetails.activity" ng-include="'/static/directives/userMovieListPost.html'"></div>
+    <script type="text/ng-template" id="info.tpl.html">
+      <div class="movie-synopsis">
+        <h4>Synopsis</h4>
+        <div class="movie-synopsis-content">{{ movie.synopsis }}</div>
+      </div>           
+
+      <div class="movie-cast">
+        <h4>Cast</h4>
+        <div class="movie-cast-content" ng-repeat="cast in movie.cast">
+          <a href="#"><img ng-src="{{ cast.img }}"/><br>{{ cast.name }}</a>
+        </div>        
+      </div>        
     </script>
     
     <script type="text/ng-template" id="reviews.tpl.html">
-        <div class="activity-post" ng-repeat="review in userReview.movies" ng-include="'/static/directives/userProfileReviewPost.html'"></div>
+      <div class="activity-post" ng-repeat="review in movieReviews.movies">
+      {{ review.Movie_title }} {{ review.Review_title }} {{ review.Rating }} {{ review.review }}
+      </div>
     </script>
 
     </div>
@@ -57,7 +64,7 @@
     <script src="../static/js/app.js"></script>
 
     <!-- Controllers -->
-    <script src="/static/js/controllers/movieController.js"></script>
+    <script src="../static/js/controllers/movieController.js"></script>
 
     <!-- Directives -->
     <script src="/static/js/directives/activityPost.js"></script>

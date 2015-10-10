@@ -299,30 +299,30 @@ a {
 /*	Fanclubs, Events	*/
 /*						*/
 
-.fanclub-info, .fanclub-description, .event-info, .event-description {
+.fanclub-info, .fanclub-description, .event-info, .event-description, .movie-synopsis {
 	background-color: white;
 	display: flex;
 	flex-direction: column;
 	margin-top: 15px;
 }
 
-.fanclub-fanclub h4, .fanclub-description h4, .fanclub-members h4, .event-info h4, .event-description h4, .event-attendants h4 {
+.fanclub-fanclub h4, .fanclub-description h4, .fanclub-members h4, .event-info h4, .event-description h4, .event-attendants h4, .movie-synopsis h4, .movie-cast h4 {
 	color: #b22222;
 }
 
-.fanclub-members, .event-attendants {
+.fanclub-members, .event-attendants, .movie-cast {
 	background-color: white;
 	margin-top: 15px;
 	padding-top: 2px;
 }
 
-.fanclub-members-content, .event-attendant-content {
+.fanclub-members-content, .event-attendant-content, .movie-cast-content {
 	display: inline-block;
 	margin: 20px;
 	text-align: center;
 }
 
-.fanclub-members-content img, .event-attendant-content img {
+.fanclub-members-content img, .event-attendant-content img, .movie-cast-content img {
 	width: 100px;
 	height: 100px;
 }

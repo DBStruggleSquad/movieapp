@@ -3,7 +3,9 @@
   <head>
     <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="/static/bower_components/flexslider/flexslider.css">
     <link href="static/css/filmshack.css" rel="stylesheet" />
+
     <script src="/static/bower_components/jquery/dist/jquery.js"></script>
     <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
     <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
@@ -50,33 +52,24 @@
     <!-- MOST REVIEWED -->
     <script type="text/ng-template" id="mostreviewed.tpl.html">
         <div class="movie-entry" ng-repeat="movie in movies">
-          <a href="#">{{ movie.name }}<br><img src="{{ movie.img }}"/></a>
+          <a href="#"><img src="{{ movie.img }}"/><br>{{ movie.name }}</a>
         </div>
     </script>
 
+    <script type="text/ng-template" id="lists.tpl.html">
+        <div class="activity-post" ng-repeat="activity in userDetails.activity" ng-include="'static/directives/userMovieListPost.html'"></div>
+    </script>
+
+
     <!-- BY GENDER -->
     <script type="text/ng-template" id="bygenre.tpl.html">
-      <div id="listsView">
-          <div class="activity-post" ng-repeat="genre in genreList">
-              <div class="post-content">
-                  <a href="#">{{genre.name}}</a><br>
-                  <ol class="movie-list">
-                      <flex-slider slide="poster in genre.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
-                          <li>
-                              <img id="flex-slider-poster" ng-src="{{poster.poster}}">
-                          </li>
-                      </flex-slider>
-                  </ol>
-              </div>
-          </div>
-      </div>
+          <div class="activity-post" ng-repeat="genre in genreList" ng-include="'static/directives/movieByGender.html'" ></div>
     </script>
 
     <!-- TOP RATED -->
     <script type="text/ng-template" id="toprated.tpl.html">
-      <div id="reviewsView">
-        <h1>View Three</h1>
-        Reviews go here
+      <div class="movie-entry"  id="reviewsView" ng-repeat="movie in topRated">
+          <a href="#"><img src="{{ movie.poster }}"/><br>{{ movie.name }}</a>
       </div>
     </script>
 

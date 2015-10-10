@@ -29,6 +29,18 @@ app.controller('movies', ['$scope', function($scope) {
         img: 'static/img/movie-placeholder.svg'
       }];
 
+    $scope.genreList = [
+        {name: 'Action', movies: [{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'}, {name: 'Movie-2', poster: '/static/img/movie-placeholder.svg'}, {name: 'Movie-3', poster: '/static/img/movie-placeholder.svg'}]},
+        {name: 'Drama', movies: [{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'}, {name: 'Movie-2', poster: '/static/img/movie-placeholder.svg'}, {name: 'Movie-3', poster: '/static/img/movie-placeholder.svg'}]},
+        {name: 'History', movies: [{name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'}, {name: 'Movie-2', poster: '/static/img/movie-placeholder.svg'}, {name: 'Movie-3', poster: '/static/img/movie-placeholder.svg'}]}
+    ]
+    $scope.topRated = [
+        {name: 'Movie-1', poster: '/static/img/movie-placeholder.svg'},
+        {name: 'Movie-2', poster: '/static/img/movie-placeholder.svg'},
+        {name: 'Movie-3', poster: '/static/img/movie-placeholder.svg'},
+        {name: 'Movie-4', poster: '/static/img/movie-placeholder.svg'},
+        {name: 'Movie-5', poster: '/static/img/movie-placeholder.svg'}
+    ]
 $scope.tabs = [{
             title: 'Most Reviewed',
             url: 'mostreviewed.tpl.html'
