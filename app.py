@@ -44,6 +44,28 @@ def user_lists():
 def settings():
     return render_template('settings.html')
 
+@app.route('/business-profile')
+def business_profile():
+    return render_template('business-profile.html')
+
+@app.route('/event-page')
+def event_page():
+    return render_template('event-page.html')
+
+@app.route('/events')
+def events():
+    return render_template('events.html')
+
+@app.route('/fanclub-page')
+def fanclub_page():
+    return render_template('fanclub-page.html')
+
+@app.route('/fanclubs')
+def fanclubs():
+    return render_template('fanclubs.html')
+
+
+
 
 if __name__ == '__main__':
     app.run()

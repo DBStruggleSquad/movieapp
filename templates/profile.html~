@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/bower_components/flexslider/flexslider.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="/static/css/profile.css" rel="stylesheet" />
+   
+
+  <script src="/static/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
+  <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
+  <script src="/static/bower_components/angular/angular.js"></script>
+  <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+
+  </head>
+  <body ng-app="myApp">
+    {% raw %}
+    <!-- Header, indicates where the user is located. -->
+    <div class="header">
+        User Profile
+    </div>
+
+    <div class="enclosure" ng-controller="profile">
+      <!-- User-Info, offers user details. -->
+      <div class="user-info">
+        <div class="profile-picture"><img src="/static/img/profile-picture-placeholder.svg"/></div>
+        <div class="user-details">
+          <div class="user-name">{{ userDetails.name }}</div>
+          <div class="user-rating"><img src="/static/img/star-icon.svg"/></div>
+          <div class="user-quote">" {{ userDetails.quote }} "</div>
+          <div class="follow-button"><install-app></install-app></div>
+        </div>
+      </div>
+
+      <!-- Profile-Tabs, allow navigation in profile.-->
+      <div class="profile-tabs">
+
+        <div ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)" ><img src="/static/img/active-{{ tab.title | lowercase }}-icon.svg"/> {{ tab.title }}</div>
+      </div>
+
+        <div class="content">
+            <div ng-include="currentTab"></div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="activity.tpl.html">
+        <div class="activity-post" ng-repeat="activity in userDetails.activity">
+                  <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
+                  <div class="post-content">
+                    <a href="#">{{ userDetails.name }}</a> {{ activity.type }} 
+                    <br>
+                    {{ activity.pubdate | date }}
+                  </div>
+                </div>
+              </div>
+       </div>
+    </script>
+    
+    <script type="text/ng-template" id="lists.tpl.html">
+      <div class="activity-post" ng-repeat="activity in userDetails.activity">
+                  <div class="post-content">
+                    <a href="#">{{ userLists.List_name }}</a>
+                    <br>
+                    {{ activity.pubdate | date }}
+                    <br>
+                      <ol class="movie-list" >
+                        <div class="activity-post" ng-repeat="activity in userDetails.activity">
+                          <flex-slider slide="poster in userLists.movies track by $index" animation="slide">
+                              <li>
+                                  <img ng-src="{{poster.poster}}">
+                              </li>
+                          </flex-slider>
+                        </div>
+                        </ol>
+                      </div>                    
+                  </div>
+       </div>
+    </script>
+    
+    <script type="text/ng-template" id="reviews.tpl.html">
+      <div id="reviewsView">
+        <div class="activity-post" ng-repeat="review in userReview.movies">
+                  <div class="Review-Movie-title"> {{review.Movie_title}} </div>
+                    <div>
+                      <span>
+                        <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
+                            <div class="post-content">
+                                <a href="#">{{ userDetails.name }}</a>
+                            </div>
+                        </div>
+                      </span>
+                      <span>
+                            <div class="Review-title"> {{review.Review_title}} </div>
+                            <div class="user-rating"><img src="/static/img/star-icon.svg"/></div>
+                            <div class="Review-text"> {{review.review}} </div>
+                      </span>
+                    </div>
+                  </div>
+        </div>
+      </div>
+    </script>
+
+    </div>
+
+    <!-- Navigation, contains buttons that navigate user through app.-->
+    <div class="navigation">
+      <div class="home">
+        <img src="/static/img/home-icon.svg"/><br>Home
+      </div>
+      <div class="my-profile">
+        <img src="/static/img/user-icon.svg"/><br>My Profile
+      </div>
+      <div class="movies">
+        <img src="/static/img/movie-icon.svg"/><br>Movies
+      </div>
+      <div class="my-lists">
+        <img src="/static/img/list-icon.svg"/><br>My Lists
+      </div>
+      <div class="settings">
+        <img src="/static/img/settings-icon.svg"/><br>Settings
+      </div>
+    </div>
+
+    <!-- Modules -->
+    <script src="/static/js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="/static/js/controllers/profileController.js"></script>
+
+    <!-- Directives -->
+    <script src="/static/js/directives/activityPost.js"></script>
+    <script src="/static/js/directives/installApp.js"></script>
+
+    {% endraw %}
+  </body>
+</html>
