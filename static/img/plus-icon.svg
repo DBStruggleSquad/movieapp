@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 396.44354 380.78164"
+   height="107.46504mm"
+   width="111.88518mm"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="plus-icon.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1474"
+     inkscape:window-height="841"
+     id="namedview4271"
+     showgrid="false"
+     inkscape:zoom="0.61977777"
+     inkscape:cx="-39.766759"
+     inkscape:cy="190.39082"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="opacity:1;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:8.30200005;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 154.67015,363.01743 C 122.85287,355.5577 96.024379,341.37632 70.703267,318.63278 30.28268,282.32725 12.160997,243.47431 12.041648,192.86231 11.924436,143.39859 27.774652,102.49335 59.923289,69.287767 133.01723,-6.2089288 253.8891,-8.2925189 328.13319,64.664348 c 36.79972,36.161602 53.51531,74.994812 53.51531,124.324682 0,50.2447 -17.35989,90.07616 -54.95612,126.09464 -46.35266,44.40695 -110.64927,62.32313 -172.02223,47.93376 z m 74.8432,-96.85039 1.02895,-46.8521 48.79545,-0.98801 48.79544,-0.98816 0,-26.57787 0,-26.57787 -49.97191,-1.7718 -49.97183,-1.77194 -0.32657,-10.63109 c -0.1784,-5.84717 -0.52782,-26.97653 -0.77537,-46.95436 l -0.44894,-36.323056 -27.68008,0 -27.68031,0 0,47.840186 0,47.84026 -26.75757,0.44763 c -14.71674,0.2459 -36.72261,0.67144 -48.9019,0.94502 l -22.144243,0.49769 -1.077902,27.40472 -1.077902,27.40479 49.979797,0 49.97972,0 0,45.47779 c 0,25.0128 1.173,46.60399 2.60674,47.98059 1.43381,1.37666 14.30502,2.04103 28.60296,1.47657 l 25.99614,-1.02645 1.0291,-46.8521 z"
+     id="path5606"
+     inkscape:connector-curvature="0" />
+</svg>

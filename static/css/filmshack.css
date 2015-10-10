@@ -1,0 +1,363 @@
+/*			*/
+/*	General */
+/*			*/
+
+html, body {
+ margin: 0;
+ padding: 0;
+ font-family: 'Roboto', sans-serif;
+ width: 100%;
+ height: 100%;
+ background-color: #eee9e9;
+}
+
+a {
+	color: #b22222;
+}
+
+.header {
+ padding: 10px;
+ background-color: #b22222;
+ color: white;
+}
+
+.header img {
+   display: inline-block;
+}
+
+.content {
+	background-color: #eee9e9;
+	height: 100%;
+}
+
+.navigation {
+	background-color: #b22222;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation div {
+	display: inline-block;
+	flex-grow: 1;
+	text-align: center;
+	color: #ff8080;
+}
+
+.navigation div img {
+	width: 25px;
+	height: 25px;
+}
+
+/*			*/
+/*	Profile */
+/*			*/
+
+
+.user-info {
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+}
+
+.user-info div:first-child {
+	display: inline-block;
+	flex-grow: 1;
+}
+
+.profile-picture {
+	width: 25%;
+}
+
+.profile-picture img {
+	width: 250px;
+	height: 250px;
+}
+
+.user-details {
+	flex-grow: 1;
+	padding-top: 15px;
+}
+
+.user-details div {
+	padding-top: 10px;
+}
+
+.user-name {
+	font-size: 250%;
+	font-weight: bold;
+}
+
+.user-rating img {
+	width: 35px;
+	height: 35px;
+}
+
+.user-quote {
+	font-size: 150%;
+}
+
+.follow-button {
+   color: white;
+   font-size: 14px;
+   padding:2px 10px;
+   border-radius: 2px;
+   width: 95px;
+   height: 30px;
+   background-repeat:no-repeat;
+   background-size: cover;
+   background-position:center;	
+}
+
+.follow-button:hover {
+   color: rgb(255,80,80);
+   background: rgba(255,80,80,0.25);
+   transition: background 500ms;
+}
+
+.follow-button {
+	background-image: url(../img/plus-button-background.svg);
+}
+
+.activity-post, .event-post {
+	background-color: white;
+	margin-top: 15px;
+	display: flex;
+}
+
+.profile-picture-thmb {
+	padding-left: 10px;
+	width: 5%;
+}
+
+.profile-picture-thmb img {
+	width: 50px;
+	height: 50px;
+}
+
+.movie-list {
+	background-color: white;
+	margin-top: 15px;
+	display: inline;
+}
+
+.post-content {
+	flex-grow: 1;
+}
+
+/*					*/
+/*	Profile, Movies */
+/*					*/
+
+.profile-tabs {
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+}
+
+.profile-tabs:hover {
+	cursor: pointer;
+}
+
+.profile-tabs div {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: inline-block;
+	flex-grow: 1;
+	text-align: center;
+}
+
+.profile-tabs div img {
+	width: 20px;
+	height: 20px;
+}
+
+.active {
+	background-color: #eee9e9;
+	color: #b22222;
+	font-weight: bold;	
+}
+
+/*											*/
+/*	Settings, My-Lists, Fanclubs, My Events */
+/*											*/
+
+
+.account-settings, .profile-settings, .lists, .my-fanclubs, .public-fanclubs, .my-events, .public-events {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-settings {
+	margin-top: 25px;
+}
+
+.account-settings h4, .profile-settings h4, .lists h4, .my-fanclubs h4, .public-fanclubs h4, .my-events h4, .public-events h4 {
+	color: #b22222;
+}
+
+.profile-settings img {
+	width: 50px;
+	height: 50px;
+}
+
+ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+ul li {
+    border-bottom: 1px solid black;
+    background-image: url(../img/arrow-icon.svg);
+    background-repeat:no-repeat;
+    background-size: 25px 25px;
+    background-position:center right;    
+    padding: 5px;
+}
+
+ul li:hover {
+	cursor: pointer;
+}
+
+/*										*/
+/*	My-Lists, Fanclubs, Events, Movies	*/
+/*										*/
+
+.list-tools {
+	background-color: #b22222;
+}
+
+.list-search, .create, .fanclub-search, .movie-search {
+	display: flex;
+	flex-direction: row;
+	background-color: #b22222;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.create button {
+	display: inline-block;
+	flex-grow: 1;
+}
+
+.list-search div, .fanclub-search div, .movie-search div {
+	display: inline-block;
+	flex-grow: 1;
+}
+
+.search-bar {
+	width: 97%;
+}
+
+.search-button {
+	margin-left: 15px;
+	background-image: url("../img/search-icon.svg");
+	background-repeat: no-repeat;
+	background-size: 25px 100%;
+}
+
+/*						*/
+/*	My Fanclubs, Events	*/
+/*						*/
+
+.my-fanclubs, .public-fanclubs, .my-events, .public-events {
+	margin-top: 15px;	
+}
+
+/*			*/
+/*	Movies	*/
+/*			*/
+
+.banner {
+	background-image: url("../img/movies-banner.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100px;
+}
+
+.movie-entry {
+	display: inline-block;
+	margin: 20px;
+	text-align: center;
+}
+
+.movie-entry img {
+	width: 250px;
+	height: 250px;
+}
+
+/*						*/
+/*	Fanclubs, Events	*/
+/*						*/
+
+.fanclub-info, .fanclub-description, .event-info, .event-description {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	margin-top: 15px;
+}
+
+.fanclub-fanclub h4, .fanclub-description h4, .fanclub-members h4, .event-info h4, .event-description h4, .event-attendants h4 {
+	color: #b22222;
+}
+
+.fanclub-members, .event-attendants {
+	background-color: white;
+	margin-top: 15px;
+	padding-top: 2px;
+}
+
+.fanclub-members-content, .event-attendant-content {
+	display: inline-block;
+	margin: 20px;
+	text-align: center;
+}
+
+.fanclub-members-content img, .event-attendant-content img {
+	width: 100px;
+	height: 100px;
+}
+
+.fanclub-options, .event-options {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.fanclub-options button, .event-options button {
+   color: white;
+   font-size: 14px;
+   padding:2px 10px;
+   border-radius: 2px;
+   width: 95px;
+   background-repeat:no-repeat;
+   background-size: cover;
+   background-position:center;	
+}
+
+.fanclub-options button:hover, .event-options button:hover {
+   color: rgb(255,80,80);
+   background: rgba(255,80,80,0.25);
+   transition: background 500ms;
+}
+
+.attend-button {
+	background-image: url(../img/plus-button-background.svg);
+}
+
+.join-button {
+	background-image: url(../img/plus-button-background.svg);
+}
+
+.share-button {
+	background-image: url(../img/share-button-background.svg);
+}
+
+.invite-button {
+	background-image: url(../img/invite-button-background.svg);
+}

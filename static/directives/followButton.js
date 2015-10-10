@@ -1,8 +1,8 @@
-app.directive('installApp', function() { 
+app.directive('followbutton', function() { 
   return { 
     restrict: 'E', 
     scope: {}, 
-    templateUrl: '/static/js/directives/installApp.html',
+    templateUrl: 'followButton.html',
     link: function(scope, element, attrs) { 
   scope.buttonText = "+ Follow", 
   scope.installed = false, 
