@@ -1,7 +1,7 @@
 app.controller('profile', ['$scope', function($scope) {
   $scope.userDetails = {
     name: 'katrific',
-    rating: 2,
+    rating: 5,
     quote: "i am groot.",
     activity: [ 
       { 
@@ -33,6 +33,29 @@ $scope.userLists = {
       { 
         title: 'Pokemon',
         poster: '/static/img/movie-placeholder.svg', 
+      }
+    ]
+  }
+
+  $scope.userReview = {
+    movies: [ 
+      { 
+        Movie_title: 'Avatar',
+        Review_title: 'Aww yeah',
+        Rating: 3,
+        review: 'text text text text text  \n text text text text text ',
+      }, 
+      { 
+        Movie_title: 'Avengers',
+        Review_title: 'it sucks',
+        Rating: 2,
+        review: '/static/img/movie-placeholder.svg',
+      }, 
+      { 
+        Movie_title: 'Pokemon',
+        Review_title: 'Changed my life',
+        Rating: 10,
+        review: '/static/img/movie-placeholder.svg', 
       }
     ]
   }
