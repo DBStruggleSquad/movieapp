@@ -64,9 +64,9 @@ def fanclub_page():
 def fanclubs():
     return render_template('fanclubs.html')
 
-@app.route('/movie-page')
-def movie_page():
-    return render_template('movie-page.html')
+@app.route('/movie-profile')
+def movie_profile():
+    return render_template('movie-profile.html')
 
 if __name__ == '__main__':
     app.run()
