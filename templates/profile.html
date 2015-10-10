@@ -64,16 +64,13 @@
                     <br>
                     {{ activity.pubdate | date }}
                     <br>
-                      <ol class="movie-list" >
-                        <div class="activity-post" ng-repeat="activity in userDetails.activity">
-                          <flex-slider slide="poster in userLists.movies track by $index" animation="slide" animation-loop="false" item-width="210" item-margin="5" as-nav-for="#slider" slideshow="false" >
+                    <ol class="movie-list" >
+                        <flex-slider slide="poster in userLists.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
                               <li>
                                   <img ng-src="{{poster.poster}}">
                               </li>
                           </flex-slider>
-                        </div>
-                        </ol>
-                      </div>                    
+                     </ol>                                       
                   </div>
        </div>
     </script>
@@ -81,7 +78,7 @@
     <script type="text/ng-template" id="reviews.tpl.html">
       <div id="reviewsView">
         <div class="activity-post" ng-repeat="review in userReview.movies">
-                  <div class="Review-Movie-title"> {{review.Movie_title}} </div>
+                  <div class="Review-Movie-title">  Movie: {{review.Movie_title}} </div>
                     <div>
                       <span>
                         <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
