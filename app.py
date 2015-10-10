@@ -6,7 +6,7 @@ Created on Sep 12, 2015
 
 from flask import Flask
 from flask import render_template
-from flask.ext.bootstrap import Bootstrap
+
 from flask.ext.mysql import MySQL
 import os
 import urlparse
@@ -15,7 +15,7 @@ import sys
 
 
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
+
 mysql = MySQL()
 #url = urlparse.urlparse(os.environ['DATABASE_URL'])
 #app.config['MYSQL_DATABASE_USER'] = url.username
