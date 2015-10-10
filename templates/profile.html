@@ -23,15 +23,7 @@
 
     <div class="enclosure" ng-controller="profile">
       <!-- User-Info, offers user details. -->
-      <div class="user-info">
-        <div class="profile-picture"><img src="/static/img/profile-picture-placeholder.svg"/></div>
-        <div class="user-details">
-          <div class="user-name">{{ userDetails.name }}</div>
-          <div class="user-rating"><img src="/static/img/star-icon.svg"/></div>
-          <div class="user-quote">" {{ userDetails.quote }} "</div>
-          <div class="user-follow"><button class="follow-button">Follow</button></div>
-        </div>
-      </div>
+      <div class="user-info" ng-include="'static/directives/profileInfo.html'"></div>
 
       <!-- Profile-Tabs, allow navigation in profile.-->
       <div class="profile-tabs">
