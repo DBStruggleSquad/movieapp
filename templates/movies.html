@@ -4,15 +4,16 @@
     <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
     <link href="static/css/filmshack.css" rel="stylesheet" />
-
-      <script src="/static/bower_components/jquery/dist/jquery.js"></script>
-      <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
-      <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
-      <script src="/static/bower_components/angular/angular.js"></script>
-      <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+    <script src="/static/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
+    <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
+    <script src="/static/bower_components/angular/angular.js"></script>
+    <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
   </head>
+
   <body ng-app="myApp">
-{% raw %}
+    {% raw %} <!-- this is for ninja to ignore all the angularjs names equal to ninja -->
+
     <!-- Header, indicates where the user is located. -->
     <div class="header">
         Movies
@@ -42,19 +43,36 @@
         </div>
     </div>
 
+    <!-- ---------------------------------------------------------------------------------- -->
+    <!--                                SCRIPTS FOR TABS                                    -->
+    <!-- ---------------------------------------------------------------------------------- -->
+
+    <!-- MOST REVIEWED -->
     <script type="text/ng-template" id="mostreviewed.tpl.html">
         <div class="movie-entry" ng-repeat="movie in movies">
           <a href="#">{{ movie.name }}<br><img src="{{ movie.img }}"/></a>
         </div>
     </script>
-    
+
+    <!-- BY GENDER -->
     <script type="text/ng-template" id="bygenre.tpl.html">
       <div id="listsView">
-        <h1>View Two</h1>
-        Lists go here
+          <div class="activity-post" ng-repeat="genre in genreList">
+              <div class="post-content">
+                  <a href="#">{{genre.name}}</a><br>
+                  <ol class="movie-list">
+                      <flex-slider slide="poster in genre.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
+                          <li>
+                              <img id="flex-slider-poster" ng-src="{{poster.poster}}">
+                          </li>
+                      </flex-slider>
+                  </ol>
+              </div>
+          </div>
       </div>
     </script>
-    
+
+    <!-- TOP RATED -->
     <script type="text/ng-template" id="toprated.tpl.html">
       <div id="reviewsView">
         <h1>View Three</h1>
@@ -62,7 +80,7 @@
       </div>
     </script>
 
-    </div>
+  </div>
 
     <!-- Navigation, contains buttons that navigate user through app.-->
     <nav class="navigation" ng-include="'static/directives/navigation.html'"></nav>
@@ -77,6 +95,6 @@
     <script src="static/directives/activityPost.js"></script>
     <script src="static/directives/installApp.js"></script>
 
-      {% endraw %}
+    {% endraw %}
   </body>
 </html>
