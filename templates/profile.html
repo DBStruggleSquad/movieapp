@@ -65,7 +65,7 @@
                     {{ activity.pubdate | date }}
                     <br>
                       <ol class="movie-list" >
-                          <flex-slider slide="poster in userLists.movies track by $index">
+                          <flex-slider slide="poster in userLists.movies track by $index" animation="slide" animation-loop="false" item-width="210" item-margin="5" as-nav-for="#slider" slideshow="false" control-nav="false">
                               <li>
                                   <img ng-src="{{poster.poster}}">
                               </li>
