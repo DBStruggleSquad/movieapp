@@ -144,6 +144,10 @@ a {
 	margin-top: 15px;
 	display: inline;
 }
+#flex-slider-poster{
+	width: 90%;
+	height: 65%;
+}
 
 .post-content {
 	flex-grow: 1;
