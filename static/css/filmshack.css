@@ -166,6 +166,30 @@ a {
 	cursor: pointer;
 }
 
+.my-profile:hover {
+	cursor: pointer;
+}
+
+.events:hover {
+	cursor: pointer;
+}
+
+.movies:hover {
+	cursor: pointer;
+}
+
+.my-lists:hover {
+	cursor: pointer;
+}
+
+.settings:hover {
+	cursor: pointer;
+}
+
+.home:hover {
+	cursor: pointer;
+}
+
 .profile-tabs div {
 	padding-top: 5px;
 	padding-bottom: 5px;
