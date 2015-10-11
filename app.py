@@ -6,13 +6,9 @@ Created on Sep 12, 2015
 
 from flask import Flask
 from flask import render_template
-
 from flask.ext.mysql import MySQL
-import os
-import urlparse
+import urlparse 
 import sys
-
-
 
 app = Flask(__name__)
 
