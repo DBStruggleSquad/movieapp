@@ -6,7 +6,19 @@ app.controller('profile', ['$scope', function($scope) {
     poster: '/static/img/movie-placeholder.svg',
     rating: '5',
     synopsis: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
-    cast: ['fulana', 'mengana', 'peter', 'dude']
+    cast: [{
+      name: 'fulana',
+      img: 'static/img/profile-picture-placeholder.svg',
+      }, {
+        name: 'mengana',
+        img: 'static/img/profile-picture-placeholder.svg',
+      }, {
+        name: 'mengana',
+        img: 'static/img/profile-picture-placeholder.svg',
+      }, {
+        name: 'dude',
+        img: 'static/img/profile-picture-placeholder.svg',
+      }]
   }
 
   $scope.movieReviews = {
@@ -34,13 +46,13 @@ app.controller('profile', ['$scope', function($scope) {
 
 $scope.tabs = [{
             title: 'Info',
-            url: 'activity.tpl.html'
+            url: 'info.tpl.html'
         }, {
             title: 'Reviews',
-            url: 'lists.tpl.html'
+            url: 'reviews.tpl.html'
         }];
 
-    $scope.currentTab = 'activity.tpl.html'; //default opened tab
+    $scope.currentTab = 'info.tpl.html'; //default opened tab
 
     $scope.onClickTab = function (tab) {
         $scope.currentTab = tab.url;

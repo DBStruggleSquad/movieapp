@@ -5,5 +5,10 @@ app.controller('myLists', ['$scope', function($scope) {
       { 
         name: 'Must-Watch'
       }
-    ]
+    ];
+
+  $scope.showModal = false;
+  $scope.toggleModal = function(){
+  	$scope.showModal = !$scope.showModal;
+  }
 }]);
