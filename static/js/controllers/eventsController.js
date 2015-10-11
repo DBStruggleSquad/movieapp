@@ -31,5 +31,9 @@ app.controller('events', ['$scope', function($scope) {
         date: new Date('2015','12','01'),
         host: 'user'
       }
-    ]    
+    ]
+
+    $scope.goToEvent = function(eventID){
+        window.location.href = '/event-page';
+    }
 }]);

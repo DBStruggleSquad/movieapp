@@ -20,6 +20,7 @@
 
     <div class="enclosure" ng-controller="events">
 
+      <!-- CREATE AND SEARCH EVENTS -->
       <div class="list-tools">
         <div class="create">
           <button class="create-event">Create a New Event</button>
@@ -30,10 +31,11 @@
         </div>        
       </div>
 
+
       <div class="my-events">
         <h4>My Events</h4>
         <ul>
-          <li ng-repeat="event in myEvents" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+          <li ng-repeat="event in myEvents" ng-click="goToEvent(event.name)" ng-class="{active:service.active}">
             {{ event.name }} <br> {{ event.date | date }} <br> Hosted by <a href="#"> {{ event.host }} </a>
           </li>
         </ul>
@@ -42,7 +44,7 @@
       <div class="public-events">
         <h4>Public Events</h4>
         <ul>
-          <li ng-repeat="event in publicEvents" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+          <li ng-repeat="event in publicEvents"  ng-click="goToEvent(event.name)" ng-class="{active:service.active}">
             {{ event.name }} <br> {{ event.date | date }} <br> Hosted by <a href="#"> {{ event.host }} </a>
           </li>
         </ul>
@@ -58,6 +60,7 @@
 
     <!-- Controllers -->
     <script src="static/js/controllers/eventsController.js"></script>
+    <script src="/static/js/controllers/navigationActions.js"></script>
 
     <!-- Directives -->
     <script src="static/directives/activityPost.js"></script>

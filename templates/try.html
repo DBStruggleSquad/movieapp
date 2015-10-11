@@ -3,16 +3,54 @@
    <head>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
    </head>
-   <body ng-app="ourapp">
-		<div ng-controller="HelloController" >
-         <h2>Welcome DB Struggle Squad to the world of AngularJS!</h2>
-      </div>
+
+
+
+
+
+   <body ng-app="app">
+   <nav>
+       <ul>
+           <li><a href="#/">Datos personales</a></li>
+           <li><a href="#/descargas">Descargas</a></li>
+           <li><a href="#/opciones">Opciones de cuenta</a></li>
+       </ul>
+   </nav>
+   <hr />
+
+   <div ng-view></div>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular-route.js"></script>
+
    </body>
+
+
+
+
          <script>
-         angular.module("ourapp", [])
-         .controller("HelloController", function($scope) {
-            $scope.helloTo = {}; //js object
-            $scope.helloTo.title = "DB Struggle Squad"; //object property
+             angular.module("app", ["ngRoute"])
+                     .config(function($routeProvider){
+                         $routeProvider
+                                 .when("/", {
+                                     controller: "appCtrl",
+                                     controllerAs: "vm",
+                                     templateUrl: "home.html"
+                                 })
+                                 .when("/descargas", {
+                                     controller: "appCtrl",
+                                     controllerAs: "vm",
+                                     templateUrl: "movieapp/templates/movies.html"
+                                 })
+                                 .when("/opciones", {
+                                     controller: "appCtrl",
+                                     controllerAs: "vm",
+                                     templateUrl: "opciones.html"
+                                 });
+                     })
+                     .controller("appCtrl", function(){
+                         //código del controlador (lo estoy usando en todas las rutas, en este sencillo ejemplo)
+                     });
          });
       </script>
 </html>
