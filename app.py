@@ -29,6 +29,10 @@ mysql = MySQL()
 def hello():
     return render_template('profile.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 @app.route('/movies')
 def movies_main():
     return render_template('movies.html')

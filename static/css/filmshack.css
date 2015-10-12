@@ -388,3 +388,42 @@ a {
 .invite-button {
 	background-image: url(../img/invite-button-background.svg);
 }
+
+/*			*/
+/*	Login	*/
+/*			*/
+
+
+.login-body {
+	background-color: #B22222;
+	color: #ffffff;
+}
+
+.page-logo {
+	font-family: 'Yesteryear', cursive;
+	font-size: 80px;
+	text-align: center;
+	padding-top: 30px;
+}
+
+.login-message, .register-message, .recover-message {
+	font-size: 36px;
+	text-align: center;
+	padding-top: 30px;	
+}
+
+.form-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-options button, .form-options button:active, .form-options button.active {
+	background-color: #751515;
+	border-color: #581010;	
+	margin-top: 15px;
+}
+
+.form-options button:hover {
+	background-color: #FF8080;
+	border-color: #581010;	
+}
