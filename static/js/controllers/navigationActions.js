@@ -64,3 +64,11 @@ app.controller('eventsNav', ['$scope', function($scope){
     }
 
 }]);
+
+app.controller('listNav', ['$scope', function($scope){
+    $scope.goToList = function(name){
+        window.location.href = "/list-page"
+    };
+
+
+}]);

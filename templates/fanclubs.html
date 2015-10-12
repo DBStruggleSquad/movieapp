@@ -31,20 +31,22 @@
         </div>        
       </div>
 
+      <!--      MY FAN CLUB       -->
       <div class="my-fanclubs">
         <h4>My Fanclubs</h4>
         <ul>
           <li ng-repeat="fanclub in myFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            {{ fanclub.name }} <br> {{ fanclub.type }} <br> Directed by <a href="#"> {{ fanclub.creator }} </a>
+            <a ng-controller="fanClubNav" ng-click="goToFCPage(fanclub.name )"> {{ fanclub.name }}</a> <br> {{ fanclub.type }} <br> Directed by <a ng-controller="userNav" ng-click="goToUserProfile(fanclub.creator )"> {{ fanclub.creator }} </a>
           </li>
         </ul>
       </div>
 
+      <!--    PUBLIC FAN CLUB       -->
       <div class="public-fanclubs">
         <h4>Public Fanclubs</h4>
         <ul>
           <li ng-repeat="fanclub in publicFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            {{ fanclub.name }} <br> {{ fanclub.type }} <br> Directed by <a href="#"> {{ fanclub.creator }} </a>
+            <a ng-controller="fanClubNav" ng-click="goToFCPage(fanclub.name )">{{ fanclub.name }}</a> <br> {{ fanclub.type }} <br> Directed by <a ng-controller="userNav" ng-click="goToUserProfile(fanclub.creator )"> {{ fanclub.creator }} </a>
           </li>
         </ul>
       </div>      
