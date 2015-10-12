@@ -28,16 +28,16 @@ mysql = MySQL()
 #                        ROUTING FUNCTIONS
 #===================================================================================
 @app.route('/')
-def mainpage():
-    return render_template('feed.html')
+def hello():
+    return render_template('profile.html')
 
 @app.route('/login')
 def login():
     return render_template('login.html')
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')    
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 @app.route('/movies')
 def movies_main():
@@ -46,6 +46,10 @@ def movies_main():
 @app.route('/my-lists')
 def user_lists():
     return render_template('my-lists.html')
+
+@app.route('/list-page')
+def list_page():
+    return render_template('list-page.html')    
 
 @app.route('/settings')
 def settings():

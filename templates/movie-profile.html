@@ -50,9 +50,20 @@
     </script>
     
     <script type="text/ng-template" id="reviews.tpl.html">
-      <div class="activity-post" ng-repeat="review in movieReviews.movies">
-      {{ review.Movie_title }} {{ review.Review_title }} {{ review.Rating }} {{ review.review }}
-      </div>
+    <div class="activity-post" ng-repeat="review in movieReviews.movies">
+      <div>
+        <span>
+          <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
+            <div class="review-post-content">
+              <a href="#">{{ review.reviewer }}</a>
+             </div>
+        </span>
+        <span>
+          <div class="review-title"> {{review.Review_title}} </div>
+          <div class="user-rating"><img src="/static/img/star-icon.svg"/></div>
+          <div class="review-text"> {{review.review}} </div>
+        </span>
+      </div>    
     </script>
 
     </div>
