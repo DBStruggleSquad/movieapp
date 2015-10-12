@@ -148,8 +148,9 @@ a {
 	height: 65%;
 }
 
-.post-content {
+.post-content, .activity-post-content, .movie-post-content, .review-post-content {
 	flex-grow: 1;
+	overflow: hidden;
 }
 
 /*					*/
@@ -224,7 +225,7 @@ a {
 	margin-top: 25px;
 }
 
-.account-settings h4, .profile-settings h4, .lists h4, .my-fanclubs h4, .public-fanclubs h4, .my-events h4, .public-events h4 {
+.account-settings h4, .profile-settings h4, .lists h4, .my-fanclubs h4, .public-fanclubs h4, .my-events h4, .public-events h4, .post-content h4{
 	color: #b22222;
 }
 

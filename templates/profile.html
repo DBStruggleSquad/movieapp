@@ -41,24 +41,7 @@
     </script>
     
     <script type="text/ng-template" id="lists.tpl.html">
-
-
       <div class="activity-post" ng-repeat="activity in userDetails.activity" ng-include="'static/directives/userMovieListPost.html'"></div>
-                  <div class="post-content">
-                    <a href="#">{{ userLists.List_name }}</a>
-                    <br>
-                    {{ activity.pubdate | date }}
-                    <br>
-                    <ol class="movie-list" >
-                        <flex-slider slide="poster in userLists.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
-                              <li>
-                                  <img ng-src="{{poster.poster}}">
-                              </li>
-                          </flex-slider>
-                     </ol>                                       
-                  </div>
-       </div>
-
     </script>
     
     <script type="text/ng-template" id="reviews.tpl.html">
