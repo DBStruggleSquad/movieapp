@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="static/css/filmshack.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>
+    
+    <script src="/static/bower_components/jquery/dist/jquery.js"></script>
+      <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
+      <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
+      <script src="/static/bower_components/angular/angular.js"></script>
+      <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </head>
+<body class="login-body" ng-app="myApp">
+  {% raw %}    
+
+<div class="page-logo">filmshack</div>
+
+<div class="enclosure" ng-controller="login">
+    <div class="log-content">
+        <div ng-include="currentOpt"></div>
+    </div>    
+</div>
+
+    <script type="text/ng-template" id="login.tpl.html">
+    <div class="login-message">Sign In To Your Account</div>
+    <div class="col-md-6 col-md-offset-3">
+        <form name="form" role="form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" />
+            </div>
+            <div class="form-options">
+                <button type="submit" class="btn btn-primary" ng-repeat="opt in opts" ng-class="{active:isActiveOpt(opt.url)}" ng-click="onClickOpt(opt)">{{ opt.title }}</button>
+            </div>
+        </form>
+    </div>
+    </script>
+    
+    <script type="text/ng-template" id="register.tpl.html">
+    <div class="register-message">Register a New Account</div>
+    <div class="col-md-6 col-md-offset-3">
+        <form name="form" role="form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password</label>
+                <input type="password" name="password" id="password" class="form-control" />
+            </div>            
+            <div class="form-options">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    </script>
+
+    <script type="text/ng-template" id="recover.tpl.html">
+    <div class="recover-message">Recover Your Password</div>
+    <div class="col-md-6 col-md-offset-3">
+        <form name="form" role="form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" />
+            </div>
+            <div class="form-options">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>    
+    </script>    
+
+    </div>
+
+    <!-- Modules -->
+    <script src="static/js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="static/js/controllers/loginController.js"></script>
+    <script src="/static/js/controllers/navigationActions.js"></script>
+
+    <!-- Directives -->
+    <script src="static/directives/activityPost.js"></script>
+    <script src="static/directives/modalDirective.js"></script>
+  {% endraw %}
+  </body>
+</html>
