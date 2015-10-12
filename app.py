@@ -24,9 +24,15 @@ mysql = MySQL()
 #cursor = conn.cursor()
 # Update with environment configuration.
 
-
+#===================================================================================
+#                        ROUTING FUNCTIONS
+#===================================================================================
 @app.route('/')
 def hello():
+    return render_template('profile.html')
+
+@app.route('/profile')
+def userprofile():
     return render_template('profile.html')
 
 @app.route('/login')
@@ -35,7 +41,7 @@ def login():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')    
+    return render_template('home.html')
 
 @app.route('/movies')
 def movies_main():
@@ -44,6 +50,10 @@ def movies_main():
 @app.route('/my-lists')
 def user_lists():
     return render_template('my-lists.html')
+
+@app.route('/list-page')
+def list_page():
+    return render_template('list-page.html')    
 
 @app.route('/settings')
 def settings():

@@ -59,7 +59,7 @@
               <div class="location-details">
                 <div class="location-title">Fanclub Activity Feed</div>
                 <div class="location-description">Find out what the users that you follow are up to! Discover new movies, actors, and more!</div>
-                <button class="btn btn-primary">Fanclubs Home</button>                
+                <button class="btn btn-primary" ng-controller="fanClubNav" ng-click="goToFCHome()">Fanclubs Home</button>
               </div>
             </div>
         </div>
@@ -74,26 +74,32 @@
               <div class="location-details">
                 <div class="location-title">Events Activity Feed</div>
                 <div class="location-description">Find out what the users that you follow are up to! Discover new movies, actors, and more!</div>
-                <button class="btn btn-primary">Events Home</button>
+                <button class="btn btn-primary" ng-controller="eventsNav" ng-click="goToEvents()">Events Home</button>
               </div>
             </div>
         </div>
-    </script>        
+    </script>
 
+    <!-- ------------------------------ -->
+    <!--            USER TAB            -->
+    <!-- ------------------------------ -->
     <script type="text/ng-template" id="userfeed.tpl.html">
       <div class="user-feed">
         <div class="activity-post" ng-repeat="activity in userActivities">
             <div class="profile-picture-thmb">
               <img src="static/img/profile-picture-placeholder.svg"/>
             </div>
-            <div class="post-content">
-              <a href="#">{{ activity.publisher }}</a> {{ activity.type }} 
+            <div class="post-content" ng-controller="userNav">
+              <a ng-click="goToUserProfile(activity.publisher )">{{ activity.publisher }}</a> {{ activity.type }}
                 <br>{{ activity.pubdate | date }}
             </div>
         </div>
       </div>  
     </script>
-    
+
+    <!-- ------------------------------ -->
+    <!--          FAN CLUB  TAB         -->
+    <!-- ------------------------------ -->
     <script type="text/ng-template" id="fanclubfeed.tpl.html">
       <div class="fanclub-feed">
         <div class="activity-post" ng-repeat="activity in fanclubActivities">
@@ -101,13 +107,16 @@
               <img src="static/img/profile-picture-placeholder.svg"/>
             </div>
             <div class="post-content">
-              <a href="#">{{ activity.publisher }}</a> {{ activity.type }} 
+              <a ng-controller="fanClubNav" ng-click="goToFCPage(activity.publisher)">{{ activity.publisher }}</a> {{ activity.type }}
                 <br>{{ activity.pubdate | date }}
             </div>
         </div>
       </div>  
-    </script>    
+    </script>
 
+    <!-- ------------------------------ -->
+    <!--            EVENT TAB           -->
+    <!-- ------------------------------ -->
     <script type="text/ng-template" id="eventfeed.tpl.html">
       <div class="event-feed">
         <div class="activity-post" ng-repeat="activity in eventActivities">
@@ -115,7 +124,7 @@
               <img src="static/img/profile-picture-placeholder.svg"/>
             </div>
             <div class="post-content">
-              <a href="#">{{ activity.publisher }}</a> {{ activity.type }} 
+              <a ng-controller="userNav" ng-click="goToUserProfile(activity.publisher)">{{ activity.publisher }}</a> {{ activity.type }} in <a ng-controller="eventsNav" ng-click="goToEventPage(activity.eventName)">{{activity.eventName}}</a>
                 <br>{{ activity.pubdate | date }}
             </div>
         </div>

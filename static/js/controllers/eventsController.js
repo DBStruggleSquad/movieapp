@@ -36,4 +36,9 @@ app.controller('events', ['$scope', function($scope) {
     $scope.goToEvent = function(eventID){
         window.location.href = '/event-page';
     }
+
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    }
 }]);

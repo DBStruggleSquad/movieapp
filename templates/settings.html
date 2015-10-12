@@ -11,6 +11,11 @@
       <script src="/static/bower_components/angular/angular.js"></script>
       <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
       <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+      <script src="static/ng-file-upload-bowe-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+      <script src="static/ng-file-upload-bowe-9.0.9/ng-file-upload.min.js"></script>
+      <script src="static/ng-file-upload-bowe-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
+      <script src="static/ng-file-upload-bowe-9.0.9/ng-file-upload.js"></script>
   </head>
   <body ng-app="myApp">
 	{% raw %}
@@ -20,7 +25,9 @@
     </div>
 
     <div class="enclosure" ng-controller="settings">
-
+      <!-- ------------------------------------ -->
+      <!--              ACCOUNT SETTINGS        -->
+      <!-- ------------------------------------ -->
       <div class="account-settings">
         <h4>Account</h4>
         <ul>
@@ -30,6 +37,9 @@
         </ul>
       </div>
 
+      <!-- ------------------------------------ -->
+      <!--              PROFILE SETTINGS        -->
+      <!-- ------------------------------------ -->
       <div class="profile-settings">
         <h4>Profile</h4>
         <ul>
@@ -70,6 +80,10 @@
     <script src="static/directives/activityPost.js"></script>
     <script src="static/directives/installApp.js"></script>
     <script src="static/directives/modalDirective.js"></script>
+
+
+
+
 	{% endraw %}
   </body>
 </html>

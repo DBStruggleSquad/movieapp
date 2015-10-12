@@ -24,22 +24,25 @@ app.controller('profile', ['$scope', function($scope) {
   $scope.movieReviews = {
     movies: [ 
       { 
+        reviewer: 'katrific',
         Movie_title: 'Avatar',
         Review_title: 'Aww yeah',
         Rating: 3,
-        review: 'text text text text text  \n text text text text text ',
+        review: 'text text text text text text text text text text ',
       }, 
       { 
-        Movie_title: 'Avengers',
+        reviewer: 'samy',
+        Movie_title: 'Avatar',
         Review_title: 'it sucks',
         Rating: 2,
-        review: '/static/img/movie-placeholder.svg',
+        review: 'no',
       }, 
       { 
-        Movie_title: 'Pokemon',
+        reviewer: 'jil',
+        Movie_title: 'Avatar',
         Review_title: 'Changed my life',
-        Rating: 10,
-        review: '/static/img/movie-placeholder.svg', 
+        Rating: 5,
+        review: 'amaaaaaaaaaazingggggggggggggggg', 
       }
     ]
   }
