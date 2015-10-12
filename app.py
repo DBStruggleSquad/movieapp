@@ -45,6 +45,10 @@ def movies_main():
 def user_lists():
     return render_template('my-lists.html')
 
+@app.route('/list-page')
+def list_page():
+    return render_template('list-page.html')    
+
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
