@@ -33,9 +33,9 @@ def hello():
 def login():
     return render_template('login.html')
 
-@app.route('/feed')
-def feed():
-    return render_template('feed.html')    
+@app.route('/home')
+def home():
+    return render_template('home.html')    
 
 @app.route('/movies')
 def movies_main():
