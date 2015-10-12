@@ -33,6 +33,10 @@ def hello():
 def login():
     return render_template('login.html')
 
+@app.route('/feed')
+def feed():
+    return render_template('feed.html')    
+
 @app.route('/movies')
 def movies_main():
     return render_template('movies.html')
