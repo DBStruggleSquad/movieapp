@@ -10,7 +10,7 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
         window.location.href = '/';
     };
     $scope.goMyProfile = function(){
-        window.location.href = '/';
+        window.location.href = '/profile';
     };
     $scope.goEvent = function(){
         window.location.href =  '/events';
@@ -25,4 +25,18 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
         window.location.href =  '/settings';
     };
 
-}])
+}]);
+
+
+app.controller('movieNav', ['$scope', function($scope){
+    $scope.goToSelectedMovie = function(movieTitle){
+      window.location.href = "/movie-profile"
+    };
+}]);
+
+
+app.controller('userNav', ['$scope', function($scope){
+    $scope.goToBusinessProfile = function(username){
+        window.location.href = "/movie-profile"
+    };
+}]);

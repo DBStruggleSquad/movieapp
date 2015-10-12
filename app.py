@@ -24,18 +24,20 @@ mysql = MySQL()
 #cursor = conn.cursor()
 # Update with environment configuration.
 
-
+#===================================================================================
+#                        ROUTING FUNCTIONS
+#===================================================================================
 @app.route('/')
-def hello():
-    return render_template('profile.html')
+def mainpage():
+    return render_template('feed.html')
 
 @app.route('/login')
 def login():
     return render_template('login.html')
 
-@app.route('/feed')
-def feed():
-    return render_template('feed.html')    
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')    
 
 @app.route('/movies')
 def movies_main():

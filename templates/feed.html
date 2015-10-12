@@ -5,15 +5,14 @@
     <link rel="stylesheet" type="text/css" href="/static/bower_components/flexslider/flexslider.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
     <link href="/static/css/filmshack.css" rel="stylesheet" />
-   
 
-  <script src="/static/bower_components/jquery/dist/jquery.js"></script>
-  <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
-  <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
-  <script src="/static/bower_components/angular/angular.js"></script>
-  <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
-
+    <script src="/static/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
+    <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
+    <script src="/static/bower_components/angular/angular.js"></script>
+    <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
   </head>
+
   <body ng-app="myApp">
     {% raw %}
     <!-- Header, indicates where the user is located. -->
@@ -27,8 +26,8 @@
           <div class="profile-picture-thmb">
             <img src="static/img/profile-picture-placeholder.svg"/>
           </div>
-          <div class="post-content">
-            <a href="#">{{ activity.publisher }}</a> {{ activity.type }} 
+          <div class="post-content" >
+            <a ng-click="goToUserProfile(activity.publisher)">{{ activity.publisher }}</a> {{ activity.type }}
               <br>{{ activity.pubdate | date }}
           </div>
       </div>
