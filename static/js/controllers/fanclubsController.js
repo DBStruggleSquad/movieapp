@@ -9,7 +9,7 @@ app.controller('fanclubs', ['$scope', function($scope) {
         type: 'Film Studio',
         creator: 'amy'
       }
-    ]
+    ];
 
   $scope.publicFanclubs = [{
         name: 'Horror Movie Lovers Unite',
@@ -31,5 +31,10 @@ app.controller('fanclubs', ['$scope', function($scope) {
         type: 'Film Studio',
         creator: 'someuser'
       }
-    ]    
+    ];
+
+    $scope.showModal = false;
+  $scope.toggleModal = function(){
+    $scope.showModal = !$scope.showModal;
+  }    
 }]);

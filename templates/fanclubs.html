@@ -10,6 +10,7 @@
       <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
       <script src="/static/bower_components/angular/angular.js"></script>
       <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
   </head>
   <body ng-app="myApp">
 	{% raw %}
@@ -22,7 +23,7 @@
 
       <div class="fanclub-tools">
         <div class="create">
-          <button class="create-fanclub">Create a New Fanclub</button>
+          <button class="create-fanclub" ng-click="toggleModal()">Create a New Fanclub</button>
         </div>
         <div class="fanclub-search">
           <input class="search-bar" type="text" placeholder="Search..."/>
@@ -48,6 +49,25 @@
         </ul>
       </div>      
 
+      <modal title="Create a New Fan Club" visible="showModal">
+        <form role="form">
+          <div class="form-group">
+            <label for="list">Fan Club Name</label>
+            <input type="text" class="form-control" id="fan-club-name" placeholder="Fan Club name..." />
+            <br>
+            <select>
+              <option value="Movies">Movies</option>
+              <option value="Actors">Actors</option>
+              <option value="Directors">Directors</option>
+              <option value="General">General</option>
+            </select>
+            <br>
+            <br>
+            <input type="text" class="form-control" id="fan-club-desc" placeholder="Fan Club description..." />
+          </div>
+          <button type="submit" class="btn btn-default">Create</button>
+        </form>
+      </modal>
     </div>
 
     <!-- Navigation, contains buttons that navigate user through app.-->
@@ -63,6 +83,8 @@
     <!-- Directives -->
     <script src="static/directives/activityPost.js"></script>
     <script src="static/directives/installApp.js"></script>
+    <script src="static/directives/modalDirective.js"></script>
+
 	{% endraw %}
   </body>
 </html>
