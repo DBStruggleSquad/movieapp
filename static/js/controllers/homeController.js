@@ -101,11 +101,13 @@ app.controller('home', ['$scope', '$http', function($scope,$http) {
 
   $scope.eventActivities = [{
     publisher: 'katrific',
+    eventName: 'event-1',
     type: 'attending',
     pubdate: new Date('2015', '09', '22'),
   }, {
     publisher: 'amy',
     type: 'attending',
+    eventName: 'event-2',
     pubdate: new Date('2015', '09', '22'),
   }];     
 
