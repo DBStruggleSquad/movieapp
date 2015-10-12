@@ -35,6 +35,7 @@ app.controller('settings', ['$scope', function($scope) {
   $scope.toggleModal = function(a){
     $scope.showModal = !$scope.showModal;
     $scope.accType = a.type;
+    $scope.title = a.type;
     if (a.type == 'Password') {$scope.currentOpt = '**********'} else{$scope.currentOpt = a.current;};
     
   } 

@@ -49,13 +49,13 @@ $scope.userLists = {
         Movie_title: 'Avengers',
         Review_title: 'it sucks',
         Rating: 2,
-        review: '/static/img/movie-placeholder.svg',
+        review: 'text text text text text  \n text text text text text ',
       }, 
       { 
         Movie_title: 'Pokemon',
         Review_title: 'Changed my life',
         Rating: 10,
-        review: '/static/img/movie-placeholder.svg', 
+        review: 'text text text text text  \n text text text text text ', 
       }
     ]
   };
