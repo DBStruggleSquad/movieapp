@@ -10,6 +10,7 @@
       <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
       <script src="/static/bower_components/angular/angular.js"></script>
       <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
   </head>
   <body ng-app="myApp">
 	{% raw %}
@@ -27,8 +28,8 @@
         <div class="event-location">{{ event.locale }}<br>{{ event.address }}</div>
         <div class="event-options">
           <button class="attend-button">Attend</button>
-          <button class="share-button">Share</button>
-          <button class="invite-button">Invite</button>                    
+          <button class="share-button" ng-click="toggleModal2()">Share</button>
+          <button class="invite-button" ng-click="toggleModal1()">Invite</button>                    
         </div>
       </div>      
 
@@ -42,7 +43,28 @@
         <div class="event-attendant-content" ng-repeat="attendant in event.attendants">
           <a href="#"><img src="{{ attendant.img }}"/><br>{{ attendant.name }}</a>
         </div>        
-      </div>           
+      </div>
+
+    <modal title="Event was Shared!" visible="showModal2">
+        <form role="form">
+          <button type="submit" class="btn btn-default">Ok</button>
+        </form>
+      </modal>
+
+    <modal title="Invite Friends" visible="showModal1">
+        <form role="form">
+          <div class="form-group">
+            <label for="list">Choose friends</label>          
+            <br>
+              <div class="event-attendant-content" ng-repeat="attendant in event.attendants">
+                <input type="checkbox"><img src="{{ attendant.img }}"/><br>{{ attendant.name }}
+              </div>
+            <br>
+            <br>
+          </div>
+          <button type="submit" class="btn btn-default">Invite</button>
+        </form>
+      </modal>    
 
     </div>
 
@@ -59,6 +81,7 @@
     <!-- Directives -->
     <script src="static/directives/activityPost.js"></script>
     <script src="static/directives/installApp.js"></script>
+    <script src="static/directives/modalDirective.js"></script>
 	{% endraw %}
   </body>
 </html>

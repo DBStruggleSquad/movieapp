@@ -83,5 +83,15 @@ app.controller('event', ['$scope', function($scope) {
           name: 'user-25',
           img: 'static/img/profile-picture-placeholder.svg'
         }]
-      }
+      };
+
+
+      $scope.showModal1 = false;
+  $scope.toggleModal1 = function(){
+    $scope.showModal1 = !$scope.showModal1;
+      };
+    $scope.showModal2 = false;
+  $scope.toggleModal2 = function(){
+    $scope.showModal2 = !$scope.showModal2;
+  };
 }]);
