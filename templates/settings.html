@@ -29,24 +29,34 @@
       <!--              ACCOUNT SETTINGS        -->
       <!-- ------------------------------------ -->
       <div class="account-settings">
-        <h4>Account</h4>
-        <ul>
-          <li ng-repeat="option in accountOptions.accOptions" ng-click="toggleModal(option)" ng-class="{active:service.active}">
-            {{ option.type }}<br>{{ option.current }}
-          </li>
-        </ul>
+          <form>
+              <fieldset>
+                  <legend><h4>Account</h4></legend>
+                    <ul>
+                        <li ng-repeat="option in accountOptions.accOptions" ng-click="toggleModal(option)" ng-class="{active:service.active}">
+                            <div>
+                            <p ><strong>{{ option.type }}</strong></p><br><p style="text-indent: 2em;">{{ option.current }}</p>
+                            </div>
+                        </li>
+                    </ul>
+              </fieldset>
+          </form>
       </div>
 
       <!-- ------------------------------------ -->
       <!--              PROFILE SETTINGS        -->
       <!-- ------------------------------------ -->
       <div class="profile-settings">
-        <h4>Profile</h4>
-        <ul>
-          <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            {{ option.type }}<br><img src="{{ option.current }}"/>
-          </li>
-        </ul>
+          <form>
+              <fieldset>
+                  <legend><h4>Profile</h4></legend>
+                  <ul>
+                      <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+                          <p><strong>{{ option.type }}</strong></p><br><p style="text-indent: 2em;"> <img src="{{ option.current }}"/></p>
+                      </li>
+                  </ul>
+              </fieldset>
+          </form>
       </div>
 
       <modal title="Change {{accType}}" visible="showModal">
