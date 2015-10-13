@@ -55,7 +55,10 @@
                   <legend><h4>Profile</h4></legend>
                   <ul>
                       <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-                          <p><strong>{{ option.type }}</strong></p><br><p style="text-indent: 2em;"> <img ngf-drop="" src="{{ option.current }}"/></p>
+                          <p><strong>{{ option.type }}</strong></p><br>
+                          <img src="{{ option.current }}" style="text-indent: 2em;" class="drop-box"  ngf-select  ngf-drop  accept="image/*" ngf-pattern="'image/*'" ngf-drag-over-class="dragover" ng-model-options="profilePic" ngf-multiple="false" ngf-capture="'camera'" >
+
+                        </img>
                       </li>
                   </ul>
               </fieldset>
