@@ -43,3 +43,21 @@ The software needed to succesfully host the DBMS as well as the necessary set up
 * Updated Gantt chart with percent completion for each task
 * Detailed Project Development Plan for Sprint II
 Updated Master Project Development Plan
+
+# Sprint 2
+
+#####What worked well? #####
+Katyas help and experience helpes us greatly as we implemented from scratch the wireframes on which our GUI. 
+Once we had a solid grasp on the techonologies we we're using and what we had to do, everything progressed a lot smoother.
+
+#####What didn't work well? #####
+ The mixing and importing of some modules from differente frameworks didn't act as we wanted them too so we had to play with different modules and directives that did the same thign to get the look we wanted.
+ 
+#####What we learned? #####
+Mixing various technologies to get the exact look we wated as well development from html, css and the diffrente flavors of JS.
+
+#####Planned work for Sprint 1.#####
+* Finish the whole front end.
+* Updated Gantt chart with percent completion for each task
+* Detailed Project Development Plan for Sprint II
+Updated Master Project Development Plan
