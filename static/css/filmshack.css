@@ -258,6 +258,7 @@ a {
 .account-settings, .profile-settings, .lists, .my-fanclubs, .public-fanclubs, .my-events, .public-events {
 	background-color: white;
 	display: flex;
+    justify-content: center;
 	flex-direction: column;
 }
 
