@@ -53,6 +53,42 @@ a {
 	height: 25px;
 }
 
+/*			    */
+/*	Img Upload	*/
+/*			    */
+.button {
+    -moz-appearance: button;
+    /* Firefox */
+    -webkit-appearance: button;
+    /* Safari and Chrome */
+    padding: 10px;
+    margin: 10px;
+    width: 70px;
+}
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    padding-top: 0px;
+    margin: 20px;
+}
+.dragover {
+    border: 5px dashed #e69380;
+}
+form .progress {
+    line-height: 15px;
+}
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+.progress div {
+    line-height: 15px;
+    height: 30px;
+    font-size: small;
+    background: red;
+}
+
 /*			*/
 /*	Home 	*/
 /*			*/
@@ -271,8 +307,8 @@ a {
 }
 
 .profile-settings img {
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 }
 
 .account-settings ul, .profile-settings ul, .lists ul, .my-fanclubs ul, .public-fanclubs ul, .my-events ul, .public-events ul {
@@ -474,26 +510,3 @@ a {
 /*	Feed	*/
 /*			*/
 
-/*			    */
-/*	Img Upload	*/
-/*			    */
-.button {
-	-moz-appearance: button;
-	/* Firefox */
-	-webkit-appearance: button;
-	/* Safari and Chrome */
-	padding: 10px;
-	margin: 10px;
-	width: 70px;
-}
-.drop-box {
-	background: #F8F8F8;
-	border: 5px dashed #DDD;
-	width: 30000px;
-	height: 5005px;
-	padding-top: 0px;
-	margin: 20px;
-}
-.dragover {
-	border: 5px dashed red;
-}

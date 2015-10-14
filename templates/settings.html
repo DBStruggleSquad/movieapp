@@ -55,10 +55,14 @@
                   <legend><h4>Profile</h4></legend>
                   <ul>
                       <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-                          <p><strong>{{ option.type }}</strong></p><br>
-                          <img src="{{ option.current }}" style="text-indent: 2em;" class="drop-box"  ngf-select  ngf-drop  accept="image/*" ngf-pattern="'image/*'" ngf-drag-over-class="dragover" ng-model-options="profilePic" ngf-multiple="false" ngf-capture="'camera'" >
-
-                        </img>
+                          <div>
+                              <p><strong>{{ option.type }}</strong></p><br>
+                              <img ng-show="true" ng-change="option.current = files[0].name.toString()" ng-src="{{option.current}}" style="text-indent: 2em;" class="drop-box" ng-model="profilePic2" ngf-select="uploadFiles($files)"  ngf-drop="uploadFiles($files)"  accept="image/*" ngf-pattern="'image/*'" ngf-drag-over-class="dragover" ng-model-options="profilePic2" ngf-multiple="false" ngf-capture="'camera'" >   </img>
+                             {{files[0].name.toString()}}
+                              <br><span class="progress" ng-show="progress >= 0">
+                                <div class="progress" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                            </span>
+                          </div>
                       </li>
                   </ul>
               </fieldset>
