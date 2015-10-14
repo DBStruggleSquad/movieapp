@@ -24,6 +24,13 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
     $scope.goSettings = function(){
         window.location.href =  '/settings';
     };
+    $scope.verifyLocation = function(location1){
+        if( window.location.pathname == location1){
+           return true;
+        }else{
+           return false;
+        }
+    };
 
 }]);
 

@@ -267,6 +267,14 @@ form .progress {
 	cursor: pointer;
 }
 
+.home2{
+    border:2px solid #3a3a3a;
+    box-shadow: 0 0 10px #000000;
+    -webkit-box-shadow: 0 0 10px #333;
+    -moz-box-shadow: 0 0 10px #333;
+    -o-box-shadow: 0 0 10px #333;
+    -ms-box-shadow: 0 0 10px #333;
+}
 .home:hover {
 	cursor: pointer;
 }
