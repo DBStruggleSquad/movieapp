@@ -71,6 +71,10 @@ a {
     padding-top: 0px;
     margin: 20px;
 }
+.after-drop{
+    padding-top: 0px;
+    margin: 20px;
+}
 .dragover {
     border: 5px dashed #e69380;
 }
@@ -86,7 +90,7 @@ form .progress {
     line-height: 15px;
     height: 30px;
     font-size: small;
-    background: red;
+    background: #e69380;
 }
 
 /*			*/
