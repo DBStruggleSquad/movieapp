@@ -19,12 +19,8 @@ a {
  background-color: #b22222;
  color: white;
  width:100%;
- text-align:center; 
-}
-
-.header div il, lu, img {
-    display: inline;
-    float: none;
+display: flex;
+flex-direction: row;
 }
 
 /*.header img {
@@ -32,19 +28,22 @@ a {
 }*/
 
 .location {
-    float:left;
+flex-grow: 0.1;
+text-align: left;
+padding: 0.5em;
 }
 
 .filmshack-logo {
 	font-family: 'Yesteryear', cursive;
 	font-size: 30px;
-	text-align: center;
-
-    display: inline-block;
+text-align: center;
+flex-grow: 0.8;
 }
 
 .notifications {
-    float:right;
+flex-grow: 0.1;
+text-align: right;
+padding: 0.5em;
 }
 
 .notifications img {
@@ -175,6 +174,7 @@ form .progress {
 .profile-picture, .movie-poster {
 	display: inline-block;
 	flex-grow: 1;
+	text-align: center;
 }
 
 .profile-picture img, .movie-poster img {
@@ -441,6 +441,7 @@ form .progress {
 	display: flex;
 	flex-direction: column;
 	margin-top: 15px;
+	padding: 0.5em;
 }
 
 .fanclub-fanclub h4, .fanclub-description h4, .fanclub-members h4, .event-info h4, .event-description h4, .event-attendants h4, .movie-synopsis h4, .movie-cast h4 {
@@ -451,6 +452,7 @@ form .progress {
 	background-color: white;
 	margin-top: 15px;
 	padding-top: 2px;
+	padding: 0.5em;
 }
 
 .fanclub-members-content, .event-attendant-content, .movie-cast-content {
