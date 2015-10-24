@@ -16,13 +16,40 @@ a {
 }
 
 .header {
- padding: 10px;
  background-color: #b22222;
  color: white;
+ width:100%;
+ text-align:center; 
 }
 
-.header img {
+.header div il, lu, img {
+    display: inline;
+    float: none;
+}
+
+/*.header img {
    display: inline-block;
+}*/
+
+.location {
+    float:left;
+}
+
+.filmshack-logo {
+	font-family: 'Yesteryear', cursive;
+	font-size: 30px;
+	text-align: center;
+
+    display: inline-block;
+}
+
+.notifications {
+    float:right;
+}
+
+.notifications img {
+	width: 30px;
+	height: 30px;
 }
 
 .content {
@@ -268,12 +295,7 @@ form .progress {
 }
 
 .navigationHighlight{
-    border:2px solid #3a3a3a;
-    box-shadow: 0 0 10px #000000;
-    -webkit-box-shadow: 0 0 10px #333;
-    -moz-box-shadow: 0 0 10px #333;
-    -o-box-shadow: 0 0 10px #333;
-    -ms-box-shadow: 0 0 10px #333;
+    background-color: #581010;
 }
 .home:hover {
 	cursor: pointer;
@@ -485,7 +507,11 @@ form .progress {
 
 
 .login-body {
+	background-image: url(../img/filmshackbg.svg);
 	background-color: #B22222;
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position:bottom right;		
 	color: #ffffff;
 }
 
