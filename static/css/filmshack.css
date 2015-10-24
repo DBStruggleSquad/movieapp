@@ -296,6 +296,7 @@ form .progress {
 
 .navigationHighlight{
     background-color: #581010;
+    border-bottom: 5px solid #FF8080;
 }
 .home:hover {
 	cursor: pointer;
