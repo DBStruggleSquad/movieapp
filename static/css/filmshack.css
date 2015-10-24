@@ -174,8 +174,7 @@ form .progress {
 
 .profile-picture, .movie-poster {
 	display: inline-block;
-	flex-grow: 1;	
-	width: 25%;
+	flex-grow: 1;
 }
 
 .profile-picture img, .movie-poster img {
@@ -233,11 +232,11 @@ form .progress {
 	background-color: white;
 	margin-top: 15px;
 	display: flex;
+	flex-direction: row;
 }
 
 .profile-picture-thmb {
 	padding-left: 10px;
-	width: 5%;
 }
 
 .profile-picture-thmb img {
@@ -258,6 +257,7 @@ form .progress {
 .post-content, .activity-post-content, .movie-post-content, .review-post-content {
 	flex-grow: 1;
 	overflow: hidden;
+	margin-left: 5px;
 }
 
 /*					*/
@@ -511,8 +511,8 @@ form .progress {
 	background-image: url(../img/filmshackbg.svg);
 	background-color: #B22222;
     background-repeat:no-repeat;
-    background-size: cover;
-    background-position:bottom right;		
+    background-position:bottom right;	
+    background-size: contain;	
 	color: #ffffff;
 }
 
