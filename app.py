@@ -9,6 +9,10 @@ from flask import render_template
 from flask.ext.mysql import MySQL
 import urlparse 
 import sys
+import json
+from flask import jsonify
+from flask.globals import request
+import logging
 
 app = Flask(__name__)
 
@@ -25,7 +29,7 @@ mysql = MySQL()
 # Update with environment configuration.
 
 #===================================================================================
-#                        ROUTING FUNCTIONS
+#                                ROUTE FUNCTIONS
 #===================================================================================
 @app.route('/')
 def hello():
@@ -43,13 +47,75 @@ def login():
 def home():
     return render_template('home.html')
 
-@app.route('/movies')
+@app.route('/movies', methods = ['GET'])
 def movies_main():
-    return render_template('movies.html')
+    if 'mostreviewed' in request.args:
+        
+        data = {"movies" : [{
+        'name': 'Movie-1',
+        'genre': 'comedy',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-2',
+        'genre': 'horror',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-3',
+        'genre': 'suspense',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-4',
+        'genre': 'drama',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-5',
+        'genre': 'comedy',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-6',
+        'genre': 'drama',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-7',
+        'genre': 'history',
+        'img': 'static/img/movie-placeholder.svg'
+      }]}
+        
+        print bcolors.INFO +  "------------------------------\nMostReviewedMovies Asked\nData returned:\n" + json.dumps(data) + "\n------------------------------\n" + bcolors.ENDC
+        return jsonify(data), 200
+    elif 'bygender' in request.args:
+        data = {"genrelist": [
+        {'name': 'Action', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]},
+        {'name': 'Drama', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]},
+        {'name': 'History', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]}
+        ]}
+        print bcolors.INFO + "Movies By Gender asked, returned:\n" + json.dumps(data) + bcolors.ENDC
+        return jsonify(data), 200
+    elif 'toprated' in request.args:
+        data = {"toprated": [
+            {'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},
+            {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'},
+            {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'},
+            {'name': 'Movie-4', 'poster': '/static/img/movie-placeholder.svg'},
+            {'name': 'Movie-5', 'poster': '/static/img/movie-placeholder.svg'}
+            ]}
+        print bcolors.INFO + "\n\nTopRated Asked\n\n" + bcolors.ENDC
+        return jsonify(data), 200
+    else:
+        print bcolors.INFO + "Movies template returned" + bcolors.ENDC
+        return render_template('movies.html')
 
 @app.route('/my-lists')
 def user_lists():
-    return render_template('my-lists.html')
+    if 'mylist' in request.args:
+        data = {'mylist':[
+                {'name': 'My Top Ten'}, 
+                {'name': 'Must-Watch'},
+                {'name': 'Worst'}
+                ]}
+        return jsonify(data)
+    else:
+        return render_template('my-lists.html')
 
 @app.route('/list-page')
 def list_page():
@@ -83,5 +149,52 @@ def fanclubs():
 def movie_profile():
     return render_template('movie-profile.html')
 
+#===================================================================================
+#                                Queries
+#===================================================================================
+@app.route('/movies/mostreviewed')
+def movies_mostreviewed():
+    data = [{
+        'name': 'Movie-1',
+        'genre': 'comedy',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-2',
+        'genre': 'horror',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-3',
+        'genre': 'suspense',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-4',
+        'genre': 'drama',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-5',
+        'genre': 'comedy',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-6',
+        'genre': 'drama',
+        'img': 'static/img/movie-placeholder.svg'
+      }, { 
+        'name': 'Movie-7',
+        'genre': 'history',
+        'img': 'static/img/movie-placeholder.svg'
+      }]
+    return 
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    INFO = '\033[1;33m'
+    
 if __name__ == '__main__':
     app.run()
