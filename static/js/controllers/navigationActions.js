@@ -19,7 +19,7 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
         window.location.href =  '/movies';
     };
     $scope.goMyLists = function(){
-        window.location.href =  '/my-lists/dummyuser';
+        window.location.href =  '/my-lists';
     };
     $scope.goSettings = function(){
         window.location.href =  '/settings';
