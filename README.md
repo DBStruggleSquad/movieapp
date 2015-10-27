@@ -63,3 +63,23 @@ Mixing various technologies to get the exact look we wated as well development f
 * Updated Gantt chart with percent completion for each task
 * Detailed Project Development Plan for Sprint II
 Updated Master Project Development Plan
+
+
+# Sprint 3
+
+#####What worked well? #####
+Rest API design flowed well. UI was refined some more.
+
+#####What didn't work well? #####
+ Populating the DB is taking longer than expected due to the number of tables.
+ 
+#####What we learned? #####
+Gotta optimize our time more.
+
+#####Planned work for Sprint 4.#####
+* Finish testing REST API.
+* Check that everything that is built in the UI is fully functional.
+* Refine UI.
+* Updated Gantt chart with percent completion for each task
+* Detailed Project Development Plan for Sprint 5
+Updated Master Project Development Plan
