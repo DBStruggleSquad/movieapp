@@ -259,19 +259,53 @@ def moviesearch(movie_title):
 
 @app.route('/listinfo/<listname>')
 def listinfo(listname):
-    list_info = {
-                    'name': 'My Top 30',
-                    'movies': [{
-                    'title': 'Avatar',
-                    'year': '2009',
-                  }, {
-                    'title': 'Avengers',
-                    'year': 'some year',
-                  }, {
-                    'title': 'Some movie',
-                    'year': 'some year',
-                  }]
-                }
+    print "\n Se esta pidiendo la siguiente lista: " + listname + "\n\n"
+    list_info = {}
+    if listname == "My Top Ten":
+        list_info = {
+                        'name': 'My Top 30',
+                        'movies': [{
+                        'title': 'Avatar',
+                        'year': '2009',
+                      }, {
+                        'title': 'Avengers',
+                        'year': 'some year',
+                      }, {
+                        'title': 'Some movie',
+                        'year': 'some year',
+                      }]
+                    }
+    elif listname == "Worst":
+        print "entro a worst"
+        list_info = { 'listinfo':{
+                        'name': 'Worst',
+                        'movies': [{
+                        'title': '???',
+                        'year': '1963',
+                      }, {
+                        'title': 'Movie 45',
+                        'year': 'some year',
+                      }, {
+                        'title': 'Some movie',
+                        'year': 'some year',
+                      }]
+                    }}
+        print list_info
+    else:
+        list_info = {
+                        'name': 'Must-Watch',
+                        'movies': [{
+                        'title': 'Avatar',
+                        'year': '2009',
+                      }, {
+                        'title': 'Avengers',
+                        'year': 'some year',
+                      }, {
+                        'title': 'Some movie',
+                        'year': 'some year',
+                      }]
+                    }
+    print list_info
     return jsonify(list_info)
 
 class bcolors:

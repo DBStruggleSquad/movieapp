@@ -1,29 +1,32 @@
-app.controller('list', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+app.controller('list', ['$scope', '$http', function($scope, $http) {
   
-  $scope.list = {
-    name: 'My Top 30',
-    movies: [{
-    title: 'Avatar',
-    year: '2009',
-  }, {
-    title: 'Avengers',
-    year: 'some year',
-  }, {
-    title: 'Some movie',
-    year: 'some year',
-  }]
-}
+  $scope.list;
+  $scope.localListName;
 
-    $rootScope.$on("listCtrlMethods", function(){
-        $scope.setListInfo(listName);
+  //Method for go to a specific list page
+  $scope.goToList = function(listName){
+
+    this.localListName = listName;
+
+
+    $http.get("listinfo/" + listName).success(function(data){
+      window.alert($scope.localListName + " spuat" + data.listinfo);
+      $scope.list = data.listinfo;
+
     });
+    window.location.href = "/list-page"
 
-    $scope.setListInfo = function(listName){
-        $http.get('/listinfo/intento').success(function(data){
-            $scope.list = data;
-            window.alert(data);
-        }).error(function(data){
-            window.alert("setlist fail");
-        });
-    }
+  };
+
+
+  //functions
+  $scope.getListData = function(listName){
+    $http.get("listinfo/" + listName).success(function(data){
+      window.alert(data);
+      $scope.list = data;
+    }).error(function(data, status){
+      window.alert("List Info no se accedio\n" + status);
+    });
+  };
+
 }]);
