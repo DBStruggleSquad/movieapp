@@ -1,7 +1,7 @@
-app.controller('list', ['$scope', function($scope) {
+app.controller('list', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
   
   $scope.list = {
-    name: 'My Top Ten',
+    name: 'My Top 30',
     movies: [{
     title: 'Avatar',
     year: '2009',
@@ -14,4 +14,16 @@ app.controller('list', ['$scope', function($scope) {
   }]
 }
 
+    $rootScope.$on("listCtrlMethods", function(){
+        $scope.setListInfo(listName);
+    });
+
+    $scope.setListInfo = function(listName){
+        $http.get('/listinfo/intento').success(function(data){
+            $scope.list = data;
+            window.alert(data);
+        }).error(function(data){
+            window.alert("setlist fail");
+        });
+    }
 }]);

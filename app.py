@@ -185,6 +185,95 @@ def movies_mostreviewed():
       }]
     return 
 
+@app.route('/userprofileactivity')
+def userpofileactivity():
+    useractivity = {'activity': [
+          {
+            'name': 'katrific',
+            'type': 'list',
+            'pubdate': '2015-09-22',
+          },
+          {
+            'name': 'katrific',
+            'type': 'post',
+            'pubdate': '2015-09-22'
+          },
+          {
+            'name': 'katrific',
+            'type': 'joined',
+            'pubdate': '2015-09-22'
+          }
+        ]}
+    return jsonify(useractivity)
+
+@app.route('/userlists')
+def userlists():
+    userelists = {'lists': [
+                {'List_name': 'My top ten',
+                 'pubdate': '2015-09-22',
+                'movies': [
+                  {
+                    'title': 'Avatar',
+                    'poster': '/static/img/movie-placeholder.svg',
+                  },
+                  {
+                    'title': 'Avengers',
+                    'poster': '/static/img/movie-placeholder.svg',
+                  },
+                  {
+                    'title': 'Pokemon',
+                    'poster': '/static/img/movie-placeholder.svg',
+                  }
+                ]}]
+                }
+    return jsonify(userelists)
+
+@app.route('/userreviews')
+def userreviews():
+    user_reviews = {'reviews': [
+                    { 
+                    'Movie_title': 'Avatar',
+                    'Review_title': 'Aww yeah',
+                    'Rating': 3,
+                    'review': 'text text text text text  \n text text text text text ',
+                  }, 
+                  { 
+                    'Movie_title': 'Avengers',
+                    'Review_title': 'it sucks',
+                    'Rating': 2,
+                    'review': 'text text text text text  \n text text text text text ',
+                  }, 
+                  { 
+                    'Movie_title': 'Pokemon',
+                    'Review_title': 'Changed my life',
+                    'Rating': 10,
+                    'review': 'text text text text text  \n text text text text text ', 
+                  }]
+                    }
+    return jsonify(user_reviews)
+
+@app.route('/moviesearch/<movie_title>')
+def moviesearch(movie_title):
+    movie_info = {'hola':'dummydata'}
+    return jsonify(movie_info)
+
+@app.route('/listinfo/<listname>')
+def listinfo(listname):
+    list_info = {
+                    'name': 'My Top 30',
+                    'movies': [{
+                    'title': 'Avatar',
+                    'year': '2009',
+                  }, {
+                    'title': 'Avengers',
+                    'year': 'some year',
+                  }, {
+                    'title': 'Some movie',
+                    'year': 'some year',
+                  }]
+                }
+    return jsonify(list_info)
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'

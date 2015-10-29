@@ -72,8 +72,9 @@ app.controller('eventsNav', ['$scope', function($scope){
 
 }]);
 
-app.controller('listNav', ['$scope', function($scope){
+app.controller('listNav', ['$scope', '$rootScope', function($scope, $rootScope){
     $scope.goToList = function(name){
+        $rootScope.$emit("listCtrlMethods", name);
         window.location.href = "/list-page"
     };
 

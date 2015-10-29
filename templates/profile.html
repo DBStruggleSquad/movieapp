@@ -48,16 +48,20 @@
         </div>
     </div>
 
+    <!-- -------------------------------------------------- -->
+    <!-- ----------TABS------------TABS-------------------- -->
+    <!-- -------------------------------------------------- -->
+    <!-- Activity -->
     <script type="text/ng-template" id="activity.tpl.html">
-        <div class="activity-post" ng-repeat="activity in userDetails.activity" ng-include="'static/directives/activityPost.html'"></div>
+        <div class="activity-post" ng-repeat="activity in activities" ng-include="'static/directives/activityPost.html'"></div>
     </script>
-    
+    <!-- My-List -->
     <script type="text/ng-template" id="lists.tpl.html">
-      <div class="activity-post" ng-repeat="activity in userDetails.activity" ng-include="'static/directives/userMovieListPost3.html'"></div>
+      <div class="activity-post" ng-repeat="list in userLists" ng-include="'static/directives/userMovieListPost5.html'"></div>
     </script>
-    
+    <!-- Reviews -->
     <script type="text/ng-template" id="reviews.tpl.html">
-        <div class="activity-post" ng-repeat="review in userReview.movies" ng-include="'static/directives/userProfileReviewPost2.html'"></div>
+        <div class="activity-post" ng-repeat="review in userReview" ng-include="'static/directives/userProfileReviewPost2.html'"></div>
     </script>
 
     </div>
