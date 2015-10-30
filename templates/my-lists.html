@@ -22,6 +22,9 @@
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
   </head>
+  <!-- ------------------ -->
+  <!--      BODY        -->
+  <!-- ------------------ -->
   <body ng-app="myApp">
   {% raw %}
     <!-- Header, indicates where the user is located. -->
@@ -46,8 +49,8 @@
       <div class="lists">
         <h4>My Lists</h4>
         <ul>
-          <li ng-repeat="list in myLists" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            <p ng-controller="listNav" ng-click="goToList(list.name)"><br> {{ list.name }}</p>
+          <li ng-repeat="myList in myLists" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+            <p ng-controller='list' ng-click="goToList(myList.name)"><br> {{ myList.name }}</p>
           </li>
         </ul>
       </div>
@@ -72,7 +75,7 @@
 
     <!-- Controllers -->
     <script src="static/js/controllers/myListsController.js"></script>
-    <script src="/static/js/controllers/navigationActions.js"></script>
+    <script src="/static/js/controllers/listController.js"></script>
 
     <!-- Directives -->
     <script src="static/directives/activityPost.js"></script>

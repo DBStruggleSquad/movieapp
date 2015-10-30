@@ -11,8 +11,8 @@
 
     <script src="/static/bower_components/jquery/dist/jquery.js"></script>
     <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
-    <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
-    <script src="/static/bower_components/angular/angular.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
 
     <!-- For image uploaded -->
@@ -66,7 +66,7 @@
     <!--    MOST REVIEWED   -->
     <!-- ------------------ -->
     <script type="text/ng-template" id="mostreviewed.tpl.html">
-        <div class="movie-entry" ng-repeat="movie in movies" ng-controller="movieNav">
+        <div class="movie-entry" ng-repeat="movie in mostReviewedMovies" ng-controller="movieNav">
           <a ng-href="/movie-profile"><img src="{{ movie.img }}" ng-click="goToSelectedMovie(movie.name)"/><br>{{ movie.name }}</a>
         </div>
     </script>

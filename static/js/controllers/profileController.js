@@ -1,64 +1,39 @@
 app.controller('profile', ['$scope', '$http', function($scope,$http) {
-  $scope.userDetails = {
-    name: 'katrific',
-    rating: 5,
-    quote: "i am groot.",
-    activity: [ 
-      { 
-        type: 'list',
-        pubdate: new Date('2015', '09', '22'),
-      }, 
-      { 
-        type: 'post',
-        pubdate: new Date('2015', '09', '19'),
-      }, 
-      { 
-        type: 'joined',
-        pubdate: new Date('2015', '09', '15'), 
-      }
-    ]
-  };
+    $scope.userDetails = {
+        name: 'katrific',
+        rating: 5,
+        quote: "i am groot.",
+        activity: [
+          {
+            type: 'list',
+            pubdate: new Date('2015', '09', '22'),
+          },
+          {
+            type: 'post',
+            pubdate: new Date('2015', '09', '19'),
+          },
+          {
+            type: 'joined',
+            pubdate: new Date('2015', '09', '15'),
+          }
+        ]
+      };
 
-$scope.userLists = {
-    List_name: 'My top ten',
-    movies: [ 
-      { 
-        title: 'Avatar',
-        poster: '/static/img/movie-placeholder.svg',
-      }, 
-      { 
-        title: 'Avengers',
-        poster: '/static/img/movie-placeholder.svg',
-      }, 
-      { 
-        title: 'Pokemon',
-        poster: '/static/img/movie-placeholder.svg', 
-      }
-    ]
-  };
+    $scope.activities = $http.get('/userprofileactivity').success(function(data){
+        $scope.activities = data.activity;
+    }).error(function(data, status){
+        window.alert(data + '\n' + status);
+    });
 
-  $scope.userReview = {
-    movies: [ 
-      { 
-        Movie_title: 'Avatar',
-        Review_title: 'Aww yeah',
-        Rating: 3,
-        review: 'text text text text text  \n text text text text text ',
-      }, 
-      { 
-        Movie_title: 'Avengers',
-        Review_title: 'it sucks',
-        Rating: 2,
-        review: 'text text text text text  \n text text text text text ',
-      }, 
-      { 
-        Movie_title: 'Pokemon',
-        Review_title: 'Changed my life',
-        Rating: 10,
-        review: 'text text text text text  \n text text text text text ', 
-      }
-    ]
-  };
+    $scope.userLists = $http.get('/userlists').success(function(data){
+        $scope.userLists = data.lists;
+    });
+
+      $scope.userReview = $http.get('/userreviews').success(function(data){
+          $scope.userReview = data.reviews;
+      }).error(function(data, status){
+          window.alert('userreview' + data + status);
+      });
 
 $scope.tabs = [{
             title: 'Activity',
