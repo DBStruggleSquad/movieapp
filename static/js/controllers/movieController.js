@@ -21,6 +21,7 @@ app.controller('profile', ['$scope', function($scope) {
       }]
   }
 
+
   $scope.movieReviews = {
     movies: [ 
       { 
@@ -46,6 +47,8 @@ app.controller('profile', ['$scope', function($scope) {
       }
     ]
   }
+
+  $scope.availableLists = ['Worst', 'My Top 10', 'Hi'];
 
 $scope.tabs = [{
             title: 'Info',
