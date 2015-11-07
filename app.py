@@ -105,6 +105,10 @@ def movies_main():
         print bcolors.INFO + "Movies template returned" + bcolors.ENDC
         return render_template('movies.html')
 
+@app.route('/search-results')
+def search_results():
+    return render_template('search-results.html')
+
 @app.route('/my-lists')
 def user_lists():
     if 'mylist' in request.args:

@@ -31,6 +31,7 @@ flex-direction: row;
 flex-grow: 0.1;
 text-align: left;
 padding: 0.5em;
+margin-top: 0.3em;
 }
 
 .filmshack-logo {
@@ -219,6 +220,14 @@ form .progress {
    background-position:center;	
 }
 
+#add-button {
+   font-size: 14px;
+   padding:2px 10px;
+   border-radius: 2px;
+   height: 30px;
+   background-color: #B22222;	
+}
+
 .follow-button:hover, .add-button:hover {
    color: rgb(255,80,80);
    background: rgba(255,80,80,0.25);
@@ -255,7 +264,7 @@ form .progress {
 	height: 65%;
 }
 
-.post-content, .activity-post-content, .movie-post-content, .review-post-content {
+.post-content, .search-content-wrapper, .activity-post-content, .movie-post-content, .review-post-content {
 	flex-grow: 1;
 	overflow: hidden;
 	margin-left: 5px;
@@ -397,10 +406,15 @@ form .progress {
 }
 
 .search-button {
+	width: 3%;
 	margin-left: 15px;
 	background-image: url("../img/search-icon.svg");
 	background-repeat: no-repeat;
 	background-size: 25px 100%;
+}
+
+.search-button:hover{
+	cursor: pointer;
 }
 
 /*						*/
@@ -549,6 +563,26 @@ form .progress {
 }
 
 /*			*/
-/*	Feed	*/
+/*	Search	*/
 /*			*/
+.search-title {
+	font-size: 36px;
+}
 
+.searched-movie-genres {
+	font-size: 30px;
+}
+
+.searched-movie-synopsis {
+	font-size: 26px;
+}
+
+.searched-movie-name-year {
+	font-size: 250%;
+	font-weight: bold;
+}
+
+.search-content {
+	display: flex;
+	flex-direction: column;
+}
