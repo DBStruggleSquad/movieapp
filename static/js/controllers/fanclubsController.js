@@ -34,7 +34,7 @@ app.controller('fanclubs', ['$scope', function($scope) {
     ];
 
     $scope.showModal = false;
-  $scope.toggleModal = function(){
+    $scope.toggleModal = function(){
     $scope.showModal = !$scope.showModal;
   }    
 }]);
