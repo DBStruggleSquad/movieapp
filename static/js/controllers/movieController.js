@@ -21,6 +21,7 @@ app.controller('profile', ['$scope', function($scope) {
       }]
   }
 
+
   $scope.movieReviews = {
     movies: [ 
       { 
@@ -47,6 +48,8 @@ app.controller('profile', ['$scope', function($scope) {
     ]
   }
 
+  $scope.availableLists = ['Worst', 'My Top 10', 'Hi'];
+
 $scope.tabs = [{
             title: 'Info',
             url: 'info.tpl.html'
@@ -64,5 +67,10 @@ $scope.tabs = [{
     $scope.isActiveTab = function(tabUrl) {
         return tabUrl == $scope.currentTab;
     }
+
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+    $scope.showModal = !$scope.showModal;
+  }        
 
 }]);

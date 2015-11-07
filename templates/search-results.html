@@ -28,21 +28,24 @@
   <body ng-app="myApp">
     {% raw %}
     <!-- Header, indicates where the user is located. -->
-    <div class="header" ng-controller="list">
-        <div class="location">{{ list.name}}</div>
+    <div class="header" ng-controller="results">
+        <div class="location">Search Results</div>
         <div class="filmshack-logo">filmshack</div>
         <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
     </div>    
 
-    <div class="enclosure" ng-controller="list">
-
-      <!-- User-Info, offers user details. -->
-      <div class="activity-post" ng-repeat="movie in list.movies">
+    <div class="enclosure" ng-controller="results">
+      <div class="search-title">Search results for " "</div>
+      <div class="activity-post" ng-repeat="movie in searchTester">
           <div class="movie-poster">
-            <img  src="static/img/profile-picture-placeholder.svg" ng-src="static/img/profile-picture-placeholder.svg"/>
+            <img ng-src="{{ movie.poster }}"/>
           </div>
-          <div class="post-content">
-            <div class="movie-name">{{ movie.title }} {{ movie.year }}</div>
+          <div class="search-content-wrapper">
+            <div class="search-content">
+              <div class="searched-movie-name-year">{{ movie.name }} ({{ movie.year }})</div>
+              <div class="searched-movie-genres">{{ movie.genre }}</div>
+              <div class="searched-movie-synopsis">{{movie.synopsis}}</div>
+            </div>
           </div>
       </div>
 
@@ -56,7 +59,7 @@
     <script src="/static/js/app.js"></script>
 
     <!-- Controllers -->
-    <script src="/static/js/controllers/listController.js"></script>
+    <script src="/static/js/controllers/searchResultsController.js"></script>
     <script src="/static/js/controllers/navigationActions.js"></script>
 
     <!-- Directives -->

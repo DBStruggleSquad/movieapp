@@ -8,7 +8,7 @@ from flask import Flask
 from flask import render_template
 from flask.ext.mysql import MySQL
 import urlparse 
-import sys
+import sys, os
 import json
 from flask import jsonify
 from flask.globals import request
@@ -17,21 +17,23 @@ import logging
 app = Flask(__name__)
 
 mysql = MySQL()
-#url = urlparse.urlparse(os.environ['DATABASE_URL'])
-#app.config['MYSQL_DATABASE_USER'] = url.username
-#app.config['MYSQL_DATABASE_PASSWORD'] = url.password
-#app.config['MYSQL_DATABASE_HOST'] = url.hostname
+url = urlparse.urlparse(os.environ['DATABASE_URL'])
+app.config['MYSQL_DATABASE_USER'] = url.username
+app.config['MYSQL_DATABASE_PASSWORD'] = url.password
+app.config['MYSQL_DATABASE_HOST'] = url.hostname
+app.config['MYSQL_DATABASE_DB'] = 'heroku_d4e136b9b4dc6f5'
 
-#mysql.init_app(app)
+mysql.init_app(app)
 
-#conn = mysql.connect()
-#cursor = conn.cursor()
+conn = mysql.connect()
+cursor = conn.cursor()
+
 # Update with environment configuration.
 
 #===================================================================================
 #                               VARIABLES FOR DATA SHARING
 #===================================================================================
-listName = "";
+
 
 
 #===================================================================================
@@ -111,6 +113,10 @@ def movies_main():
         print bcolors.INFO + "Movies template returned" + bcolors.ENDC
         return render_template('movies.html')
 
+@app.route('/search-results')
+def search_results():
+    return render_template('search-results.html')
+
 @app.route('/my-lists')
 def user_lists():
     if 'mylist' in request.args:
@@ -123,10 +129,8 @@ def user_lists():
     else:
         return render_template('my-lists.html')
 
-@app.route('/list-page/<listname>')        
-def list_page(listname):
-    listName = listname
-    print bcolors.OKGREEN + "\n\nlist name changed to: " + listName + "\n\n" + bcolors.ENDC
+@app.route('/list-page')        
+def list_page():
     return render_template('list-page.html')    
 
 @app.route('/settings')
@@ -265,8 +269,8 @@ def moviesearch(movie_title):
     movie_info = {'hola':'dummydata'}
     return jsonify(movie_info)
 
-@app.route('/listinfo')
-def listinfo():
+@app.route('/listinfo/<listName>')
+def listinfo(listName):
     print "\n Se esta pidiendo la siguiente lista: " + listName + "\n\n"
     list_info = {}
     if listName == "My Top Ten":
@@ -303,13 +307,13 @@ def listinfo():
         list_info = {'listinfo':{
                         'name': 'Must-Watch',
                         'movies': [{
-                        'title': 'Avatar',
+                        'title': 'Avarrrrrr',
                         'year': '2009',
                       }, {
-                        'title': 'Avengers',
+                        'title': 'Friends',
                         'year': 'some year',
                       }, {
-                        'title': 'Some movie',
+                        'title': 'Alooooo ',
                         'year': 'some year',
                       }]
                     }}
