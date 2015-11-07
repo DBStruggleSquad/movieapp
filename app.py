@@ -8,7 +8,7 @@ from flask import Flask
 from flask import render_template
 from flask.ext.mysql import MySQL
 import urlparse 
-import sys
+import sys, os
 import json
 from flask import jsonify
 from flask.globals import request
@@ -17,15 +17,16 @@ import logging
 app = Flask(__name__)
 
 mysql = MySQL()
-#url = urlparse.urlparse(os.environ['DATABASE_URL'])
-#app.config['MYSQL_DATABASE_USER'] = url.username
-#app.config['MYSQL_DATABASE_PASSWORD'] = url.password
-#app.config['MYSQL_DATABASE_HOST'] = url.hostname
+url = urlparse.urlparse(os.environ['DATABASE_URL'])
+app.config['MYSQL_DATABASE_USER'] = url.username
+app.config['MYSQL_DATABASE_PASSWORD'] = url.password
+app.config['MYSQL_DATABASE_HOST'] = url.hostname
+app.config['MYSQL_DATABASE_DB'] = 'heroku_d4e136b9b4dc6f5'
 
-#mysql.init_app(app)
+mysql.init_app(app)
 
-#conn = mysql.connect()
-#cursor = conn.cursor()
+conn = mysql.connect()
+cursor = conn.cursor()
 # Update with environment configuration.
 
 #===================================================================================
