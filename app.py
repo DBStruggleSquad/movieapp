@@ -29,6 +29,12 @@ mysql = MySQL()
 # Update with environment configuration.
 
 #===================================================================================
+#                               VARIABLES FOR DATA SHARING
+#===================================================================================
+listName = "";
+
+
+#===================================================================================
 #                                ROUTE FUNCTIONS
 #===================================================================================
 @app.route('/')
@@ -117,8 +123,10 @@ def user_lists():
     else:
         return render_template('my-lists.html')
 
-@app.route('/list-page')
-def list_page():
+@app.route('/list-page/<listname>')        
+def list_page(listname):
+    listName = listname
+    print bcolors.OKGREEN + "\n\nlist name changed to: " + listName + "\n\n" + bcolors.ENDC
     return render_template('list-page.html')    
 
 @app.route('/settings')
@@ -257,12 +265,12 @@ def moviesearch(movie_title):
     movie_info = {'hola':'dummydata'}
     return jsonify(movie_info)
 
-@app.route('/listinfo/<listname>')
-def listinfo(listname):
-    print "\n Se esta pidiendo la siguiente lista: " + listname + "\n\n"
+@app.route('/listinfo')
+def listinfo():
+    print "\n Se esta pidiendo la siguiente lista: " + listName + "\n\n"
     list_info = {}
-    if listname == "My Top Ten":
-        list_info = {
+    if listName == "My Top Ten":
+        list_info = {'listinfo':{
                         'name': 'My Top 30',
                         'movies': [{
                         'title': 'Avatar',
@@ -274,8 +282,8 @@ def listinfo(listname):
                         'title': 'Some movie',
                         'year': 'some year',
                       }]
-                    }
-    elif listname == "Worst":
+                    }}
+    elif listName == "Worst":
         print "entro a worst"
         list_info = { 'listinfo':{
                         'name': 'Worst',
@@ -292,7 +300,7 @@ def listinfo(listname):
                     }}
         print list_info
     else:
-        list_info = {
+        list_info = {'listinfo':{
                         'name': 'Must-Watch',
                         'movies': [{
                         'title': 'Avatar',
@@ -304,7 +312,7 @@ def listinfo(listname):
                         'title': 'Some movie',
                         'year': 'some year',
                       }]
-                    }
+                    }}
     print list_info
     return jsonify(list_info)
 
