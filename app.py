@@ -303,14 +303,19 @@ def moviesearch(movie_title):
 def listinfo(listName):
     print bcolors.INFO + "----------------------LIST INFO---------------------------" + bcolors.ENDC
     print "\n Se esta pidiendo la siguiente lista: " + listName + "\n"
-    list_info = {}
+    list_info2 = {'listinfo':{'name': listName, 'movies':[]}}
     
     #query
-    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
+    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
     print query
     cur.execute(query)
     result = cur.fetchall()
     print result 
+    
+    for i in result:
+        list_info2['listinfo']['movies'].append({'title': i[1], 'year': i[2], 'description': i[3], 'genre': i[4]})
+    
+    print list_info2
     
     if listName == "My Top Ten":
         list_info = {'listinfo':{
