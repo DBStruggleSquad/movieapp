@@ -307,7 +307,7 @@ def listinfo(listName):
     print query
     cur.execute(query)
     result = cur.fetchall()
-    print bcolors.OKGREEN + result + bcolors.ENDC
+    #print result 
     
     if listName == "My Top Ten":
         list_info = {'listinfo':{
