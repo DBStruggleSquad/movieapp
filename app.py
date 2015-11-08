@@ -15,19 +15,40 @@ from flask.globals import request
 import logging
 
 app = Flask(__name__)
-"""
+
 mysql = MySQL()
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
 app.config['MYSQL_DATABASE_HOST'] = url.hostname
-app.config['MYSQL_DATABASE_DB'] = 'heroku_d4e136b9b4dc6f5'
+app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
+
 
 mysql.init_app(app)
 
 conn = mysql.connect()
+
 cursor = conn.cursor()
-"""
+
+cur = conn.cursor()
+username = "'Antoine Cotto'"
+query = "select * from Lists where username = " + username
+cur.execute("select * from Lists where username = " + username)
+data = cur.fetchall()
+
+data_dict = []
+for hi in data:
+    d_dict = {
+    'List_name': hi[0],
+    'username': hi[1],
+    'Category': hi[2],
+    'Sharable': hi[4]}
+    data_dict.append(d_dict)
+json.dumps(data_dict)
+
+
+
+>>>>>>> fb309254bdf3e6e21896956e1adac42f92a4c8be
 # Update with environment configuration.
 
 #===================================================================================
