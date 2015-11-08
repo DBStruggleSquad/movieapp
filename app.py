@@ -308,9 +308,9 @@ def listinfo(listName):
     #query
     query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
     print query
-    #cur.execute(query)
-    #result = cur.fetchall()
-    #print result 
+    cur.execute(query)
+    result = cur.fetchall()
+    print result 
     
     if listName == "My Top Ten":
         list_info = {'listinfo':{
