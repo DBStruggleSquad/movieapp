@@ -15,7 +15,7 @@ from flask.globals import request
 import logging
 
 app = Flask(__name__)
-
+"""
 mysql = MySQL()
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
@@ -27,7 +27,7 @@ mysql.init_app(app)
 
 conn = mysql.connect()
 cursor = conn.cursor()
-
+"""
 # Update with environment configuration.
 
 #===================================================================================

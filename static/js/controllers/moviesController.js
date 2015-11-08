@@ -49,5 +49,9 @@ $scope.tabs = [{
         return tabUrl == $scope.currentTab;
     }
 
+    $scope.goToSelectedMovie = function(movieTitle){
+        window.location.href = "/movie-profile"
+    };
+
 }]);
 

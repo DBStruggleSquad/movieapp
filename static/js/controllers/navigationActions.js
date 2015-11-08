@@ -37,7 +37,9 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
 
 app.controller('movieNav', ['$scope', function($scope){
     $scope.goToSelectedMovie = function(movieTitle){
-      window.location.href = "/movie-profile"
+        localStorage.removeItem("movieTitle");
+        localStorage.setItem("movieTitle", movieTitle);
+        window.location.href = "/movie-profile?" + movieTitle;
     };
 }]);
 
