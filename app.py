@@ -140,8 +140,9 @@ def search_results():
 
 @app.route('/my-lists')
 def user_lists():
-    print bcolors.INFO + "----------------------MY LIST---------------------------" + bcolors.ENDC
+    
     if 'mylist' in request.args:
+        print bcolors.INFO + "----------------------MY LISTS INFO------------------------" + bcolors.ENDC
         data = {'mylist':[]}
         
         #query
@@ -157,9 +158,12 @@ def user_lists():
             data['mylist'].append({'name': str(i[0])})
         
         #data returned
-        print bcolors.INFO + "---------------------MY LISTS END---------------------------" + bcolors.ENDC
+        print bcolors.INFO + "---------------------MY LISTS END------------------------" + bcolors.ENDC
         return jsonify(data)
     else:
+        print bcolors.INFO + "-------------------MY LISTS TEMPLATE---------------------" + bcolors.ENDC
+        print request.args
+        print bcolors.INFO + "-----------------MY LISTS TEMPLATE END-------------------" + bcolors.ENDC
         return render_template('my-lists.html')
 
 @app.route('/list-page')        
