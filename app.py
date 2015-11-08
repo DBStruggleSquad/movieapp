@@ -147,9 +147,12 @@ def user_lists():
         #query
         username = "'Antoine Cotto'"
         query = "select lists.List_name from lists where lists.username = " + username
+        print "comenzando el query"
         cur.execute(query)
+        print "termino el query"
         result = cur.fetchall()
         print result
+        
         for i in result:
             data['mylist'].append({'name': str(i[0])})
         
