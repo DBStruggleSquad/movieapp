@@ -140,6 +140,7 @@ def search_results():
 
 @app.route('/my-lists')
 def user_lists():
+    print bcolors.INFO + "----------------------MY LIST---------------------------" + bcolors.ENDC
     if 'mylist' in request.args:
         data = {'mylist':[]}
         
@@ -148,10 +149,12 @@ def user_lists():
         query = "select lists.List_name from lists where lists.username = " + username
         cur.execute(query)
         result = cur.fetchall()
+        print result
         for i in result:
             data['mylist'].append({'name': str(i[0])})
         
         #data returned
+        print bcolors.INFO + "---------------------MY LISTS END---------------------------" + bcolors.ENDC
         return jsonify(data)
     else:
         return render_template('my-lists.html')
@@ -305,8 +308,8 @@ def listinfo(listName):
     #query
     query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
     print query
-    cur.execute(query)
-    result = cur.fetchall()
+    #cur.execute(query)
+    #result = cur.fetchall()
     #print result 
     
     if listName == "My Top Ten":
