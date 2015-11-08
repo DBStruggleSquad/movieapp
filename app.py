@@ -244,7 +244,7 @@ def userpofileactivity():
           }
         ]}
     return jsonify(useractivity)
-
+"""
 @app.route('/userlists')
 def userlists():
     userelists = {'lists': [
@@ -266,7 +266,7 @@ def userlists():
                 ]}]
                 }
     return jsonify(userelists)
-
+"""
 @app.route('/userreviews')
 def userreviews():
     user_reviews = {'reviews': [
@@ -300,6 +300,13 @@ def moviesearch(movie_title):
 def listinfo(listName):
     print "\n Se esta pidiendo la siguiente lista: " + listName + "\n\n"
     list_info = {}
+    
+    #query
+    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
+    cur.execute()
+    result = cur.fetchall()
+    print result
+    
     if listName == "My Top Ten":
         list_info = {'listinfo':{
                         'name': 'My Top 30',
