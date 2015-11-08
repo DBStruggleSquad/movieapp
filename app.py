@@ -163,6 +163,8 @@ def user_lists():
     else:
         print bcolors.INFO + "-------------------MY LISTS TEMPLATE---------------------" + bcolors.ENDC
         print request.args
+        for i in request.args:
+            print i
         print bcolors.INFO + "-----------------MY LISTS TEMPLATE END-------------------" + bcolors.ENDC
         return render_template('my-lists.html')
 
