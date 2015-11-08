@@ -36,6 +36,7 @@ query = "select * from Lists where username = " + username
 cur.execute("select * from Lists where username = " + username)
 data = cur.fetchall()
 
+
 data_dict = []
 for hi in data:
     d_dict = {
@@ -48,7 +49,6 @@ json.dumps(data_dict)
 
 
 
->>>>>>> fb309254bdf3e6e21896956e1adac42f92a4c8be
 # Update with environment configuration.
 
 #===================================================================================
@@ -141,11 +141,17 @@ def search_results():
 @app.route('/my-lists')
 def user_lists():
     if 'mylist' in request.args:
-        data = {'mylist':[
-                {'name': 'My Top Ten'}, 
-                {'name': 'Must-Watch'},
-                {'name': 'Worst'}
-                ]}
+        data = {'mylist':[]}
+        
+        #query
+        username = "'Antoine Cotto'"
+        query = "select lists.List_name from lists where lists.username = " + username
+        cur.execute(query)
+        result = cur.fetchall()
+        for i in result:
+            data['mylist'].append({'name': str(i[0])})
+        
+        #data returned
         return jsonify(data)
     else:
         return render_template('my-lists.html')
@@ -351,6 +357,8 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     INFO = '\033[1;33m'
+    
+
     
 if __name__ == '__main__':
     app.run()
