@@ -166,10 +166,19 @@ def user_lists():
 @app.route('/list-page')        
 def list_page():
     print bcolors.INFO + "-----------------LIST PAGE TEMPLATE---------------------" + bcolors.ENDC
-    print request.args
+    print ""
+    print ""
+    
+    print type(request.args)
     for i in request.args:
-         print i
-    print bcolors.INFO + "-----------------LIST PAGE TEMPLATE---------------------" + bcolors.ENDC
+        print i 
+    #query = "select lists.Category from lists where lists.List_name = '" + str(request.args[0]) + "'" 
+    #cur.execute(query)
+    #result = cur.fetchall()
+    #list_category = str(result[0])
+    #print list_category
+    #print result
+    print bcolors.INFO + "-----------------LIST PAGE TEMPLATE END------------------" + bcolors.ENDC
     return render_template('list-page.html')    
 
 @app.route('/settings')
