@@ -161,15 +161,15 @@ def user_lists():
         print bcolors.INFO + "---------------------MY LISTS END------------------------" + bcolors.ENDC
         return jsonify(data)
     else:
-        print bcolors.INFO + "-------------------MY LISTS TEMPLATE---------------------" + bcolors.ENDC
-        print request.args
-        for i in request.args:
-            print i
-        print bcolors.INFO + "-----------------MY LISTS TEMPLATE END-------------------" + bcolors.ENDC
         return render_template('my-lists.html')
 
 @app.route('/list-page')        
 def list_page():
+    print bcolors.INFO + "-----------------LIST PAGE TEMPLATE---------------------" + bcolors.ENDC
+    print request.args
+    for i in request.args:
+         print i
+    print bcolors.INFO + "-----------------LIST PAGE TEMPLATE---------------------" + bcolors.ENDC
     return render_template('list-page.html')    
 
 @app.route('/settings')
