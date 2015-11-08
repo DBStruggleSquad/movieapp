@@ -303,7 +303,7 @@ def moviesearch(movie_title):
 def listinfo(listName):
     print bcolors.INFO + "----------------------LIST INFO---------------------------" + bcolors.ENDC
     print "\n Se esta pidiendo la siguiente lista: " + listName + "\n"
-    list_info2 = {'listinfo':{'name': listName, 'movies':[]}}
+    list_info = {'listinfo':{'name': str(listName), 'movies':[]}}
     
     #query
     query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
@@ -313,55 +313,10 @@ def listinfo(listName):
     print result 
     
     for i in result:
-        list_info2['listinfo']['movies'].append({'title': i[1], 'year': i[2], 'description': i[3], 'genre': i[4]})
+        list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4])})
     
-    print list_info2
-    
-    if listName == "My Top Ten":
-        list_info = {'listinfo':{
-                        'name': 'My Top 30',
-                        'movies': [{
-                        'title': 'Avatar',
-                        'year': '2009',
-                      }, {
-                        'title': 'Avengers',
-                        'year': 'some year',
-                      }, {
-                        'title': 'Some movie',
-                        'year': 'some year',
-                      }]
-                    }}
-    elif listName == "Worst":
-        print "entro a worst"
-        list_info = { 'listinfo':{
-                        'name': 'Worst',
-                        'movies': [{
-                        'title': '???',
-                        'year': '1963',
-                      }, {
-                        'title': 'Movie 45',
-                        'year': 'some year',
-                      }, {
-                        'title': 'Some movie',
-                        'year': 'some year',
-                      }]
-                    }}
-        print list_info
-    else:
-        list_info = {'listinfo':{
-                        'name': 'Must-Watch',
-                        'movies': [{
-                        'title': 'Avarrrrrr',
-                        'year': '2009',
-                      }, {
-                        'title': 'Friends',
-                        'year': 'some year',
-                      }, {
-                        'title': 'Alooooo ',
-                        'year': 'some year',
-                      }]
-                    }}
     print list_info
+    
     print bcolors.INFO + "----------------------END LIST INFO---------------------------" + bcolors.ENDC
     return jsonify(list_info)
 
