@@ -113,6 +113,8 @@ def movies_main():
         print bcolors.INFO +  "------------------------------\nMostReviewedMovies Asked\nData returned:\n" + json.dumps(data) + "\n------------------------------\n" + bcolors.ENDC
         return jsonify(data), 200
     elif 'bygender' in request.args:
+        
+        
         data = {"genrelist": [
         {'name': 'Action', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]},
         {'name': 'Drama', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]},
@@ -120,6 +122,8 @@ def movies_main():
         ]}
         print bcolors.INFO + "Movies By Gender asked, returned:\n" + json.dumps(data) + bcolors.ENDC
         return jsonify(data), 200
+    
+    
     elif 'toprated' in request.args:
         data = {"toprated": [
             {'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},
@@ -215,6 +219,7 @@ def movie_profile():
 #===================================================================================
 #                                Queries
 #===================================================================================
+"""
 @app.route('/movies/mostreviewed')
 def movies_mostreviewed():
     data = [{
@@ -247,7 +252,7 @@ def movies_mostreviewed():
         'img': 'static/img/movie-placeholder.svg'
       }]
     return 
-
+"""
 @app.route('/userprofileactivity')
 def userpofileactivity():
     useractivity = {'activity': [
@@ -345,17 +350,17 @@ def listinfo(listName):
 def listinfo_nonmovies(listName):
     print bcolors.INFO + "----------------------LIST INFO---------------------------" + bcolors.ENDC
     print "\n Se esta pidiendo la siguiente lista: " + listName + "\n"
-    list_info = {'listinfo':{'name': str(listName), 'movies':[]}}
+    list_info = {'listinfo':{'name': str(listName), 'posts':[]}}
     
     #query
-    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
+    query = "select lists.List_name, lists_post.Title, lists_post.description from lists, lists_post where lists.List_name = lists_post.List_name and lists.List_name = '" + listName + "'" 
     print query
     cur.execute(query)
     result = cur.fetchall()
     print result 
     
     for i in result:
-        list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4])})
+        list_info['listinfo']['posts'].append({'title': str(i[1]),'description': str(i[2])})
     
     print list_info
     
