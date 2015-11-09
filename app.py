@@ -25,7 +25,7 @@ app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 
 
 mysql.init_app(app)
-
+'''
 conn = mysql.connect()
 
 cursor = conn.cursor()
@@ -35,7 +35,6 @@ username = "'Antoine Cotto'"
 query = "select * from Lists where username = " + username
 cur.execute("select * from Lists where username = " + username)
 data = cur.fetchall()
-
 
 data_dict = []
 for hi in data:
@@ -47,6 +46,7 @@ for hi in data:
     data_dict.append(d_dict)
 json.dumps(data_dict)
 
+'''
 
 
 # Update with environment configuration.
@@ -80,6 +80,18 @@ def home():
 def movies_main():
     if 'mostreviewed' in request.args:
         
+        query = """ Select m.*, count(Movie_title) r_num from Reviews as r join Movies m on r.Movie_title = m.Title
+                    group by Movie_title
+                    order by r_num DESC;"""
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        qresult = cur.fetchall()
+        conn.close()
+        result = {"movies": []}
+        for movie in qresult:
+            result["movies"].append({'name': str(movie[0]), 'genre': movie[4], 'img': movie[3]}) #'img': 'static/img/movie-placeholder.svg'
+            print movie[3]
         data = {"movies" : [{
         'name': 'Movie-1',
         'genre': 'comedy',
@@ -110,8 +122,8 @@ def movies_main():
         'img': 'static/img/movie-placeholder.svg'
       }]}
         
-        print bcolors.INFO +  "------------------------------\nMostReviewedMovies Asked\nData returned:\n" + json.dumps(data) + "\n------------------------------\n" + bcolors.ENDC
-        return jsonify(data), 200
+        print bcolors.INFO +  "------------------------------\nMostReviewedMovies Asked\nData returned:\n" + json.dumps(result) + "\n------------------------------\n" + bcolors.ENDC
+        return jsonify(result), 200
     elif 'bygender' in request.args:
         
         
@@ -151,6 +163,9 @@ def user_lists():
         
         #query
         username = "'Antoine Cotto'"
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cur = conn.cursor()
         query = "select lists.List_name from lists where lists.username = " + username
         print "comenzando el query"
         cur.execute(query)
@@ -161,6 +176,7 @@ def user_lists():
         for i in result:
             data['mylist'].append({'name': str(i[0])})
         
+        conn.close()
         #data returned
         print bcolors.INFO + "---------------------MY LISTS END------------------------" + bcolors.ENDC
         return jsonify(data)
@@ -176,14 +192,17 @@ def list_page():
     
     for i in request.args:
         query = "select lists.Category from lists where lists.List_name = '" + str(i) + "'" 
+        conn = mysql.connect()
+        cur = conn.cursor()
         cur.execute(query)
         result = cur.fetchall()
         list_category = str(result[0][0])
         print str(list_category)    
+        conn.close()
     
     print bcolors.INFO + "-----------------LIST PAGE TEMPLATE END------------------" + bcolors.ENDC
     if list_category == "Movies":
-        print "devolvio  liost page para peliculas"
+        print "devolvio  list page para peliculas"
         return render_template('list-page.html')
     
     return render_template('list-page-nonmovies.html')    
@@ -334,8 +353,12 @@ def listinfo(listName):
     #query
     query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
     print query
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cur = conn.cursor()
     cur.execute(query)
     result = cur.fetchall()
+    conn.close()
     print result 
     
     for i in result:
@@ -355,8 +378,11 @@ def listinfo_nonmovies(listName):
     #query
     query = "select lists.List_name, lists_post.Title, lists_post.description from lists, lists_post where lists.List_name = lists_post.List_name and lists.List_name = '" + listName + "'" 
     print query
+    conn = mysql.connect()
+    cur = conn.cursor()
     cur.execute(query)
     result = cur.fetchall()
+    conn.close()
     print result 
     
     for i in result:
