@@ -168,16 +168,21 @@ def list_page():
     print bcolors.INFO + "-----------------LIST PAGE TEMPLATE---------------------" + bcolors.ENDC
     print ""
     print ""
+    list_category = ""
     
     for i in request.args:
         query = "select lists.Category from lists where lists.List_name = '" + str(i) + "'" 
         cur.execute(query)
         result = cur.fetchall()
-        list_category = str(result[0])
-        print str(list_category)
+        list_category = str(result[0][0])
+        print str(list_category)    
     
     print bcolors.INFO + "-----------------LIST PAGE TEMPLATE END------------------" + bcolors.ENDC
-    return render_template('list-page.html')    
+    if list_category == "Movies":
+        print "devolvio  liost page para peliculas"
+        return render_template('list-page.html')
+    
+    return render_template('list-page-nonmovies.html')    
 
 @app.route('/settings')
 def settings():
