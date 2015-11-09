@@ -174,9 +174,7 @@ def list_page():
         cur.execute(query)
         result = cur.fetchall()
         list_category = str(result[0])
-        print list_category
-        print result
-        print i 
+        print str(list_category)
     
     print bcolors.INFO + "-----------------LIST PAGE TEMPLATE END------------------" + bcolors.ENDC
     return render_template('list-page.html')    
