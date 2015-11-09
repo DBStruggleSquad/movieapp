@@ -48,7 +48,7 @@ app.controller('profile', ['$scope', function($scope) {
     ]
   }
 
-  $scope.availableLists = ['Worst', 'My Top 10', 'Hi'];
+$scope.availableLists = ['Worst', 'My Top 10', 'Hi'];
 
 $scope.tabs = [{
             title: 'Info',
@@ -69,8 +69,9 @@ $scope.tabs = [{
     }
 
     $scope.showModal = false;
+
     $scope.toggleModal = function(){
-    $scope.showModal = !$scope.showModal;
+      $scope.showModal = !$scope.showModal;
   }        
 
 }]);
