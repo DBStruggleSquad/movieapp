@@ -1,4 +1,5 @@
 app.controller('profile', ['$scope', '$http', function($scope, $http) {
+
   $scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
   	$scope.movie = data;
   }).error(function(data){
@@ -34,6 +35,8 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 
 $scope.availableLists = ['Worst', 'My Top 10', 'Hi'];
 
+$scope.selectedList = 'List';
+
 $scope.tabs = [{
             title: 'Info',
             url: 'info.tpl.html'
@@ -54,7 +57,8 @@ $scope.tabs = [{
 
     $scope.showModal = false;
 
-    $scope.toggleModal = function(){
+    $scope.toggleModal = function(list){
+      $scope.selectedList = list;
       $scope.showModal = !$scope.showModal;
   }        
 

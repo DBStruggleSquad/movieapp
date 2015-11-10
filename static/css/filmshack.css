@@ -278,6 +278,10 @@ form .progress {
 	overflow: hidden;	
 }
 
+#flex-slider-poster:hover{
+	cursor: pointer;
+}
+
 .post-content, .search-content-wrapper, .activity-post-content, .movie-post-content, .review-post-content {
 	flex-grow: 1;
 	overflow: hidden;
@@ -454,6 +458,10 @@ form .progress {
 	display: inline-block;
 	margin: 20px;
 	text-align: center;
+}
+
+.movie-entry:hover {
+	cursor: pointer;
 }
 
 .movie-entry img {
