@@ -177,6 +177,7 @@ form .progress {
 	display: inline-block;
 	flex-grow: 1;
 	text-align: center;
+	margin: 15px;
 }
 
 .list-post-img {
@@ -191,6 +192,8 @@ form .progress {
 .profile-picture img, .movie-poster img {
 	width: 250px;
 	height: 250px;
+	border-radius: 50%;
+	overflow: hidden;		
 }
 
 .user-details, .movie-details {
@@ -269,8 +272,10 @@ form .progress {
 	display: inline;
 }
 #flex-slider-poster{
-	width: 90%;
-	height: 65%;
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	overflow: hidden;	
 }
 
 .post-content, .search-content-wrapper, .activity-post-content, .movie-post-content, .review-post-content {
@@ -452,6 +457,8 @@ form .progress {
 }
 
 .movie-entry img {
+	border-radius: 50%;
+	overflow: hidden;	
 	width: 250px;
 	height: 250px;
 }
