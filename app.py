@@ -327,14 +327,13 @@ def movie_reviews(movie_title):
     print movieriviews
     print "termina query"
     print "entro al loop"
+    
     for review in qresult:
-        movieriviews["movies"].append({'reviewer': review[1],
-        'Movie_title': review[2],
-        'Review_title': review[0],
-        'Rating': str(review[7]),
-        'review': review[3]})
+        print "iteracion del loop"
+        print review
+        movieriviews["movies"].append({'reviewer': review[1], 'Movie_title': review[2], 'Review_title': review[0], 'Rating': str(review[7]),'review': review[3]})
+        print movieriviews
     print "dalio del loop"
-    print bcolors.INFO + movieriviews + bcolors.ENDC
     print movieriviews
     return jsonify(movieriviews)
 #---------------------------------
