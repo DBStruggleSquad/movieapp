@@ -6,31 +6,9 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
   });
 
 
-  $scope.movieReviews = {
-    movies: [ 
-      { 
-        reviewer: 'katrific',
-        Movie_title: 'Avatar',
-        Review_title: 'Aww yeah',
-        Rating: 3,
-        review: 'text text text text text text text text text text ',
-      }, 
-      { 
-        reviewer: 'samy',
-        Movie_title: 'Avatar',
-        Review_title: 'it sucks',
-        Rating: 2,
-        review: 'no',
-      }, 
-      { 
-        reviewer: 'jil',
-        Movie_title: 'Avatar',
-        Review_title: 'Changed my life',
-        Rating: 5,
-        review: 'amaaaaaaaaaazingggggggggggggggg', 
-      }
-    ]
-  }
+  $scope.movieReviews = $http.get('/moviereviews/' + localStorage.getItem("movieTitle")).success(function(data){
+  	$scope.movieReviews = data;
+  });
 
 $scope.availableLists = ['Worst', 'My Top 10', 'Hi'];
 
@@ -46,16 +24,16 @@ $scope.tabs = [{
 
     $scope.onClickTab = function (tab) {
         $scope.currentTab = tab.url;
-    }
+    };
     
     $scope.isActiveTab = function(tabUrl) {
         return tabUrl == $scope.currentTab;
-    }
+    };
 
     $scope.showModal = false;
 
     $scope.toggleModal = function(){
       $scope.showModal = !$scope.showModal;
-  }        
+  };        
 
 }]);
