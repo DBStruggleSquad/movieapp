@@ -403,9 +403,9 @@ def listinfo_nonmovies(listName):
 #===================================================================================
 @app.route('/addmovie2list', methods=['POST'])
 def add_movie2list():
-    print str(request.form)
-    print request.get_json()
-    print jsonify(request.form)
+    print "1" + str(request.form)
+    print "2" + request.get_json()
+    print "3" + jsonify(request.form)
     return jsonify({})
     
 class bcolors:

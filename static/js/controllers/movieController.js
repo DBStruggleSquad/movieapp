@@ -42,10 +42,11 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 	//--------------------------
 	//FUNSIONES PARA ANADIR MOVIE A LISTA
 	//--------------------------
-	$scope.data2send = {movieTitle: $scope.movie.name,  title: "", description: ""};
-	$scope.addMovie2List = function(){
+	$scope.data2send = {movieTitle: "",  title: "", description: ""};
+	$scope.addMovie2List = function(moviename){
+		$scope.data2send.movieTitle = moviename;
 		$http.post('/addmovie2list', $scope.data2send).success(function(data){
-			window.alert($scope.data2send.movieTitle+ "   " + $scope.data2send.description + "   " + $scope.data2send.title);
+			
 		}).error(function(data){
 			window.alert(data);
 		});

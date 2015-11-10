@@ -52,7 +52,7 @@
             <label for="list">Say something about this movie:</label>
             <input type="text" class="form-control" ng-model="data2send.description" placeholder="Description..." />
           </div>
-          <button type="submit" ng-click="addMovie2List()"class="btn btn-default">Add</button> 
+          <button type="submit" ng-click="addMovie2List(movie.name)"class="btn btn-default">Add</button> 
           <button type="cancel" class="btn btn-default">Cancel</button>
         </form>
       </modal>    
