@@ -109,7 +109,8 @@ def movies_main():
             tempdata = {'name': genre, "movies":[]}
             for movie in qresult:
                 tempdata["movies"].append({'name': movie[0], 'poster': movie[3]})
-            data["genrelist"].append(tempdata)
+            if len(tempdata["movies"]) > 0:
+                data["genrelist"].append(tempdata)
             
         
         
