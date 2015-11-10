@@ -23,6 +23,8 @@ app.config['MYSQL_DATABASE_PASSWORD'] = url.password
 app.config['MYSQL_DATABASE_HOST'] = url.hostname
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 
+global genres
+genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
 mysql.init_app(app)
 '''
@@ -82,7 +84,7 @@ def movies_main():
         
         query = """ Select m.*, count(Movie_title) r_num from Reviews as r join Movies m on r.Movie_title = m.Title
                     group by Movie_title
-                    order by r_num DESC;"""
+                    order by r_num DESC"""
         conn = mysql.connect()
         cur = conn.cursor()
         cur.execute(query)
@@ -95,25 +97,42 @@ def movies_main():
         print bcolors.INFO +  "------------------------------\nMostReviewedMovies Asked\nData returned:\n" + json.dumps(result) + "\n------------------------------\n" + bcolors.ENDC
         return jsonify(result), 200
     elif 'bygender' in request.args:
+        data = {"genrelist": []}     
+        for genre in genres:
+            print genre
+            query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where genre like '%"  + str(genre) + "%' group by Movie_title order by r_num DESC"
+            conn = mysql.connect()
+            cur = conn.cursor()
+            cur.execute(query)
+            qresult = cur.fetchall()
+            conn.close()
+            tempdata = {'name': genre, "movies":[]}
+            for movie in qresult:
+                tempdata["movies"].append({'name': movie[0], 'poster': movie[3]})
+            data["genrelist"].append(tempdata)
+            
         
         
-        data = {"genrelist": [
-        {'name': 'Action', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]},
-        {'name': 'Drama', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]},
-        {'name': 'History', 'movies': [{'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'}, {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'}]}
-        ]}
+        
         print bcolors.INFO + "Movies By Gender asked, returned:\n" + json.dumps(data) + bcolors.ENDC
         return jsonify(data), 200
     
     
     elif 'toprated' in request.args:
-        data = {"toprated": [
-            {'name': 'Movie-1', 'poster': '/static/img/movie-placeholder.svg'},
-            {'name': 'Movie-2', 'poster': '/static/img/movie-placeholder.svg'},
-            {'name': 'Movie-3', 'poster': '/static/img/movie-placeholder.svg'},
-            {'name': 'Movie-4', 'poster': '/static/img/movie-placeholder.svg'},
-            {'name': 'Movie-5', 'poster': '/static/img/movie-placeholder.svg'}
-            ]}
+        data = {"toprated": []}
+        query = """Select m.*, avg(rating) r_num
+                     from Reviews as r join Movies m on r.Movie_title = m.Title
+                     group by Movie_title
+                     order by r_num DESC"""
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        qresult = cur.fetchall()
+        conn.close()
+        
+        for i in qresult:
+            data['toprated'].append({'name': str(i[0]), 'poster': str(i[3])})
+     
         print bcolors.INFO + "\n\nTopRated Asked\n\n" + bcolors.ENDC
         return jsonify(data), 200
     else:
