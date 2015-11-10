@@ -205,7 +205,7 @@ def list_page():
         print "devolvio  list page para peliculas"
         return render_template('list-page.html')
     
-    return render_template('list-page-nonmovies.html')    
+    return render_template('list-page-nonmovies.html')     
 
 @app.route('/settings')
 def settings():

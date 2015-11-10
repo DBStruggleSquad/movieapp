@@ -37,14 +37,14 @@
     <div class="enclosure" ng-controller="results">
       <div class="search-title">Search results for " "</div>
       <div class="activity-post" ng-repeat="movie in searchTester">
-          <div class="movie-poster">
+          <div class="list-post-img">
             <img ng-src="{{ movie.poster }}"/>
           </div>
           <div class="search-content-wrapper">
             <div class="search-content">
-              <div class="searched-movie-name-year">{{ movie.name }} ({{ movie.year }})</div>
-              <div class="searched-movie-genres">{{ movie.genre }}</div>
-              <div class="searched-movie-synopsis">{{movie.synopsis}}</div>
+              <div class="list-post-name-year">{{ movie.name }} ({{ movie.year }})</div>
+              <div class="list-post-genres">{{ movie.genre }}</div>
+              <div class="list-post-synopsis">{{movie.synopsis}}</div>
             </div>
           </div>
       </div>

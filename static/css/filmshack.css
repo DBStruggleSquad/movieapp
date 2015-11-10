@@ -179,6 +179,15 @@ form .progress {
 	text-align: center;
 }
 
+.list-post-img {
+	text-align: center;	
+}
+
+.list-post-img img {
+	width: 250px;
+	height: 250px;
+}
+
 .profile-picture img, .movie-poster img {
 	width: 250px;
 	height: 250px;
@@ -569,20 +578,24 @@ form .progress {
 	font-size: 36px;
 }
 
-.searched-movie-genres {
-	font-size: 30px;
-}
-
-.searched-movie-synopsis {
-	font-size: 26px;
-}
-
-.searched-movie-name-year {
-	font-size: 250%;
-	font-weight: bold;
-}
-
 .search-content {
 	display: flex;
 	flex-direction: column;
+}
+
+/*				*/
+/*	Any List	*/
+/*				*/
+
+.list-post-genres {
+	font-size: 30px;
+}
+
+.list-post-synopsis {
+	font-size: 22px;
+}
+
+.list-post-name-year {
+	font-size: 250%;
+	font-weight: bold;
 }

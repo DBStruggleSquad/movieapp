@@ -4,6 +4,21 @@ app.controller('list', ['$scope', '$http', function($scope, $http) {
         $scope.list = data.listinfo;
 
      });
+
+  $scope.testList = {
+    name: 'My Top Ten Actors',
+    content: [{
+    name: 'edward scissorhands',
+    description: 'lel'
+  }, {
+    name: 'paris hilton',
+    description: 'idk'
+  }, {
+    name: 'katya borgos',
+    description: 'why not'
+  }]
+}
+
 }]);
 
 

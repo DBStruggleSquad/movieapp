@@ -38,13 +38,13 @@
 
       <!-- User-Info, offers user details. -->
       <div class="activity-post" ng-repeat="movie in list.movies">
-          <div class="movie-poster">
-            <img  src="static/img/profile-picture-placeholder.svg" ng-src="static/img/profile-picture-placeholder.svg"/>
+          <div class="list-post-img">
+            <img  src="static/img/profile-picture-placeholder.svg" ng-src="static/img/movie-placeholder.svg"/>
           </div>
           <div class="post-content">
-            <div class="movie-name">{{ movie.title }} {{ movie.year }}</div>
-            <div>Genre: {{movie.genre}}</div>
-            <div>{{movie.description}}</div>
+              <div class="list-post-name-year">{{ movie.title }} ({{ movie.year }})</div>
+              <div class="list-post-genres">{{ movie.genre }}</div>
+              <div class="list-post-synopsis">" {{ movie.description }} "</div>
           </div>
       </div>
 
