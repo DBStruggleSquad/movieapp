@@ -32,6 +32,7 @@ flex-grow: 0.1;
 text-align: left;
 padding: 0.5em;
 margin-top: 0.3em;
+font-weight: bold;
 }
 
 .filmshack-logo {
@@ -178,6 +179,15 @@ form .progress {
 	flex-grow: 1;
 	text-align: center;
 	margin: 15px;
+}
+
+@media only screen and (max-width: 500px) {
+	.profile-picture img, .movie-poster img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	overflow: hidden;		
+}
 }
 
 .list-post-img {
