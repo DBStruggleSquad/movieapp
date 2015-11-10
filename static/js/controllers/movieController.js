@@ -10,7 +10,9 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
   	$scope.movieReviews = data;
   });
 
-$scope.availableLists = ['Worst', 'My Top 10', 'Hi'];
+$scope.availableLists = $http.get('/usermovielistnames').success(function(data){
+	$scope.availableLists = data;
+});
 
 $scope.tabs = [{
             title: 'Info',

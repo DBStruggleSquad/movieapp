@@ -318,27 +318,37 @@ def movieinfo(movie_title):
 def movie_reviews(movie_title):
     movieriviews = {"movies": []}
     query = "select * from reviews where reviews.Movie_title = '" + movie_title + "'"
-    print "comienza query para la pelicula: " + movie_title 
     conn = mysql.connect()
     cur = conn.cursor()
     cur.execute(query)
     qresult = cur.fetchall()
     conn.close()
-    print movieriviews
-    print "termina query"
-    print "entro al loop"
-    
     for review in qresult:
-        print "iteracion del loop"
-        print review
         movieriviews["movies"].append({'reviewer': review[1], 'Movie_title': review[2], 'Review_title': review[0], 'Rating': str(review[7]),'review': review[3]})
-        print movieriviews
-    print "dalio del loop"
-    print movieriviews
     return jsonify(movieriviews)
+
+
 #---------------------------------
 #     LIST RELATED
 #---------------------------------
+
+@app.route('/userlistnames')
+def user_list_names():
+    data = []
+    #query
+    username = "'Antoine Cotto'"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    query = "select lists.List_name from lists where lists.username = " + username
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+        
+    for i in result:
+        data.append({'name': str(i[0])})
+        
+    return jsonify(data)
+
 @app.route('/listinfo/<listName>')
 def listinfo(listName):
     print bcolors.INFO + "----------------------LIST INFO---------------------------" + bcolors.ENDC
