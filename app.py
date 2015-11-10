@@ -91,37 +91,7 @@ def movies_main():
         result = {"movies": []}
         for movie in qresult:
             result["movies"].append({'name': str(movie[0]), 'genre': movie[4], 'img': movie[3]}) #'img': 'static/img/movie-placeholder.svg'
-            print movie[3]
-        data = {"movies" : [{
-        'name': 'Movie-1',
-        'genre': 'comedy',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-2',
-        'genre': 'horror',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-3',
-        'genre': 'suspense',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-4',
-        'genre': 'drama',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-5',
-        'genre': 'comedy',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-6',
-        'genre': 'drama',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-7',
-        'genre': 'history',
-        'img': 'static/img/movie-placeholder.svg'
-      }]}
-        
+                
         print bcolors.INFO +  "------------------------------\nMostReviewedMovies Asked\nData returned:\n" + json.dumps(result) + "\n------------------------------\n" + bcolors.ENDC
         return jsonify(result), 200
     elif 'bygender' in request.args:
