@@ -333,7 +333,7 @@ def movie_reviews(movie_title):
         'Rating': review[7],
         'review': review[3]})
     print "dalio del loop"
-    print "review es: " + review
+    print bcolors.INFO + movieriviews + bcolors.ENDC
     return jsonify(movieriviews)
 #---------------------------------
 #     LIST RELATED
