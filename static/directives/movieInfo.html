@@ -7,7 +7,7 @@
           	<div>{{availableLists}}</div>
           	<select id="add-button" class="btn dropdown-toggle" ng-model="selectedList" ng-change="toggleModal()">
           		<option value="" disable selected hidden>Add to</option>
-          		<option ng-repeat="option in availableLists" value="{{ option }}"> {{ option.name }} </option>
+          		<option ng-repeat="option in availableLists" value="{{ option }}"> {{ option }} </option>
           	</select>
           </div>
 

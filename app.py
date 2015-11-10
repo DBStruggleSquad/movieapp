@@ -334,7 +334,7 @@ def movie_reviews(movie_title):
 
 @app.route('/usermovielistnames')
 def user_list_names():
-    data = []
+    data = {}
     #query
     username = "'Antoine Cotto'"
     conn = mysql.connect()
