@@ -332,7 +332,7 @@ def movie_reviews(movie_title):
 #     LIST RELATED
 #---------------------------------
 
-@app.route('/userlistnames')
+@app.route('/usermovielistnames')
 def user_list_names():
     data = []
     #query
