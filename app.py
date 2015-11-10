@@ -318,7 +318,7 @@ def movieinfo(movie_title):
 def movie_reviews(movie_title):
     movieriviews = {"movies": []}
     query = "select * from reviews where reviews.Movie_title = '" + movie_title + "'"
-    print "comienza query"
+    print "comienza query para la pelicula: " + movie_title 
     conn = mysql.connect()
     cur = conn.cursor()
     cur.execute(query)
