@@ -12,6 +12,7 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 
 $scope.availableLists = $http.get('/usermovielistnames').success(function(data){
 	$scope.availableLists = data;
+	window.alert(data);
 });
 
 $scope.tabs = [{

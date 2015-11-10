@@ -345,6 +345,7 @@ def user_list_names():
     conn.close()
         
     for i in result:
+        print i
         data.append({'name': str(i[0])})
         
     return jsonify(data)
