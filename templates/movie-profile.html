@@ -44,8 +44,11 @@
         <div class="content">
             <div ng-include="currentTab"></div>
         </div>
+
 	<!--		MODAL		-->
-      <modal  title="Add {{ movie.name }} to List" visible="showModal">
+
+      <modal title="Add {{ movie.name }} to {{ selectedList }}" visible="showModal">
+
         <form role="form">
           <div class="form-group">
           	<input type="text" class="form-control" ng-model="data2send.title" placeholder="Title..." />

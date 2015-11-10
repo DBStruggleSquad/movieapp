@@ -32,6 +32,7 @@ flex-grow: 0.1;
 text-align: left;
 padding: 0.5em;
 margin-top: 0.3em;
+font-weight: bold;
 }
 
 .filmshack-logo {
@@ -180,6 +181,15 @@ form .progress {
 	margin: 15px;
 }
 
+@media only screen and (max-width: 500px) {
+	.profile-picture img, .movie-poster img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	overflow: hidden;		
+}
+}
+
 .list-post-img {
 	text-align: center;	
 }
@@ -276,6 +286,10 @@ form .progress {
 	height: 180px;
 	border-radius: 50%;
 	overflow: hidden;	
+}
+
+#flex-slider-poster:hover{
+	cursor: pointer;
 }
 
 .post-content, .search-content-wrapper, .activity-post-content, .movie-post-content, .review-post-content {
@@ -454,6 +468,10 @@ form .progress {
 	display: inline-block;
 	margin: 20px;
 	text-align: center;
+}
+
+.movie-entry:hover {
+	cursor: pointer;
 }
 
 .movie-entry img {
