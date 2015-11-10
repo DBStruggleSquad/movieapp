@@ -1,20 +1,20 @@
 app.controller('profile', ['$scope', '$http', function($scope, $http) {
-  $scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
-  	$scope.movie = data;
-  }).error(function(data){
-  		window.alert("hola");
-  });
+	$scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
+	  	$scope.movie = data;
+	}).error(function(data){
+	  		window.alert("hola");
+	});
+	
+	
+	$scope.movieReviews = $http.get('/moviereviews/' + localStorage.getItem("movieTitle")).success(function(data){
+	  	$scope.movieReviews = data;
+	});
 
+	$scope.availableLists = $http.get('/usermovielistnames' ).success(function(data){
+  		$scope.availableLists = data.lists;
+  	});
 
-  $scope.movieReviews = $http.get('/moviereviews/' + localStorage.getItem("movieTitle")).success(function(data){
-  	$scope.movieReviews = data;
-  });
-
-$scope.availableLists = $http.get('/usermovielistnames' ).success(function(data){
-  	$scope.availableLists = data;
-  });
-
-$scope.tabs = [{
+	$scope.tabs = [{
             title: 'Info',
             url: 'info.tpl.html'
         }, {
@@ -38,4 +38,16 @@ $scope.tabs = [{
       $scope.showModal = !$scope.showModal;
   };        
 
+	//--------------------------
+	//FUNSIONES PARA ANADIR MOVIE A LISTA
+	//--------------------------
+	$scope.data2send = {movieTitle: $scope.movie.name,  title: "", description: ""};
+	$scope.addMovie2List = function(){
+		$http.post('/addmovie2list', $scope.data2send).success(function(data){
+			window.alert($scope.data2send.description + "   " + $scope.data2send.title);
+		}).error(function(data){
+			window.alert(data);
+		});
+		
+	};
 }]);

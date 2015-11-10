@@ -334,7 +334,7 @@ def movie_reviews(movie_title):
 
 @app.route('/usermovielistnames')
 def user_list_names():
-    data = {}
+    data = {'lists' : []}
     #query
     username = "'Antoine Cotto'"
     conn = mysql.connect()
@@ -346,7 +346,7 @@ def user_list_names():
         
     for i in result:
         print i[0]
-        data.append({'name': str(i[0])})
+        data['lists'].append({'name': str(i[0])})
     print data
     return jsonify(data)
 
@@ -398,7 +398,14 @@ def listinfo_nonmovies(listName):
     
     print bcolors.INFO + "----------------------END LIST INFO---------------------------" + bcolors.ENDC
     return jsonify(list_info)
-
+#===================================================================================
+#                                POST
+#===================================================================================
+@app.route('/addmovie2list', methods=['POST'])
+def add_movie2list():
+    print request.form
+    return jsonify({})
+    
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
