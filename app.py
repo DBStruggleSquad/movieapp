@@ -228,40 +228,7 @@ def movie_profile():
 #===================================================================================
 #                                Queries
 #===================================================================================
-"""
-@app.route('/movies/mostreviewed')
-def movies_mostreviewed():
-    data = [{
-        'name': 'Movie-1',
-        'genre': 'comedy',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-2',
-        'genre': 'horror',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-3',
-        'genre': 'suspense',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-4',
-        'genre': 'drama',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-5',
-        'genre': 'comedy',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-6',
-        'genre': 'drama',
-        'img': 'static/img/movie-placeholder.svg'
-      }, { 
-        'name': 'Movie-7',
-        'genre': 'history',
-        'img': 'static/img/movie-placeholder.svg'
-      }]
-    return 
-"""
+
 @app.route('/userprofileactivity')
 def userpofileactivity():
     useractivity = {'activity': [
@@ -282,29 +249,7 @@ def userpofileactivity():
           }
         ]}
     return jsonify(useractivity)
-"""
-@app.route('/userlists')
-def userlists():
-    userelists = {'lists': [
-                {'List_name': 'My top ten',
-                 'pubdate': '2015-09-22',
-                'movies': [
-                  {
-                    'title': 'Avatar',
-                    'poster': '/static/img/movie-placeholder.svg',
-                  },
-                  {
-                    'title': 'Avengers',
-                    'poster': '/static/img/movie-placeholder.svg',
-                  },
-                  {
-                    'title': 'Pokemon',
-                    'poster': '/static/img/movie-placeholder.svg',
-                  }
-                ]}]
-                }
-    return jsonify(userelists)
-"""
+
 @app.route('/userreviews')
 def userreviews():
     user_reviews = {'reviews': [
@@ -329,10 +274,44 @@ def userreviews():
                     }
     return jsonify(user_reviews)
 
+#---------------------------------
+#     MOVIE RELATED
+#---------------------------------
 @app.route('/moviesearch/<movie_title>')
 def moviesearch(movie_title):
     movie_info = {'hola':'dummydata'}
     return jsonify(movie_info)
+
+@app.route('/movieinfo/<movie_title>')
+def movieinfo(movie_title):
+    result = {}
+    
+    query = "select * from movies where movies.title = '" + movie_title + "'"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.execute(query)
+    qresult = cur.fetchall()
+    conn.close()
+    for info in qresult:
+        result['name'] = str(info[0])
+        result['year'] = str(info[2])
+        result['genres'] = str(info[4])
+        result['poster'] = str(info[3])
+        result['rating'] = str(5)
+        result['synopsis'] = str(info[1])
+    
+    query = "select * from actors_in_movie where actors_in_movie.Title_mov = '" + movie_title + "'"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.execute(query)
+    qresult = cur.fetchall()
+    conn.close()
+    result['cast'] = []
+    for actors in qresult:
+        result['cast'].append({'name': actors[1], 'img': 'static/img/profile-picture-placeholder.svg'})
+        pass
+    
+    return jsonify(result)
 
 @app.route('/listinfo/<listName>')
 def listinfo(listName):

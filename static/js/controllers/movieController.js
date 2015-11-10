@@ -1,25 +1,9 @@
-app.controller('profile', ['$scope', function($scope) {
-  $scope.movie = {
-    name: 'Avatar',
-    year: '2009',
-    genres: ['action', 'adventure', 'fantasy'],
-    poster: '/static/img/movie-placeholder.svg',
-    rating: '5',
-    synopsis: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
-    cast: [{
-      name: 'fulana',
-      img: 'static/img/profile-picture-placeholder.svg',
-      }, {
-        name: 'mengana',
-        img: 'static/img/profile-picture-placeholder.svg',
-      }, {
-        name: 'mengana',
-        img: 'static/img/profile-picture-placeholder.svg',
-      }, {
-        name: 'dude',
-        img: 'static/img/profile-picture-placeholder.svg',
-      }]
-  }
+app.controller('profile', ['$scope', '$http', function($scope, $http) {
+  $scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
+  	$scope.movie = data;
+  }).error(function(data){
+  		window.alert("hola");
+  });
 
 
   $scope.movieReviews = {

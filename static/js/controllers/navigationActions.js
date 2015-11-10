@@ -34,7 +34,9 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
 
 }]);
 
-
+//------------------------------------------
+//          MOVIE NAV
+//------------------------------------------
 app.controller('movieNav', ['$scope', function($scope){
     $scope.goToSelectedMovie = function(movieTitle){
         localStorage.removeItem("movieTitle");
