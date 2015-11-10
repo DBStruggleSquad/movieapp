@@ -345,9 +345,9 @@ def user_list_names():
     conn.close()
         
     for i in result:
-        print i
+        print i[0]
         data.append({'name': str(i[0])})
-        
+    print data
     return jsonify(data)
 
 @app.route('/listinfo/<listName>')
