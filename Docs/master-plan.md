@@ -48,17 +48,17 @@
 | Task Name  | Duration | Start | Finish | Resource Names | Work |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | **Sprint 4** | **11 days** | **Wed, 10/28/15** | **Tue, 11/10/15** | - | **54 hrs** |
-| *Events (GUI & RESTful)* | *10 days* | *Wed, 10/28/15* | *Mon, 11/9/15* | - | *15 hrs* |
+| ~~*Events (GUI & RESTful)* ~~| *10 days* | *Wed, 10/28/15* | *Mon, 11/9/15* | - | *15 hrs* |
 | *Email Notifications* | *1 day* | *Mon, 10/26/15* | *Mon, 11/6/15* | - | *7 hrs* |
-| *Update Project Development Plan* | *2 days* | *Sun, 11/8/15* | *Mon, 11/9/15* | - | *2 hrs* |
+|~~ *Update Project Development Plan* ~~| *2 days* | *Sun, 11/8/15* | *Mon, 11/9/15* | - | *2 hrs* |
 
 ### Sprint 5
 
 | Task Name  | Duration | Start | Finish | Resource Names | Work |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | **Sprint 5** | **10 days** | **Wed, 11/11/15** | **Tue, 11/24/15** | - | **29 hrs** |
-| *Desirable Features* | *4 days* | *Thu, 11/19/15* | *Tue, 11/24/15* | - | *21 hrs* |
-| *Testing* | *2.5 days* | *Fri, 11/20/15* | *Tue, 11/24/15* | - | *8 hrs* |
+| *Email Notifications* | *4 days* | *Thu, 11/19/15* | *Tue, 11/24/15* | - | *21 hrs* |
+| *Finish Restfull API* | *2.5 days* | *Fri, 11/20/15* | *Tue, 11/24/15* | - | *8 hrs* |
 
 ### Timeline
 
