@@ -4,10 +4,10 @@
           <div class="movie-genres">{{ movie.genres }}</div>
           <div class="movie-rating"><img src="/static/img/star-icon.svg"/></div>
           <div class="movie-add">
-          	<select id="add-button" class="btn dropdown-toggle" ng-model="slist" ng-change="toggleModal(slist)">
-          		<option value="" disable selected hidden>Add to</option>
-          		<option ng-repeat="option in availableLists" value="{{ option }}"> {{ option.name }} </option>
-          	</select>
+            <select id="add-button" class="btn dropdown-toggle" ng-model="slist" ng-change="toggleModal(slist)">
+              <option value="" disable selected hidden>Add to</option>
+              <option ng-repeat="option in availableLists" value="{{ option }}"> {{ option.name }} </option>
+            </select>
           </div>
 
         </div>

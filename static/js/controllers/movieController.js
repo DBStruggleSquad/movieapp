@@ -1,22 +1,22 @@
 //= require_tree .
 app.controller('profile', ['$scope', '$http', function($scope, $http) {
 
-	$scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
-	  	$scope.movie = data;
-	}).error(function(data){
-	  		window.alert("hola");
-	});
-	
-	
-	$scope.movieReviews = $http.get('/moviereviews/' + localStorage.getItem("movieTitle")).success(function(data){
-	  	$scope.movieReviews = data;
-	});
+  $scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
+      $scope.movie = data;
+  }).error(function(data){
+        window.alert("hola");
+  });
+  
+  
+  $scope.movieReviews = $http.get('/moviereviews/' + localStorage.getItem("movieTitle")).success(function(data){
+      $scope.movieReviews = data;
+  });
 
-	$scope.availableLists = $http.get('/usermovielistnames' ).success(function(data){
-  		$scope.availableLists = data.lists;
-  	});
+  $scope.availableLists = $http.get('/usermovielistnames' ).success(function(data){
+      $scope.availableLists = data.lists;
+    });
 
-	$scope.tabs = [{
+  $scope.tabs = [{
             title: 'Info',
             url: 'info.tpl.html'
         }, {
