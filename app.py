@@ -405,7 +405,7 @@ def listinfo_nonmovies(listName):
 def add_movie2list():
     data = request.get_json()
     print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] 
-    print data['listName']['name']
+    print type(data['listName'])
     conn = mysql.connect()
     cur = conn.cursor()
     conn.close()
