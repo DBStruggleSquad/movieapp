@@ -47,7 +47,7 @@
 
   <!--    MODAL   -->
 
-      <modal title="Add {{ movie.name }} to {{ selectedList}" visible="showModal">
+      <modal title="Add {{ movie.name }} to {{ selectedList }}" visible="showModal">
 
         <form role="form">
           <div class="form-group">
@@ -56,7 +56,7 @@
             <input type="text" class="form-control" ng-model="data2send.description" placeholder="Description..." />
           </div>
           <button type="submit" ng-click="addMovie2List(movie.name, selectedList)"class="btn btn-default">Add</button> 
-          <button type="cancel" class="btn btn-default">Cancel</button>
+          <button type="cancel" ng-click="toggleModal()" class="btn btn-default">Cancel</button>
         </form>
       </modal>    
 
@@ -89,7 +89,7 @@
         </span>
         <span>
           <div class="review-title"> {{review.Review_title}} </div>
-          <div class="user-rating"><img src="/static/img/star-icon.svg"/></div>
+          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/></div>
           <div class="review-text"> {{review.review}} </div>
         </span>
       </div>    
