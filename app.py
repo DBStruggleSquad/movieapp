@@ -404,7 +404,7 @@ def listinfo_nonmovies(listName):
 @app.route('/addmovie2list', methods=['POST'])
 def add_movie2list():
     data = request.get_json()
-    print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] + "    " +  data['listName']
+    print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] 
     conn = mysql.connect()
     cur = conn.cursor()
     conn.close()
