@@ -14,6 +14,7 @@ from flask import jsonify
 from flask.globals import request
 import logging
 from flask.json import jsonify
+import json
 
 app = Flask(__name__)
 
@@ -406,7 +407,9 @@ def listinfo_nonmovies(listName):
 def add_movie2list():
     data = request.get_json()
     print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] 
-    print dict(str(data['listName']))
+    temp = json.loads(str(data['listName']))
+    print temp
+    
     conn = mysql.connect()
     cur = conn.cursor()
     conn.close()
