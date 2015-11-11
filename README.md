@@ -83,3 +83,17 @@ Gotta optimize our time more.
 * Updated Gantt chart with percent completion for each task
 * Detailed Project Development Plan for Sprint 5
 Updated Master Project Development Plan
+
+# Sprint 4
+
+#####What worked well? #####
+Back end work was improved as well as some more UI optimization.
+
+#####What didn't work well? #####
+ Due to issues outside our control we we'rent able to finish as much as we wanted.
+ 
+#####What we learned? #####
+Gotta optimize our time more.
+
+#####Planned work for Sprint 5#####
+* Finish the project.
