@@ -41,18 +41,18 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
       $scope.showModal = !$scope.showModal;
   };        
 
-  //--------------------------
-  //FUNSIONES PARA ANADIR MOVIE A LISTA
-  //--------------------------
-  $scope.data2send = {movieTitle: "",  title: "", description: "", listName: ""};
-  $scope.addMovie2List = function(moviename, selectedlistname){
-    $scope.data2send.movieTitle = moviename;
-    $scope.data2send.listName = selectedlistname;
-    $http.post('/addmovie2list', $scope.data2send).success(function(data){
-      
-    }).error(function(data){
-      window.alert(data);
-    });
-    
-  };
+	//--------------------------
+	//FUNSIONES PARA ANADIR MOVIE A LISTA
+	//--------------------------
+	$scope.data2send = {movieTitle: "",  title: "", description: "", listName: ""};
+	$scope.addMovie2List = function(moviename, selectedlistname){
+		$scope.data2send.movieTitle = moviename;
+		$scope.data2send.listName = selectedlistname;
+		$http.post('/addmovie2list', $scope.data2send).success(function(data){
+			
+		}).error(function(data){
+			window.alert(data);
+		});
+		
+	};
 }]);
