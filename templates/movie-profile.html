@@ -45,24 +45,24 @@
             <div ng-include="currentTab"></div>
         </div>
 
-	<!--		MODAL		-->
+  <!--    MODAL   -->
 
       <modal title="Add {{ movie.name }} to {{ selectedList }}" visible="showModal">
 
         <form role="form">
           <div class="form-group">
-          	<input type="text" class="form-control" ng-model="data2send.title" placeholder="Title..." />
+            <input type="text" class="form-control" ng-model="data2send.title" placeholder="Title..." />
             <label for="list">Say something about this movie:</label>
             <input type="text" class="form-control" ng-model="data2send.description" placeholder="Description..." />
           </div>
-          <button type="submit" ng-click="addMovie2List(movie.name)"class="btn btn-default">Add</button> 
+          <button type="submit" ng-click="addMovie2List(movie.name, selectedList)"class="btn btn-default">Add</button> 
           <button type="cancel" class="btn btn-default">Cancel</button>
         </form>
       </modal>    
 
     </div>
-	
-	<!--  INFO TAB -->
+  
+  <!--  INFO TAB -->
     <script type="text/ng-template" id="info.tpl.html">
       <div class="movie-synopsis">
         <h4>Synopsis</h4>
