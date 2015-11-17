@@ -19,6 +19,7 @@ import json
 app = Flask(__name__)
 
 mysql = MySQL()
+
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
@@ -359,7 +360,7 @@ def listinfo(listName):
     list_info = {'listinfo':{'name': str(listName), 'movies':[]}}
     
     #query
-    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
+    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
     print query
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -370,7 +371,7 @@ def listinfo(listName):
     print result 
     
     for i in result:
-        list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4])})
+        list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
     
     print list_info
     
@@ -408,10 +409,27 @@ def add_movie2list():
     data = request.get_json()
     print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] 
     temp = json.loads(str(data['listName']))
-    print temp['name']
+    print temp['name'] + "\n\n\n"
+    print data['title']+ temp['name']+ 'Movies' + data['description']+ data['movieTitle']
     conn = mysql.connect()
     cur = conn.cursor()
     cur.callproc('addListPost', (data['title'], temp['name'], 'Movies' , data['description'], data['movieTitle'] ))
+    conn.commit()
+    conn.close()
+    print "salio"
+    
+    return jsonify({})
+
+@app.route('/addlist2user', methods=['POST'])
+def add_list2user():
+    data = request.get_json()
+    print data['username'] + "  " + data['title'] + "   " + data['category'] 
+    print "its hereeee \n"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('ListExists', (data['title'], data['username'], data['category'] ))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
     conn.close()
     print "salio"
     
