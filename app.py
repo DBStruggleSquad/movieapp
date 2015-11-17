@@ -30,28 +30,7 @@ global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
 mysql.init_app(app)
-'''
-conn = mysql.connect()
 
-cursor = conn.cursor()
-
-cur = conn.cursor()
-username = "'Antoine Cotto'"
-query = "select * from Lists where username = " + username
-cur.execute("select * from Lists where username = " + username)
-data = cur.fetchall()
-
-data_dict = []
-for hi in data:
-    d_dict = {
-    'List_name': hi[0],
-    'username': hi[1],
-    'Category': hi[2],
-    'Sharable': hi[4]}
-    data_dict.append(d_dict)
-json.dumps(data_dict)
-
-'''
 
 
 # Update with environment configuration.
