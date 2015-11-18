@@ -408,7 +408,7 @@ def add_movie2list():
     data = request.get_json()
     print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] 
     temp = json.loads(str(data['listName']))
-    print temp['name']
+    print temp['name'] #nombre de la lista
     conn = mysql.connect()
     cur = conn.cursor()
     cur.callproc('addListPost', (data['title'], temp['name'], 'Movies' , data['description'], data['movieTitle'] ))
