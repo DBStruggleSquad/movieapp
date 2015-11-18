@@ -36,16 +36,35 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 
     $scope.showModal = false;
 
-    $scope.toggleModal = function(list){
+    $scope.selectedList = '';
+
+    $scope.setSelectedList = function(list){
       $scope.selectedList = list;
+    };
+
+    $scope.toggleModal = function(){
       $scope.showModal = !$scope.showModal;
   };        
+
+  //
+  // For now, we get the floor function of the AVG user rating for this movie (no half stars)
+  //
+  $scope.getMovieRating = function() {
+    return new Array(Math.floor($scope.movie.rating));
+  };
+
+  //
+  // To get each reviewer's rating, we only need to set a bound; users cannot give half stars.
+  //
+  $scope.getReviewerRating = function(number) {
+    return new Array(number);
+  };  
 
 	//--------------------------
 	//FUNSIONES PARA ANADIR MOVIE A LISTA
 	//--------------------------
 	$scope.data2send = {movieTitle: "",  title: "", description: "", listName: ""};
-	$scope.addMovie2List = function(moviename, selectedlistname){
+	$scope.addMovie2List = function(moviename, selectedlistname){ 
 		$scope.data2send.movieTitle = moviename;
 		$scope.data2send.listName = selectedlistname;
 		$http.post('/addmovie2list', $scope.data2send).success(function(data){

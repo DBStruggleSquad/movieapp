@@ -10,8 +10,7 @@
     
     <script src="/static/bower_components/jquery/dist/jquery.js"></script>
       <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
-      <script data-require="angular.js@1.2.x" src="https://code.angularjs.org/1.2.20/angular.js" data-semver="1.2.20"></script>
-      <script src="/static/bower_components/angular/angular.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
       <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
@@ -39,17 +38,17 @@
     <div class="col-md-6 col-md-offset-3">
         <form name="form" role="form">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" class="form-control" />
+                <label for="username">Email</label>
+                <input type="text" name="Email" id="Email" ng-model="data2sendlogin.email" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" />
+                <input type="password" name="password" id="password" ng-model="data2sendlogin.password" class="form-control" />
             </div>
             <div class="form-options">
                 <button type="submit" class="btn btn-primary" ng-repeat="opt in opts" ng-class="{active:isActiveOpt(opt.url)}" ng-click="onClickOpt(opt)">{{ opt.title }}</button>
             </div>
-        </form>
+        </form>  
     </div>
     </script>
     
@@ -58,19 +57,23 @@
     <div class="col-md-6 col-md-offset-3">
         <form name="form" role="form">
             <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" ng-model="data2sendregister.username" class="form-control" />
+            </div>
+            <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" />
+                <input type="email" name="email" id="email" ng-model="data2sendregister.email" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" />
+                <input type="password" name="password" id="password" ng-model="data2sendregister.password1" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="password">Confirm Password</label>
-                <input type="password" name="password" id="password" class="form-control" />
+                <input type="password" name="password" id="password" ng-model="data2sendregister.password2" class="form-control" />
             </div>            
             <div class="form-options">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" ng-click="addAccount()">Submit</button>
             </div>
         </form>
     </div>

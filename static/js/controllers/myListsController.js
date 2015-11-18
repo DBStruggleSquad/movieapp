@@ -9,6 +9,20 @@ app.controller('myLists', ['$scope', '$http', function($scope, $http) {
   $scope.toggleModal = function(){
   	$scope.showModal = !$scope.showModal;
   }
+
+  $scope.data2send = {username: "",  title: "", category: ""};
+  $scope.addlist2user = function(Dausername){
+    $scope.data2send.username = Dausername;
+    window.alert(Dausername + "  " +$scope.data2send.title + "  "+$scope.data2send.category);
+    $http.post('/addlist2user', $scope.data2send).success(function(data){
+      window.alert($scope.data2send.listName + "   try  ")
+    }).error(function(data){
+      window.alert("Worst error code ever");
+    });
+    
+  };
+
+
   //Para llamar funciones de los servicios:
   $scope.goToList = function(listName){
       localStorage.removeItem("userListName");

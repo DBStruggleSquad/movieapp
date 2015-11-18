@@ -4,7 +4,7 @@ Created on Sep 12, 2015
 @author: Glory, Antoine
 '''
 
-from flask import Flask
+from flask import Flask, flash, redirect, session, url_for, request, g, request, get_flashed_messages
 from flask import render_template
 from flask.ext.mysql import MySQL
 import urlparse 
@@ -15,43 +15,31 @@ from flask.globals import request
 import logging
 from flask.json import jsonify
 import json
+from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
 mysql = MySQL()
+
+
+
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
 app.config['MYSQL_DATABASE_HOST'] = url.hostname
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
+app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
 global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
 mysql.init_app(app)
-'''
-conn = mysql.connect()
+login_manager = LoginManager()
+login_manager.init_app(app)
 
-cursor = conn.cursor()
-
-cur = conn.cursor()
-username = "'Antoine Cotto'"
-query = "select * from Lists where username = " + username
-cur.execute("select * from Lists where username = " + username)
-data = cur.fetchall()
-
-data_dict = []
-for hi in data:
-    d_dict = {
-    'List_name': hi[0],
-    'username': hi[1],
-    'Category': hi[2],
-    'Sharable': hi[4]}
-    data_dict.append(d_dict)
-json.dumps(data_dict)
-
-'''
-
+class UserNotFoundError(Exception):
+    pass
 
 # Update with environment configuration.
 
@@ -96,7 +84,6 @@ def movies_main():
         for movie in qresult:
             result["movies"].append({'name': str(movie[0]), 'genre': movie[4], 'img': movie[3]}) #'img': 'static/img/movie-placeholder.svg'
                 
-        print bcolors.INFO +  "------------------------------\nMostReviewedMovies Asked\nData returned:\n" + json.dumps(result) + "\n------------------------------\n" + bcolors.ENDC
         return jsonify(result), 200
     elif 'bygender' in request.args:
         data = {"genrelist": []}     
@@ -117,7 +104,6 @@ def movies_main():
         
         
         
-        print bcolors.INFO + "Movies By Gender asked, returned:\n" + json.dumps(data) + bcolors.ENDC
         return jsonify(data), 200
     
     
@@ -359,7 +345,7 @@ def listinfo(listName):
     list_info = {'listinfo':{'name': str(listName), 'movies':[]}}
     
     #query
-    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
+    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
     print query
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -370,7 +356,7 @@ def listinfo(listName):
     print result 
     
     for i in result:
-        list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4])})
+        list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
     
     print list_info
     
@@ -408,11 +394,61 @@ def add_movie2list():
     data = request.get_json()
     print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] 
     temp = json.loads(str(data['listName']))
-    print temp['name'] #nombre de la lista
+    
+    
+    print temp['name'] + "\n\n\n"
+    print data['title']+ temp['name']+ 'Movies' + data['description']+ data['movieTitle']
+
+
     conn = mysql.connect()
     cur = conn.cursor()
     cur.callproc('addListPost', (data['title'], temp['name'], 'Movies' , data['description'], data['movieTitle'] ))
+    conn.commit()
     conn.close()
+    print "salio"
+    
+    return jsonify({})
+
+@app.route('/addlist2user', methods=['POST'])
+def add_list2user():
+    data = request.get_json()
+    print data['username'] + "  " + data['title'] + "   " + data['category'] 
+    print "its hereeee \n"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('ListExists', (data['title'], data['username'], data['category'] ))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "salio"
+    
+    return jsonify({})
+
+
+@app.route('/addAccount', methods=['POST'])
+def add_Account():
+    data = request.get_json()
+    print data['username'] + data['email'] + "  " + data['password1'] + "   " + data['password2'] + "\n"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('registerAccount', (data['email'], generate_password_hash(data['password1']),data['username']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "salio"
+    
+    return jsonify({})
+
+@app.route('/userLogin', methods=['POST'])
+def user_Login():
+    data = request.get_json()
+    dude = User.get(data['email'])
+    print dude.id + "\n\n"
+    print "is this it? \n\n"
+    if (dude and dude.verify_password(data['password'])):
+        print "reaching here\n\n"
+        login_user(dude)
+
     print "salio"
     
     return jsonify({})
@@ -428,6 +464,65 @@ class bcolors:
     UNDERLINE = '\033[4m'
     INFO = '\033[1;33m'
     
+
+
+class User():
+
+    #query = "select account.email, account.password_hash, account_belong_user.username from account, account_belong_user where account.email = account_belong_user.email" 
+    query = "select email, password_hash from account"
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cur = conn.cursor()
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+    users = []
+    for i in result:
+        users.append({'email': str(i[0]), 'password_hash': str(i[1])})
+
+    def __init__(self, id):
+        print "reached init \n\n"
+        if not any(u['email'] == id for u in self.users):
+            print "not found"
+            raise UserNotFoundError()
+        self.id = id
+        for x in self.users:
+            if x['email'] == id:
+                self.password_hash = x['password_hash']
+        #self.username = self.users['username']
+
+    def is_active(self):
+        return True
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    @classmethod
+    def get(self_class, email):
+        '''Return user instance of id, return None if not exist'''
+        try:
+            user = self_class(email)
+            print "Testing the inheritance"
+            return user
+        except UserNotFoundError:
+            return None
+
+# Flask-Login use this to reload the user object from the user ID stored in the session
+@login_manager.user_loader
+def load_user(id):
+    return User.get(str(id))
+
+
+
 
     
 if __name__ == '__main__':

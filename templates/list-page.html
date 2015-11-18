@@ -39,7 +39,7 @@
       <!-- User-Info, offers user details. -->
       <div class="activity-post" ng-repeat="movie in list.movies">
           <div class="list-post-img">
-            <img  src="static/img/profile-picture-placeholder.svg" ng-src="static/img/movie-placeholder.svg"/>
+            <img  src="{{ movie.poster }}"/>
           </div>
           <div class="post-content">
               <div class="list-post-name-year">{{ movie.title }} ({{ movie.year }})</div>
