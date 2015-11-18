@@ -15,6 +15,8 @@ from flask.globals import request
 import logging
 from flask.json import jsonify
 import json
+from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -30,8 +32,9 @@ global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
 mysql.init_app(app)
-
-
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 # Update with environment configuration.
 
@@ -413,6 +416,37 @@ def add_list2user():
     print "salio"
     
     return jsonify({})
+
+
+@app.route('/addAccount', methods=['POST'])
+def add_Account():
+    data = request.get_json()
+    print data['username'] + data['email'] + "  " + data['password1'] + "   " + data['password2'] + "\n"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('registerAccount', (data['email'], generate_password_hash(data['password1']),data['username']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "salio"
+    
+    return jsonify({})
+
+@app.route('/userLogin', methods=['POST'])
+def user_Login():
+    data = request.get_json()
+    print data['email'] + "  " + data['password'] + "\n"
+    user = User.get(data['email'])
+    print "is this it? \n\n" + user.is_active(self) + "\n\n"
+    if (user and user.verify_password(data['password'])):
+        print "reaching here\n\n"
+        login_user(user)
+    else:
+        flash('Username or password incorrect')
+
+    print "salio"
+    
+    return jsonify({})
     
 class bcolors:
     HEADER = '\033[95m'
@@ -425,6 +459,56 @@ class bcolors:
     UNDERLINE = '\033[4m'
     INFO = '\033[1;33m'
     
+
+
+class User(UserMixin):
+
+    #query = "select account.email, account.password_hash, account_belong_user.username from account, account_belong_user where account.email = account_belong_user.email" 
+    query = "select email, password_hash from account"
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cur = conn.cursor()
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+    users = []
+    for i in result:
+        users.append({'email': str(i[0]), 'password_hash': str(i[1])})
+
+
+    def __init__(self, id):
+        print "reached init \n\n"
+        if not any(u['email'] == id for u in self.users):
+            print "not found"
+            raise UserNotFoundError()
+        self.id = id
+        for x in self.users:
+            if x['email'] == id:
+                self.password_hash = x['password_hash']
+        print self.password_hash + "\n\n"
+        #self.username = self.users['username']
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+    @classmethod
+    def get(self_class, email):
+        '''Return user instance of id, return None if not exist'''
+        try:
+            user = self_class(email)
+            return user
+        except UserNotFoundError:
+            return None
+
+
+# Flask-Login use this to reload the user object from the user ID stored in the session
+@login_manager.user_loader
+def load_user(id):
+    return User.get(id)
+
+
+
 
     
 if __name__ == '__main__':

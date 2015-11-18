@@ -15,6 +15,10 @@ $scope.opts = [{
 
     $scope.onClickOpt = function (opt) {
         $scope.currentOpt = opt.url;
+        if (opt.title  === "Login") 
+            {
+                $scope.userLogin();
+            }
     };
     
     $scope.isActiveOpt = function(optUrl) {
@@ -23,5 +27,23 @@ $scope.opts = [{
 
     $http.get('movie.json').success(function(data) {
         $scope.movies = data;});
+
+    $scope.data2sendregister = {username: "",email: "",  password1: "", password2: ""};
+    $scope.addAccount = function(){ 
+        $http.post('/addAccount', $scope.data2sendregister).success(function(data){
+            window.alert("It worked")
+        }).error(function(data){
+            window.alert("This blew up");
+        });
+    };
+
+    $scope.data2sendlogin = {email: "",  password: ""};
+    $scope.userLogin = function(){ 
+        $http.post('/userLogin', $scope.data2sendlogin).success(function(data){
+            window.alert("It worked")
+        }).error(function(data){
+            window.alert("This blew up in login");
+        });
+    };
 
 }]);
