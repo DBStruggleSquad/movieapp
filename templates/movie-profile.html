@@ -123,7 +123,7 @@
         </span>
         <span>
           <div class="review-title"> {{review.Review_title}} </div>
-          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> Rating: {{ review.Rating }}</div>
+          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> {{ review.Rating }}</div>
           <div class="review-text"> {{review.review}} </div>
         </span>
       </div>    

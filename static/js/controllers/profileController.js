@@ -35,6 +35,13 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
           window.alert('userreview' + data + status);
       });
 
+  //
+  // To get each reviewer's rating, we only need to set a bound; users cannot give half stars.
+  //
+  $scope.getReviewerRating = function(number) {
+    return new Array(parseInt(number));
+  };  
+
 $scope.tabs = [{
             title: 'Activity',
             url: 'activity.tpl.html'
