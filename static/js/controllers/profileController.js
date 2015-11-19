@@ -40,7 +40,11 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
   //
   $scope.getReviewerRating = function(number) {
     return new Array(parseInt(number));
-  };  
+  }; 
+
+  $scope.getUserRating = function() {
+    return new Array($scope.userDetails.rating);
+  };     
 
 $scope.tabs = [{
             title: 'Activity',

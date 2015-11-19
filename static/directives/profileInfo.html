@@ -1,7 +1,7 @@
         <div class="profile-picture"><img src="static/img/profile-picture-placeholder.svg"/></div>
         <div class="user-details">
           <div class="user-name">{{ userDetails.name }}</div>
-          <div class="user-rating"><img src="static/img/star-icon.svg"/></div>
+          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating() track by $index"/></div>
           <div class="user-quote">" {{ userDetails.quote }} "</div>
           <div class="user-follow"><button class="follow-button">Follow</button></div>
         </div>
