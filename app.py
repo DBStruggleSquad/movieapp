@@ -273,8 +273,9 @@ def movieinfo(movie_title):
         result['year'] = str(info[2])
         result['genres'] = str(info[4])
         result['poster'] = str(info[3])
-        result['rating'] = info[8]
+        result['rating'] = str(info[8])
         result['synopsis'] = str(info[1])
+        print "salio de aqui"
     
     
     #anade los actores que partisiparon en la movie
