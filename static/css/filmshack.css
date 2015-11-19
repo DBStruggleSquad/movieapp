@@ -68,6 +68,10 @@ padding: 0.5em;
     flex-direction: row;
 }
 
+.navigation div:hover {
+	background-color: #581010;
+}
+
 .navigation div {
     padding-top: 5px;	
 	display: inline-block;

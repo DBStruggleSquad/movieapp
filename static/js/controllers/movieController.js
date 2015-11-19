@@ -53,17 +53,17 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
   };            
 
   //
-  // For now, we get the floor function of the AVG user rating for this movie (no half stars)
+  // For now, we get the integer part of the rating (thus, half stars are ignored)
   //
   $scope.getMovieRating = function() {
-    return new Array(Math.floor($scope.movie.rating));
+    return new Array(parseInt($scope.movie.rating));
   };
 
   //
   // To get each reviewer's rating, we only need to set a bound; users cannot give half stars.
   //
   $scope.getReviewerRating = function(number) {
-    return new Array(number);
+    return new Array(parseInt(number));
   };  
 
 	//--------------------------
