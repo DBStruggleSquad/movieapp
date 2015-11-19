@@ -22,10 +22,9 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-url = urlparse.urlparse(os.environ['DATABASE_URL'])
-app.config['MYSQL_DATABASE_USER'] = url.username
-app.config['MYSQL_DATABASE_PASSWORD'] = url.password
-app.config['MYSQL_DATABASE_HOST'] = url.hostname
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
@@ -52,10 +51,12 @@ class UserNotFoundError(Exception):
 #                                ROUTE FUNCTIONS
 #===================================================================================
 @app.route('/')
+@login_required
 def hello():
     return render_template('profile.html')
 
 @app.route('/profile')
+@login_required
 def userprofile():
     return render_template('profile.html')
 
@@ -442,14 +443,10 @@ def add_Account():
 def user_Login():
     data = request.get_json()
     dude = User.get(data['email'])
-    print dude.id + "\n\n"
-    print "is this it? \n\n"
     if (dude and dude.verify_password(data['password'])):
-        print "reaching here\n\n"
         login_user(dude)
-
     print "salio"
-    
+    print current_user.username
     return jsonify({})
     
 class bcolors:
@@ -467,8 +464,8 @@ class bcolors:
 
 class User():
 
-    #query = "select account.email, account.password_hash, account_belong_user.username from account, account_belong_user where account.email = account_belong_user.email" 
-    query = "select email, password_hash from account"
+    query = "select account.email, account.password_hash, account_belong_user.username from account, account_belong_user where account.email = account_belong_user.email" 
+    #query = "select email, password_hash from account"
     conn = mysql.connect()
     cursor = conn.cursor()
     cur = conn.cursor()
@@ -477,11 +474,10 @@ class User():
     conn.close()
     users = []
     for i in result:
-        users.append({'email': str(i[0]), 'password_hash': str(i[1])})
+        users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2])})
     print users 
     print "\n\n"
     def __init__(self, id):
-        print "reached init \n\n"
         if not any(u['email'] == id for u in self.users):
             print "not found"
             raise UserNotFoundError()
@@ -489,6 +485,7 @@ class User():
         for x in self.users:
             if x['email'] == id:
                 self.password_hash = x['password_hash']
+                self.username = x['username']
         #self.username = self.users['username']
 
     def is_active(self):
@@ -511,7 +508,6 @@ class User():
         '''Return user instance of id, return None if not exist'''
         try:
             user = self_class(email)
-            print "Testing the inheritance"
             return user
         except UserNotFoundError:
             return None
