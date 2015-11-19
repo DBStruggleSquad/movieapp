@@ -6,7 +6,6 @@ Created on Nov 19, 2015
 from flask.json import jsonify
 from flask.globals import request
 from flask import render_template
-from forms import moviesForm
 import json
 
 def addRoutes(app, mysql, genres):
@@ -16,9 +15,8 @@ def addRoutes(app, mysql, genres):
     
     @app.route('/movie-profile')
     def movie_profile():
-        form = moviesForm.AddMovie2ListForm()
         
-        return render_template('movie-profile.html', form = form)
+        return render_template('movie-profile.html')
     
     
     

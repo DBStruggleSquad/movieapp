@@ -22,7 +22,11 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
+app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
+app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
 global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
@@ -47,7 +51,7 @@ movies.addRoutes(app, mysql, genres)
 def hello():
     return render_template('profile.html')
 
-@app.route('/profile')
+@app.route('/profile', methods = ['GET'])
 @login_required
 def userprofile():
     return render_template('profile.html')
@@ -282,7 +286,7 @@ def add_Account():
     conn.close()
     print "salio"
     
-    return jsonify({})
+    return render_template('/userLogin')
 
 @app.route('/userLogin', methods=['POST'])
 def user_Login():
@@ -292,7 +296,7 @@ def user_Login():
         login_user(dude)
     print "salio"
     print current_user.username
-    return jsonify({})
+    return render_template('profile.html')
     
 class bcolors:
     HEADER = '\033[95m'
