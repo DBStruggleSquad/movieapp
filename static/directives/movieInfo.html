@@ -2,7 +2,7 @@
         <div class="movie-details">
           <div class="movie-name">{{ movie.name }} ({{ movie.year }})</div>
           <div class="movie-genres">{{ movie.genres }}</div>
-          <div class="movie-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getMovieRating() track by $index"/> {{ movie.rating }}</div>
+          <div class="movie-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getMovieRating() track by $index"/><img ng-src="/static/img/half-star-icon.svg" ng-repeat="i in getMovieHalfRating() track by $index"/> {{ movie.rating | number:1 }}</div>
           <div class="movie-add">
             <select id="add-button" class="btn dropdown-toggle" ng-model="list" ng-change="toggleModal(); setSelectedList(list)">
               <option value="" disable selected hidden>Add to</option>
