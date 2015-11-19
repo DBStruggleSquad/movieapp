@@ -76,7 +76,7 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 		$http.post('/addmovie2list', $scope.data2send).success(function(data){
 			window.alert($scope.data2send.listName + "   try  " + selectedlistname)
 		}).error(function(data){
-			window.alert("hola");
+			window.alert("hola dentro del addMovie2List rn movieController");
 		});
 		
 	};
