@@ -47,16 +47,19 @@
   <!--    MODAL   -->
 
       <modal title="Add {{ movie.name }} to {{ selectedList }}" visible="showModal">
-
-        <form role="form">
+		
+        <form role="form" >
           <div class="form-group">
+            <label> {{form.postTitle.label}} </label>
             <input type="text" class="form-control" ng-model="data2send.title" placeholder="Title..." />
             <label for="list">Say something about this movie:</label>
             <input type="text" class="form-control" ng-model="data2send.description" placeholder="Description..." />
           </div>
           <button type="submit" ng-click="addMovie2List(movie.name, selectedList)"class="btn btn-default">Add</button> 
           <button type="cancel" ng-click="toggleModal()" class="btn btn-default">Cancel</button>
+          
         </form>
+        
       </modal>    
 
   <!--    REVIEW MODAL   -->
@@ -75,6 +78,8 @@
           <button type="submit" ng-click="addMovie2List(movie.name, selectedList)"class="btn btn-default">Add</button> 
           <button type="cancel" ng-click="toggleReviewModal()" class="btn btn-default">Cancel</button>
         </form>
+
+        
       </modal>          
 
     </div>

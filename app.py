@@ -9,8 +9,6 @@ from flask import render_template
 from flask.ext.mysql import MySQL
 import urlparse 
 import sys, os
-import json
-from flask import jsonify
 from flask.globals import request
 import logging
 from flask.json import jsonify
@@ -18,14 +16,15 @@ import json
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
+global app, mysql
+
 app = Flask(__name__)
 
 mysql = MySQL()
 
-url = urlparse.urlparse(os.environ['DATABASE_URL'])
-app.config['MYSQL_DATABASE_USER'] = url.username
-app.config['MYSQL_DATABASE_PASSWORD'] = url.password
-app.config['MYSQL_DATABASE_HOST'] = url.hostname
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
@@ -39,6 +38,10 @@ login_manager.login_view = 'login'
 
 class UserNotFoundError(Exception):
     pass
+#=========
+#Route import
+from queries import movies
+movies.addRoutes(app, mysql, genres)
 
 #===================================================================================
 #                                ROUTE FUNCTIONS
@@ -59,64 +62,7 @@ def login():
 def home():
     return render_template('home.html')
 
-@app.route('/movies', methods = ['GET'])
-def movies_main():
-    if 'mostreviewed' in request.args:
-        
-        query = """ Select m.*, count(Movie_title) r_num from Reviews as r join Movies m on r.Movie_title = m.Title
-                    group by Movie_title
-                    order by r_num DESC"""
-        conn = mysql.connect()
-        cur = conn.cursor()
-        cur.execute(query)
-        qresult = cur.fetchall()
-        conn.close()
-        result = {"movies": []}
-        for movie in qresult:
-            result["movies"].append({'name': str(movie[0]), 'genre': movie[4], 'img': movie[3]}) #'img': 'static/img/movie-placeholder.svg'
-                
-        return jsonify(result), 200
-    elif 'bygender' in request.args:
-        data = {"genrelist": []}     
-        for genre in genres:
-            query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where genre like '%"  + str(genre) + "%' group by Movie_title order by r_num DESC"
-            conn = mysql.connect()
-            cur = conn.cursor()
-            cur.execute(query)
-            qresult = cur.fetchall()
-            conn.close()
-            tempdata = {'name': genre, "movies":[]}
-            for movie in qresult:
-                tempdata["movies"].append({'name': movie[0], 'poster': movie[3]})
-            if len(tempdata["movies"]) > 0:
-                data["genrelist"].append(tempdata)
-            
-        
-        
-        
-        return jsonify(data), 200
-    
-    
-    elif 'toprated' in request.args:
-        data = {"toprated": []}
-        query = """Select m.*, avg(rating) r_num
-                     from Reviews as r join Movies m on r.Movie_title = m.Title
-                     group by Movie_title
-                     order by r_num DESC"""
-        conn = mysql.connect()
-        cur = conn.cursor()
-        cur.execute(query)
-        qresult = cur.fetchall()
-        conn.close()
-        
-        for i in qresult:
-            data['toprated'].append({'name': str(i[0]), 'poster': str(i[3])})
-     
-        print bcolors.INFO + "\n\nTopRated Asked\n\n" + bcolors.ENDC
-        return jsonify(data), 200
-    else:
-        print bcolors.INFO + "Movies template returned" + bcolors.ENDC
-        return render_template('movies.html')
+
 
 @app.route('/search-results')
 def search_results():
@@ -194,9 +140,6 @@ def fanclub_page():
 def fanclubs():
     return render_template('fanclubs.html')
 
-@app.route('/movie-profile')
-def movie_profile():
-    return render_template('movie-profile.html')
 
 #===================================================================================
 #                                Queries
@@ -246,65 +189,6 @@ def userreviews():
                   }]
                     }
     return jsonify(user_reviews)
-
-#---------------------------------
-#     MOVIE RELATED
-#---------------------------------
-@app.route('/moviesearch/<movie_title>')
-def moviesearch(movie_title):
-    movie_info = {'hola':'dummydata'}
-    return jsonify(movie_info)
-
-@app.route('/movieinfo/<movie_title>')
-def movieinfo(movie_title):
-    result = {}
-    
-    #query = "select * from movies where movies.title = '" + movie_title + "'"
-    query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where m.title = '" + movie_title + "' group by Movie_title"
-    
-    conn = mysql.connect()
-    cur = conn.cursor()
-    cur.execute(query)
-    qresult = cur.fetchall()
-    conn.close()
-    for info in qresult:
-        print info
-        result['name'] = str(info[0])
-        result['year'] = str(info[2])
-        result['genres'] = str(info[4])
-        result['poster'] = str(info[3])
-        result['rating'] = str(info[8])
-        result['synopsis'] = str(info[1])
-        print "salio de aqui"
-    
-    
-    #anade los actores que partisiparon en la movie
-    query = "select * from actors_in_movie where actors_in_movie.Title_mov = '" + movie_title + "'"
-    conn = mysql.connect()
-    cur = conn.cursor()
-    cur.execute(query)
-    qresult = cur.fetchall()
-    conn.close()
-    result['cast'] = []
-    for actors in qresult:
-        result['cast'].append({'name': actors[1], 'img': 'static/img/profile-picture-placeholder.svg'})
-        pass
-    
-    return jsonify(result)
-
-@app.route('/moviereviews/<movie_title>')
-def movie_reviews(movie_title):
-    movieriviews = {"movies": []}
-    query = "select * from reviews where reviews.Movie_title = '" + movie_title + "'"
-    conn = mysql.connect()
-    cur = conn.cursor()
-    cur.execute(query)
-    qresult = cur.fetchall()
-    conn.close()
-    for review in qresult:
-        movieriviews["movies"].append({'reviewer': review[1], 'Movie_title': review[2], 'Review_title': review[0], 'Rating': str(review[7]),'review': review[3]})
-    return jsonify(movieriviews)
-
 
 #---------------------------------
 #     LIST RELATED
@@ -371,25 +255,7 @@ def listinfo_nonmovies(listName):
 #===================================================================================
 #                                POST
 #===================================================================================
-@app.route('/addmovie2list', methods=['POST'])
-def add_movie2list():
-    data = request.get_json()
-    print data['description'] + "  " + data['movieTitle'] + "   " + data['title'] 
-    temp = json.loads(str(data['listName']))
-    
-    
-    print temp['name'] + "\n\n\n"
-    print data['title']+ temp['name']+ 'Movies' + data['description']+ data['movieTitle']
 
-
-    conn = mysql.connect()
-    cur = conn.cursor()
-    cur.callproc('addListPost', (data['title'], temp['name'], 'Movies' , data['description'], data['movieTitle'] ))
-    conn.commit()
-    conn.close()
-    print "salio"
-    
-    return jsonify({})
 
 @app.route('/addlist2user', methods=['POST'])
 def add_list2user():
