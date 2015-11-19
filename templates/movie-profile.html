@@ -10,7 +10,7 @@
 
     <script src="/static/bower_components/jquery/dist/jquery.js"></script>
       <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
-      <<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
       <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
       <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
@@ -47,17 +47,40 @@
   <!--    MODAL   -->
 
       <modal title="Add {{ movie.name }} to {{ selectedList }}" visible="showModal">
-
-        <form role="form">
+		
+        <form role="form" >
           <div class="form-group">
+            <label> {{form.postTitle.label}} </label>
             <input type="text" class="form-control" ng-model="data2send.title" placeholder="Title..." />
             <label for="list">Say something about this movie:</label>
             <input type="text" class="form-control" ng-model="data2send.description" placeholder="Description..." />
           </div>
           <button type="submit" ng-click="addMovie2List(movie.name, selectedList)"class="btn btn-default">Add</button> 
           <button type="cancel" ng-click="toggleModal()" class="btn btn-default">Cancel</button>
+          
         </form>
+        
       </modal>    
+
+  <!--    REVIEW MODAL   -->
+
+      <modal title="Add a Review to {{ movie.name }}" visible="showReviewModal">
+
+        <form role="form">
+          <div class="form-group">
+            <label for="list">Review Title:</label>
+            <input type="text" class="form-control" ng-model="data2send.description" placeholder="Title..." />
+            <label for="list">Star Rating:</label>
+            <input type="text" class="form-control" ng-model="data2send.rating" placeholder="Star Rating (out of 5)..." />        
+            <label for="list">Review:</label>
+            <input type="text" class="form-control" ng-model="data2send.review" placeholder="Talk about your experience with this movie..." />                
+          </div>
+          <button type="submit" ng-click="addMovie2List(movie.name, selectedList)"class="btn btn-default">Add</button> 
+          <button type="cancel" ng-click="toggleReviewModal()" class="btn btn-default">Cancel</button>
+        </form>
+
+        
+      </modal>          
 
     </div>
   
@@ -78,6 +101,9 @@
     
     <!--  REVIEW TAB -->
     <script type="text/ng-template" id="reviews.tpl.html">
+    <div class="create-review">
+      <button ng-click="toggleReviewModal()">Add a Review</button>
+    </div>
     <div class="activity-post" ng-repeat="review in movieReviews.movies">
       <div>
         <span>
@@ -88,7 +114,7 @@
         </span>
         <span>
           <div class="review-title"> {{review.Review_title}} </div>
-          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/></div>
+          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> Rating: {{ review.Rating }}</div>
           <div class="review-text"> {{review.review}} </div>
         </span>
       </div>    
