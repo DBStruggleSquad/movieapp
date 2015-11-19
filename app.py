@@ -22,11 +22,10 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-
-url = urlparse.urlparse(os.environ['DATABASE_URL'])
-app.config['MYSQL_DATABASE_USER'] = url.username
-app.config['MYSQL_DATABASE_PASSWORD'] = url.password
-app.config['MYSQL_DATABASE_HOST'] = url.hostname
+#url = urlparse.urlparse(os.environ['DATABASE_URL'])
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 
 global genres
@@ -440,6 +439,7 @@ def user_Login():
     print dude.id + "\n\n"
     print "is this it? \n\n"
     if (dude and dude.verify_password(data['password'])):
+        print dude
         print "reaching here\n\n"
         login_user(dude)
 
@@ -460,7 +460,7 @@ class bcolors:
     
 
 
-class User():
+class User(UserMixin):
 
     #query = "select account.email, account.password_hash, account_belong_user.username from account, account_belong_user where account.email = account_belong_user.email" 
     query = "select email, password_hash from account"
@@ -475,7 +475,6 @@ class User():
         users.append({'email': str(i[0]), 'password_hash': str(i[1])})
 
     def __init__(self, id):
-        print "reached init \n\n"
         if not any(u['email'] == id for u in self.users):
             print "not found"
             raise UserNotFoundError()
@@ -485,26 +484,14 @@ class User():
                 self.password_hash = x['password_hash']
         #self.username = self.users['username']
 
-    def is_active(self):
-        return True
-
-    def is_authenticated(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return unicode(self.id)
-
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
     @classmethod
-    def get(self_class, email):
+    def get(self_class, id):
         '''Return user instance of id, return None if not exist'''
         try:
-            user = self_class(email)
+            user = self_class(id)
             print "Testing the inheritance"
             return user
         except UserNotFoundError:
@@ -512,8 +499,8 @@ class User():
 
 # Flask-Login use this to reload the user object from the user ID stored in the session
 @login_manager.user_loader
-def load_user(id):
-    return User.get(str(id))
+def user_loader(id):
+    return User.get(id)
 
 
 
