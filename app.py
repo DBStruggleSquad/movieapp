@@ -15,14 +15,12 @@ from flask.globals import request
 import logging
 from flask.json import jsonify
 import json
-from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user
+from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
 mysql = MySQL()
-
-
 
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
@@ -37,6 +35,7 @@ genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documen
 mysql.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 class UserNotFoundError(Exception):
     pass
@@ -186,6 +185,7 @@ def list_page():
     return render_template('list-page-nonmovies.html')     
 
 @app.route('/settings')
+@login_required
 def settings():
     return render_template('settings.html')
 
@@ -432,7 +432,6 @@ def add_Account():
     conn = mysql.connect()
     cur = conn.cursor()
     cur.callproc('registerAccount', (data['email'], generate_password_hash(data['password1']),data['username']))
-    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
     conn.commit()
     conn.close()
     print "salio"
@@ -479,7 +478,8 @@ class User():
     users = []
     for i in result:
         users.append({'email': str(i[0]), 'password_hash': str(i[1])})
-
+    print users 
+    print "\n\n"
     def __init__(self, id):
         print "reached init \n\n"
         if not any(u['email'] == id for u in self.users):
