@@ -48,7 +48,7 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
   }; 
 
   $scope.getUserRating = function() {
-    return new Array($scope.userDetails.rating);
+    return new Array(parseInt($scope.userDetails.rating));
   };     
 
 $scope.tabs = [{
