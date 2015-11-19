@@ -34,8 +34,15 @@
 
     <div class="enclosure" ng-controller="profile">
       <!-- User-Info, offers user details. -->
-      <div class="user-info" ng-include="'static/directives/profileInfo.html'"></div>
-
+      <div class="user-info">
+        <div class="profile-picture"><img src="static/img/profile-picture-placeholder.svg"/></div>
+          <div class="user-details">
+            {% endraw %} <div class="user-name">{{ current_user.username }} </div>{% raw %}
+            <div class="user-rating"><img src="static/img/star-icon.svg"/></div>
+            <div class="user-quote">" {{ userDetails.quote }} "</div>
+            <div class="user-follow"><button class="follow-button">Follow</button></div>
+          </div>
+      </div>
       <!-- Profile-Tabs, allow navigation in profile.-->
       <div class="profile-tabs">
 
@@ -46,7 +53,7 @@
             <div ng-include="currentTab"></div>
         </div>
     </div>
-
+{% raw %}
     <!-- -------------------------------------------------- -->
     <!-- ----------TABS------------TABS-------------------- -->
     <!-- -------------------------------------------------- -->
@@ -75,11 +82,6 @@
     <!-- Controllers -->
     <script src="/static/js/controllers/profileController.js"></script>
     <script src="/static/js/controllers/navigationActions.js"></script>
-
-    <!-- Directives -->
-    <script src="/static/js/directives/activityPost.js"></script>
-    <script src="/static/js/directives/installApp.js"></script>
-
     {% endraw %}
   </body>
 </html>

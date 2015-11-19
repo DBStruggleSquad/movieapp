@@ -22,6 +22,14 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
+
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
+app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
+app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
+
+
 global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
@@ -36,6 +44,8 @@ class UserNotFoundError(Exception):
 #Route import
 from queries import movies
 movies.addRoutes(app, mysql, genres)
+
+
 
 #===================================================================================
 #                                ROUTE FUNCTIONS
@@ -143,6 +153,21 @@ def fanclubs():
 
 @app.route('/userprofileactivity')
 def userpofileactivity():
+    data = {'activity' : []}
+    #query
+    username = "'"+ current_user.username +"'"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    query = "select username, List_name, 'List', DATE(date_modified) d from Lists where username =" + username +"union select username, Title, 'Review', DATE(date_modified) d from Reviews where username = " + username +" union select username, Title, 'Text post', DATE(date_modified) d from text_user where username =" + username + "order by d desc"
+    print query
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+        
+    for i in result:
+        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3])})
+
+
     useractivity = {'activity': [
           {
             'name': 'katrific',
@@ -160,10 +185,23 @@ def userpofileactivity():
             'pubdate': '2015-09-22'
           }
         ]}
-    return jsonify(useractivity)
+    return jsonify(data)
 
 @app.route('/userreviews')
 def userreviews():
+    data = {'reviews' : []}
+    #query
+    username = "'"+ current_user.username +"'"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    query = "select * from Reviews where username = " + username
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+        
+    for i in result:
+        data['reviews'].append({'Movie_title': str(i[2]),'Review_title': str(i[0]),'Rating': str(i[7]),'review': str(i[3])})
+
     user_reviews = {'reviews': [
                     { 
                     'Movie_title': 'Avatar',
@@ -184,7 +222,8 @@ def userreviews():
                     'review': 'text text text text text  \n text text text text text ', 
                   }]
                     }
-    return jsonify(user_reviews)
+
+    return jsonify(data)
 
 #---------------------------------
 #     LIST RELATED
@@ -307,7 +346,7 @@ class bcolors:
 
 class User():
 
-    query = "select account.email, account.password_hash, account_belong_user.username from account, account_belong_user where account.email = account_belong_user.email" 
+    query = "select account.email, account.password_hash, account_belong_user.username, users.user_rank from account, account_belong_user, users where account.email = account_belong_user.email and account_belong_user.username = users.username" 
     #query = "select email, password_hash from account"
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -317,7 +356,7 @@ class User():
     conn.close()
     users = []
     for i in result:
-        users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2])})
+        users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2]),'rank': str(i[3])})
     print users 
     print "\n\n"
     def __init__(self, id):
@@ -329,6 +368,7 @@ class User():
             if x['email'] == id:
                 self.password_hash = x['password_hash']
                 self.username = x['username']
+                self.rank = x['rank']
         #self.username = self.users['username']
 
     def is_active(self):
