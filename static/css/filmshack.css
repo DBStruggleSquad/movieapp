@@ -197,6 +197,9 @@ form .progress {
 .list-post-img img {
 	width: 250px;
 	height: 250px;
+	border-radius: 50%;
+	overflow: hidden;
+	padding: 10px;	
 }
 
 .profile-picture img, .movie-poster img {
@@ -419,9 +422,16 @@ form .progress {
 	margin: 0 auto;
 }
 
-.create button {
+.create button, .create-review button {
 	display: inline-block;
 	flex-grow: 1;
+}
+
+.create-review {
+	display: flex;
+	flex-direction: row;
+	padding-top: 15px;
+	margin: 0 auto;	
 }
 
 .list-search div, .fanclub-search div, .movie-search div {

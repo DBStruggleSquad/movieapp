@@ -36,6 +36,8 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 
     $scope.showModal = false;
 
+    $scope.showReviewModal = false;
+
     $scope.selectedList = '';
 
     $scope.setSelectedList = function(list){
@@ -44,7 +46,11 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 
     $scope.toggleModal = function(){
       $scope.showModal = !$scope.showModal;
-  };        
+  };      
+
+    $scope.toggleReviewModal = function(){
+      $scope.showReviewModal = !$scope.showReviewModal;
+  };            
 
   //
   // For now, we get the floor function of the AVG user rating for this movie (no half stars)
