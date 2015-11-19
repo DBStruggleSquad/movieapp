@@ -22,10 +22,10 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-#url = urlparse.urlparse(os.environ['DATABASE_URL'])
-app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
-app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
-app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
+url = urlparse.urlparse(os.environ['DATABASE_URL'])
+app.config['MYSQL_DATABASE_USER'] = url.username
+app.config['MYSQL_DATABASE_PASSWORD'] = url.password
+app.config['MYSQL_DATABASE_HOST'] = url.hostname
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
@@ -87,7 +87,6 @@ def movies_main():
     elif 'bygender' in request.args:
         data = {"genrelist": []}     
         for genre in genres:
-            print genre
             query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where genre like '%"  + str(genre) + "%' group by Movie_title order by r_num DESC"
             conn = mysql.connect()
             cur = conn.cursor()
