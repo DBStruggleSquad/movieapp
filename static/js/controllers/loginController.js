@@ -32,6 +32,7 @@ $scope.opts = [{
     $scope.addAccount = function(){ 
         $http.post('/addAccount', $scope.data2sendregister).success(function(data){
             window.alert("It worked")
+            window.location.href = '/profile?' + $scope.data2sendlogin.username
         }).error(function(data){
             window.alert("This blew up");
         });
