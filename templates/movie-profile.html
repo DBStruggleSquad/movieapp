@@ -71,7 +71,16 @@
             <label for="list">Review Title:</label>
             <input type="text" class="form-control" ng-model="data2send.description" placeholder="Title..." />
             <label for="list">Star Rating:</label>
-            <input type="text" class="form-control" ng-model="data2send.rating" placeholder="Star Rating (out of 5)..." />        
+            <br>
+            <select>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select> 
+            <br>
             <label for="list">Review:</label>
             <input type="text" class="form-control" ng-model="data2send.review" placeholder="Talk about your experience with this movie..." />                
           </div>
@@ -114,7 +123,7 @@
         </span>
         <span>
           <div class="review-title"> {{review.Review_title}} </div>
-          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> Rating: {{ review.Rating }}</div>
+          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> {{ review.Rating }}</div>
           <div class="review-text"> {{review.review}} </div>
         </span>
       </div>    

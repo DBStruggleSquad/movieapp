@@ -225,6 +225,12 @@ def userreviews():
 
     return jsonify(data)
 
+@app.route('/userank')
+def userank():
+    data = {'rank' :current_user.rank }
+
+    return jsonify(data)
+
 #---------------------------------
 #     LIST RELATED
 #---------------------------------

@@ -29,11 +29,26 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
         $scope.userLists = data.lists;
     });
 
+    $scope.userRank = $http.get('/userank').success(function(data){
+        $scope.userDetails.rating = data;
+    });
+
       $scope.userReview = $http.get('/userreviews').success(function(data){
           $scope.userReview = data.reviews;
       }).error(function(data, status){
           window.alert('userreview' + data + status);
       });
+
+  //
+  // To get each reviewer's rating, we only need to set a bound; users cannot give half stars.
+  //
+  $scope.getReviewerRating = function(number) {
+    return new Array(parseInt(number));
+  }; 
+
+  $scope.getUserRating = function() {
+    return new Array($scope.userDetails.rating);
+  };     
 
 $scope.tabs = [{
             title: 'Activity',
