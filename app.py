@@ -88,7 +88,6 @@ def movies_main():
     elif 'bygender' in request.args:
         data = {"genrelist": []}     
         for genre in genres:
-            print genre
             query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where genre like '%"  + str(genre) + "%' group by Movie_title order by r_num DESC"
             conn = mysql.connect()
             cur = conn.cursor()
@@ -275,19 +274,23 @@ def moviesearch(movie_title):
 def movieinfo(movie_title):
     result = {}
     
-    query = "select * from movies where movies.title = '" + movie_title + "'"
+    #query = "select * from movies where movies.title = '" + movie_title + "'"
+    query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where m.title = '" + movie_title + "' group by Movie_title"
+    
     conn = mysql.connect()
     cur = conn.cursor()
     cur.execute(query)
     qresult = cur.fetchall()
     conn.close()
     for info in qresult:
+        print info
         result['name'] = str(info[0])
         result['year'] = str(info[2])
         result['genres'] = str(info[4])
         result['poster'] = str(info[3])
-        result['rating'] = str(5)
+        result['rating'] = info[8]
         result['synopsis'] = str(info[1])
+    
     
     #anade los actores que partisiparon en la movie
     query = "select * from actors_in_movie where actors_in_movie.Title_mov = '" + movie_title + "'"
