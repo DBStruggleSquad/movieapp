@@ -40,14 +40,6 @@ login_manager.login_view = 'login'
 class UserNotFoundError(Exception):
     pass
 
-# Update with environment configuration.
-
-#===================================================================================
-#                               VARIABLES FOR DATA SHARING
-#===================================================================================
-
-
-
 #===================================================================================
 #                                ROUTE FUNCTIONS
 #===================================================================================
@@ -134,27 +126,21 @@ def search_results():
 def user_lists():
     
     if 'mylist' in request.args:
-        print bcolors.INFO + "----------------------MY LISTS INFO------------------------" + bcolors.ENDC
         data = {'mylist':[]}
         
         #query
         username = "'Antoine Cotto'"
         conn = mysql.connect()
-        cursor = conn.cursor()
         cur = conn.cursor()
         query = "select lists.List_name from lists where lists.username = " + username
-        print "comenzando el query"
         cur.execute(query)
-        print "termino el query"
         result = cur.fetchall()
-        print result
         
         for i in result:
             data['mylist'].append({'name': str(i[0])})
         
         conn.close()
         #data returned
-        print bcolors.INFO + "---------------------MY LISTS END------------------------" + bcolors.ENDC
         return jsonify(data)
     else:
         return render_template('my-lists.html')
@@ -343,27 +329,19 @@ def user_list_names():
 
 @app.route('/listinfo/<listName>')
 def listinfo(listName):
-    print bcolors.INFO + "----------------------LIST INFO---------------------------" + bcolors.ENDC
-    print "\n Se esta pidiendo la siguiente lista: " + listName + "\n"
     list_info = {'listinfo':{'name': str(listName), 'movies':[]}}
     
     #query
     query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
-    print query
     conn = mysql.connect()
-    cursor = conn.cursor()
     cur = conn.cursor()
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-    print result 
     
     for i in result:
         list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
-    
-    print list_info
-    
-    print bcolors.INFO + "----------------------END LIST INFO---------------------------" + bcolors.ENDC
+
     return jsonify(list_info)
 
 @app.route('/listinfo-nonmovies/<listName>')
