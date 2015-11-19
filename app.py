@@ -22,10 +22,10 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-url = urlparse.urlparse(os.environ['DATABASE_URL'])
-app.config['MYSQL_DATABASE_USER'] = url.username
-app.config['MYSQL_DATABASE_PASSWORD'] = url.password
-app.config['MYSQL_DATABASE_HOST'] = url.hostname
+#url = urlparse.urlparse(os.environ['DATABASE_URL'])
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
@@ -274,19 +274,23 @@ def moviesearch(movie_title):
 def movieinfo(movie_title):
     result = {}
     
-    query = "select * from movies where movies.title = '" + movie_title + "'"
+    #query = "select * from movies where movies.title = '" + movie_title + "'"
+    query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where m.title = '" + movie_title + "' group by Movie_title"
+    
     conn = mysql.connect()
     cur = conn.cursor()
     cur.execute(query)
     qresult = cur.fetchall()
     conn.close()
     for info in qresult:
+        print info
         result['name'] = str(info[0])
         result['year'] = str(info[2])
         result['genres'] = str(info[4])
         result['poster'] = str(info[3])
-        result['rating'] = str(5)
+        result['rating'] = info[8]
         result['synopsis'] = str(info[1])
+    
     
     #anade los actores que partisiparon en la movie
     query = "select * from actors_in_movie where actors_in_movie.Title_mov = '" + movie_title + "'"
