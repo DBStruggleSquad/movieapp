@@ -37,10 +37,10 @@ class UserNotFoundError(Exception):
     pass
 #=========
 #Route import
-from queries import movies
-from queries import searches
+from queries import searches, fanclub, movies
 movies.addRoutes(app, mysql, genres)
 searches.addSearchesRouts(app, mysql, genres)
+fanclub.addFanClubRoutes(app, mysql, genres)
 
 
 #===================================================================================
@@ -131,13 +131,6 @@ def event_page():
 def events():
     return render_template('events.html')
 
-@app.route('/fanclub-page')
-def fanclub_page():
-    return render_template('fanclub-page.html')
-
-@app.route('/fanclubs')
-def fanclubs():
-    return render_template('fanclubs.html')
 
 
 #===================================================================================
