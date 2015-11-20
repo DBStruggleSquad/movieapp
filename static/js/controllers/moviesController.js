@@ -52,6 +52,24 @@ $scope.tabs = [{
     $scope.goToSelectedMovie = function(movieTitle){
         window.location.href = "/movie-profile"
     };
+    
+    //===========================================
+    //		CODIGO PARA SEARCH
+    //===========================================
+    $scope.searchTxtMessage = "Search...";
+    $scope.searchMovies = function(txtForSearch){
+    	if ( txtForSearch){
+    		localStorage.removeItem("movieSrchTxt");
+    		localStorage.setItem("movieSrchTxt", txtForSearch);
+    		window.location.href = "/search-results?" + txtForSearch;
+    		//proximos codigos en searchResultController dado que se hace rendering de search-result.html
+    		
+    	}else{
+    		$scope.searchTxtMessage = "Please insert text for search..."
+        	window.alert("No se ha ingresado texto para el search, intente de nuevo...");
+    	}
+    	
+    };
 
 }]);
 

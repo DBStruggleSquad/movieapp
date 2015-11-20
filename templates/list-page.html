@@ -41,6 +41,7 @@
             <img  src="{{ movie.poster }}"/>
           </div>
           <div class="post-content">
+              <div class="list-post-options"><button id="delete-button" ng-click="deleteListItem()"></button></div>
               <div class="list-post-name-year">{{ movie.title }} ({{ movie.year }})</div>
               <div class="list-post-genres">{{ movie.genre }}</div>
               <div class="list-post-synopsis">" {{ movie.description }} "</div>

@@ -32,14 +32,17 @@
         <div class="filmshack-logo">filmshack</div>
         <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
     </div>
-
+    
+    <!-- ---------------------- -->
+    <!--    BANNER AND SEARCH   -->
+    <!-- ---------------------- -->
     <div class="enclosure" ng-controller="movies">
       <!-- User-Info, offers user details. -->
       <div class="movies-header">
         <div class="banner"></div>
         <div class="movie-search">
-          <input class="search-bar" type="text" placeholder="Search..."/>
-          <div class="search-button"></div>
+          <input class="search-bar"  type="text" placeholder="{{searchTxtMessage}}" ng-model="txt2Search"/>
+          <div class="search-button" ng-click="searchMovies(txt2Search)"></div> <!--  codigo para ir ala paginal de search en moviesController -->
         </div>
       </div>
 
