@@ -1,7 +1,7 @@
 <div class="list-post-content">
     <a ng-controller="listNav" ng-click="goToList(list.List_name )">{{ list.List_name }}</a>
     <br>
-    {{ list.pubdate | date }}
+    {{ list.year | date }}
     <br>
     <ol class="movie-list" >
         <flex-slider slide="poster in list.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
