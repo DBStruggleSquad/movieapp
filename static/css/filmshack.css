@@ -274,13 +274,46 @@ form .progress {
 	flex-direction: row;
 }
 
+.review-post {
+	background-color: white;
+	margin-top: 15px;
+	padding: 10px;	
+}
+
+.review-title {
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.review-block {
+	display: flex; 
+	flex-direction: row;
+}
+
+.review-left-block {
+	padding-top: 5px;
+}
+
+.review-left-block div {
+	padding-bottom: 5px;
+}
+
+.review-right-block {
+	padding-top: 5px; 
+	padding-left: 25px;	
+}
+
+.review-right-block div {
+	padding-bottom: 5px;
+}
+
 .profile-picture-thmb {
 	padding-left: 10px;
 }
 
 .profile-picture-thmb img {
-	width: 50px;
-	height: 50px;
+	width: 80px;
+	height: 80px;
 }
 
 .movie-list {
@@ -299,10 +332,17 @@ form .progress {
 	cursor: pointer;
 }
 
-.post-content, .search-content-wrapper, .activity-post-content, .movie-post-content, .review-post-content {
+.post-content, .search-content-wrapper, .activity-post-content, .movie-post-content {
 	flex-grow: 1;
 	overflow: hidden;
 	margin-left: 5px;
+}
+
+.review-post-content {
+	flex-grow: 1;
+	overflow: hidden;
+	margin-left: 5px;
+	text-align: center;	
 }
 
 /*					*/
@@ -416,6 +456,25 @@ form .progress {
 
 .list-tools {
 	background-color: #b22222;
+}
+
+.list-post-options {
+	margin-left:auto; 
+	margin-right:0;
+	text-align: right;
+	padding: 5px;
+}
+
+.list-post-options button {
+	width: 25px;
+	height: 25px;
+}
+
+#delete-button {
+	background-image: url("../img/x-icon.svg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border: none;
 }
 
 .list-search, .create, .fanclub-search, .movie-search {

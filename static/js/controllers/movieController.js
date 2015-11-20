@@ -52,11 +52,24 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
       $scope.showReviewModal = !$scope.showReviewModal;
   };            
 
-  //
-  // For now, we get the integer part of the rating (thus, half stars are ignored)
-  //
+  // gets the "full" star rating
   $scope.getMovieRating = function() {
     return new Array(parseInt($scope.movie.rating));
+  };
+
+  // gets "half" star rating
+  $scope.getMovieHalfRating = function() {
+    //substract integer part of the rating number, if result is not zero, it means there should be a half star
+    var fract = $scope.movie.rating - parseInt($scope.movie.rating);
+
+    if(fract != 0){
+      //return array with only one space because only one half star will appear
+      return new Array(1);
+    }
+    else {
+      //return empty array because no half stars will appear
+      return new Array(0);
+    }
   };
 
   //

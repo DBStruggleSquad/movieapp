@@ -1,16 +1,16 @@
 <div class="review-movie-title">  Movie: <a ng-controller="movieNav" ng-click="goToSelectedMovie(review.Movie_title)"> {{review.Movie_title}} </a></div>
-<div>
-                      <span>
+<div class="review-block" style="'display: flex; flex-direction: row'">
+                      <div class="review-left-block">
 
                         <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
 
                             <div class="review-post-content">
-                                <a ng-controller="userNav" ng-click="goToUserProfile(userDetails.name )"> {{ userDetails.name }}</a>
+                                <a ng-controller="userNav" ng-click="goToUserProfile(userDetails.name )">{{ userDetails.name }}</a>
                             </div>
-                      </span>
-                      <span>
+                      </div>
+                      <div class="review-right-block">
                             <div class="review-title"> {{review.Review_title}} </div>
-                            <div class="user-rating"><img src="/static/img/star-icon.svg"/></div>
+                            <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> {{ review.Rating }}</div>
                             <div class="review-text"> {{review.review}} </div>
-                      </span>
+                      </div>
 </div>
