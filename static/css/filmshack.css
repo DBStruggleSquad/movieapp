@@ -332,11 +332,17 @@ form .progress {
 	cursor: pointer;
 }
 
-.post-content, .search-content-wrapper, .activity-post-content, .movie-post-content, .review-post-content {
+.post-content, .search-content-wrapper, .activity-post-content, .movie-post-content {
 	flex-grow: 1;
 	overflow: hidden;
 	margin-left: 5px;
-	text-align: center;
+}
+
+.review-post-content {
+	flex-grow: 1;
+	overflow: hidden;
+	margin-left: 5px;
+	text-align: center;	
 }
 
 /*					*/
