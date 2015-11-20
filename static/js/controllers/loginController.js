@@ -31,8 +31,7 @@ $scope.opts = [{
     $scope.data2sendregister = {username: "",email: "",  password1: "", password2: ""};
     $scope.addAccount = function(){ 
         $http.post('/addAccount', $scope.data2sendregister).success(function(data){
-            window.alert("It worked")
-            window.location.href = '/profile?' + $scope.data2sendlogin.username
+            window.location.href = '/profile' + $scope.data2sendregister.email
         }).error(function(data){
             window.alert("This blew up");
         });
@@ -41,7 +40,7 @@ $scope.opts = [{
     $scope.data2sendlogin = {email: "",  password: ""};
     $scope.userLogin = function(){ 
         $http.post('/userLogin', $scope.data2sendlogin).success(function(data){
-            window.alert("It worked")
+            window.location.href = '/profile?' + $scope.data2sendlogin.email
         }).error(function(data){
             window.alert("This blew up in login");
         });
