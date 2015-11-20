@@ -22,7 +22,7 @@ app.controller('myLists', ['$scope', '$http', function($scope, $http) {
     
   };
 
-
+  //EJEMPLO PARA GUARDAR DATA ACCECIBLE A TODOS LOS CONTROLLERS Y PAGES
   //Para llamar funciones de los servicios:
   $scope.goToList = function(listName){
       localStorage.removeItem("userListName");

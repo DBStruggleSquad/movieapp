@@ -33,15 +33,16 @@
         <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
     </div>    
 
+
     <div class="enclosure" ng-controller="results">
-      <div class="search-title">Search results for " "</div>
+      <div class="search-title">Search results for <i>{{movieSrchTxt}}</i></div>
       <div class="activity-post" ng-repeat="movie in searchTester">
           <div class="list-post-img">
-            <img ng-src="{{ movie.poster }}"/>
+            <a><img ng-click="goToSelectedMovie({{ movie.name }})" ng-src="{{ movie.poster }}"/></a>
           </div>
           <div class="search-content-wrapper">
             <div class="search-content">
-              <div class="list-post-name-year">{{ movie.name }} ({{ movie.year }})</div>
+              <div class="list-post-name-year"><a ng-href="/movie-profile?{{movie.name}}">{{ movie.name }}</a> ({{ movie.year }})</div>
               <div class="list-post-genres">{{ movie.genre }}</div>
               <div class="list-post-synopsis">{{movie.synopsis}}</div>
             </div>

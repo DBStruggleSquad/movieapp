@@ -23,6 +23,7 @@ app = Flask(__name__)
 mysql = MySQL()
 
 
+
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
@@ -43,9 +44,10 @@ class UserNotFoundError(Exception):
     pass
 #=========
 #Route import
-from queries import movies
+from queries import searches, fanclub, movies
 movies.addRoutes(app, mysql, genres)
-
+searches.addSearchesRouts(app, mysql, genres)
+fanclub.addFanClubRoutes(app, mysql, genres)
 
 
 #===================================================================================
@@ -71,9 +73,6 @@ def home():
 
 
 
-@app.route('/search-results')
-def search_results():
-    return render_template('search-results.html')
 
 @app.route('/my-lists')
 def user_lists():
@@ -139,13 +138,6 @@ def event_page():
 def events():
     return render_template('events.html')
 
-@app.route('/fanclub-page')
-def fanclub_page():
-    return render_template('fanclub-page.html')
-
-@app.route('/fanclubs')
-def fanclubs():
-    return render_template('fanclubs.html')
 
 
 #===================================================================================

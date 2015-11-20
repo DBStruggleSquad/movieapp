@@ -1,9 +1,12 @@
-<div class="post-content" ng-controller="movieNav">
+<div class="post-content">
     <h4> {{genre.name}} </h4>
     <ol class="movie-list" >
         <flex-slider slide="poster in genre.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
             <li>
-                <img id="flex-slider-poster" ng-src="{{poster.poster}}" ng-click="goToSelectedMovie(genre.movies.name)">
+            <div class="movie-entry">
+            	<a ng-click="goToSelectedMovie(poster.name)" >  <img id="flex-slider-poster" ng-src="{{poster.poster}}"></a> <br><a ng-click="goToSelectedMovie(poster.name)">{{ poster.name }}</a>
+            </div>
+                
             </li>
         </flex-slider>
     </ol>
