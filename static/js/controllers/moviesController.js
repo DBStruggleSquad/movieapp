@@ -48,11 +48,11 @@ $scope.tabs = [{
     $scope.isActiveTab = function(tabUrl) {
         return tabUrl == $scope.currentTab;
     }
-
     $scope.goToSelectedMovie = function(movieTitle){
-        window.location.href = "/movie-profile"
+        localStorage.removeItem("movieTitle");
+        localStorage.setItem("movieTitle", movieTitle);
+        window.location.href = "/movie-profile?" + movieTitle;
     };
-    
     //===========================================
     //		CODIGO PARA SEARCH
     //===========================================

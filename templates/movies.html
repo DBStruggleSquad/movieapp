@@ -68,8 +68,8 @@
     <!--    MOST REVIEWED   -->
     <!-- ------------------ -->
     <script type="text/ng-template" id="mostreviewed.tpl.html">
-        <div class="movie-entry" ng-repeat="movie in mostReviewedMovies" ng-controller="movieNav">
-          <a ng-href="/movie-profile?{{movie.name}}"><img src="{{ movie.img }}" ng-click="goToSelectedMovie(movie.name)"/><br>{{ movie.name }}</a>
+        <div class="movie-entry" ng-repeat="movie in mostReviewedMovies">
+          <a  ng-click="goToSelectedMovie(movie.name)"><img src="{{ movie.img }}" ng-click="goToSelectedMovie(movie.name)"/><br>{{ movie.name }}</a>
         </div>
     </script>
 
@@ -88,8 +88,8 @@
     <!--    TOP RATED       -->
     <!-- ------------------ -->
     <script type="text/ng-template" id="toprated.tpl.html">
-      <div class="movie-entry"  id="reviewsView" ng-repeat="movie in topRated" ng-controller="movieNav">
-          <a ng-href="/movie-profile?{{movie.name}}"><img src="{{ movie.poster }}" ng-click="goToSelectedMovie(movie.name)"/><br>{{ movie.name }}</a>
+      <div class="movie-entry"  id="reviewsView" ng-repeat="movie in topRated">
+          <a ng-click="goToSelectedMovie(movie.name)"><img src="{{ movie.poster }}" ng-click="goToSelectedMovie(movie.name)"/><br>{{ movie.name }}</a>
       </div>
     </script>
 
