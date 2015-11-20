@@ -113,20 +113,21 @@
     <div class="create-review">
       <button ng-click="toggleReviewModal()">Add a Review</button>
     </div>
-    <div class="activity-post" ng-repeat="review in movieReviews.movies">
-      <div>
-        <span>
-          <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
-            <div class="review-post-content">
-              <a href="#">{{ review.reviewer }}</a>
-             </div>
-        </span>
-        <span>
-          <div class="review-title"> {{review.Review_title}} </div>
-          <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> {{ review.Rating }}</div>
-          <div class="review-text"> {{review.review}} </div>
-        </span>
-      </div>    
+    <div class="review-post" ng-repeat="review in movieReviews.movies">
+      <div class="review-block" style="'display: flex; flex-direction: row'">
+        <div class="review-left-block">
+              <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
+              <div class="review-post-content">
+                <a ng-controller="userNav" ng-click="goToUserProfile(userDetails.name )">{{ review.reviewer }}</a>
+              </div>
+          </div>
+          <div class="review-right-block">
+            <div class="review-title"> {{review.Review_title}} </div>
+            <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> {{ review.Rating }}</div>
+            <div class="review-text"> {{review.review}} </div>
+          </div>
+      </div>
+    </div>   
     </script>
 
     <!-- Navigation, contains buttons that navigate user through app.-->
