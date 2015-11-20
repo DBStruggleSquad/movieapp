@@ -22,8 +22,6 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-
-
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
@@ -44,10 +42,10 @@ class UserNotFoundError(Exception):
     pass
 #=========
 #Route import
-from queries import searches, fanclub, movies
+from queries import searches, movies
 movies.addRoutes(app, mysql, genres)
 searches.addSearchesRouts(app, mysql, genres)
-fanclub.addFanClubRoutes(app, mysql, genres)
+#fanclub.addFanClubRoutes(app, mysql, genres)
 
 
 #===================================================================================
@@ -161,7 +159,7 @@ def userpofileactivity():
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-        
+    print result
     for i in result:
         data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3])})
 
@@ -240,11 +238,13 @@ def userlists():
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-    list_info = {'listinfo':[]}
+    list_info = []
+    print result
     print "hope this works\n"
     for i in result:
-        list_info['listinfo'].append({'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]})
-        #print list_info['listinfo']['List_name']
+        list_info.append({str(i[0]):{'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}})
+        print str(i[0]) + "\n"
+        #print list_info[str(i[0])][str(i[6])]
         print "\n"
     for i in result:
         if list_info['listinfo']['List_name'] == str(i[0]):
