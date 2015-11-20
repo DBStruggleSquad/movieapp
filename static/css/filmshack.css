@@ -458,6 +458,25 @@ form .progress {
 	background-color: #b22222;
 }
 
+.list-post-options {
+	margin-left:auto; 
+	margin-right:0;
+	text-align: right;
+	padding: 5px;
+}
+
+.list-post-options button {
+	width: 25px;
+	height: 25px;
+}
+
+#delete-button {
+	background-image: url("../img/x-icon.svg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border: none;
+}
+
 .list-search, .create, .fanclub-search, .movie-search {
 	display: flex;
 	flex-direction: row;
