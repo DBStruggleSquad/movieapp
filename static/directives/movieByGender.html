@@ -3,7 +3,7 @@
     <ol class="movie-list" >
         <flex-slider slide="poster in genre.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
             <li>
-                <img id="flex-slider-poster" ng-src="{{poster.poster}}" ng-click="goToSelectedMovie(genre.movies.name)">
+                <img id="flex-slider-poster" ng-src="{{poster.poster}}" ng-click="goToSelectedMovie({{poster.name}})">
             </li>
         </flex-slider>
     </ol>

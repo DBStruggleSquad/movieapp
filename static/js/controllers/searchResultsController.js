@@ -10,10 +10,15 @@ app.controller('results', ['$scope', '$http', function($scope, $http) {
     });
     */
 	
-	  $scope.searchTester = $http.get('/searchMovie/' + $scope.movieSrchTxt).success(function(data){
-	      $scope.searchTester = data.data;
-	  });
-    
+	$scope.searchTester = $http.get('/searchMovie/' + $scope.movieSrchTxt).success(function(data){
+		$scope.searchTester = data.data;
+	});
+	  
+    $scope.goToSelectedMovie = function(movieTitle){
+        localStorage.removeItem("movieTitle");
+        localStorage.setItem("movieTitle", movieTitle);
+        window.location.href = "/movie-profile?" + movieTitle;
+    };
 	  /*
     $scope.searchTester = [
         {name: 'Movie-1', year: '1999', genre: 'comedy', synopsis: 'textextextextextext', poster: '/static/img/movie-placeholder.svg'},
