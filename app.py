@@ -22,6 +22,7 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
+
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
@@ -30,8 +31,13 @@ app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
 
+<<<<<<< HEAD
 
 
+||||||| merged common ancestors
+=======
+
+>>>>>>> e32d60ae44b9569e825020668c02afc514cea101
 global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
@@ -44,10 +50,10 @@ class UserNotFoundError(Exception):
     pass
 #=========
 #Route import
-from queries import searches, movies
+from queries import searches, movies, fanclub
 movies.addRoutes(app, mysql, genres)
 searches.addSearchesRouts(app, mysql, genres)
-#fanclub.addFanClubRoutes(app, mysql, genres)
+fanclub.addFanClubRoutes(app, mysql, genres)
 
 
 #===================================================================================
