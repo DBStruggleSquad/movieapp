@@ -21,9 +21,20 @@ global app, mysql
 app = Flask(__name__)
 
 mysql = MySQL()
+
+"""
 app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
 app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
 app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
+app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
+app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
+"""
+
+
+url = urlparse.urlparse(os.environ['DATABASE_URL'])
+app.config['MYSQL_DATABASE_USER'] = url.username
+app.config['MYSQL_DATABASE_PASSWORD'] = url.password
+app.config['MYSQL_DATABASE_HOST'] = url.hostname
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
@@ -41,10 +52,10 @@ class UserNotFoundError(Exception):
     pass
 #=========
 #Route import
-from queries import searches, fanclub, movies
+from queries import searches, movies
 movies.addRoutes(app, mysql, genres)
 searches.addSearchesRouts(app, mysql, genres)
-fanclub.addFanClubRoutes(app, mysql, genres)
+#fanclub.addFanClubRoutes(app, mysql, genres)
 
 
 #===================================================================================
@@ -141,6 +152,12 @@ def events():
 #                                Queries
 #===================================================================================
 
+
+#---------------------------------
+#     Profile RELATED
+#---------------------------------
+
+
 @app.route('/userprofileactivity')
 def userpofileactivity():
     data = {'activity' : []}
@@ -149,11 +166,10 @@ def userpofileactivity():
     conn = mysql.connect()
     cur = conn.cursor()
     query = "select username, List_name, 'List', DATE(date_modified) d from Lists where username =" + username +"union select username, Title, 'Review', DATE(date_modified) d from Reviews where username = " + username +" union select username, Title, 'Text post', DATE(date_modified) d from text_user where username =" + username + "order by d desc"
-    print query
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-        
+    print result
     for i in result:
         data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3])})
 
@@ -188,7 +204,7 @@ def userreviews():
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-        
+
     for i in result:
         data['reviews'].append({'Movie_title': str(i[2]),'Review_title': str(i[0]),'Rating': str(i[7]),'review': str(i[3])})
 
@@ -220,6 +236,33 @@ def userank():
     data = {'rank' :current_user.rank, 'user': current_user.username }
 
     return jsonify(data)
+
+
+@app.route('/userlists')
+def userlists():    
+    #query
+    print "hi\n\n\n"
+    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link, DATE(lists.date_modified) d from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+    list_info = []
+    print result
+    print "hope this works\n"
+    for i in result:
+        list_info.append({str(i[0]):{'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}})
+        print str(i[0]) + "\n"
+        #print list_info[str(i[0])][str(i[6])]
+        print "\n"
+    for i in result:
+        if list_info['listinfo']['List_name'] == str(i[0]):
+            list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
+        
+
+
+    return jsonify(list_info)
 
 #---------------------------------
 #     LIST RELATED
