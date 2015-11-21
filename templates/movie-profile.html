@@ -26,7 +26,7 @@
     {% raw %}
     <!-- Header, indicates where the user is located. -->
     <div class="header">
-        <div class="location">Movie Profile</div>
+        <div class="location">Movie Profile</div>5
         <div class="filmshack-logo">filmshack</div>
         <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
     </div>
@@ -69,22 +69,22 @@
         <form role="form">
           <div class="form-group">
             <label for="list">Review Title:</label>
-            <input type="text" class="form-control" ng-model="data2send.description" placeholder="Title..." />
+            <input type="text" class="form-control" ng-model="data2sendReview.title" placeholder="Title..." />
             <label for="list">Star Rating:</label>
             <br>
-            <select>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+            <select ng-model="data2sendReview.rating">
+              <option value=0>0</option>
+              <option value=1>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+              <option value=4>4</option>
+              <option value=5>5</option>
             </select> 
             <br>
             <label for="list">Review:</label>
-            <input type="text" class="form-control" ng-model="data2send.review" placeholder="Talk about your experience with this movie..." />                
+            <input type="text" class="form-control" ng-model="data2sendReview.review" placeholder="Talk about your experience with this movie..." />                
           </div>
-          <button type="submit" ng-click="addMovie2List(movie.name, selectedList)"class="btn btn-default">Add</button> 
+          <button type="submit" ng-click="addReview(movie.name)"class="btn btn-default">Add</button> 
           <button type="cancel" ng-click="toggleReviewModal()" class="btn btn-default">Cancel</button>
         </form>
 

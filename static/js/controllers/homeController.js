@@ -1,6 +1,6 @@
 app.controller('home', ['$scope', '$http', function($scope,$http) {
 	
-  $scope.userActivities = [{
+  $scope.Activities = [{
     publisher: 'katrific',
     type: 'list',
     pubdate: new Date('2015', '09', '22'),
@@ -130,6 +130,15 @@ $scope.tabs = [{
             title: 'Events',
             url: 'eventfeed.tpl.html'
         }];
+
+
+
+ $scope.activities = $http.get('/newsfeedactivity').success(function(data){
+        $scope.userActivities = data.activity;
+    }).error(function(data, status){
+        window.alert(data + '\n' + status);
+    });
+
 
     $scope.currentTab = 'userfeed.tpl.html'; //default opened tab
     $scope.currentInfo = 'Users'; //default info displayed
