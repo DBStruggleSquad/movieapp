@@ -1,0 +1,68 @@
+select * from lists;
+
+select * from lists_contains;
+
+select * from lists_post;
+
+select lists.List_name from lists where lists.username = 'Antoine Cotto';
+select lists.List_name, movies.Title, movies.Release_year, lists_post.description from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = "My top 5";
+
+
+select lists.Category from lists where lists.List_name = 'My top 3';
+
+select lists.List_name, lists_post.Title, lists_post.description from lists, lists_post where lists.List_name = lists_post.List_name and lists.List_name = 'My top Actors';
+
+select * from moviefollows_fan_clubs;
+
+Select m.*, count(Movie_title) r_num
+         from Reviews as r join Movies m on r.Movie_title = m.Title
+         group by Movie_title
+         order by r_num DESC;
+         
+Select m.*, avg(rating) r_num
+         from Reviews as r join Movies m on r.Movie_title = m.Title
+         where genre = " +genre +"
+         group by Movie_title
+         order by r_num DESC;
+
+Select m.*, avg(rating) r_num
+         from Reviews as r join Movies m on r.Movie_title = m.Title
+         group by Movie_title
+         order by r_num DESC;
+
+select * from movies;
+select * from movies ;
+
+select * from actors_in_movie where actors_in_movie.Title_mov = "Avatar";
+
+select * from reviews ;
+
+select * from users;
+
+insert into lists_post values('try1', 'My top 3', 'Movies');
+insert into lists_contains values ();
+
+select * from Movies where lower(movies.Title)  Like lower('%inc%');
+
+select * from Movies where Title COLLATE UTF8_GENERAL_CI Like '%inc %';
+
+select * from fan_club;
+
+select follows_fan_club.*, users.Image_link from follows_fan_club join users on follows_fan_club.username = users.username where follows_fan_club.Club_name = "Pixar Lovers";
+
+select * from follows_fan_club where follows_fan_club.username = "Antoine Cotto";
+
+select * from fan_club where fan_club.username = "Antoine Cotto";
+
+select * from fan_club where fan_club.Club_name = ;
+
+
+select * from text_fan_club join fan_club on fan_club.Club_name = text_fan_club.Club_nam;
+
+select * from text_fan_club;
+
+select * from users;
+
+select text_fan_club.* from text_fan_club, fan_club where fan_club.Club_name = text_fan_club.Club_name and fan_club.username = "Antoine Cotto";
+
+select text_fan_club.* from text_fan_club , follows_fan_club where follows_fan_club.Club_name = text_fan_club.Club_name and follows_fan_club.username = "Antoine Cotto" ;

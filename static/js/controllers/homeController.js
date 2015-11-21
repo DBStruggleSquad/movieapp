@@ -53,8 +53,25 @@ app.controller('home', ['$scope', '$http', function($scope,$http) {
   //------------------
   //	FAN CLUB
   //------------------
-  $scope.fanclubActivities = [{
-    publisher: 'Pixar Lovers Unite',
+  $scope.fanclubActivities = $http.get('/myfanclubactivity').success(function(data){
+	  $scope.fanclubActivities = data.data;
+  })
+	  
+	  /*
+	  [{
+    publisher: 'Pixar Lovers',
+    type: 'post',
+    pubdate: new Date('2015', '09', '22'),
+  }, {
+    publisher: 'Pixar Lovers',
+    type: 'post',
+    pubdate: new Date('2015', '09', '22'),
+  }, {
+    publisher: 'Pixar Lovers',
+    type: 'post',
+    pubdate: new Date('2015', '09', '22'),
+  }, {
+    publisher: 'Pixar Lovers',
     type: 'post',
     pubdate: new Date('2015', '09', '22'),
   }, {
@@ -89,19 +106,7 @@ app.controller('home', ['$scope', '$http', function($scope,$http) {
     publisher: 'Pixar Lovers Unite',
     type: 'post',
     pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }];   
+  }];  */ 
 
   $scope.eventActivities = [{
     publisher: 'katrific',

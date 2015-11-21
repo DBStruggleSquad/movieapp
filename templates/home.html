@@ -119,11 +119,12 @@
       <div class="fanclub-feed">
         <div class="activity-post" ng-repeat="activity in fanclubActivities">
             <div class="profile-picture-thmb">
-              <img src="static/img/profile-picture-placeholder.svg"/>
+              <img src="{{activity.img}}"/>
             </div>
             <div class="post-content">
-              <a ng-controller="fanClubNav" ng-click="goToFCPage(activity.publisher)">{{ activity.publisher }}</a> {{ activity.type }}
+              <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.publisher)">{{ activity.publisher }}</a>  in <a ng-controller="fanClubNav" ng-click="goToFCPage(activity.fanclub)">{{activity.fanclub}}</a> ({{ activity.type }})
                 <br>{{ activity.pubdate | date }}
+				<br>{{ activity.text}}
             </div>
         </div>
       </div>  

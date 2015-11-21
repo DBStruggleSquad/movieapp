@@ -25,34 +25,38 @@
 	{% raw %}
     <!-- Header, indicates where the user is located. -->
     <div class="header" ng-controller="fanclub">
-        <div class="location">{{ fanclub.name }}</div>
+        <div class="location">{{ fanClubName}}</div>
         <div class="filmshack-logo">filmshack</div>
         <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
     </div>      
 
     <div class="enclosure" ng-controller="fanclub">
 
-      <div class="fanclub-info">
-        <div class="fanclub-type"><h4>{{ fanclub.type }} Fanclub</h4></div>
-        <div class="fanclub-director">Directed by <a >{{ fanclub.director }}</a></div>
-        <div class="fanclub-options">
-          <button class="join-button">Join</button>
-          <button class="share-button">Share</button>
-          <button class="invite-button">Invite</button>                    
-        </div>
-      </div>      
+      	<div class="fanclub-info">
+        	<div class="fanclub-type"><h4>{{ fanclub.type }} Fanclub</h4></div>
+        	<div class="fanclub-director">Directed by <a >{{ fanclub.director }}</a></div>
+        	<div class="fanclub-options">
+          		<button class="join-button">Join</button>
+          		<button class="share-button">Share</button>
+          		<button class="invite-button">Invite</button>                    
+        	</div>
+      	</div>      
 
-      <div class="fanclub-description">
-        <h4>Description</h4>
-        <div class="fanclub-description-content">{{ fanclub.description }}</div>
-      </div>           
-
-      <div class="fanclub-members">
-        <h4>Members</h4>
-        <div class="fanclub-members-content" ng-repeat="member in fanclub.members">
-          <a ng-controller="userNav" ng-click="goToUserProfile(member.name)"><img src="{{ member.img }}" ng-controller="userNav" ng-click="goToUserProfile(member.name)"/><br>{{ member.name }}</a>
-        </div>        
-      </div>           
+      	<div class="fanclub-description">
+        	<h4>Description</h4>
+        	<div class="fanclub-description-content">{{ fanclub.description }}</div>
+      	</div>        
+      	   
+		<!-- ------------------- -->
+		<!-- 	MEMBERS SECTION  -->
+		<!-- ------------------- -->
+      	<div class="fanclub-members">
+        	<h4>Members</h4>
+        	<div class="fanclub-members-content" ng-repeat="member in fanclub.members">
+          		<a ng-controller="userNav" ng-click="goToAnothersUserProfile(member.name)"><img src="{{ member.img }}" ng-controller="userNav" ng-click="goToAnothersUserProfile(member.name)"/><br>{{ member.name }}</a>
+        	</div>
+                
+      	</div>           
 
     </div>
 

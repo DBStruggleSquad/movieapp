@@ -36,7 +36,7 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
 
 
 app.controller('movieNav', ['$scope', function($scope){
-	    $scope.goToSelectedMovie = function(movieTitle){
+	$scope.goToSelectedMovie = function(movieTitle){
         localStorage.removeItem("movieTitle");
         localStorage.setItem("movieTitle", movieTitle);
         window.location.href = "/movie-profile?" + movieTitle;
@@ -48,7 +48,13 @@ app.controller('userNav', ['$scope', function($scope){
         window.location.href = "/business-profile"
     };
     $scope.goToUserProfile = function(username){
-        window.location.href = "/profile"
+        window.location.href = "/profile?" + username
+    };
+    
+    $scope.goToAnothersUserProfile = function(username){
+    	localStorage.removeItem("userName");
+        localStorage.setItem("userName", username);
+    	window.location.href = "/userprofile?" + username
     }
 }]);
 
@@ -58,7 +64,9 @@ app.controller('fanClubNav', ['$scope', function($scope){
         window.location.href = "/fanclubs"
     };
     $scope.goToFCPage = function(fanclubname){
-        window.location.href = "/fanclub-page"
+    	localStorage.removeItem("fanClubName");
+        localStorage.setItem("fanClubName", fanclubname);
+        window.location.href = "/fanclub-page?" + fanclubname
     }
 
 }]);
