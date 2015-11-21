@@ -163,7 +163,7 @@ def userpofileactivity():
     conn.close()
     print result
     for i in result:
-        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3])})
+        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1])})
 
     return jsonify(data)
 
@@ -296,6 +296,21 @@ def add_list2user():
     conn = mysql.connect()
     cur = conn.cursor()
     cur.callproc('ListExists', (data['title'], data['username'], data['category'] ))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "salio"
+    
+    return jsonify({})
+#{movieTitle: "",  title: "", review: "", rating: 0};
+@app.route('/addReview', methods=['POST'])
+def add_Review():
+    data = request.get_json()
+    print data['movieTitle'] + "  " + data['title'] + "   " + data['rating']
+    print "its hereeee \n"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('addReview', (data['title'], current_user.username, data['rating'], data['review'], data['movieTitle'] ))
     #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
     conn.commit()
     conn.close()

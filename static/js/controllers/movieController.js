@@ -93,4 +93,15 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 		});
 		
 	};
+
+  $scope.data2sendReview = {movieTitle: "",  title: "", review: "", rating: 0};
+  $scope.addReview = function(moviename){ 
+    $scope.data2sendReview.movieTitle = moviename;
+    $http.post('/addReview', $scope.data2sendReview).success(function(data){
+      window.alert("worked")
+    }).error(function(data){
+      window.alert("hola review");
+    });
+  };
+
 }]);

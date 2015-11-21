@@ -2,6 +2,7 @@
             <img src="static/img/profile-picture-placeholder.svg"/>
           </div>
           <div class="activity-post-content">
-            <a href="#">{{ activity.name }}</a> {{ activity.type }}
+            <a href="#">{{ activity.name }}</a> created a new {{ activity.type }}
               <br>{{ activity.pubdate | date }}
+              <br><a ng-show="activity.type == 'List'" ng-controller="listNav" ng-click="goToList(activity.title)">{{activity.title}}</a><div ng-show="activity.type != 'List'">{{activity.title}}</div>
           </div>
