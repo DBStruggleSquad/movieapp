@@ -23,13 +23,6 @@ app = Flask(__name__)
 mysql = MySQL()
 
 
-app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
-app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
-app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
-app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
-app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
-
-
 '''
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
@@ -173,24 +166,6 @@ def userpofileactivity():
     for i in result:
         data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3])})
 
-
-    useractivity = {'activity': [
-          {
-            'name': 'katrific',
-            'type': 'list',
-            'pubdate': '2015-09-22',
-          },
-          {
-            'name': 'katrific',
-            'type': 'post',
-            'pubdate': '2015-09-22'
-          },
-          {
-            'name': 'katrific',
-            'type': 'joined',
-            'pubdate': '2015-09-22'
-          }
-        ]}
     return jsonify(data)
 
 @app.route('/userreviews')
@@ -207,27 +182,6 @@ def userreviews():
 
     for i in result:
         data['reviews'].append({'Movie_title': str(i[2]),'Review_title': str(i[0]),'Rating': str(i[7]),'review': str(i[3])})
-
-    user_reviews = {'reviews': [
-                    { 
-                    'Movie_title': 'Avatar',
-                    'Review_title': 'Aww yeah',
-                    'Rating': 3,
-                    'review': 'text text text text text  \n text text text text text ',
-                  }, 
-                  { 
-                    'Movie_title': 'Avengers',
-                    'Review_title': 'it sucks',
-                    'Rating': 2,
-                    'review': 'text text text text text  \n text text text text text ',
-                  }, 
-                  { 
-                    'Movie_title': 'Pokemon',
-                    'Review_title': 'Changed my life',
-                    'Rating': 10,
-                    'review': 'text text text text text  \n text text text text text ', 
-                  }]
-                    }
 
     return jsonify(data)
 
