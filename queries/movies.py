@@ -18,10 +18,6 @@ def addRoutes(app, mysql, genres):
         
         return render_template('movie-profile.html')
     
-    
-    
-    
-    
 
     @app.route('/movies', methods = ['GET'])
     def movies_main():

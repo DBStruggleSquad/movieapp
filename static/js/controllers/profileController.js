@@ -1,4 +1,5 @@
 app.controller('profile', ['$scope', '$http', function($scope,$http) {
+	
     $scope.userDetails = {
         name: 'katrific',
         rating: 5,

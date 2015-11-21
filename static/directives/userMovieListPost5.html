@@ -7,8 +7,9 @@
         <flex-slider slide="poster in list.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
             <li>
                 <div class="movie-entry">
-                <img ng-src="{{poster.poster}}">
-                </div>
+                <a ng-controller="movieNav" ng-click="goToSelectedMovie(poster.title)"><img ng-src="{{poster.poster}}"></a>
+                <br><a ng-controller="movieNav" ng-click="goToSelectedMovie(poster.title)" >{{poster.title}}</a> 
+                
             </li>
         </flex-slider>
     </ol>
