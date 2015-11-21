@@ -60,10 +60,13 @@
     <script type="text/ng-template" id="activity.tpl.html">
         <div class="activity-post" ng-repeat="activity in activities" ng-include="'static/directives/activityPost.html'"></div>
     </script>
-    <!-- My-List -->
+    <!-- ------------------------------ -->
+    <!--         My list TAB            -->
+    <!-- ------------------------------ -->
     <script type="text/ng-template" id="lists.tpl.html">
       <div class="activity-post" ng-repeat="list in userLists" ng-include="'static/directives/userMovieListPost5.html'"></div>
     </script>
+    
     <!-- Reviews -->
     <script type="text/ng-template" id="reviews.tpl.html">
         <div class="review-post" ng-repeat="review in userReview" ng-include="'static/directives/userProfileReviewPost2.html'"></div>

@@ -35,7 +35,13 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
 }]);
 
 
-
+app.controller('movieNav', ['$scope', function($scope){
+	    $scope.goToSelectedMovie = function(movieTitle){
+        localStorage.removeItem("movieTitle");
+        localStorage.setItem("movieTitle", movieTitle);
+        window.location.href = "/movie-profile?" + movieTitle;
+    };
+}]);
 
 app.controller('userNav', ['$scope', function($scope){
     $scope.goToBusinessProfile = function(username){
@@ -68,10 +74,13 @@ app.controller('eventsNav', ['$scope', function($scope){
 }]);
 
 app.controller('listNav', ['$scope', '$rootScope', function($scope, $rootScope){
-    $scope.goToList = function(name){
-        $rootScope.$emit("listCtrlMethods", name);
-        window.location.href = "/list-page"
-    };
+	  $scope.goToList = function(listName){
+	      localStorage.removeItem("userListName");
+	      localStorage.setItem("userListName", listName);
+
+	      //se deberia poner algun waiting para que la prox pag no abra antes de q el set se haga en localStorage
+	      window.location.href = "/list-page?" + listName;
+	  };
 
 
 }]);
