@@ -1,4 +1,5 @@
 app.controller('home', ['$scope', '$http', function($scope,$http) {
+	
   $scope.userActivities = [{
     publisher: 'katrific',
     type: 'list',
@@ -49,6 +50,9 @@ app.controller('home', ['$scope', '$http', function($scope,$http) {
     pubdate: new Date('2015', '09', '22'),
   }]; 
 
+  //------------------
+  //	FAN CLUB
+  //------------------
   $scope.fanclubActivities = [{
     publisher: 'Pixar Lovers Unite',
     type: 'post',
