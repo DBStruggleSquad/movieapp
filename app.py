@@ -40,7 +40,6 @@ app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 '''
 
 
-
 global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
@@ -249,21 +248,25 @@ def userlists():
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-    list_info = []
+    list_info = {}
+    wut= []
     print result
     print "hope this works\n"
     for i in result:
-        list_info.append({str(i[0]):{'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}})
+        if not (str(i[0]) in list_info):
+               list_info[str(i[0])]= {'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}
         print str(i[0]) + "\n"
         #print list_info[str(i[0])][str(i[6])]
         print "\n"
     for i in result:
-        if list_info['listinfo']['List_name'] == str(i[0]):
-            list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
-        
+        list_info[str(i[0])]['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
+    for x in list_info.keys():
+        wut.append(list_info[x])
+    print wut
+    print "\n\n"
 
 
-    return jsonify(list_info)
+    return jsonify({"lists":wut})
 
 #---------------------------------
 #     LIST RELATED

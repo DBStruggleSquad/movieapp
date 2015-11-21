@@ -6,7 +6,9 @@
     <ol class="movie-list" >
         <flex-slider slide="poster in list.movies track by $index" animation="slide" item-width="210" item-margin="5" slideshow="false">
             <li>
+                <div class="movie-entry">
                 <img ng-src="{{poster.poster}}">
+                </div>
             </li>
         </flex-slider>
     </ol>
