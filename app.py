@@ -363,8 +363,10 @@ def add_Account():
 @app.route('/userLogin', methods=['POST'])
 def user_Login():
     data = request.get_json()
+    print "before the get\n\n"
     dude = User.get(data['email'])
     if (dude and dude.verify_password(data['password'])):
+        print "IT got here \n\n"
         login_user(dude)
     print "salio"
     print current_user.username
@@ -383,7 +385,7 @@ class bcolors:
     
 
 
-class User():
+class User(UserMixin):
 
     query = "select account.email, account.password_hash, account_belong_user.username, users.user_rank from account, account_belong_user, users where account.email = account_belong_user.email and account_belong_user.username = users.username" 
     #query = "select email, password_hash from account"
@@ -399,6 +401,7 @@ class User():
     print users 
     print "\n\n"
     def __init__(self, id):
+        print "reached init\n\n"
         if not any(u['email'] == id for u in self.users):
             print "not found"
             raise UserNotFoundError()
@@ -410,34 +413,23 @@ class User():
                 self.rank = x['rank']
         #self.username = self.users['username']
 
-    def is_active(self):
-        return True
-
-    def is_authenticated(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return unicode(self.id)
-
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
     @classmethod
-    def get(self_class, email):
+    def get(self_class, id):
         '''Return user instance of id, return None if not exist'''
         try:
-            user = self_class(email)
+            user = self_class(id)
+            print "exited init \n\n"
             return user
         except UserNotFoundError:
             return None
 
 # Flask-Login use this to reload the user object from the user ID stored in the session
 @login_manager.user_loader
-def load_user(id):
-    return User.get(str(id))
+def user_loader(id):
+    return User.get(id)
 
 
 
