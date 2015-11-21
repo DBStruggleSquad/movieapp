@@ -22,12 +22,12 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-url = urlparse.urlparse(os.environ['DATABASE_URL'])
-app.config['MYSQL_DATABASE_USER'] = url.username
-app.config['MYSQL_DATABASE_PASSWORD'] = url.password
-app.config['MYSQL_DATABASE_HOST'] = url.hostname
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "008aadb1"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
+
 
 
 global genres
@@ -238,21 +238,25 @@ def userlists():
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-    list_info = []
+    list_info = {}
+    wut= []
     print result
     print "hope this works\n"
     for i in result:
-        list_info.append({str(i[0]):{'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}})
+        if not (str(i[0]) in list_info):
+               list_info[str(i[0])]= {'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}
         print str(i[0]) + "\n"
         #print list_info[str(i[0])][str(i[6])]
         print "\n"
     for i in result:
-        if list_info['listinfo']['List_name'] == str(i[0]):
-            list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
-        
+        list_info[str(i[0])]['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
+    for x in list_info.keys():
+        wut.append(list_info[x])
+    print wut
+    print "\n\n"
 
 
-    return jsonify(list_info)
+    return jsonify({"lists":wut})
 
 #---------------------------------
 #     LIST RELATED
