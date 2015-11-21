@@ -30,7 +30,6 @@ app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
 
-
 global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
@@ -354,8 +353,10 @@ def add_Account():
 @app.route('/userLogin', methods=['POST'])
 def user_Login():
     data = request.get_json()
+    print "before the get\n\n"
     dude = User.get(data['email'])
     if (dude and dude.verify_password(data['password'])):
+        print "IT got here \n\n"
         login_user(dude)
     print "salio"
     print current_user.username
@@ -390,6 +391,7 @@ class User(UserMixin):
     print users 
     print "\n\n"
     def __init__(self, id):
+        print "reached init\n\n"
         if not any(u['email'] == id for u in self.users):
             print "not found"
             raise UserNotFoundError()
@@ -408,7 +410,8 @@ class User(UserMixin):
     def get(self_class, id):
         '''Return user instance of id, return None if not exist'''
         try:
-            user = self_class(email)
+            user = self_class(id)
+            print "exited init \n\n"
             return user
         except UserNotFoundError:
             return None
