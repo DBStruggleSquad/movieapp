@@ -148,7 +148,22 @@ def events():
 #---------------------------------
 #     Profile RELATED
 #---------------------------------
+@app.route('/newsfeedactivity')
+def newsfeed_activity():
+    data = {'activity' : []}
+    #query
+    username = "'"+ current_user.username +"'"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    query = "select username, List_name, 'List', DATE(Lists.date_modified) d from Lists, follows where follows.followed_username =" + username +" and follows.following_username = Lists.username union select username, Title, 'Review', DATE(Reviews.date_modified) d from Reviews, follows where follows.followed_username = " + username +" and follows.following_username = Reviews.username union select username, Title, 'Text post', DATE(text_user.date_modified) d from text_user, follows where follows.followed_username =" + username + " and follows.following_username = text_user.username order by d desc"
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+    print result
+    for i in result:
+        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1])})
 
+    return jsonify(data)
 
 @app.route('/userprofileactivity')
 def userpofileactivity():

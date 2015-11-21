@@ -104,10 +104,11 @@
             <div class="profile-picture-thmb">
               <img src="static/img/profile-picture-placeholder.svg"/>
             </div>
-            <div class="post-content" ng-controller="userNav">
-              <a ng-click="goToUserProfile(activity.publisher )">{{ activity.publisher }}</a> {{ activity.type }}
+             <div class="activity-post-content">
+              <a href="#">{{ activity.name }}</a> created a new {{ activity.type }}
                 <br>{{ activity.pubdate | date }}
-            </div>
+                <br><a ng-show="activity.type == 'List'" ng-controller="listNav" ng-click="goToList(activity.title)">{{activity.title}}</a><div ng-show="activity.type != 'List'">{{activity.title}}</div>
+          </div>
         </div>
       </div>  
     </script>
