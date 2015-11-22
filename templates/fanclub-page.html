@@ -65,8 +65,11 @@
           <h4>Posts</h4>
           <div class="fanclub-posts-content">
               <div class="new-post">
-                  <textarea placeholder="Write something to {{ fanClubName }}..."></textarea>
-                  <button class="btn btn-primary ng-scope">Post</button>
+                  <input placeholder="Post Title"></input>
+                  <div>
+                    <textarea placeholder="Write something to {{ fanClubName }}..."></textarea>
+                    <button class="btn btn-primary ng-scope">Post</button>
+                  </div>                  
               </div>
               <div class="activity-post" ng-repeat="post in fanclub.posts">
                   <div class="profile-picture-thmb">

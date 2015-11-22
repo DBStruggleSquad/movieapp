@@ -490,9 +490,14 @@ form .progress {
 
 .new-post {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	padding: 15px;
-	margin: 0 auto;
+	margin: 0 auto;	
+}
+
+.new-post div {
+	display: flex;
+	flex-direction: row;
 }
 
 .new-post textarea {
@@ -500,14 +505,20 @@ form .progress {
 	height: 5em;
 }
 
-.new-post button, .new-post button:active, .new-post button.active, .create-review button, .create-review button:active, .create-review button.active {
+.new-post button, .new-post button:active, .new-post button.active, .create-review button, .create-review button:active, .create-review button.active, .user-follow button, .user-follow button:active, .user-follow button.active {
 	background-color: #B22222;
 	border-color: #581010;
 }
 
-.new-post button:hover, .create-review button:hover {
+.new-post button:hover, .create-review button:hover, .user-follow button:hover, .new-post button:focus, .create-review button:focus, .user-follow button:focus {
 	background-color: #581010;
 	border-color: #581010;	
+}
+
+.user-follow button img {
+	width: 2em;
+	height: 2em;
+	padding-right: 0.2em;
 }
 
 .create button, .create-review button {
