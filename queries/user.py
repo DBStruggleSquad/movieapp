@@ -163,5 +163,18 @@ def addUserRoutes(app, mysql, genres, current_user):
     
         return jsonify({"lists":wut})
 
+    @app.route('/adduserpost', methods=['POST'])
+    def add_user_post():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('addUserTextPost', (data['title'], current_user.username, data['post']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "fanclub added"
+        return jsonify({})
+
 
     
