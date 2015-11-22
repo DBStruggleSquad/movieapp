@@ -32,7 +32,9 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
 
     $scope.userRank = $http.get('/userank').success(function(data){
         $scope.userDetails.rating = data["rank"];
-         $scope.userDetails.name = data["user"];
+        $scope.userDetails.name = data["user"];
+        $scope.userDetails.quote = data["quote"];
+        $scope.userDetails.picture = data["picture"];
     });
 
       $scope.userReview = $http.get('/userreviews').success(function(data){

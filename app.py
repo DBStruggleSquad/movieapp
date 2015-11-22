@@ -200,7 +200,7 @@ def userreviews():
 
 @app.route('/userank')
 def userank():
-    data = {'rank' :current_user.rank, 'user': current_user.username }
+    data = {'rank' :current_user.rank, 'user': current_user.username, 'picture': current_user.image, 'quote': current_user.quote}
 
     return jsonify(data)
 
@@ -367,7 +367,7 @@ class bcolors:
 
 class User(UserMixin):
 
-    query = "select account.email, account.password_hash, account_belong_user.username, users.user_rank from account, account_belong_user, users where account.email = account_belong_user.email and account_belong_user.username = users.username" 
+    query = "select account.email, account.password_hash, account_belong_user.username, users.user_rank, users.quote, users.Image_link from account, account_belong_user, users where account.email = account_belong_user.email and account_belong_user.username = users.username" 
     #query = "select email, password_hash from account"
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -377,9 +377,8 @@ class User(UserMixin):
     conn.close()
     users = []
     for i in result:
-        users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2]),'rank': str(i[3])})
-    print users 
-    print "\n\n"
+        users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2]),'rank': str(i[3]),'quote': str(i[4]),'image': str(i[5])})
+ 
     def __init__(self, id):
         print "reached init\n\n"
         if not any(u['email'] == id for u in self.users):
@@ -391,6 +390,8 @@ class User(UserMixin):
                 self.password_hash = x['password_hash']
                 self.username = x['username']
                 self.rank = x['rank']
+                self.quote = x['quote']
+                self.image = x['image']
         #self.username = self.users['username']
 
     def verify_password(self, password):

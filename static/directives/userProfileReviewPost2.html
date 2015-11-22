@@ -2,7 +2,7 @@
 <div class="review-block" style="'display: flex; flex-direction: row'">
                       <div class="review-left-block">
 
-                        <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
+                        <div class="profile-picture-thmb" ng-controller="profile"><img src="{{userDetails.picture}}"/></div>
 
                             <div class="review-post-content">
                                 <a ng-controller="userNav" ng-click="goToUserProfile(userDetails.name )">{{ userDetails.name }}</a>
