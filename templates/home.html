@@ -102,7 +102,7 @@
       <div class="user-feed">
         <div class="activity-post" ng-repeat="activity in userActivities">
             <div class="profile-picture-thmb">
-              <img src="static/img/profile-picture-placeholder.svg"/>
+              <img src="{{activity.image}}"/>
             </div>
              <div class="activity-post-content">
               <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.name)">{{ activity.name }}</a> created a new {{ activity.type }}

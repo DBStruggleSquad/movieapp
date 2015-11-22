@@ -21,7 +21,7 @@ def addEventsRoutes(app, mysql, genres, current_user):
         print "Event activity is beaing asked"
         username = current_user.username
         query = """
-            select events_inf.username, 'creates' as 'type', events_inf.Event_name , Date(events_inf.date_modified) as 'date', users.Image_link 
+            select events_inf.username, 'creates' as 'type', events_inf.Event_name , Date(events_inf.date_modified) as date, users.Image_link 
             from events_inf left join users on events_inf.username = users.username
             where events_inf.Event_name in (
             select attends.Event_name from attends where attends.username = '""" + username + "'" + """
@@ -29,18 +29,20 @@ def addEventsRoutes(app, mysql, genres, current_user):
             select events_inf.Event_name from events_inf where events_inf.username = '""" + username + "'" + """
             )
             union
-            select attends.username, 'is now attending' as 'type', attends.Event_name, Date(attends.date_modified) as 'date', users.Image_link 
+            select attends.username, 'is now attending' as 'type', attends.Event_name, Date(attends.date_modified) as date, users.Image_link 
             from attends left join users on attends.username = users.username
             where attends.Event_name in (
             select attends.Event_name from attends where attends.username = '""" + username + "'" + """
             union
-            select events_inf.Event_name from events_inf where events_inf.username = '""" + username + "');"
+            select events_inf.Event_name from events_inf where events_inf.username = '""" + username + "') order by date desc;"
             
         conn = mysql.connect()
         cur = conn.cursor()
         cur.execute(query)
         queryResult = cur.fetchall()
         conn.close()
+        print "event testing \n\n"
+        print queryResult
         eventactivity = {'data': []}
         data = []
         print "event"
