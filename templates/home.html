@@ -105,7 +105,7 @@
               <img src="static/img/profile-picture-placeholder.svg"/>
             </div>
              <div class="activity-post-content">
-              <a href="#">{{ activity.name }}</a> created a new {{ activity.type }}
+              <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.name)">{{ activity.name }}</a> created a new {{ activity.type }}
                 <br>{{ activity.pubdate | date }}
                 <br><a ng-show="activity.type == 'List'" ng-controller="listNav" ng-click="goToList(activity.title)">{{activity.title}}</a><div ng-show="activity.type != 'List'">{{activity.title}}</div>
           </div>
@@ -138,10 +138,10 @@
       <div class="event-feed">
         <div class="activity-post" ng-repeat="activity in eventActivities">
             <div class="profile-picture-thmb">
-              <img src="static/img/profile-picture-placeholder.svg"/>
+              <img src="{{activity.img}}"/>
             </div>
             <div class="post-content">
-              <a ng-controller="userNav" ng-click="goToUserProfile(activity.publisher)">{{ activity.publisher }}</a> {{ activity.type }} in <a ng-controller="eventsNav" ng-click="goToEventPage(activity.eventName)">{{activity.eventName}}</a>
+              <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.publisher)">{{ activity.publisher }}</a> {{ activity.type }}  <a ng-controller="eventsNav" ng-click="goToEventPage(activity.eventName)">{{activity.eventName}}</a>
                 <br>{{ activity.pubdate | date }}
             </div>
         </div>

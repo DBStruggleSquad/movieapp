@@ -39,11 +39,12 @@ class UserNotFoundError(Exception):
     pass
 #=========
 #Route import
-from queries import searches, movies, fanclub, events
+from queries import searches, movies, fanclub, events, user
 movies.addRoutes(app, mysql, genres)
 searches.addSearchesRouts(app, mysql, genres)
 fanclub.addFanClubRoutes(app, mysql, genres, current_user)
 events.addEventsRoutes(app, mysql, genres, current_user)
+user.addUserRoutes(app, mysql, genres, current_user)
 
 
 #===================================================================================
@@ -55,14 +56,7 @@ def hello():
     return render_template('profile.html')
 
 
-@app.route('/profile', methods = ['GET'])
-@login_required
-def userprofile():
-    return render_template('profile.html')
 
-@app.route('/userprofile')
-def anotherUser_profile():
-    return render_template('anotherUserProfile.html')
 
 @app.route('/login')
 def login():
@@ -159,73 +153,9 @@ def newsfeed_activity():
 
     return jsonify(data)
 
-@app.route('/userprofileactivity')
-def userpofileactivity():
-    data = {'activity' : []}
-    #query
-    username = "'"+ current_user.username +"'"
-    conn = mysql.connect()
-    cur = conn.cursor()
-    query = "select username, List_name, 'List', DATE(date_modified) d from Lists where username =" + username +"union select username, Title, 'Review', DATE(date_modified) d from Reviews where username = " + username +" union select username, Title, 'Text post', DATE(date_modified) d from text_user where username =" + username + "order by d desc"
-    cur.execute(query)
-    result = cur.fetchall()
-    conn.close()
-    print result
-    for i in result:
-        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1])})
-
-    return jsonify(data)
-
-@app.route('/userreviews')
-def userreviews():
-    data = {'reviews' : []}
-    #query
-    username = "'"+ current_user.username +"'"
-    conn = mysql.connect()
-    cur = conn.cursor()
-    query = "select * from Reviews where username = " + username
-    cur.execute(query)
-    result = cur.fetchall()
-    conn.close()
-
-    for i in result:
-        data['reviews'].append({'Movie_title': str(i[2]),'Review_title': str(i[0]),'Rating': str(i[7]),'review': str(i[3])})
-
-    return jsonify(data)
-
-@app.route('/userank')
-def userank():
-    data = {'rank' :current_user.rank, 'user': current_user.username, 'picture': current_user.image, 'quote': current_user.quote}
-
-    return jsonify(data)
 
 
-@app.route('/userlists')
-def userlists():    
-    #query
-    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link, DATE(lists.date_modified) d from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.username = '" + current_user.username + "'"
-    conn = mysql.connect()
-    cur = conn.cursor()
-    cur.execute(query)
-    result = cur.fetchall()
-    conn.close()
-    list_info = {}
-    wut= []
-    for i in result:
-        if not (str(i[0]) in list_info):
-            list_info[str(i[0])]= {'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}
-        print str(i[0]) + "\n"
-        #print list_info[str(i[0])][str(i[6])]
-        print "\n"
-        
-    for i in result:
-        list_info[str(i[0])]['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
-    for x in list_info.keys():
-        wut.append(list_info[x])
-    print wut
 
-
-    return jsonify({"lists":wut})
 
 #---------------------------------
 #     LIST RELATED

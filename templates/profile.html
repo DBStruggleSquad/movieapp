@@ -31,7 +31,7 @@
         <div class="filmshack-logo">filmshack</div>
         <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
     </div>
-
+	<!-- BANER -->
     <div class="enclosure" ng-controller="profile">
       <!-- User-Info, offers user details. -->
       <div class="user-info">
@@ -40,7 +40,6 @@
             {% endraw %} <div class="user-name">{{ current_user.username }} </div> {% raw %}
             <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating() track by $index"/></div>
             <div class="user-quote">" {{ userDetails.quote }} "</div>
-            <div class="user-follow"><button class="follow-button">Follow</button></div>
           </div>
       </div>
       <!-- Profile-Tabs, allow navigation in profile.-->

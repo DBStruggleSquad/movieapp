@@ -1,114 +1,18 @@
 app.controller('home', ['$scope', '$http', function($scope,$http) {
 	
-  $scope.Activities = [{
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'katrific',
-    type: 'list',
-    pubdate: new Date('2015', '09', '22'),
-  }]; 
-
   //------------------
   //	FAN CLUB
   //------------------
   $scope.fanclubActivities = $http.get('/myfanclubactivity').success(function(data){
 	  $scope.fanclubActivities = data.data;
+  });
+	  
+
+  $scope.eventActivities = $http.get('/myeventactivity').success(function(data){
+	  $scope.eventActivities = data.data;
   })
 	  
-	  /*
-	  [{
-    publisher: 'Pixar Lovers',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }, {
-    publisher: 'Pixar Lovers Unite',
-    type: 'post',
-    pubdate: new Date('2015', '09', '22'),
-  }];  */ 
-
-  $scope.eventActivities = [{
+	  /*[{
     publisher: 'katrific',
     eventName: 'event-1',
     type: 'attending',
@@ -118,7 +22,7 @@ app.controller('home', ['$scope', '$http', function($scope,$http) {
     type: 'attending',
     eventName: 'event-2',
     pubdate: new Date('2015', '09', '22'),
-  }];     
+  }];     */
 
 $scope.tabs = [{
             title: 'Users',

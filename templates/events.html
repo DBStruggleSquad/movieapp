@@ -43,19 +43,27 @@
           <div class="search-button"></div>
         </div>        
       </div>
+      <!-- 	-----------------------  -->
+      <!-- 		ADD EVENT CODE		 -->
+      <!-- 	-----------------------  -->
         <modal title="Create a New Event" visible="showModal">
             <form role="form">
                 <div class="form-group">
                     <label for="list">Event Name:</label>
-                    <input type="text" class="form-control" id="event-name" placeholder="Event name..." />
+                    <input ng-model="data2send.eventName" type="text" class="form-control" id="event-name" placeholder="Event name..." />
+                    <select ng-model="data2send.eventType">
+	              		<option value="Premier">Premier</option>
+	              		<option value="Discussion">Discussion</option>
+	              		<option value="Movie Showing">Movie Showing</option>
+            		</select> <br>
                     <label for="list">Event Description:</label>
-                    <input type="text" class="form-control" id="event-description" placeholder="Event description..." />
+                    <input ng-model="data2send.description" type="text" class="form-control" id="event-description" placeholder="Event description..." />
                     <label for="list">Event Location:</label>
-                    <input type="text" class="form-control" id="event-location" placeholder="Event location..." />
+                    <input ng-model="data2send.eventLocation"  type="text" class="form-control" id="event-location" placeholder="Event location..." />
                     <label for="list">Event Time:</label>
-                    <input type="text" class="form-control" id="event-time" placeholder="Event time..." />                                                        
+                    <input ng-model="data2send.eventTime" type="text" class="form-control" id="event-time" placeholder="Event time..." />                                                        
                 </div>
-                <button type="submit" class="btn btn-default">Create</button>
+                <button ng-click="createFanClub();toggleModal()" type="submit" class="btn btn-default">Create</button>
             </form>
         </modal>
 

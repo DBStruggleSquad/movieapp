@@ -1,43 +1,29 @@
 app.controller('profile', ['$scope', '$http', function($scope,$http) {
 	
     $scope.userDetails = {
-        name: 'katrific',
-        rating: 5,
-        quote: "i am groot.",
-        activity: [
-          {
-            type: 'list',
-            pubdate: new Date('2015', '09', '22'),
-          },
-          {
-            type: 'post',
-            pubdate: new Date('2015', '09', '19'),
-          },
-          {
-            type: 'joined',
-            pubdate: new Date('2015', '09', '15'),
-          }
-        ]
+        name: '',
+        rating: 0,
+        quote: ""
       };
 
-    $scope.activities = $http.get('/userprofileactivity').success(function(data){
+    $scope.activities = $http.get('/myuserprofileactivity').success(function(data){
         $scope.activities = data.activity;
     }).error(function(data, status){
         window.alert(data + '\n' + status);
     });
 
-    $scope.userLists = $http.get('/userlists').success(function(data){
+    $scope.userLists = $http.get('/myuserlists').success(function(data){
         $scope.userLists = data.lists;
     });
 
-    $scope.userRank = $http.get('/userank').success(function(data){
+    $scope.userRank = $http.get('/myuserank').success(function(data){
         $scope.userDetails.rating = data["rank"];
         $scope.userDetails.name = data["user"];
         $scope.userDetails.quote = data["quote"];
         $scope.userDetails.picture = data["picture"];
     });
 
-      $scope.userReview = $http.get('/userreviews').success(function(data){
+      $scope.userReview = $http.get('/myuserreviews').success(function(data){
           $scope.userReview = data.reviews;
       }).error(function(data, status){
           window.alert('userreview' + data + status);
@@ -74,7 +60,5 @@ $scope.tabs = [{
     $scope.isActiveTab = function(tabUrl) {
         return tabUrl == $scope.currentTab;
     };
-    $http.get('movie.json').success(function(data) {
-        $scope.movies = data;});
 
 }]);

@@ -1,0 +1,34 @@
+select * from events_inf;
+
+select * from attends;
+
+select * from events_inf where lower(events_inf.Event_name) like lower("%torin%");
+
+
+select attends.Event_name from attends where attends.username = "Antoine Cotto"
+union
+select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto";
+
+
+/* eventos que cree */
+select events_inf.username, 'creates' as 'type', events_inf.Event_name , Date(events_inf.date_modified) as 'date', users.Image_link 
+from events_inf left join users on events_inf.username = users.username
+where events_inf.Event_name in (
+select attends.Event_name from attends where attends.username = "Antoine Cotto"
+union
+select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto"
+)
+
+union
+
+
+select attends.username, 'is now attending' as 'type', attends.Event_name, Date(attends.date_modified) as 'date', users.Image_link 
+from attends left join users on attends.username = users.username
+where attends.Event_name in (
+select attends.Event_name from attends where attends.username = "Antoine Cotto"
+union
+select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto"
+
+);
+
+
