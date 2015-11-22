@@ -56,8 +56,26 @@
           		<a ng-controller="userNav" ng-click="goToAnothersUserProfile(member.name)"><img src="{{ member.img }}" ng-controller="userNav" ng-click="goToAnothersUserProfile(member.name)"/><br>{{ member.name }}</a>
         	</div>
                 
-      	</div>           
+      	</div>    
 
+    <!-- ------------------- -->
+    <!--  POSTS SECTION  -->
+    <!-- ------------------- -->
+        <div class="fanclub-posts">
+          <h4>Posts</h4>
+          <div class="fanclub-posts-content" ng-repeat="member in fanclub.members">
+              <div class="activity-post" ng-repeat="activity in userActivities">
+                  <div class="profile-picture-thmb">
+                    <img src="static/img/profile-picture-placeholder.svg"/>
+                  </div>
+                   <div class="activity-post-content">
+                    <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.name)">{{ activity.name }}</a> created a new {{ activity.type }}
+                      <br>{{ activity.pubdate | date }}
+                      <br><a ng-show="activity.type == 'List'" ng-controller="listNav" ng-click="goToList(activity.title)">{{activity.title}}</a><div ng-show="activity.type != 'List'">{{activity.title}}</div>
+                </div>
+              </div>
+          </div>                
+        </div>                 
     </div>
 
     <!-- Navigation, contains buttons that navigate user through app.-->
