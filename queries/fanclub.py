@@ -5,7 +5,6 @@ Created on Nov 20, 2015
 '''
 from flask.json import jsonify
 from flask import render_template, request
-from flask_login import current_user
 
 def addFanClubRoutes(app, mysql, genres, current_user):
     @app.route('/fanclub-page')
