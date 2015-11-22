@@ -23,8 +23,8 @@ select follows_fan_club.Club_name, fan_club.Role, fan_club.username from follows
 where follows_fan_club.username = "Jennifer Lawrence";
 
 
-select Club_name, Role, username from fan_club not in ( 
-select Club_name, Role, username from fan_club where fan_club.username = "Jennifer Lawrence"
+select Club_name, Role, username from fan_club where (Club_name, Role, username) not in ( 
+select Club_name, Role, username from fan_club where fan_club.username = "Antoine Cotto"
 union
 select follows_fan_club.Club_name, fan_club.Role, fan_club.username from follows_fan_club left join fan_club on fan_club.Club_name = follows_fan_club.Club_name 
-where follows_fan_club.username = "Jennifer Lawrence");
+where follows_fan_club.username = "Antoine Cotto");

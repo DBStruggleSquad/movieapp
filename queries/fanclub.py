@@ -4,7 +4,7 @@ Created on Nov 20, 2015
 @author: galarwen
 '''
 from flask.json import jsonify
-from flask import render_template
+from flask import render_template, request
 from flask_login import current_user
 
 def addFanClubRoutes(app, mysql, genres, current_user):
@@ -111,4 +111,26 @@ def addFanClubRoutes(app, mysql, genres, current_user):
             data.append({'name': str(row[0]), 'type': str(row[1]), 'creator': str(row[2])})
         myfanclubs['data'] = data
         return jsonify(myfanclubs)
+    
+    #{'clubname': "", 'user': "", 'rol': "", 'descript': ""}
+    @app.route('/addfanclub', methods=['POST'])
+    def add_fan_club():
+        print "Fanclub is being added"
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('createFanclub', (data['clubname'], current_user.username, data['rol'], data['description'] ))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "fanclub added"
+        return jsonify({})
+        
+
+        
+        
+        
+        
+        
     

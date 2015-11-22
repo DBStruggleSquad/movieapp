@@ -10,15 +10,22 @@ app.controller('myLists', ['$scope', '$http', function($scope, $http) {
   	$scope.showModal = !$scope.showModal;
   }
 
-  $scope.data2send = {username: "",  title: "", category: ""};
-  $scope.addlist2user = function(Dausername){
-    $scope.data2send.username = Dausername;
-    window.alert(Dausername + "  " +$scope.data2send.title + "  "+$scope.data2send.category);
-    $http.post('/addlist2user', $scope.data2send).success(function(data){
-      window.alert($scope.data2send.listName + "   try  ")
-    }).error(function(data){
-      window.alert("Worst error code ever");
-    });
+  //----------------------------
+  //	CODIGO PARA CREATE NEW
+  //----------------------------
+  $scope.data2send = {title: "", category: ""};
+  $scope.addlist2user = function(){
+	  if($scope.data2send.title && $scope.data2send.category ){
+		  $http.post('/addlist2user', $scope.data2send).success(function(data){
+			  location.reload(true)
+		  }).error(function(data){
+			  window.alert("Worst error code ever");
+		  });
+	  }else{
+		  window.alert("Title and category have to be indicated");
+	  }
+	  
+	  
     
   };
 

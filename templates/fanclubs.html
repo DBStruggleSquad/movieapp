@@ -62,24 +62,25 @@
           </li>
         </ul>
       </div>      
-
+	
+	<!-- CREATE FAN CLUB -->
       <modal title="Create a New Fan Club" visible="showModal">
-        <form role="form">
-          <div class="form-group">
-            <label for="list">Fan Club Name</label>
-            <input type="text" class="form-control" id="fan-club-name" placeholder="Fan Club name..." />
-            <br>
-            <select>
-              <option value="Movies">Movies</option>
-              <option value="Actors">Actors</option>
-              <option value="Directors">Directors</option>
-              <option value="General">General</option>
-            </select>
-            <br>
-            <br>
-            <input type="text" class="form-control" id="fan-club-desc" placeholder="Fan Club description..." />
-          </div>
-          <button type="submit" class="btn btn-default">Create</button>
+ 		<form role="form">
+        	<div class="form-group">
+            	<label for="list">Fan Club Name</label>
+            	<input ng-model="data2send.clubname" type="text" class="form-control" id="fan-club-name" placeholder="Fan Club name..." />
+            	<br>
+            	<select ng-model="data2send.rol">
+              		<option value="Movies">Movies</option>
+              		<option value="Actors">Actors</option>
+              		<option value="Directors">Directors</option>
+              		<option value="General">General</option>
+            	</select>
+            	<br>
+            	<br>
+            	<input ng-model="data2send.description" type="text" class="form-control" id="fan-club-desc" placeholder="Fan Club description..." />
+          	</div>
+  			<button type="submit" ng-click="createFanClub();toggleModal()"class="btn btn-default">Create</button>
         </form>
       </modal>
     </div>

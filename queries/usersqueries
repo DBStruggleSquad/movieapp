@@ -1,0 +1,8 @@
+update users set Image_link = "static/img/profile-picture-placeholder.svg" where username != "Antoine Cotto";
+
+select * from users;
+
+select * from account;
+
+select * from account_belong_user;
+
