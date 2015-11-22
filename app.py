@@ -363,6 +363,28 @@ def follow_user():
     return jsonify({})
 
 
+@app.route('/followfanclub', methods=['POST'])
+def follow_fanclub():
+    data = request.get_json()
+    print data
+    username = "'"+ data['user'] +"'"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.execute("select email from account_belong_user where username = "+username)
+    hi = cur.fetchall()
+    cur.callproc('followFanClub', (current_user.username, data['title']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    dude = {'user': data['user'], 'email': "", 'Club': data['title'] }
+    print "fanclub followed"
+    for i in hi:
+        dude['email'] = str(i[0])
+
+    fan_follower_notification(dude, current_user.username);
+    return jsonify({})
+
+
 def send_email(subject, sender, recipients, text_body, html_body):
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
@@ -378,7 +400,14 @@ def follower_notification(followed, follower):
                render_template("follower_email.html", 
                                user=followed['user'], follower=follower))
 
+def fan_follower_notification(followed, follower):
+    send_email(follower + "is now following your Fanclub!",
+               "filmshacktest123@gmail.com",
+               [str(followed['email'])],
+               render_template("fanclub_follower_email.txt", 
+                               user=followed['user'], follower=follower, fan=followed['Club']),
+               render_template("fanclub_follower_email.html", 
+                               user=followed['user'], follower=follower, fan=followed['Club']))
 
-    
 if __name__ == '__main__':
     app.run()

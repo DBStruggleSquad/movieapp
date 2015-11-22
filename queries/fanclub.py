@@ -138,6 +138,7 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         print "fanclub added"
         return jsonify({})
         
+    
 
         
         

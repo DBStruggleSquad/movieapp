@@ -6,9 +6,10 @@ app.controller('fanclub', ['$scope', '$http', function($scope, $http) {
 		window.alert("There was an error extracting the information for the fanclub: " + $scope.fanClubName);
 	});
 	
-	$scope.data2sendfollow = {title: ""};
+	$scope.data2sendfollow = {title: "", user: ""};
   $scope.addfollowfanclub = function(fanClubN){ 
     $scope.data2sendfollow.title = fanClubN;
+    $scope.data2sendfollow.user = $scope.fanclub.director;
     $http.post('/followfanclub', $scope.data2sendfollow).success(function(data){
       window.alert("worked")
     }).error(function(data){
