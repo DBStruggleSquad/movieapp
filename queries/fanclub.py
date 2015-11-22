@@ -5,7 +5,7 @@ Created on Nov 20, 2015
 '''
 from flask.json import jsonify
 from flask import render_template
-from pyodbc import Row
+from flask_login import current_user
 
 def addFanClubRoutes(app, mysql, genres, current_user):
     @app.route('/fanclub-page')
@@ -72,5 +72,43 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         fanclubactivity['data'] = data    
         return jsonify(fanclubactivity)
     
-    
+    @app.route('/myfanclubs')
+    def my_fanclubs():
+        print "My fanclubs has being asked"
+        myfanclubs = {'data': []}
+        query = """
+            select Club_name, Role, username from fan_club where fan_club.username = '""" + current_user.username + "'" + """
+            union
+            select follows_fan_club.Club_name, fan_club.Role, fan_club.username from follows_fan_club left join fan_club on fan_club.Club_name = follows_fan_club.Club_name 
+            where follows_fan_club.username = '""" + current_user.username + "';" 
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        resultQuery = cur.fetchall()
+        cur.close()
+        data = []
+        for row in resultQuery:
+            data.append({'name': str(row[0]), 'type': str(row[1]), 'creator': str(row[2])})
+        myfanclubs['data'] = data
+        return jsonify(myfanclubs)
+        
+    @app.route('/mypublicfanclubs')
+    def my_public_fan_club():
+        query= """
+            select Club_name, Role, username from fan_club where (Club_name, Role, username) not in ( 
+            select Club_name, Role, username from fan_club where fan_club.username = '""" + current_user.username + "'" + """
+            union
+            select follows_fan_club.Club_name, fan_club.Role, fan_club.username from follows_fan_club left join fan_club on fan_club.Club_name = follows_fan_club.Club_name 
+            where follows_fan_club.username = '""" + current_user.username + "');"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        resultQuery = cur.fetchall()
+        cur.close()
+        myfanclubs = {'data': []}
+        data = []
+        for row in resultQuery:
+            data.append({'name': str(row[0]), 'type': str(row[1]), 'creator': str(row[2])})
+        myfanclubs['data'] = data
+        return jsonify(myfanclubs)
     
