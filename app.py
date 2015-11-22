@@ -10,8 +10,10 @@ from flask.ext.mysql import MySQL
 from flask.json import jsonify
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.mail import Mail, Message
 
-global app, mysql
+
+global app, mysql, mail
 
 app = Flask(__name__)
 
@@ -24,12 +26,23 @@ app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
+app.config.update(dict(
+    MAIL_SERVER = 'smtp.googlemail.com',
+    MAIL_PORT = 465,
+    MAIL_USE_TLS = False,
+    MAIL_USE_SSL = True,
+    MAIL_USERNAME = "filmshacktest123@gmail.com",
+    MAIL_PASSWORD = "1qaz3edc5tgb"))
+# email server
+
+
 
 
 
 global genres
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
+mail = Mail(app)
 mysql.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -335,7 +348,35 @@ class User(UserMixin):
 def user_loader(id):
     return User.get(id)
 
+@app.route('/followuser', methods=['POST'])
+def follow_user():
+    data = request.get_json()
+    print data
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('userFollows', (current_user.username, data['user']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "user followed"
+    follower_notification(data, current_user.username);
+    return jsonify({})
 
+
+def send_email(subject, sender, recipients, text_body, html_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    mail.send(msg)
+
+def follower_notification(followed, follower):
+    send_email(follower + "is now following you!",
+               "filmshacktest123@gmail.com",
+               [str(followed['email'])],
+               render_template("follower_email.txt", 
+                               user=followed['user'], follower=follower),
+               render_template("follower_email.html", 
+                               user=followed['user'], follower=follower))
 
 
     
