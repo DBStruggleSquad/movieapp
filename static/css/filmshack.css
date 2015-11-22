@@ -139,7 +139,7 @@ form .progress {
 }
 
 .location-img img {
-	width: 20em;
+	width: 15em;
 	height: 20em;
 }
 
@@ -314,6 +314,8 @@ form .progress {
 .profile-picture-thmb img {
 	width: 80px;
 	height: 80px;
+	border-radius: 50%;
+	overflow: hidden;		
 }
 
 .movie-list {
@@ -664,10 +666,22 @@ form .progress {
 	margin-top: 15px;
 }
 
-.form-options button:hover {
-	background-color: #FF8080;
+.form-options button:hover, .form-options button:visited, .form-options button:focus {
+	background-color: #581010;
 	border-color: #581010;	
 }
+
+.location-details button, .location-details button:active, .location-details button.active {
+	background-color: #751515;
+	border-color: #581010;	
+	margin-top: 15px;
+}
+
+.location-details button:hover, .location-details button:visited, .location-details button:focus {
+	background-color: #581010;
+	border-color: #581010;	
+}
+
 
 /*			*/
 /*	Search	*/
