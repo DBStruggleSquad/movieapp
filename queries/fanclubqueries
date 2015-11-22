@@ -7,19 +7,24 @@ insert into text_fan_club (title, username, Club_name, Text_post) values ('Just 
 select text_fan_club.Title, text_fan_club.username, text_fan_club.Club_name, text_fan_club.Text_post, 'Text', DATE(text_fan_club.date_modified) d, users.Image_link
 from text_fan_club left join users on users.username = text_fan_club.username, fan_club 
 where fan_club.Club_name = text_fan_club.Club_name and fan_club.username = "Jennifer Lawrence"
-
-
 union
-
-/*comentarios que han hecho en fanclub que estas follow*/
 select text_fan_club.Title, text_fan_club.username, text_fan_club.Club_name, text_fan_club.Text_post, 'Text', DATE(text_fan_club.date_modified) d, users.Image_link
 from text_fan_club left join users on users.username = text_fan_club.username, follows_fan_club
-where follows_fan_club.Club_name = text_fan_club.Club_name and follows_fan_club.username = "Jennifer Lawrence";
-/*
+where follows_fan_club.Club_name = text_fan_club.Club_name and follows_fan_club.username = "Jennifer Lawrence"
 union
-*/
-select '', b.username, b.Club_name, 'Is now following', 'User', DATE(b.date_modified) d, users.Image_link  from follows_fan_club as a, follows_fan_club as b, users where a.username = "Antoine Cotto" and a.Club_name = b.Club_name and users.username =  b.username
-/*
+select '', b.username, b.Club_name, 'Is now following', 'User', DATE(b.date_modified) as d, users.Image_link  from follows_fan_club as a, follows_fan_club as b, users where a.username = "Jennifer Lawrence" and a.Club_name = b.Club_name and users.username =  b.username
 union
-select '', b.username, b.Club_name, 'Is now following', 'User', DATE(b.date_modified) d, users.Image_link  from follows_fan_club as a, follows_fan_club as b, users, fan_club where fan_club.Club_name = b.Club_name and users.username =  "Antoine Cotto" and fan_club.username = "Antoine Cotto" order by d desc;
-*/*
+select '', b.username, b.Club_name, 'Is now following', 'User', DATE(b.date_modified) d, users.Image_link  from follows_fan_club as a, follows_fan_club as b, users, fan_club where fan_club.Club_name = b.Club_name and users.username =  "Jennifer Lawrence" and fan_club.username = "Jennifer Lawrence" order by d desc;
+
+/*para extraer todos los fanclubs que la persona sigue y creo*/
+select Club_name, Role, username from fan_club where fan_club.username = "Jennifer Lawrence"
+union
+select follows_fan_club.Club_name, fan_club.Role, fan_club.username from follows_fan_club left join fan_club on fan_club.Club_name = follows_fan_club.Club_name 
+where follows_fan_club.username = "Jennifer Lawrence";
+
+
+select Club_name, Role, username from fan_club where (Club_name, Role, username) not in ( 
+select Club_name, Role, username from fan_club where fan_club.username = "Antoine Cotto"
+union
+select follows_fan_club.Club_name, fan_club.Role, fan_club.username from follows_fan_club left join fan_club on fan_club.Club_name = follows_fan_club.Club_name 
+where follows_fan_club.username = "Antoine Cotto");

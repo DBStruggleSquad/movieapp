@@ -54,7 +54,6 @@ select * from follows_fan_club where follows_fan_club.username = "Antoine Cotto"
 
 select * from fan_club where fan_club.username = "Antoine Cotto";
 
-select * from fan_club where fan_club.Club_name = ;
 
 
 select * from text_fan_club join fan_club on fan_club.Club_name = text_fan_club.Club_nam;

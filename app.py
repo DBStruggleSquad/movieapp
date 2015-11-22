@@ -4,15 +4,10 @@ Created on Sep 12, 2015
 @author: Glory, Antoine
 '''
 
-from flask import Flask, flash, redirect, session, url_for, request, g, request, get_flashed_messages
+from flask import Flask, flash, redirect, session, url_for,  request, get_flashed_messages
 from flask import render_template
 from flask.ext.mysql import MySQL
-import urlparse 
-import sys, os
-from flask.globals import request
-import logging
 from flask.json import jsonify
-import json
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -86,10 +81,9 @@ def user_lists():
         data = {'mylist':[]}
         
         #query
-        username = "'Antoine Cotto'"
         conn = mysql.connect()
         cur = conn.cursor()
-        query = "select lists.List_name from lists where lists.username = " + username
+        query = "select lists.List_name from lists where lists.username = '" + current_user.username + "'"
         cur.execute(query)
         result = cur.fetchall()
         
@@ -214,8 +208,7 @@ def userank():
 @app.route('/userlists')
 def userlists():    
     #query
-    print "hi\n\n\n"
-    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link, DATE(lists.date_modified) d from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title"
+    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link, DATE(lists.date_modified) d from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.username = '" + current_user.username + "'"
     conn = mysql.connect()
     cur = conn.cursor()
     cur.execute(query)
@@ -223,20 +216,18 @@ def userlists():
     conn.close()
     list_info = {}
     wut= []
-    print result
-    print "hope this works\n"
     for i in result:
         if not (str(i[0]) in list_info):
-               list_info[str(i[0])]= {'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}
+            list_info[str(i[0])]= {'List_name': str(i[0]), 'year': str(i[6]), 'movies':[]}
         print str(i[0]) + "\n"
         #print list_info[str(i[0])][str(i[6])]
         print "\n"
+        
     for i in result:
         list_info[str(i[0])]['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
     for x in list_info.keys():
         wut.append(list_info[x])
     print wut
-    print "\n\n"
 
 
     return jsonify({"lists":wut})
@@ -249,10 +240,9 @@ def userlists():
 def user_list_names():
     data = {'lists' : []}
     #query
-    username = "'Antoine Cotto'"
     conn = mysql.connect()
     cur = conn.cursor()
-    query = "select lists.List_name from lists where lists.username = " + username
+    query = "select lists.List_name from lists where lists.username = '" + current_user.username + "'"
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
@@ -311,17 +301,15 @@ def listinfo_nonmovies(listName):
 @app.route('/addlist2user', methods=['POST'])
 def add_list2user():
     data = request.get_json()
-    print data['username'] + "  " + data['title'] + "   " + data['category'] 
-    print "its hereeee \n"
     conn = mysql.connect()
     cur = conn.cursor()
-    cur.callproc('ListExists', (data['title'], data['username'], data['category'] ))
+    cur.callproc('ListExists', (data['title'], current_user.username, data['category'] ))
     #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
     conn.commit()
     conn.close()
-    print "salio"
     
     return jsonify({})
+
 #{movieTitle: "",  title: "", review: "", rating: 0};
 @app.route('/addReview', methods=['POST'])
 def add_Review():
