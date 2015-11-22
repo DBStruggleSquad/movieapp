@@ -35,7 +35,7 @@
     <div class="enclosure" ng-controller="profile">
       <!-- User-Info, offers user details. -->
       <div class="user-info">
-        <div class="profile-picture"><img src="static/img/profile-picture-placeholder.svg"/></div>
+        <div class="profile-picture"><img src="{{userDetails.picture}}"/></div>
           <div class="user-details">
             {% endraw %} <div class="user-name">{{ current_user.username }} </div> {% raw %}
             <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating() track by $index"/></div>
