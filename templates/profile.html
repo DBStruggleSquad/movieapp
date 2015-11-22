@@ -58,8 +58,11 @@
     <!-- Activity -->
     <script type="text/ng-template" id="activity.tpl.html">
         <div class="new-post">
-          <textarea placeholder="Write something to your followers..."></textarea>
-          <button class="btn btn-primary ng-scope">Post</button>
+          <input placeholder="Post Title"></input>
+          <div>
+            <textarea placeholder="Write something to your followers..."></textarea>
+            <button class="btn btn-primary ng-scope">Post</button>
+          </div>
         </div>
         <div class="activity-post" ng-repeat="activity in activities" ng-include="'static/directives/activityPost.html'"></div>
     </script>
