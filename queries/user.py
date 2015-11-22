@@ -152,3 +152,17 @@ def addUserRoutes(app, mysql, genres, current_user):
     
     
         return jsonify({"lists":wut})
+
+
+    @app.route('/followuser', methods=['POST'])
+    def follow_user():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('userFollows', (current_user.username, data['user']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "user followed"
+        return jsonify({})

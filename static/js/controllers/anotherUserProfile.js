@@ -74,5 +74,15 @@ $scope.tabs = [{
         return tabUrl == $scope.currentTab;
     };
 
+    $scope.data2sendfollow = {user: ""};
+  $scope.addfollowuser = function(user){ 
+    $scope.data2sendfollow.user = user;
+    $http.post('/followuser', $scope.data2sendfollow).success(function(data){
+      window.alert("worked")
+    }).error(function(data){
+      window.alert("hola followuser");
+    });
+  };
+
 
 }]);

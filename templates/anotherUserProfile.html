@@ -40,7 +40,7 @@
             <div class="user-name">{{userName}} </div>
             <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating() track by $index"/></div>
             <div class="user-quote">" {{ userDetails.quote }} "</div>
-            <div class="user-follow"><button class="follow-button">Follow</button></div>
+            <div class="user-follow"><button ng-click="addfollowuser(userName)" class="follow-button">Follow</button></div>
           </div>
       </div>
       <!-- Profile-Tabs, allow navigation in profile.-->
