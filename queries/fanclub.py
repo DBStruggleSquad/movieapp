@@ -128,6 +128,19 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         return jsonify({})
         
 
+    @app.route('/followfanclub', methods=['POST'])
+    def follow_fanclub():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('followFanClub', (current_user.username, data['title']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "fanclub followed"
+        return jsonify({})
+
         
         
         

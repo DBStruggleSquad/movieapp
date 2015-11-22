@@ -143,13 +143,13 @@ def newsfeed_activity():
     username = "'"+ current_user.username +"'"
     conn = mysql.connect()
     cur = conn.cursor()
-    query = "select username, List_name, 'List', DATE(Lists.date_modified) d from Lists, follows where follows.followed_username =" + username +" and follows.following_username = Lists.username union select username, Title, 'Review', DATE(Reviews.date_modified) d from Reviews, follows where follows.followed_username = " + username +" and follows.following_username = Reviews.username union select username, Title, 'Text post', DATE(text_user.date_modified) d from text_user, follows where follows.followed_username =" + username + " and follows.following_username = text_user.username order by d desc"
+    query = "select Lists.username, List_name, 'List', DATE(Lists.date_modified) d, users.Image_link  from Lists, follows, users where follows.followed_username =" + username +" and follows.following_username = Lists.username and follows.following_username = users.username union select Reviews.username, Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link from Reviews, follows, users where follows.followed_username = " + username +" and follows.following_username = Reviews.username and follows.following_username = users.username union select text_user.username, Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link from text_user, follows, users where follows.followed_username =" + username + " and follows.following_username = text_user.username and follows.following_username = users.username order by d desc"
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
     print result
     for i in result:
-        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1])})
+        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1]), 'image' : str(i[4])})
 
     return jsonify(data)
 
@@ -305,7 +305,6 @@ class User(UserMixin):
         users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2]),'rank': str(i[3]),'quote': str(i[4]),'image': str(i[5])})
  
     def __init__(self, id):
-        print "reached init\n\n"
         if not any(u['email'] == id for u in self.users):
             print "not found"
             raise UserNotFoundError()
@@ -327,7 +326,6 @@ class User(UserMixin):
         '''Return user instance of id, return None if not exist'''
         try:
             user = self_class(id)
-            print "exited init \n\n"
             return user
         except UserNotFoundError:
             return None
