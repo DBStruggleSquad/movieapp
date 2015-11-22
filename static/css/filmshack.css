@@ -272,6 +272,7 @@ form .progress {
 	margin-top: 15px;
 	display: flex;
 	flex-direction: row;
+	padding: 0.5em 0em 0.5em 0em;
 }
 
 .review-post {
@@ -337,7 +338,7 @@ form .progress {
 .post-content, .search-content-wrapper, .activity-post-content, .movie-post-content {
 	flex-grow: 1;
 	overflow: hidden;
-	margin-left: 5px;
+	margin-left: 0.9em;
 }
 
 .review-post-content {
