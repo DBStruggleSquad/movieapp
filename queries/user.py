@@ -213,7 +213,7 @@ def addUserRoutes(app, mysql, genres, current_user):
         print data
         conn = mysql.connect()
         cur = conn.cursor()
-        cur.callproc('changeUsername', (current_user.username, data['user']))
+        cur.callproc('changeUsername', (current_user.username, data['gvar']))
         #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
         conn.commit()
         conn.close()
@@ -226,7 +226,7 @@ def addUserRoutes(app, mysql, genres, current_user):
         print data
         conn = mysql.connect()
         cur = conn.cursor()
-        cur.callproc('changeQuote', (data['quote'],current_user.username))
+        cur.callproc('changeQuote', (data['gvar'],current_user.username))
         #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
         conn.commit()
         conn.close()
@@ -240,7 +240,7 @@ def addUserRoutes(app, mysql, genres, current_user):
         print data
         conn = mysql.connect()
         cur = conn.cursor()
-        cur.callproc('changeEmail', (current_user.id, data['email']))
+        cur.callproc('changeEmail', (current_user.id, data['gvar']))
         #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
         conn.commit()
         conn.close()
