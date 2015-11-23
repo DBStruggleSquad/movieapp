@@ -17,6 +17,9 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', function($scope, Upl
       { 
         type: 'Password',
         current: '********', 
+      },
+      {
+        type: 'Log Out'
       }
     ]
   }
@@ -26,7 +29,11 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', function($scope, Upl
       { 
         type: 'Profile Picture',
         current: 'static/img/profile-picture-placeholder.svg',
-      }
+      },
+      {
+        type: 'Quote',
+        current: 'i am groot',
+      },
     ]
   }
 
