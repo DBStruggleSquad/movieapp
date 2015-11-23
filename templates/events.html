@@ -67,12 +67,14 @@
             </form>
         </modal>
 
-
+      <!-- 	-----------------------  -->
+      <!-- 		MY EVENT CODE		 -->
+      <!-- 	-----------------------  -->
       <div class="my-events">
         <h4>My Events</h4>
         <ul>
           <li ng-repeat="event in myEvents"  ng-class="{active:service.active}">
-            <a ng-controller="eventsNav" ng-click="goToEvent(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToUserProfile(event.host)"> {{ event.host }} </a>
+            <a ng-controller="eventsNav" ng-click="goToEvent(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a>
           </li>
         </ul>
       </div>
@@ -81,7 +83,7 @@
         <h4>Public Events</h4>
         <ul>
           <li ng-repeat="event in publicEvents"  ng-click="goToEvent(event.name)" ng-class="{active:service.active}">
-            <a ng-controller="eventsNav" ng-click="goToEvent(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToUserProfile(event.host)"> {{ event.host }} </a>
+            <a ng-controller="eventsNav" ng-click="goToEvent(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a>
           </li>
         </ul>
       </div>

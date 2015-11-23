@@ -53,13 +53,49 @@ def addEventsRoutes(app, mysql, genres, current_user):
         eventactivity['data'] = data
         return jsonify(eventactivity)
 
-    @app.route('/getpublicevent')
-    def get_public_event():
-        pass
+    @app.route('/mypublicevent')
+    def my_public_event():
+        print "My events has being asked"
+        publicfanclubs = {'data': []}
+        query = """
+                select events_inf.Event_name, events_inf.date_modified, events_inf.username 
+                from events_inf 
+                where events_inf.Event_name not in (
+                select attends.Event_name from attends where attends.username = '""" + current_user.username + "'" + """
+                union
+                select events_inf.Event_name from events_inf where events_inf.username = '""" + current_user.username + "');"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        resultQuery = cur.fetchall()
+        cur.close()
+        data = []
+        for row in resultQuery:
+            data.append({'name': str(row[0]), 'date': str(row[1]), 'host': str(row[2])})
+        publicfanclubs['data'] = data
+        return jsonify(publicfanclubs)
     
-    @app.route('/getmyevents')
-    def get_my_events():
-        pass
+    @app.route('/myevents')
+    def my_my_events():
+        print "My events has being asked"
+        myfanclubs = {'data': []}
+        query = """
+                select events_inf.Event_name, events_inf.date_modified, events_inf.username 
+                from events_inf 
+                where events_inf.Event_name in (
+                select attends.Event_name from attends where attends.username = '""" + current_user.username + "'" + """
+                union
+                select events_inf.Event_name from events_inf where events_inf.username = '""" + current_user.username + "');"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        resultQuery = cur.fetchall()
+        cur.close()
+        data = []
+        for row in resultQuery:
+            data.append({'name': str(row[0]), 'date': str(row[1]), 'host': str(row[2])})
+        myfanclubs['data'] = data
+        return jsonify(myfanclubs)
     
     @app.route('/searchevents/<data2search>', methods=['GET'])
     def search_events(data2search):

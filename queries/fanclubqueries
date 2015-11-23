@@ -3,7 +3,7 @@ select * from text_fan_club where text_fan_club.Club_name = "Pixar Lovers";
 select * from follows_fan_club;
 insert into text_fan_club (title, username, Club_name, Text_post) values ('Just a try', 'Johnny Depp', 'Pixar Lovers', 'npi idea de que decir buy I am so cool');
 
-/*comentarios que han echo en fanclubs creados*/
+/*comentarios que han echo en fanclubs creados y/o seguidos*/
 select text_fan_club.Title, text_fan_club.username, text_fan_club.Club_name, text_fan_club.Text_post, 'Text', DATE(text_fan_club.date_modified) d, users.Image_link
 from text_fan_club left join users on users.username = text_fan_club.username, fan_club 
 where fan_club.Club_name = text_fan_club.Club_name and fan_club.username = "Jennifer Lawrence"
@@ -28,3 +28,5 @@ select Club_name, Role, username from fan_club where fan_club.username = "Antoin
 union
 select follows_fan_club.Club_name, fan_club.Role, fan_club.username from follows_fan_club left join fan_club on fan_club.Club_name = follows_fan_club.Club_name 
 where follows_fan_club.username = "Antoine Cotto");
+
+
