@@ -28,21 +28,21 @@
     <div class="header">
         <div class="location">Users</div>
         <div class="filmshack-logo">filmshack</div>
-        <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
+        <div class="logout"><img ng-src="/static/img/logout-icon.svg"></img></div>
     </div>  
 
     <div class="enclosure" ng-controller="users">
 
         <div class="user-search">
-          <input class="search-bar" ng-model="searchUsers" type="text" placeholder="Search..."/>
-          <div class="search-button"></div>
+          <input class="search-bar" type="text" placeholder="{{ searchTxtMessage }}" ng-model="txt2Search"/>
+          <div class="search-button" ng-click="searchUsers(txt2Search)"></div>
         </div>        
       
       <!--      FOLLOWING      -->
       <div class="my-users">
         <h4>Following</h4>
         <ul>
-          <li ng-repeat="user in userFollows | filter:searchUsers" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+          <li ng-repeat="user in userFollows | filter:txt2Search" ng-click="toggleActive(service)" ng-class="{active:service.active}">
             <a ng-click="goToAnothersUserProfile(user.username)"> {{ user.username }}</a>
           </li>
         </ul>

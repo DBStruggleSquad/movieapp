@@ -37,16 +37,16 @@
 
 
     <div class="enclosure" ng-controller="results">
-      <div class="search-title">Search results for "<i>{{movieSrchTxt}}</i>"</div>
-      <div class="activity-post" ng-repeat="movie in searchTester">
+      <div class="search-title">Search results for "<i>{{userSrchTxt}}</i>"</div>
+      <div class="activity-post" ng-repeat="user in userSearchTester">
           <div class="list-post-img">
-            <a><img ng-click="goToSelectedMovie({{ movie.name }})" ng-src="{{ movie.poster }}"/></a>
+            <a><img ng-controller="userNav" ng-click="goToAnothersUserProfile({{ user.username }})" ng-src="{{ user.img }}"/></a>
           </div>
           <div class="search-content-wrapper">
             <div class="search-content">
-              <div class="list-post-name-year"><a ng-href="/movie-profile?{{movie.name}}">{{ movie.name }}</a> ({{ movie.year }})</div>
-              <div class="list-post-genres">{{ movie.genre }}</div>
-              <div class="list-post-synopsis">{{movie.synopsis}}</div>
+              <div class="list-post-name-year"><a ng-href="/anotherUserProfile?{{user.username}}">{{ user.username }}</a></div>
+              <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating({{ user.rank }}) track by $index"/>{{ user.rank }}</div>
+              <div class="list-post-genres">" {{ user.quote }} "</div>
             </div>
           </div>
       </div>

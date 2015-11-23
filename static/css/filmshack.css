@@ -47,13 +47,13 @@ text-align: center;
 flex-grow: 0.8;
 }
 
-.notifications {
+.logout {
 flex-grow: 0.1;
 text-align: right;
 padding: 0.5em;
 }
 
-.notifications img {
+.logout img {
 	width: 30px;
 	height: 30px;
 }

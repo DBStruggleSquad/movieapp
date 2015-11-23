@@ -39,3 +39,33 @@ def addSearchesRouts(app, mysql, genres):
         
         #tempResult = {"data": result}
         return jsonify(tempResult)
+
+    @app.route('/search-results-users')
+    def search_results_users():
+        return render_template('search-results-users.html')        
+
+    #para hacer queries de search movies
+    @app.route('/searchUsers/<username>')
+    def search_users(username):
+        print "Haciendo search USER query"
+        query = "select * from users where lower(users.username)  Like lower('%" + username + "%')"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        qresult = cur.fetchall()
+        conn.close()
+        
+        result = []
+
+        for info in qresult:
+            print info
+            dicResult = {}
+            dicResult['username'] = str(info[0])
+            dicResult['rank'] = str(info[1])
+            dicResult['img'] = str(info[2])
+            dicResult['quote'] = str(info[4])
+            result.append(dicResult)
+            print "salio de aqui"
+        print result
+        tempResult = {"data": result}
+        return jsonify(tempResult)        
