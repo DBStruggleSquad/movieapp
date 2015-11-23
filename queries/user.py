@@ -88,11 +88,7 @@ def addUserRoutes(app, mysql, genres, current_user):
             data['reviews'].append({'Movie_title': str(i[2]),'Review_title': str(i[0]),'Rating': str(i[7]),'review': str(i[3])})
     
         return jsonify(data)
-    @app.route('/myuserank')
-    def myuserank():
-        data = {'rank' :current_user.rank, 'user': current_user.username, 'picture': current_user.image, 'quote': current_user.quote, 'email': current_user.id}
     
-        return jsonify(data)
     
     #fixed
     @app.route('/userank/<username>')
@@ -230,10 +226,6 @@ def addUserRoutes(app, mysql, genres, current_user):
         #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
         conn.commit()
         conn.close()
-        email = current_user.id
-        logout_user(current_user)
-        dude = User.get(email)
-        login_user(dude)
         print "Quote Changed"
         return jsonify({})
 

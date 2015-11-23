@@ -410,5 +410,12 @@ def fan_follower_notification(followed, follower):
                render_template("fanclub_follower_email.html", 
                                user=followed['user'], follower=follower, fan=followed['Club']))
 
+@app.route('/myuserank')
+    def myuserank():
+        dude = User.get(current_user.id)
+        data = {'rank' :dude.rank, 'user': dude.username, 'picture': dude.image, 'quote': dude.quote, 'email': dude.id}
+    
+        return jsonify(data)
+
 if __name__ == '__main__':
     app.run()
