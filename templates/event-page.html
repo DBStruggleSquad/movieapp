@@ -1,98 +1,112 @@
 <!doctype html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- ----------- -->
+	<!-- 	HEADE	 -->
+	<!-- ----------- -->
+  	<head>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
-    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
-    <link href="static/css/filmshack.css" rel="stylesheet" />
-    <link href='https://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>                
+	    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+	    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+	    <link href="static/css/filmshack.css" rel="stylesheet" />
+	    <link href='https://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>                
 
-    <script src="/static/bower_components/jquery/dist/jquery.js"></script>
-      <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-      <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
-      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    	<script src="/static/bower_components/jquery/dist/jquery.js"></script>
+      	<script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
+      	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+      	<script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+      	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
-    <!-- For image uploaded -->
-    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
-    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.min.js"></script>
-    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
-    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
-    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
-    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
-  </head>
-  <body ng-app="myApp">
+	    <!-- For image uploaded -->
+	    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+	    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.min.js"></script>
+	    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
+	    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
+	    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
+	    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
+	    
+	</head>
+	<!-- END OF HEADE -->
+	
+	<!-- ----------- -->
+	<!-- 	BODY	 -->
+	<!-- ----------- -->	
+  	<body ng-app="myApp">
 	{% raw %}
-    <!-- Header, indicates where the user is located. -->
-    <div class="header" ng-controller="event">
-        <div class="location">{{ event.name }}</div>
-        <div class="filmshack-logo">filmshack</div>
-        <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
-    </div>      
-    <div class="enclosure" ng-controller="event">
+    	<!-- Header, indicates where the user is located. -->
+	    <div class="header" ng-controller="event">
+	        <div class="location">Event: {{ event.name }}</div>
+	        <div class="filmshack-logo">filmshack</div>
+	        <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
+	    </div>      
+	    <div class="enclosure" ng-controller="event">
+			<!-- ------------------------- -->
+			<!-- 		EVENT INFO		   -->
+			<!-- ------------------------- -->
+	     	<div class="event-info">
+	     		<div class="event-name"><h4>{{ event.name }}</h4></div>
+		        <div class="event-type"><h5>{{ event.type }} Event</h5></div>
+		        <div class="event-host">Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)">{{ event.host }}</a></div>
+		        <div class="event-date">{{ event.date | date }}</div>
+		        <div class="event-location">{{ event.locale }}<br>{{ event.address }}</div>
+	        	<div class="event-options">
+	              	<button class="btn btn-primary ng-scope"><img ng-src="/static/img/plus-icon.svg"/> Attend</button>
+	              	<button class="btn btn-primary ng-scope" ng-click="toggleModal2()"><img ng-src="/static/img/share-icon.svg"/> Share</button>
+	              	<button class="btn btn-primary ng-scope" ng-click="toggleModal1()"><img ng-src="/static/img/invite-icon.svg"/> Invite</button>                   
+	       		</div>
+	      	</div>      
 
-      <div class="event-info">
-        <div class="event-type"><h4>{{ event.type }} Event</h4></div>
-        <div class="event-host">Hosted by <a href="#">{{ event.host }}</a></div>
-        <div class="event-date">{{ event.date | date }}</div>
-        <div class="event-location">{{ event.locale }}<br>{{ event.address }}</div>
-        <div class="event-options">
-              <button class="btn btn-primary ng-scope"><img ng-src="/static/img/plus-icon.svg"/> Attend</button>
-              <button class="btn btn-primary ng-scope" ng-click="toggleModal2()"><img ng-src="/static/img/share-icon.svg"/> Share</button>
-              <button class="btn btn-primary ng-scope" ng-click="toggleModal1()"><img ng-src="/static/img/invite-icon.svg"/> Invite</button>                   
-        </div>
-      </div>      
+	      	<div class="event-description">
+	       		<h4>Description</h4>
+	        	<div class="event-description-content">{{ event.description }}</div>
+	      	</div>           
+			<!-- ------------------------- -->
+			<!-- 	Miembros que atienden  -->
+			<!-- ------------------------- -->
+	      	<div class="event-attendants">
+	        	<h4>Attendants</h4>
+	        	<div class="event-attendant-content" ng-repeat="attendant in event.attendants">
+	          		<a ng-controller="userNav" ng-click="goToAnothersUserProfile(attendant.name)"><img ng-src="{{attendant.img}}"/><br>{{ attendant.name }}</a>
+	        	</div>        
+	      	</div>
 
-      <div class="event-description">
-        <h4>Description</h4>
-        <div class="event-description-content">{{ event.description }}</div>
-      </div>           
+	    	<modal title="Event was Shared!" visible="showModal2">
+		        <form role="form">
+		          	<button type="submit" class="btn btn-default" ng-click="toggleModal2()">OK</button>
+		        </form>
+	      	</modal>
+			<!-- ------------------------- -->
+			<!-- 	   INVITE FRIENDS  	   -->
+			<!-- ------------------------- -->	
+		    <modal title="Invite Friends" visible="showModal1">
+		        <form role="form">
+		          	<div class="form-group">
+		            	<label for="list">Choose friends</label>          
+		            	<br>
+		              	<div class="event-attendant-content" ng-repeat="friends in myFriends">
+		                	<input type="checkbox" ng-model="selectdeFriends[friends.name ]" ><img ng-src="{{ friends.img }}"/><br>{{ friends.name }}
+		              	</div>
+		            	<br>
+		            	<br>
+		          	</div>
+		          	<button type="submit" class="btn btn-default" ng-click="inviteFriends();toggleModal1()">Invite</button>
+		     	</form>
+			</modal>    
 
-      <div class="event-attendants">
-        <h4>Attendants</h4>
-        <div class="event-attendant-content" ng-repeat="attendant in event.attendants">
-          <a href="#"><img src="{{ attendant.img }}"/><br>{{ attendant.name }}</a>
-        </div>        
-      </div>
+    	</div>
 
-    <modal title="Event was Shared!" visible="showModal2">
-        <form role="form">
-          <button type="submit" class="btn btn-default" ng-click="toggleModal2()">OK</button>
-        </form>
-      </modal>
+	    <!-- Navigation, contains buttons that navigate user through app.-->
+	    <nav class="navigation" ng-include="'static/directives/navigation.html'"></nav>
 
-    <modal title="Invite Friends" visible="showModal1">
-        <form role="form">
-          <div class="form-group">
-            <label for="list">Choose friends</label>          
-            <br>
-              <div class="event-attendant-content" ng-repeat="attendant in event.attendants">
-                <input type="checkbox"><img src="{{ attendant.img }}"/><br>{{ attendant.name }}
-              </div>
-            <br>
-            <br>
-          </div>
-          <button type="submit" class="btn btn-default" ng-click="toggleModal1()">Invite</button>
-        </form>
-      </modal>    
-
-    </div>
-
-    <!-- Navigation, contains buttons that navigate user through app.-->
-    <nav class="navigation" ng-include="'static/directives/navigation.html'"></nav>
-
-    <!-- Modules -->
-    <script src="static/js/app.js"></script>
-
-    <!-- Controllers -->
-    <script src="static/js/controllers/eventController.js"></script>
-    <script src="/static/js/controllers/navigationActions.js"></script>
-
-    <!-- Directives -->
-    <script src="static/directives/activityPost.js"></script>
-    <script src="static/directives/installApp.js"></script>
-    <script src="static/directives/modalDirective.js"></script>
+	    <!-- Modules -->
+	    <script src="static/js/app.js"></script>
+	
+	    <!-- Controllers -->
+	    <script src="static/js/controllers/eventController.js"></script>
+	    <script src="/static/js/controllers/navigationActions.js"></script>
+	
+	    <!-- Directives -->
+	    <script src="static/directives/modalDirective.js"></script>
 	{% endraw %}
-  </body>
+	</body>
 </html>

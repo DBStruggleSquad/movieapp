@@ -7,13 +7,10 @@ app.controller('events', ['$scope', '$http', function($scope, $http) {
 	});
 
   
-  $scope.publicEvents = $http.get('/mypublicevent').success(function(data){
+	$scope.publicEvents = $http.get('/mypublicevent').success(function(data){
 		$scope.publicEvents = data.data;
 	});
 
-    $scope.goToEvent = function(eventID){
-        window.location.href = '/event-page';
-    }
 
   	//codigo para modal
     $scope.showModal = false;

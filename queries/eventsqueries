@@ -58,8 +58,18 @@ select attends.Event_name from attends where attends.username = "Antoine Cotto"
 union
 select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto");
 
+/* ------------------------ */
+/*	  EVENTS MEMBERS		*/
+/* extrae LA FOTO Y NOMBRE DE LOS MIEMBROS */
+select users.username, users.Image_link from attends left join users on attends.username = users.username, events_inf
+where events_inf.Event_name = attends.Event_name and events_inf.Event_name = "Explaining Horror Movies";
 
 
-
+/* ------------------------ */
+/*	  	EVENTS INFO			*/
+/* Extrae events info		*/
+select events_inf.Event_name, events_inf.username, events_inf.date_modified, events_inf.Event_location, events_inf.locale, events_inf.Event_description, events_inf.Event_type, events_inf.Event_time
+from events_inf
+where events_inf.Event_name = "Pixar Lovers";
 
 

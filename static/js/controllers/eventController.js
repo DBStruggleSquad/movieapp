@@ -1,97 +1,42 @@
-app.controller('event', ['$scope', function($scope) {
-  $scope.event = {
-        type: 'Public',
-        name: '"Tomorrow" Premiere',
-        date: new Date('2015','10','15'),
-        host: 'dreamworks',
-        locale: 'S Movie Theatre',
-        address: 'Something St 1815 Los Angeles, California Zip Code Something',
-        description: 'Dreamworks invites the FilmShack community to the world premiere of "Tomorrow"!',
-        attendants: [{
-          name: 'user-1',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-2',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-3',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-4',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-5',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-6',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-7',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-8',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-9',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-10',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-11',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-12',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-13',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-14',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-15',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-16',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-17',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-18',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-19',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-20',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-21',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-22',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-23',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-24',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }, {
-          name: 'user-25',
-          img: 'static/img/profile-picture-placeholder.svg'
-        }]
-      };
+app.controller('event', ['$scope', '$http', function($scope, $http) {
+	
+	
+	$scope.eventName = localStorage.getItem('eventName');
+	$scope.event = $http.get('/eventinfo/' + $scope.eventName).success(function(data){
+		$scope.event = data;
+	});
 
+	$scope.myFriends = $http.get('/myfriends').success(function(data){
+		$scope.myFriends = data.data;
+	});
 
-      $scope.showModal1 = false;
-  $scope.toggleModal1 = function(){
-    $scope.showModal1 = !$scope.showModal1;
-      };
+	$scope.selectdeFriends = {};
+	$scope.friends2invite = [];
+    $scope.showModal1 = false;
+    $scope.toggleModal1 = function(){
+    	$scope.showModal1 = !$scope.showModal1;
+    	//INVITE FRIENDS    	
+    	$scope.inviteFriends = function(){
+    		var data2send = {'eventName': $scope.eventName}
+    		var keys = [];
+    		for(var key in $scope.selectdeFriends){
+    			console.log(key + " " + $scope.selectdeFriends[key])
+    			if (String($scope.selectdeFriends[key]).localeCompare("true") == 0){
+    				$scope.friends2invite.push(key);
+    			}
+    		}
+    		data2send['users'] = $scope.friends2invite
+    		$http.post('/invitetoevent', data2send ).success(function(data){
+    			console.log("Invitacion exitosa");
+    		}).error(function(data){
+    			console.log("invitacion fallo");
+    		});
+    		$scope.selectdeFriends = {};
+    		$scope.friends2invite = [];
+    	};
+    };
     $scope.showModal2 = false;
-  $scope.toggleModal2 = function(){
-    $scope.showModal2 = !$scope.showModal2;
-  };
+    $scope.toggleModal2 = function(){
+    	$scope.showModal2 = !$scope.showModal2;
+    };
 }]);

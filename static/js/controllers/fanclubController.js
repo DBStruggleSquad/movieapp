@@ -1,4 +1,5 @@
 app.controller('fanclub', ['$scope', '$http', function($scope, $http) {
+	
 	$scope.fanClubName = localStorage.getItem("fanClubName");
 	$scope.fanclub = $http.get('/fanclubinfo/' + $scope.fanClubName).success(function(data){
 		$scope.fanclub = data;
@@ -7,7 +8,7 @@ app.controller('fanclub', ['$scope', '$http', function($scope, $http) {
 	});
 	
 	$scope.data2sendfollow = {title: "", user: ""};
-  $scope.addfollowfanclub = function(fanClubN){ 
+	$scope.addfollowfanclub = function(fanClubN){ 
     $scope.data2sendfollow.title = fanClubN;
 
     //---------------

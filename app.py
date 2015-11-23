@@ -56,7 +56,7 @@ from queries import searches, movies, fanclub, events, user
 movies.addRoutes(app, mysql, genres)
 searches.addSearchesRouts(app, mysql, genres)
 fanclub.addFanClubRoutes(app, mysql, genres, current_user)
-events.addEventsRoutes(app, mysql, genres, current_user)
+events.addEventsRoutes(app, mysql, genres, current_user, mail)
 user.addUserRoutes(app, mysql, genres, current_user)
 
 

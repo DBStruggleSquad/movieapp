@@ -6,3 +6,12 @@ select * from account;
 
 select * from account_belong_user;
 
+select * from users where users.username = "Antoine Cotto";
+
+select users.username, users.Image_link from follows left join users on follows.followed_username = users.username
+where follows.following_username = "Antoine Cotto";
+
+/* select user email */
+select account_belong_user.email
+from account_belong_user
+where account_belong_user.username = 'Jennifer Lawrence';
