@@ -15,3 +15,5 @@ where follows.following_username = "Antoine Cotto";
 select account_belong_user.email
 from account_belong_user
 where account_belong_user.username = 'Jennifer Lawrence';
+
+select * from account_belong_user;

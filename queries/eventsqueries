@@ -62,7 +62,7 @@ select events_inf.Event_name from events_inf where events_inf.username = "Antoin
 /*	  EVENTS MEMBERS		*/
 /* extrae LA FOTO Y NOMBRE DE LOS MIEMBROS */
 select users.username, users.Image_link from attends left join users on attends.username = users.username, events_inf
-where events_inf.Event_name = attends.Event_name and events_inf.Event_name = "Explaining Horror Movies";
+where events_inf.Event_name = attends.Event_name and events_inf.Event_name = "Pixar Lovers";
 
 
 /* ------------------------ */

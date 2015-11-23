@@ -9,15 +9,12 @@ from flask import render_template, request, make_response
 from flask.ext.mail import Message
 
 def addEventsRoutes(app, mysql, genres, current_user, mail):
-    @app.route('/event-page')
+    @app.route('/event-page', methods=['GET'])
     def event_page():
+        print "entro aqui le esta dando la que es"
         return render_template('event-page.html')
     
-    @app.route('/event-page/<eventname>')
-    def event_page_2(eventname):
-        resp = make_response(render_template('event-page.html'))
-        resp.set_cookie('eventName', str(eventname))
-        return resp
+
     
     @app.route('/events')
     def events():
