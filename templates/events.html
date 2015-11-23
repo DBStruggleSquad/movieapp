@@ -39,7 +39,7 @@
           <button class="create-event" ng-click="toggleModal()">Create a New Event</button>
         </div>
         <div class="list-search">
-          <input class="search-bar" type="text" placeholder="Search..."/>
+          <input class="search-bar" ng-model="searchEvents" type="text" placeholder="Search..."/>
           <div class="search-button"></div>
         </div>        
       </div>
@@ -73,7 +73,7 @@
       <div class="my-events">
         <h4>My Events</h4>
         <ul>
-          <li ng-repeat="event in myEvents"  ng-class="{active:service.active}">
+          <li ng-repeat="event in myEvents | filter:searchEvents"  ng-class="{active:service.active}">
             <a ng-controller="eventsNav" ng-click="goToEvent(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a>
           </li>
         </ul>
@@ -82,7 +82,7 @@
       <div class="public-events">
         <h4>Public Events</h4>
         <ul>
-          <li ng-repeat="event in publicEvents"  ng-click="goToEvent(event.name)" ng-class="{active:service.active}">
+          <li ng-repeat="event in publicEvents | filter:searchEvents"  ng-click="goToEvent(event.name)" ng-class="{active:service.active}">
             <a ng-controller="eventsNav" ng-click="goToEvent(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a>
           </li>
         </ul>
