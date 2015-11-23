@@ -14,21 +14,52 @@ select events_inf.Event_name from events_inf where events_inf.username = "Antoin
 select events_inf.username, 'creates' as 'type', events_inf.Event_name , Date(events_inf.date_modified) as 'date', users.Image_link 
 from events_inf left join users on events_inf.username = users.username
 where events_inf.Event_name in (
-select attends.Event_name from attends where attends.username = "Antoine Cotto"
+select attends.Event_name from attends where attends.username = 'Antoine Cotto'
 union
-select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto"
+select events_inf.Event_name from events_inf where events_inf.username = 'Antoine Cotto'
 )
-
 union
-
-
 select attends.username, 'is now attending' as 'type', attends.Event_name, Date(attends.date_modified) as 'date', users.Image_link 
 from attends left join users on attends.username = users.username
 where attends.Event_name in (
+select attends.Event_name from attends where attends.username = 'Antoine Cotto'
+union
+select events_inf.Event_name from events_inf where events_inf.username = 'Antoine Cotto'
+);
+
+select events_inf.username, 'creates' as 'type', events_inf.Event_name , Date(events_inf.date_modified) as 'date', users.Image_link 
+            from events_inf left join users on events_inf.username = users.username;
+
+
+/* Busca los nombre de los eventos que el usuario creo o participa */
 select attends.Event_name from attends where attends.username = "Antoine Cotto"
 union
-select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto"
+select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto";
 
-);
+/* -------------------- */
+/*		MY EVENTS		*/
+/* extrae informacion de events que la persona creo o follow */
+select events_inf.Event_name, events_inf.date_modified, events_inf.username 
+from events_inf 
+where events_inf.Event_name in (
+select attends.Event_name from attends where attends.username = "Antoine Cotto"
+union
+select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto");
+
+
+
+/* ------------------------ */
+/*		PUBLIC EVENTS		*/
+/* extrae informacion de events que la persona NO ESTA SIGUIENDO */
+select events_inf.Event_name, events_inf.date_modified, events_inf.username 
+from events_inf 
+where events_inf.Event_name NOT in (
+select attends.Event_name from attends where attends.username = "Antoine Cotto"
+union
+select events_inf.Event_name from events_inf where events_inf.username = "Antoine Cotto");
+
+
+
+
 
 

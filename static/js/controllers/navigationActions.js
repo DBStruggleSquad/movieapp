@@ -59,6 +59,7 @@ app.controller('userNav', ['$scope', function($scope){
 }]);
 
 
+
 app.controller('fanClubNav', ['$scope', function($scope){
     $scope.goToFCHome = function(){
         window.location.href = "/fanclubs"

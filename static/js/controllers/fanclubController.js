@@ -9,11 +9,15 @@ app.controller('fanclub', ['$scope', '$http', function($scope, $http) {
 	$scope.data2sendfollow = {title: "", user: ""};
   $scope.addfollowfanclub = function(fanClubN){ 
     $scope.data2sendfollow.title = fanClubN;
+
+    //---------------
+    // FOLLOW 
+    //---------------
     $scope.data2sendfollow.user = $scope.fanclub.director;
     $http.post('/followfanclub', $scope.data2sendfollow).success(function(data){
-      window.alert("worked")
+    	location.reload(true)
     }).error(function(data){
-      window.alert("hola followfanclub");
+    	window.alert("hola followfanclub");
     });
   };	
  
