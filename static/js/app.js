@@ -1,3 +1,3 @@
-var app = angular.module("myApp", ['angular-flexslider', 'ngFileUpload', 'ngDialog']);
+var app = angular.module("myApp", ['angular-flexslider', 'ngFileUpload']);
 
 

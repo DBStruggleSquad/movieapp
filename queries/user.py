@@ -232,6 +232,32 @@ def addUserRoutes(app, mysql, genres, current_user):
         conn.close()
         print "Quote Changed"
         return jsonify({})
+    
+    @app.route('/users')
+    def users_home():
+        return render_template('users.html')
+    
+    @app.route('/my-lists')
+    def user_lists():
+        
+        if 'mylist' in request.args:
+            data = {'mylist':[]}
+            
+            #query
+            conn = mysql.connect()
+            cur = conn.cursor()
+            query = "select lists.List_name from lists where lists.username = '" + current_user.username + "'"
+            cur.execute(query)
+            result = cur.fetchall()
+            
+            for i in result:
+                data['mylist'].append({'name': str(i[0])})
+            
+            conn.close()
+            #data returned
+            return jsonify(data)
+        else:
+            return render_template('my-lists.html')
 
 
     

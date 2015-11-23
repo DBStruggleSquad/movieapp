@@ -9,28 +9,25 @@
     <link href='https://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>
     
     <script src="/static/bower_components/jquery/dist/jquery.js"></script>
-      <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-      <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+    <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
-      <!-- For image uploaded -->
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.min.js"></script>
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
-      
-      <!--  FOR NGDIALOG -->
-      	<script src="/static/bower_components/bower_components/angular-dialog-service/dist/dialogs.css></script>
-      	<script src="/static/bower_components/bower_components/angular-dialog-service/dist/dialogs.min.css></script>
-      	<script src="/static/bower_components/bower_components/angular-dialog-service/dist/dialogs.js></script>
-      	<script src="/static/bower_components/bower_components/angular-dialog-service/dist/dialogs.min.js></script>
-      	<script src="/static/bower_components/bower_components/angular-dialog-service/dist/dialogs-default-translations.js"></script>
-		<script src="/static/bower_components/bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js"></script>
+    <!-- For image uploaded -->
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.min.js"></script>
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
+    
+    <link rel="stylesheet" href="/static/jAlert-master/src/jAlert-v3.css" />
+    <script src="/static/jAlert-master/src/jAlert-v3.js"></script>
+
 
   </head>
+  
 <body class="login-body" ng-app="myApp">
   {% raw %}    
 
@@ -41,6 +38,7 @@
         <div ng-include="currentOpt"></div>
     </div>    
 </div>
+        
 	<!-- LOG IN  -->
     <script type="text/ng-template" id="login.tpl.html">
     <div class="login-message">Sign In To Your Account</div>
@@ -78,37 +76,39 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" ng-model="data2sendregister.password1" class="form-control" />
+                <input ng-change="verifyMatch()" type="password" name="password" id="password" ng-model="data2sendregister.password1" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="password">Confirm Password</label>
-                <input type="password" name="password" id="password" ng-model="data2sendregister.password2" class="form-control" />
+                <input ng-change="verifyMatch()" type="password" name="password" id="password" ng-model="data2sendregister.password2" class="form-control" />
+				<div ng-modal="passwordMatch"> {{passwordMatch}} </div>
+				<br>
             </div>            
             <div class="form-options">
                 <button type="submit" class="btn btn-primary" ng-click="addAccount()">Submit</button>
             </div>
         </form>
+
     </div>
     </script>
 
+	<!-- RECOVER PASS -->
     <script type="text/ng-template" id="recover.tpl.html">
     <div class="recover-message">Recover Your Password</div>
     <div class="col-md-6 col-md-offset-3">
         <form name="form" role="form">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" />
+                <input ng-modal="emailForRecover" type="email" name="email" id="email" class="form-control" />
             </div>
             <div class="form-options">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button ng-click="recoverPass()" type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>    
     </script>    
 
 
-    
-    </div>
 
     <!-- Modules -->
     <script src="static/js/app.js"></script>
@@ -118,8 +118,9 @@
     <script src="/static/js/controllers/navigationActions.js"></script>
 
     <!-- Directives -->
-    <script src="static/directives/activityPost.js"></script>
     <script src="static/directives/modalDirective.js"></script>
+
+
   {% endraw %}
   </body>
 </html>

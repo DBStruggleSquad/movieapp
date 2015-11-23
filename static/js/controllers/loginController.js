@@ -31,20 +31,45 @@ app.controller('login', ['$scope', '$http', function($scope,$http) {
         return optUrl == $scope.currentOpt;
     };
 
-    $http.get('movie.json').success(function(data) {
-        $scope.movies = data;});
+
 
     //------------------------
     // ADD ACCOUNT
     //------------------------
-    $scope.data2sendregister = {username: "",email: "",  password1: "", password2: ""};
+    $scope.passwordMatch = "";
+    $scope.verifyMatch = function(){
+    	console.log("entro correctamente");
+    	if($scope.data2sendregister.password1 == $scope.data2sendregister.password2){
+    		$scope.passwordMatch = "";
+    		console.log("pass match")
+    	}else{
+    		$scope.passwordMatch = "Passwords do not match";
+    		console.log("se supone que cambie el mensjae")
+    	}
+    };
+    $scope.data2sendregister = {username: "", email: "",  password1: "", password2: ""};
     $scope.addAccount = function(){ 
-    	console.log("entro al add")
         $http.post('/addAccount', $scope.data2sendregister).success(function(data){
-            window.location.href = '/profile' + $scope.data2sendregister.email
-        }).error(function(data){
-        	console.log("correctaamente exploto");
-        	console.log("se supone q el dialog saliera")
+            window.location.href = '/profile?' + $scope.data2sendregister.username
+        }).error(function(data, status){
+        	if(status == 404){
+        		 $.jAlert({
+                     'title': 'Error',
+                     'content': '<center>' + data.data + '</center>',
+                     'theme': 'red',
+                     'btns': { 'text': 'Close' },
+                     'showAnimation': 'zoomIn'
+                   });
+        	}else if (status == 500) {
+        		$.jAlert({
+                    'title': 'Error',
+                    'content': '<center> An account with that email already exists! </center>',
+                    'theme': 'red',
+                    'btns': { 'text': 'Close' },
+                    'showAnimation': 'slideInUp'
+                  });
+			}
+               
         });
     };
 
@@ -57,10 +82,44 @@ app.controller('login', ['$scope', '$http', function($scope,$http) {
         $http.post('/userLogin', $scope.data2sendlogin).success(function(data){
             window.location.href = '/profile?' + $scope.data2sendlogin.email
         }).error(function(data){
-        	 $scope.passwordSrvMsg = "Password or email incorrect";
+        	 $scope.passwordSrvMsg = data.data;
         });
     };
+
     
+    //------------------------
+    // RECOVER PASSWORD
+    //------------------------  
+    $scope.emailForRecover = "";
+    $scope.recoverPass = function(){
+    	$http.post('/recoverpassword', $scope.emailForRecover).success(function(data){
+    		$.jAlert({
+    			'title': data.title,
+                'content': '<center  style="word-wrap: break-word">' + data.data + '</center>',
+                'theme': 'red',
+                'btns': { 'text': 'Close' },
+                'showAnimation': 'slideInUp'
+    		})
+    	}).error(function(data,status){
+    		if(status == 404){
+    			$.jAlert({
+	    			'title': data.title,
+	                'content': '<center>' + data.data + '</center>',
+	                'theme': 'red',
+	                'btns': { 'text': 'Close' },
+	                'showAnimation': 'slideInUp'
+    			})
+    		}else{
+    			$.jAlert({
+	    			'title': 'Error',
+	                'content': '<center> An error occured while trying to recover the password, plaese try again latter. </center>',
+	                'theme': 'red',
+	                'btns': { 'text': 'Close' },
+	                'showAnimation': 'slideInUp'
+    			})
+    		}
+    	})
+    };
 
 
 }]);

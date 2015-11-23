@@ -80,31 +80,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/users')
-def users_home():
-    return render_template('users.html')
 
-@app.route('/my-lists')
-def user_lists():
-    
-    if 'mylist' in request.args:
-        data = {'mylist':[]}
-        
-        #query
-        conn = mysql.connect()
-        cur = conn.cursor()
-        query = "select lists.List_name from lists where lists.username = '" + current_user.username + "'"
-        cur.execute(query)
-        result = cur.fetchall()
-        
-        for i in result:
-            data['mylist'].append({'name': str(i[0])})
-        
-        conn.close()
-        #data returned
-        return jsonify(data)
-    else:
-        return render_template('my-lists.html')
 
 @app.route('/list-page')        
 def list_page():
@@ -270,6 +246,18 @@ def add_Review():
 @app.route('/addAccount', methods=['POST'])
 def add_Account():
     data = request.get_json()
+    #verifica que todos los fields existan
+    if( not (data['username'] and data['email'] and data['password1'] and data['password2'])):
+        return jsonify({'data': "All the fields must be completed."}), 404
+        
+    if (len(str(data['username'])) < 1  or len(str(data['email'])) < 1  or len(str(data['password1'])) < 1  or len(str(data['password2'])) < 1):
+        return jsonify({'data': "All the fields must be completed."}), 404
+        
+    if '@' not in data['email']:
+        return jsonify({'data': "Must enter a valid email address."}), 404
+    if(data['password1'] != data['password2']):
+        return jsonify({'data': "Passwords must match before creating the account."}), 404
+
     print data['username'] + data['email'] + "  " + data['password1'] + "   " + data['password2'] + "\n"
     conn = mysql.connect()
     cur = conn.cursor()
@@ -284,13 +272,23 @@ def add_Account():
 def user_Login():
     data = request.get_json()
     print "before the get\n\n"
+    
     dude = User.get(data['email'])
+    print dude
     if (dude and dude.verify_password(data['password'])):
         print "IT got here \n\n"
         login_user(dude)
+    else:
+        return jsonify({'data': "Email or password invalid."}), 400
+        
     print "salio"
     print current_user.username
     return render_template('profile.html')
+
+@app.route('/recoverpassword', methods=['POST'])
+def recovering_password():
+    
+    return jsonify({'title': 'Title', 'data': 'An email have being sent to your email account.'})
     
 class bcolors:
     HEADER = '\033[95m'

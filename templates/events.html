@@ -22,9 +22,7 @@
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+
     
   </head>
   <body ng-app="myApp">
@@ -48,8 +46,9 @@
           <input class="search-bar" ng-model="searchEvents" type="text" placeholder="Search..."/>
         </div>        
       </div>
+      
       <!-- 	-----------------------  -->
-      <!-- 		ADD EVENT CODE		 -->
+      <!-- 	ADD EVENT CODE/MODAL	 -->
       <!-- 	-----------------------  -->
         <modal title="Create a New Event" visible="showModal">
             <form role="form">
@@ -85,7 +84,9 @@
           </li>
         </ul>
       </div>
-
+      <!-- 	-----------------------  -->
+      <!-- 		PUBLIC EVENTCODE	 -->
+      <!-- 	-----------------------  -->
       <div class="public-events">
         <h4>Public Events</h4>
         <ul>
