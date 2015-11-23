@@ -80,7 +80,7 @@ app.controller('eventsNav', ['$scope', '$cookies', function($scope, '$cookies'){
     $scope.goToEventPage = function(eventName){
     	localStorage.removeItem("eventName");
         localStorage.setItem("eventName", eventName);
-        $cookie.remove("eventName");
+        $cookies.remove("eventName");
         window.location.href = "/event-page?" + eventName
     }
 
