@@ -207,5 +207,44 @@ def addUserRoutes(app, mysql, genres, current_user):
         myfriends['data'] = data
         return jsonify(myfriends)
 
+    @app.route('/changeuser', methods=['POST'])
+    def change_user():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('changeUsername', (current_user.username, data['user']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "Username Changed"
+        return jsonify({})
+
+    @app.route('/changequote', methods=['POST'])
+    def change_quote():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('changeQuote', (data['quote'],current_user.username))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "Quote Changed"
+        return jsonify({})
+
+
+    @app.route('/changeEmail', methods=['POST'])
+    def change_email():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('changeEmail', (current_user.id, data['email']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "Username Changed"
+        return jsonify({})
 
     

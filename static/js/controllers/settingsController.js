@@ -97,6 +97,56 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
             Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
       });
     }
-
   };
+
+  $scope.onClickOpt = function (opt) {
+        $scope.currentOpt = opt.url;
+        if (opt  === "Names") 
+            {
+                $scope.changeUser();
+            }
+        else if (opt  === "Quote") 
+        {
+          $scope.changeQuote();
+        } 
+        else if (opt  === "Email") 
+        {
+          $scope.changeEmail();
+        } 
+        else{};
+    };
+
+  $scope.data2send = {gvar: ""};
+    $scope.changeEmail = function(){
+      $http.post('/changeEmail', $scope.data2send).success(function(data){
+        location.reload(true)
+      }).error(function(data){
+        window.alert("Email Exists");
+      });
+    };
+
+    $scope.changeQuote = function(){
+      $http.post('/changequote', $scope.data2send).success(function(data){
+        location.reload(true)
+      }).error(function(data){
+        window.alert("Worst error code ever in post");
+      });
+    };
+
+    $scope.changePass = function(){
+      $http.post('/adduserpost', $scope.data2send).success(function(data){
+        location.reload(true)
+      }).error(function(data){
+        window.alert("Worst error code ever in post");
+      });
+    };
+
+    $scope.changeUser = function(){
+      $http.post('/changeuser', $scope.data2send).success(function(data){
+        location.reload(true)
+      }).error(function(data){
+        window.alert("User Exists");
+      });
+    };
+
 }]);
