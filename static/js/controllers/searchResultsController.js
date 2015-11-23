@@ -1,7 +1,9 @@
 app.controller('results', ['$scope', '$http', function($scope, $http) {
 
 	$scope.movieSrchTxt = localStorage.getItem("movieSrchTxt");
-	/*
+   $scope.userSrchTxt = localStorage.getItem("userSrchTxt");
+
+    /*
     $scope.movieSrchResult = $http.get('/searchMovie/inc').success(function(data){
     	$scope.movieSrchResult = data;
     	window.alert("salio")
@@ -13,12 +15,21 @@ app.controller('results', ['$scope', '$http', function($scope, $http) {
 	$scope.searchTester = $http.get('/searchMovie/' + $scope.movieSrchTxt).success(function(data){
 		$scope.searchTester = data.data;
 	});
+
+    $scope.userSearchTester = $http.get('/searchUsers/' + $scope.userSrchTxt).success(function(data){
+        $scope.userSearchTester = data.data;
+    });    
 	  
     $scope.goToSelectedMovie = function(movieTitle){
         localStorage.removeItem("movieTitle");
         localStorage.setItem("movieTitle", movieTitle);
         window.location.href = "/movie-profile?" + movieTitle;
     };
+
+  $scope.getUserRating = function(number) {
+    return new Array(parseInt(number));
+  };         
+
 	  /*
     $scope.searchTester = [
         {name: 'Movie-1', year: '1999', genre: 'comedy', synopsis: 'textextextextextext', poster: '/static/img/movie-placeholder.svg'},

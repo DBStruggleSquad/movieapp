@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/bower_components/flexslider/flexslider.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="/static/css/filmshack.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>             
+   
+
+  <script src="/static/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/static/bower_components/flexslider/jquery.flexslider.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
+
+    <!-- For image uploaded -->
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.min.js"></script>
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
+    <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+
+  </head>
+  <body ng-app="myApp">
+    {% raw %}
+    <!-- Header, indicates where the user is located. -->
+    <div class="header" ng-controller="results">
+        <div class="location">Search Results</div>
+        <div class="filmshack-logo">filmshack</div>
+        <div class="logout"><img ng-src="/static/img/logout-icon.svg"></img></div>
+    </div>    
+
+
+    <div class="enclosure" ng-controller="results">
+      <div class="search-title">Search results for "<i>{{userSrchTxt}}</i>"</div>
+      <div class="activity-post" ng-repeat="user in userSearchTester">
+          <div class="list-post-img">
+            <a><img ng-controller="userNav" ng-click="goToAnothersUserProfile({{ user.username }})" ng-src="{{ user.img }}"/></a>
+          </div>
+          <div class="search-content-wrapper">
+            <div class="search-content">
+              <div class="list-post-name-year"><a ng-href="/anotherUserProfile?{{user.username}}">{{ user.username }}</a></div>
+              <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating({{ user.rank }}) track by $index"/>{{ user.rank }}</div>
+              <div class="list-post-genres">" {{ user.quote }} "</div>
+            </div>
+          </div>
+      </div>
+
+    </div>
+
+    <!-- Botton part of the page -->
+    <!-- Navigation, contains buttons that navigate user through app.-->
+    <nav class="navigation" ng-include="'static/directives/navigation.html'"></nav>
+
+    <!-- Modules -->
+    <script src="/static/js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="/static/js/controllers/searchResultsController.js"></script>
+    <script src="/static/js/controllers/navigationActions.js"></script>
+
+    <!-- Directives -->
+    <script src="/static/js/directives/activityPost.js"></script>
+    <script src="/static/js/directives/installApp.js"></script>
+
+    {% endraw %}
+  </body>
+</html>
