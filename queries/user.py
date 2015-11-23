@@ -5,7 +5,7 @@ Created on Nov 22, 2015
 '''
 from flask.json import jsonify
 from flask import render_template, request
-from flask.ext.login import login_required, current_user
+from flask.ext.login import login_required, current_user, login_user, logout_user
 from flask.ext.mail import Mail, Message
 
 
@@ -230,6 +230,9 @@ def addUserRoutes(app, mysql, genres, current_user):
         #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
         conn.commit()
         conn.close()
+        dude = current_user
+        logout_user(current_user)
+        login_user(dude)
         print "Quote Changed"
         return jsonify({})
 
