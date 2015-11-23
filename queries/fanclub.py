@@ -39,6 +39,17 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         for row in queryResult:
             members.append({'name': str(row[0]), 'img': str(row[4])})
         fanclubInfo['members'] = members
+
+        posts = []
+        query = "select text_fan_club.Title, text_fan_club.username, text_fan_club.Club_name, text_fan_club.Text_post, 'Text', DATE(text_fan_club.date_modified) d, users.Image_link from text_fan_club left join users on users.username = text_fan_club.username, fan_club where fan_club.Club_name = text_fan_club.Club_name and fan_club.Club_name = '" + fanClubName + "' order by d desc"
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        for row in queryResult:
+            posts.append({'publisher': str(row[1]), 'type': str(row[4]), 'pubdate': str(row[5]), 'text': str(row[3]), 'title': str(row[0]), 'img': str(row[6]), 'fanclub': row[2] })
+        fanclubInfo['posts'] = posts
+
+        print fanclubInfo['posts']
+
         print "next information is beaing returned: "
         print fanclubInfo
         return jsonify(fanclubInfo)
@@ -127,19 +138,7 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         print "fanclub added"
         return jsonify({})
         
-
-    @app.route('/followfanclub', methods=['POST'])
-    def follow_fanclub():
-        data = request.get_json()
-        print data
-        conn = mysql.connect()
-        cur = conn.cursor()
-        cur.callproc('followFanClub', (current_user.username, data['title']))
-        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
-        conn.commit()
-        conn.close()
-        print "fanclub followed"
-        return jsonify({})
+    
 
         
         

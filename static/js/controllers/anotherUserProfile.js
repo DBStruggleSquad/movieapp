@@ -21,6 +21,7 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
     
     
 	$scope.userName = localStorage.getItem('userName');
+
     $scope.activities = $http.get('/userprofileactivity/' + $scope.userName).success(function(data){
         $scope.activities = data.activity;
     }).error(function(data, status){
@@ -32,8 +33,11 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
     });
 
     $scope.userRank = $http.get('/userank/' + $scope.userName).success(function(data){
-        $scope.userDetails.rating = data["rank"];
-         $scope.userDetails.name = data["user"];
+        if (data['rank']==="None") {$scope.userDetails.rating = "0";} else{$scope.userDetails.rating = data["rank"];};
+        $scope.userDetails.name = data["user"];
+        $scope.userDetails.quote = data["quote"];
+        $scope.userDetails.image = data["image"];
+        $scope.userDetails.email = data["email"];
     });
 
       $scope.userReview = $http.get('/userreviews/' + $scope.userName).success(function(data){
@@ -74,11 +78,27 @@ $scope.tabs = [{
         return tabUrl == $scope.currentTab;
     };
 
-    $scope.data2sendfollow = {user: ""};
+    $scope.userFollows = $http.get('/userfollows').success(function(data){
+        $scope.userFollows = data;
+        window.alert(data);
+    });
+
+/*    $scope.checkFollow = function() {
+      for(int i=0; i < userFollows.length; i++){
+        if(userFollows[i].username === userName)
+          return "Unfollow";
+      }
+      else
+        return "Follow";
+    };*/
+
+    $scope.data2sendfollow = {user: "", email:""};
   $scope.addfollowuser = function(user){ 
     $scope.data2sendfollow.user = user;
+    $scope.data2sendfollow.email = $scope.userDetails.email
     $http.post('/followuser', $scope.data2sendfollow).success(function(data){
       window.alert("worked")
+
     }).error(function(data){
       window.alert("hola followuser");
     });

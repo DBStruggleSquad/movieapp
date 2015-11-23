@@ -26,7 +26,7 @@
     {% raw %}
     <!-- Header, indicates where the user is located. -->
     <div class="header">
-        <div class="location">Movie Profile</div>5
+        <div class="location">Movie Profile</div>
         <div class="filmshack-logo">filmshack</div>
         <div class="notifications"><img ng-src="/static/img/notifications-icon.svg"></img></div>
     </div>
@@ -111,7 +111,7 @@
     <!--  REVIEW TAB -->
     <script type="text/ng-template" id="reviews.tpl.html">
     <div class="create-review">
-      <button ng-click="toggleReviewModal()">Add a Review</button>
+      <button class="btn btn-primary ng-scope" ng-click="toggleReviewModal()">Add a Review</button>
     </div>
     <div class="review-post" ng-repeat="review in movieReviews.movies">
       <div class="review-block" style="'display: flex; flex-direction: row'">

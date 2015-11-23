@@ -5,7 +5,9 @@ Created on Nov 22, 2015
 '''
 from flask.json import jsonify
 from flask import render_template, request
-from flask.ext.login import login_required
+from flask.ext.login import login_required, current_user
+from flask.ext.mail import Mail, Message
+
 
 def addUserRoutes(app, mysql, genres, current_user):
     @app.route('/profile', methods = ['GET'])
@@ -92,11 +94,19 @@ def addUserRoutes(app, mysql, genres, current_user):
     
         return jsonify(data)
     
-    #hay que arreglar
+    #fixed
     @app.route('/userank/<username>')
     def userank(username):
+        username = "'"+ username +"'"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        query = "select account_belong_user.email, users.username, users.quote, users.user_rank, users.Image_link from account_belong_user, users where account_belong_user.username = users.username and users.username = " + username
+        cur.execute(query)
+        result = cur.fetchall()
+        conn.close()
         data = {'rank' :current_user.rank, 'user': username, 'picture': current_user.image, 'quote': current_user.quote}
-    
+        for i in result:
+            data = {'rank' :str(i[3]), 'user': str(i[1]), 'picture': str(i[4]), 'quote': str(i[2]), 'email': str(i[0])}
         return jsonify(data)
     
     @app.route('/myuserlists')
@@ -153,16 +163,33 @@ def addUserRoutes(app, mysql, genres, current_user):
     
         return jsonify({"lists":wut})
 
+    # @app.route('/userfollows')
+    # def userFollows():
+    #     data = {'following' : []}
+    #     conn = mysql.connect()
+    #     cur = conn.cursor()        
+    #     query="select followed_username from follows where following_username = '" + current_user.username + "'"
+    #     cur.execute(query)
+    #     result = cur.fetchall()
+    #     print result
+    #     conn.close()
+    #     for row in result:
+    #         data['following'].append({'username': str(row[0])})
+    #     #print "user follows:" + data
+    #     return jsonify(data)           
 
-    @app.route('/followuser', methods=['POST'])
-    def follow_user():
+    @app.route('/adduserpost', methods=['POST'])
+    def add_user_post():
         data = request.get_json()
         print data
         conn = mysql.connect()
         cur = conn.cursor()
-        cur.callproc('userFollows', (current_user.username, data['user']))
+        cur.callproc('addUserTextPost', (data['title'], current_user.username, data['post']))
         #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
         conn.commit()
         conn.close()
-        print "user followed"
+        print "fanclub added"
         return jsonify({})
+
+
+    

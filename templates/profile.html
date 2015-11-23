@@ -57,6 +57,13 @@
     <!-- -------------------------------------------------- -->
     <!-- Activity -->
     <script type="text/ng-template" id="activity.tpl.html">
+        <div class="new-post">
+          <input ng-model="data2sendPost.title" placeholder="Post Title"></input>
+          <div>
+            <textarea ng-model="data2sendPost.post" placeholder="Write something to your followers..."></textarea>
+            <button ng-click="adduserpost()" class="btn btn-primary ng-scope">Post</button>
+          </div>
+        </div>
         <div class="activity-post" ng-repeat="activity in activities" ng-include="'static/directives/activityPost.html'"></div>
     </script>
     <!-- ------------------------------ -->

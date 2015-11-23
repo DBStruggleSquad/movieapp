@@ -38,9 +38,9 @@
         <div class="event-date">{{ event.date | date }}</div>
         <div class="event-location">{{ event.locale }}<br>{{ event.address }}</div>
         <div class="event-options">
-          <button class="attend-button">Attend</button>
-          <button class="share-button" ng-click="toggleModal2()">Share</button>
-          <button class="invite-button" ng-click="toggleModal1()">Invite</button>                    
+              <button class="btn btn-primary ng-scope"><img ng-src="/static/img/plus-icon.svg"/> Attend</button>
+              <button class="btn btn-primary ng-scope" ng-click="toggleModal2()"><img ng-src="/static/img/share-icon.svg"/> Share</button>
+              <button class="btn btn-primary ng-scope" ng-click="toggleModal1()"><img ng-src="/static/img/invite-icon.svg"/> Invite</button>                   
         </div>
       </div>      
 

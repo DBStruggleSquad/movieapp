@@ -36,9 +36,9 @@
         	<div class="fanclub-type"><h4>{{ fanclub.type }} Fanclub</h4></div>
         	<div class="fanclub-director">Directed by <a >{{ fanclub.director }}</a></div>
         	<div class="fanclub-options">
-          		<button ng-click="addfollowfanclub(fanClubName)" class="join-button">Join</button>
-          		<button class="share-button">Share</button>
-          		<button class="invite-button">Invite</button>                    
+          		<button ng-click="addfollowfanclub(fanClubName)" class="btn btn-primary ng-scope"><img ng-src="/static/img/plus-icon.svg"/> Join</button>
+          		<button class="btn btn-primary ng-scope"><img ng-src="/static/img/share-icon.svg"/> Share</button>
+          		<button class="btn btn-primary ng-scope"><img ng-src="/static/img/invite-icon.svg"/> Invite</button>                  
         	</div>    
       	</div>      
 
@@ -56,8 +56,33 @@
           		<a ng-controller="userNav" ng-click="goToAnothersUserProfile(member.name)"><img src="{{ member.img }}" ng-controller="userNav" ng-click="goToAnothersUserProfile(member.name)"/><br>{{ member.name }}</a>
         	</div>
                 
-      	</div>           
+      	</div>    
 
+    <!-- ------------------- -->
+    <!--  POSTS SECTION  -->
+    <!-- ------------------- -->
+        <div class="fanclub-posts">
+          <h4>Posts</h4>
+          <div class="fanclub-posts-content">
+              <div class="new-post">
+                  <input placeholder="Post Title"></input>
+                  <div>
+                    <textarea placeholder="Write something to {{ fanClubName }}..."></textarea>
+                    <button class="btn btn-primary ng-scope">Post</button>
+                  </div>                  
+              </div>
+              <div class="activity-post" ng-repeat="post in fanclub.posts">
+                  <div class="profile-picture-thmb">
+                    <img src="static/img/profile-picture-placeholder.svg"/>
+                  </div>
+                   <div class="activity-post-content">
+                    <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.name)">{{ post.publisher }}</a> created a new {{ post.type }}
+                      <br>{{ post.pubdate | date }}
+                      <br><a ng-show="post.type == 'List'" ng-controller="listNav" ng-click="goToList(activity.title)">{{post.title}}</a><div ng-show="post.type != 'List'">{{post.title}}</div>
+                </div>
+              </div>
+          </div>                
+        </div>                 
     </div>
 
     <!-- Navigation, contains buttons that navigate user through app.-->

@@ -272,6 +272,7 @@ form .progress {
 	margin-top: 15px;
 	display: flex;
 	flex-direction: row;
+	padding: 0.5em 0em 0.5em 0em;
 }
 
 .review-post {
@@ -337,7 +338,7 @@ form .progress {
 .post-content, .search-content-wrapper, .activity-post-content, .movie-post-content {
 	flex-grow: 1;
 	overflow: hidden;
-	margin-left: 5px;
+	margin-left: 0.9em;
 }
 
 .review-post-content {
@@ -487,6 +488,39 @@ form .progress {
 	margin: 0 auto;
 }
 
+.new-post {
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
+	margin: 0 auto;	
+}
+
+.new-post div {
+	display: flex;
+	flex-direction: row;
+}
+
+.new-post textarea {
+	width: 95%;
+	height: 5em;
+}
+
+.new-post button, .new-post button:active, .new-post button.active, .create-review button, .create-review button:active, .create-review button.active, .user-follow button, .user-follow button:active, .user-follow button.active, .fanclub-options button, .fanclub-options button:active, .fanclub-options button.active, .event-options button, .event-options button:active, .event-options button.active {
+	background-color: #B22222;
+	border-color: #581010;
+}
+
+.new-post button:hover, .create-review button:hover, .user-follow button:hover, .fanclub-options button:hover, .event-options button:hover, .new-post button:focus, .create-review button:focus, .user-follow button:focus, .fanclub-options button:focus, .event-options button:focus {
+	background-color: #581010;
+	border-color: #581010;	
+}
+
+.user-follow button img, .fanclub-options button img, .event-options button img {
+	width: 2em;
+	height: 2em;
+	padding-right: 0.2em;
+}
+
 .create button, .create-review button {
 	display: inline-block;
 	flex-grow: 1;
@@ -568,11 +602,11 @@ form .progress {
 	padding: 0.5em;
 }
 
-.fanclub-fanclub h4, .fanclub-description h4, .fanclub-members h4, .event-info h4, .event-description h4, .event-attendants h4, .movie-synopsis h4, .movie-cast h4 {
+.fanclub-fanclub h4, .fanclub-posts h4, .fanclub-description h4, .fanclub-members h4, .event-info h4, .event-description h4, .event-attendants h4, .movie-synopsis h4, .movie-cast h4 {
 	color: #b22222;
 }
 
-.fanclub-members, .event-attendants, .movie-cast {
+.fanclub-members, .event-attendants, .movie-cast, .fanclub-posts {
 	background-color: white;
 	margin-top: 15px;
 	padding-top: 2px;
@@ -588,28 +622,13 @@ form .progress {
 .fanclub-members-content img, .event-attendant-content img, .movie-cast-content img {
 	width: 100px;
 	height: 100px;
+	border-radius: 50%;
+	overflow: hidden;			
 }
 
 .fanclub-options, .event-options {
 	margin-top: 10px;
 	margin-bottom: 10px;
-}
-
-.fanclub-options button, .event-options button {
-   color: white;
-   font-size: 14px;
-   padding:2px 10px;
-   border-radius: 2px;
-   width: 95px;
-   background-repeat:no-repeat;
-   background-size: cover;
-   background-position:center;	
-}
-
-.fanclub-options button:hover, .event-options button:hover {
-   color: rgb(255,80,80);
-   background: rgba(255,80,80,0.25);
-   transition: background 500ms;
 }
 
 .attend-button {
