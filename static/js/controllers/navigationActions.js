@@ -72,7 +72,7 @@ app.controller('fanClubNav', ['$scope', function($scope){
 
 }]);
 
-app.controller('eventsNav', ['$scope', '$cookies', function($scope, '$cookies'){
+app.controller('eventsNav', ['$scope', '$cookies', function($scope, $cookies){
     $scope.goToEvents = function(){
         window.location.href = "/events"
     };
