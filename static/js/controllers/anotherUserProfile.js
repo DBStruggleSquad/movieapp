@@ -92,16 +92,15 @@ $scope.tabs = [{
     };
 
     $scope.data2sendfollow = {user: "", email:""};
-  $scope.addfollowuser = function(user){ 
-    $scope.data2sendfollow.user = user;
-    $scope.data2sendfollow.email = $scope.userDetails.email
-    $http.post('/followuser', $scope.data2sendfollow).success(function(data){
-      window.alert("worked")
-
-    }).error(function(data){
-      window.alert("hola followuser");
-    });
-  };
+    $scope.addfollowuser = function(user){ 
+    	$scope.data2sendfollow.user = user;
+    	$scope.data2sendfollow.email = $scope.userDetails.email
+	    $http.post('/followuser', $scope.data2sendfollow).success(function(data){
+	      window.alert("worked")
+	    }).error(function(data){
+	      window.alert("hola followuser");
+	    });
+    };
 
 
 }]);

@@ -1,0 +1,8 @@
+Dear {{ user }},
+
+{{ follower }} invite you to the next event:
+	 {{ eventName }}
+
+Regards,
+
+The filmshack admin
