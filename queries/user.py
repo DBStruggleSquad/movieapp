@@ -90,7 +90,7 @@ def addUserRoutes(app, mysql, genres, current_user):
         return jsonify(data)
     @app.route('/myuserank')
     def myuserank():
-        data = {'rank' :current_user.rank, 'user': current_user.username, 'picture': current_user.image, 'quote': current_user.quote}
+        data = {'rank' :current_user.rank, 'user': current_user.username, 'picture': current_user.image, 'quote': current_user.quote, 'email': current_user.id}
     
         return jsonify(data)
     
