@@ -1,5 +1,19 @@
 app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($scope, Upload, $timeout,$http) {
   $scope.profilePic = '';
+  $scope.userDetails = {
+    name: '',
+    rating: 0,
+    quote: "",
+    picture: "",
+    email: "",
+  };
+  $scope.userRank = $http.get('/myuserank').success(function(data){
+      $scope.userDetails.rating = data["rank"];
+      $scope.userDetails.name = data["user"];
+      $scope.userDetails.quote = data["quote"];
+      $scope.userDetails.picture = data["picture"];
+      $scope.userDetails.email = data["email"];
+    });
 
   $scope.setProfilePic = function(p1, image){
     p1 = image;
@@ -8,15 +22,23 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     accOptions: [ 
       { 
         type: 'Username',
-        current: 'katrific',
+        current: $scope.userDetails.name,
       }, 
       { 
         type: 'Email',
-        current: 'kat@domain.com',
+        current: $scope.userDetails.email,
       }, 
       { 
         type: 'Password',
-        current: '********', 
+        current: '********',
+      },
+      {
+        type:"Rank",
+        current: $scope.userDetails.rating,
+      },
+      {
+        type: "Quote",
+        current: $scope.userDetails.quote,
       },
       {
         type: 'Log Out'
@@ -40,6 +62,8 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
   $scope.toggleActive = function(s){
     s.active = !s.active;
   };
+  
+
 
   $scope.showModal = false;
   $scope.accType = 'Username';
