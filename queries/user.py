@@ -163,20 +163,19 @@ def addUserRoutes(app, mysql, genres, current_user):
     
         return jsonify({"lists":wut})
 
-    # @app.route('/userfollows')
-    # def userFollows():
-    #     data = {'following' : []}
-    #     conn = mysql.connect()
-    #     cur = conn.cursor()        
-    #     query="select followed_username from follows where following_username = '" + current_user.username + "'"
-    #     cur.execute(query)
-    #     result = cur.fetchall()
-    #     print result
-    #     conn.close()
-    #     for row in result:
-    #         data['following'].append({'username': str(row[0])})
-    #     #print "user follows:" + data
-    #     return jsonify(data)           
+    @app.route('/userfollows')
+    def userFollows():
+        data = {'following' : []}
+        conn = mysql.connect()
+        cur = conn.cursor()        
+        query="select followed_username from follows where following_username = '" + current_user.username + "'"
+        cur.execute(query)
+        result = cur.fetchall()
+        print result
+        conn.close()
+        for row in result:
+            data['following'].append({'username': str(row[0])})
+        return jsonify(data)           
 
     @app.route('/adduserpost', methods=['POST'])
     def add_user_post():
