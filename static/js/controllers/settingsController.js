@@ -113,7 +113,10 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
         {
           $scope.changeEmail();
         } 
-        else{};
+        else if (opt  === "Password") 
+          {
+            $scope.changePass()
+          } ;
     };
 
   $scope.data2send = {gvar: ""};
@@ -134,7 +137,7 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     };
 
     $scope.changePass = function(){
-      $http.post('/adduserpost', $scope.data2send).success(function(data){
+      $http.post('/changepass', $scope.data2send).success(function(data){
         location.reload(true)
       }).error(function(data){
         window.alert("Worst error code ever in post");

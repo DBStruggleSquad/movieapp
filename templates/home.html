@@ -111,6 +111,7 @@
               <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.name)">{{ activity.name }}</a> created a new {{ activity.type }}
                 <br>{{ activity.pubdate | date }}
                 <br><a ng-show="activity.type == 'List'" ng-controller="listNav" ng-click="goToList(activity.title)">{{activity.title}}</a><div ng-show="activity.type != 'List'">{{activity.title}}</div>
+                <div ng-show="activity.type == 'Text post'">{{activity.post}}</div>
           </div>
         </div>
       </div>  

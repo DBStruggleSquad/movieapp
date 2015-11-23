@@ -47,11 +47,11 @@
                             <p ><strong>Username</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Names }}</p>
                             </div>
                         </li>
-                        <li ng-click="toggleModal('Email')" ng-class="{active:service.active}">
+                        <!-- <li ng-click="toggleModal('Email')" ng-class="{active:service.active}">
                             <div>
                             <p ><strong>Email</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Email }}</p>
                             </div>
-                        </li>
+                        </li> -->
                         <li ng-click="toggleModal('Password')" ng-class="{active:service.active}">
                             <div>
                             <p ><strong>Password</strong></p><br><p style="text-indent: 2em;">********</p>
@@ -84,11 +84,6 @@
                               <br><span class="progress" ng-show="progress >= 0">
                                 <div class="progress" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
                             </span>
-                          </div>
-                      </li>
-                      <li ng-click="toggleActive(service)" ng-class="{active:service.active}">
-                          <div>
-                            <p ><strong>Quote</strong></p><br><p style="text-indent: 2em;">' i am groot '</p>
                           </div>
                       </li>                          
 <!--                       <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">

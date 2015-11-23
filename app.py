@@ -158,13 +158,13 @@ def newsfeed_activity():
     username = "'"+ current_user.username +"'"
     conn = mysql.connect()
     cur = conn.cursor()
-    query = "select Lists.username, List_name, 'List', DATE(Lists.date_modified) d, users.Image_link  from Lists, follows, users where follows.followed_username =" + username +" and follows.following_username = Lists.username and follows.following_username = users.username union select Reviews.username, Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link from Reviews, follows, users where follows.followed_username = " + username +" and follows.following_username = Reviews.username and follows.following_username = users.username union select text_user.username, Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link from text_user, follows, users where follows.followed_username =" + username + " and follows.following_username = text_user.username and follows.following_username = users.username order by d desc"
+    query = "select Lists.username, List_name, 'List', DATE(Lists.date_modified) d, users.Image_link,''  from Lists, follows, users where follows.followed_username =" + username +" and follows.following_username = Lists.username and follows.following_username = users.username union select Reviews.username, Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link, '' from Reviews, follows, users where follows.followed_username = " + username +" and follows.following_username = Reviews.username and follows.following_username = users.username union select text_user.username, Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link, Text_post from text_user, follows, users where follows.followed_username =" + username + " and follows.following_username = text_user.username and follows.following_username = users.username order by d desc"
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
     print result
     for i in result:
-        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1]), 'image' : str(i[4])})
+        data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1]), 'image' : str(i[4]), 'post' : str(i[5])})
 
     return jsonify(data)
 
@@ -305,21 +305,19 @@ class bcolors:
     
 
 
-class User(UserMixin):
-
-    query = "select account.email, account.password_hash, account_belong_user.username, users.user_rank, users.quote, users.Image_link from account, account_belong_user, users where account.email = account_belong_user.email and account_belong_user.username = users.username" 
-    #query = "select email, password_hash from account"
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    cur = conn.cursor()
-    cur.execute(query)
-    result = cur.fetchall()
-    conn.close()
+class User(UserMixin): 
     users = []
-    for i in result:
-        users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2]),'rank': str(i[3]),'quote': str(i[4]),'image': str(i[5])})
- 
     def __init__(self, id):
+        query = "select account.email, account.password_hash, account_belong_user.username, users.user_rank, users.quote, users.Image_link from account, account_belong_user, users where account.email = account_belong_user.email and account_belong_user.username = users.username" 
+        #query = "select email, password_hash from account"
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cur = conn.cursor()
+        cur.execute(query)
+        result = cur.fetchall()
+        conn.close()
+        for i in result:
+            self.users.append({'email': str(i[0]), 'password_hash': str(i[1]),'username': str(i[2]),'rank': str(i[3]),'quote': str(i[4]),'image': str(i[5])})
         if not any(u['email'] == id for u in self.users):
             print "not found"
             raise UserNotFoundError()
@@ -427,6 +425,22 @@ def change_pass():
     conn.commit()
     conn.close()
     print "/Password Changed"
+    return jsonify({})
+
+@app.route('/changeEmail', methods=['POST'])
+def change_email():
+    data = request.get_json()
+    print data
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('changeEmail', (current_user.id, data['gvar']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    logout_user()
+    dude = User.get(data['gvar'])
+    login_user(dude)
+    print "email Changed"
     return jsonify({})
 
 if __name__ == '__main__':

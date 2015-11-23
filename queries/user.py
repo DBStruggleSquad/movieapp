@@ -45,13 +45,13 @@ def addUserRoutes(app, mysql, genres, current_user):
         username = "'"+ current_user.username +"'"
         conn = mysql.connect()
         cur = conn.cursor()
-        query = "select username, List_name, 'List', DATE(date_modified) d from Lists where username =" + username +"union select username, Title, 'Review', DATE(date_modified) d from Reviews where username = " + username +" union select username, Title, 'Text post', DATE(date_modified) d from text_user where username =" + username + "order by d desc"
+        query = "select username, List_name, 'List', DATE(date_modified) d, '' from Lists where username =" + username +"union select username, Title, 'Review', DATE(date_modified) d, '' from Reviews where username = " + username +" union select username, Title, 'Text post', DATE(date_modified) d, Text_post from text_user where username =" + username + "order by d desc"
         cur.execute(query)
         result = cur.fetchall()
         conn.close()
         print result
         for i in result:
-            data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1])})
+            data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1]), 'post': str(i[4])})
     
         return jsonify(data)
     
@@ -230,17 +230,6 @@ def addUserRoutes(app, mysql, genres, current_user):
         return jsonify({})
 
 
-    @app.route('/changeEmail', methods=['POST'])
-    def change_email():
-        data = request.get_json()
-        print data
-        conn = mysql.connect()
-        cur = conn.cursor()
-        cur.callproc('changeEmail', (current_user.id, data['gvar']))
-        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
-        conn.commit()
-        conn.close()
-        print "Username Changed"
-        return jsonify({})
+    
 
     
