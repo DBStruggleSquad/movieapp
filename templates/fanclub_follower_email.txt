@@ -1,0 +1,7 @@
+Dear {{ user }},
+
+{{ follower }} is now a follower of you {{fan}}. 
+
+Regards,
+
+The filmshack admin

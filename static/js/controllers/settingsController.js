@@ -1,4 +1,4 @@
-app.controller('settings', ['$scope', 'Upload', '$timeout', function($scope, Upload, $timeout) {
+app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($scope, Upload, $timeout,$http) {
   $scope.profilePic = '';
 
   $scope.setProfilePic = function(p1, image){
