@@ -15,6 +15,11 @@ a {
 	color: #b22222;
 }
 
+a:hover {
+	color: #581010;
+	cursor: pointer;
+}
+
 .header {
  background-color: #b22222;
  color: white;
@@ -498,11 +503,16 @@ form .progress {
 .new-post div {
 	display: flex;
 	flex-direction: row;
+	padding-top: 0.3em;
 }
 
 .new-post textarea {
 	width: 95%;
 	height: 5em;
+}
+
+.new-post button {
+	margin-left: 0.3em;
 }
 
 .new-post button, .new-post button:active, .new-post button.active, .create-review button, .create-review button:active, .create-review button.active, .user-follow button, .user-follow button:active, .user-follow button.active, .fanclub-options button, .fanclub-options button:active, .fanclub-options button.active, .event-options button, .event-options button:active, .event-options button.active {

@@ -79,18 +79,17 @@ $scope.tabs = [{
     };
 
     $scope.userFollows = $http.get('/userfollows').success(function(data){
-        $scope.userFollows = data;
-        window.alert(data);
+        $scope.userFollows = data['following'];
     });
 
-/*    $scope.checkFollow = function() {
-      for(int i=0; i < userFollows.length; i++){
-        if(userFollows[i].username === userName)
+    $scope.checkFollow = function() {
+      for(var i=0; i < $scope.userFollows.length; i++){
+        if($scope.userFollows[i].username == $scope.userName){
           return "Unfollow";
+        }
       }
-      else
         return "Follow";
-    };*/
+    };
 
     $scope.data2sendfollow = {user: "", email:""};
     $scope.addfollowuser = function(user){ 

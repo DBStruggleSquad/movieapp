@@ -35,7 +35,7 @@
 
 
     <div class="enclosure" ng-controller="results">
-      <div class="search-title">Search results for <i>{{movieSrchTxt}}</i></div>
+      <div class="search-title">Search results for "<i>{{movieSrchTxt}}</i>"</div>
       <div class="activity-post" ng-repeat="movie in searchTester">
           <div class="list-post-img">
             <a><img ng-click="goToSelectedMovie({{ movie.name }})" ng-src="{{ movie.poster }}"/></a>
