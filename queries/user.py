@@ -189,6 +189,23 @@ def addUserRoutes(app, mysql, genres, current_user):
         conn.close()
         print "fanclub added"
         return jsonify({})
+    
+    @app.route('/myfriends')
+    def my_friends():
+        query = """
+        select users.username, users.Image_link from follows left join users on follows.followed_username = users.username
+        where follows.following_username = '""" + current_user.username + "';"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        myfriends = {'data': []}
+        data = []
+        for row in queryResult:
+            data.append({'name': str(row[0]), 'img': str(row[1]), 'selected': "F"})
+        myfriends['data'] = data
+        return jsonify(myfriends)
 
 
     
