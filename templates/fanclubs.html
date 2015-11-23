@@ -41,7 +41,7 @@
           <button class="create-fanclub" ng-click="toggleModal()">Create a New Fanclub</button>
         </div>
         <div class="fanclub-search">
-          <input class="search-bar" type="text" placeholder="Search..."/>
+          <input class="search-bar" ng-model="searchFanclubs" type="text" placeholder="Search..."/>
           <div class="search-button"></div>
         </div>        
       </div>
@@ -50,7 +50,7 @@
       <div class="my-fanclubs">
         <h4>My Fanclubs</h4>
         <ul>
-          <li ng-repeat="fanclub in myFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+          <li ng-repeat="fanclub in myFanclubs | filter:searchFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
             <a ng-controller="fanClubNav" ng-click="goToFCPage(fanclub.name)"> {{ fanclub.name }}</a> <br> {{ fanclub.type }} <br> Directed by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(fanclub.creator )"> {{ fanclub.creator }} </a>
           </li>
         </ul>
@@ -60,7 +60,7 @@
       <div class="public-fanclubs">
         <h4>Public Fanclubs</h4>
         <ul>
-          <li ng-repeat="fanclub in publicFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+          <li ng-repeat="fanclub in publicFanclubs | filter:searchFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
             <a ng-controller="fanClubNav" ng-click="goToFCPage(fanclub.name )">{{ fanclub.name }}</a> <br> {{ fanclub.type }} <br> Directed by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(fanclub.creator )"> {{ fanclub.creator }} </a>
           </li>
         </ul>
