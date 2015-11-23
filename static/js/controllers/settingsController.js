@@ -1,28 +1,27 @@
 app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($scope, Upload, $timeout,$http) {
   $scope.profilePic = '';
   $scope.userDetails = {
-    name: '',
-    rating: 0,
-    quote: "",
+    Names: '',
+    rating: "",
+    Quote: "",
     picture: "",
-    email: "",
+    Email: "",
   };
   $scope.userRank = $http.get('/myuserank').success(function(data){
       $scope.userDetails.rating = data["rank"];
-      $scope.userDetails.name = data["user"];
-      $scope.userDetails.quote = data["quote"];
+      $scope.userDetails.Names = data["user"];
+      $scope.userDetails.Quote = data["quote"];
       $scope.userDetails.picture = data["picture"];
-      $scope.userDetails.email = data["email"];
+      $scope.userDetails.Email = data["email"];
     });
 
   $scope.setProfilePic = function(p1, image){
     p1 = image;
   };
-  $scope.accountOptions = {
-    accOptions: [ 
+  $scope.accOptions= [ 
       { 
         type: 'Username',
-        current: $scope.userDetails.name,
+        current: $scope.userDetails.names,
       }, 
       { 
         type: 'Email',
@@ -41,10 +40,11 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
         current: $scope.userDetails.quote,
       },
       {
-        type: 'Log Out'
+        type: 'Log Out',
+        current: "idk"
       }
-    ]
-  }
+    ];
+
 
   $scope.profileOptions = {
     profOptions: [ 
@@ -70,9 +70,8 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
   $scope.currentOpt = 'Unknown';
   $scope.toggleModal = function(a){
     $scope.showModal = !$scope.showModal;
-    $scope.accType = a.type;
-    $scope.title = a.type;
-    if (a.type == 'Password') {$scope.currentOpt = '**********'} else{$scope.currentOpt = a.current;};
+    if (a === "Names") {$scope.accType = "Username";} else{$scope.accType = a;};
+    if (a == 'Password') {$scope.currentOpt = '**********'} else{$scope.currentOpt = $scope.userDetails[a];};
     
   }
 
