@@ -164,7 +164,7 @@ def addUserRoutes(app, mysql, genres, current_user):
         return jsonify({"lists":wut})
 
     @app.route('/userfollows')
-    def userFollows():
+    def user_follows():
         data = {'following' : []}
         conn = mysql.connect()
         cur = conn.cursor()        
