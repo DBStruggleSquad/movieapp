@@ -413,8 +413,21 @@ def fan_follower_notification(followed, follower):
 @app.route('/myuserank')
 def myuserank():
     dude = User.get(current_user.id)
-    data = {'rank' :dude.rank, 'user': dude.username, 'picture': dude.image, 'quote': dude.quote, 'email': dude.id}
- 
+    data = {'rank' :dude.rank, 'user': dude.username, 'picture': dude.image, 'quote': dude.quote, 'email': dude.id} 
     return jsonify(data)
+
+@app.route('/changepass', methods=['POST'])
+def change_pass():
+    data = request.get_json()
+    print data
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('changePassword', (current_user.id, generate_password_hash(data['gvar'])))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "/Password Changed"
+    return jsonify({})
+
 if __name__ == '__main__':
     app.run()
