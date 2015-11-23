@@ -362,7 +362,6 @@ def follow_user():
     follower_notification(data, current_user.username);
     return jsonify({})
 
-
 @app.route('/followfanclub', methods=['POST'])
 def follow_fanclub():
     data = request.get_json()
@@ -392,7 +391,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
     mail.send(msg)
 
 def follower_notification(followed, follower):
-    send_email(follower + "is now following you!",
+    send_email(follower + " is now following you!",
                "filmshacktest123@gmail.com",
                [str(followed['email'])],
                render_template("follower_email.txt", 
@@ -401,7 +400,7 @@ def follower_notification(followed, follower):
                                user=followed['user'], follower=follower))
 
 def fan_follower_notification(followed, follower):
-    send_email(follower + "is now following your Fanclub!",
+    send_email(follower + " is now following your Fanclub!",
                "filmshacktest123@gmail.com",
                [str(followed['email'])],
                render_template("fanclub_follower_email.txt", 
