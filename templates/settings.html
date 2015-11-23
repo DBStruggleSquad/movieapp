@@ -42,11 +42,27 @@
               <fieldset>
                   <legend><h4>Account</h4></legend>
                     <ul>
-                        <li ng-repeat="option in accountOptions.accOptions" ng-click="toggleModal(option)" ng-class="{active:service.active}">
+                        <li ng-click="toggleModal('Names')" ng-class="{active:service.active}">
                             <div>
-                            <p ><strong>{{ option.type }}</strong></p><br><p style="text-indent: 2em;">{{ option.current }}</p>
+                            <p ><strong>Username</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Names }}</p>
                             </div>
                         </li>
+                        <!-- <li ng-click="toggleModal('Email')" ng-class="{active:service.active}">
+                            <div>
+                            <p ><strong>Email</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Email }}</p>
+                            </div>
+                        </li> -->
+                        <li ng-click="toggleModal('Password')" ng-class="{active:service.active}">
+                            <div>
+                            <p ><strong>Password</strong></p><br><p style="text-indent: 2em;">********</p>
+                            </div>
+                        </li>
+                        <li ng-click="toggleModal('Quote')" ng-class="{active:service.active}">
+                            <div>
+                            <p ><strong>Quote</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Quote }}</p>
+                            </div>
+                        </li>
+
                     </ul>
               </fieldset>
           </form>
@@ -63,16 +79,11 @@
                       <li ng-click="toggleActive(service)" ng-class="{active:service.active}">
                           <div>
                               <p><strong>Profile Picture</strong></p><br>
-                              <img ng-show="files[0].name == null" ng-change="static/img/profile-picture-placeholder.svg = files[0].name.toString()" ng-src="static/img/profile-picture-placeholder.svg" style="text-indent: 2em;" class="drop-box" ng-model="profilePic2" ngf-select="uploadFiles($files)"  ngf-drop="uploadFiles($files)"  accept="image/*" ngf-pattern="'image/*'" ngf-drag-over-class="dragover" ng-model-options="profilePic2" ngf-multiple="false" ngf-capture="'camera'" >   </img>
+                              <img ng-show="files[0].name == null" ng-change="static/img/profile-picture-placeholder.svg = files[0].name.toString()" ng-src="static/img/profile-picture-placeholder.svg" style="text-indent: 2em;" class="drop-box" ng-model="profilePic2" ngf-select="uploadFiles($files)"  ngf-drop="uploadFiles($files)"  accept="image/*" ngf-pattern="'image/*'" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-capture="'camera'" >   </img>
                               <img class="after-drop" ng-show="files[0].name != null" ngf-src="profilePic2">
                               <br><span class="progress" ng-show="progress >= 0">
                                 <div class="progress" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
                             </span>
-                          </div>
-                      </li>
-                      <li ng-click="toggleActive(service)" ng-class="{active:service.active}">
-                          <div>
-                            <p ><strong>Quote</strong></p><br><p style="text-indent: 2em;">' i am groot '</p>
                           </div>
                       </li>                          
 <!--                       <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
@@ -90,7 +101,7 @@
           </form>
       </div>
 
-      <modal title="Change {{accType}}" visible="showModal">
+      <modal title="Change Setting" visible="showModal">
         <form role="form">
           <div class="form-group">
             <label for="list"> Current {{accType}} </label>
@@ -99,9 +110,9 @@
             <label for="list"> {{currentOpt}} </label>
             <br>
             <br>
-            <input type="text" class="form-control" id="list-name" placeholder="New {{accType}}..." />
+            <input type="text" ng-model="data2send.gvar" class="form-control" id="list-name" placeholder="New {{accType}}..." />
           </div>
-          <button type="submit" class="btn btn-default" ng-click="toggleModal()">Change</button>
+          <button type="submit" class="btn btn-default" ng-click="toggleModal(accType); onClickOpt(accType)">Change</button>
         </form>
       </modal>
 

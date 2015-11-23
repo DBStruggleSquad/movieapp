@@ -59,6 +59,7 @@
               <div class="location-details">
                 <div class="location-title">User Activity Feed</div>
                 <div class="location-description">Find out what the users that you follow are up to! Discover new movies, actors, and more!</div>
+                <button class="btn btn-primary" ng-controller="usersNav" ng-click="goToUserHome()">Users Home</button>
               </div>
             </div>
         </div>
@@ -110,6 +111,7 @@
               <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.name)">{{ activity.name }}</a> created a new {{ activity.type }}
                 <br>{{ activity.pubdate | date }}
                 <br><a ng-show="activity.type == 'List'" ng-controller="listNav" ng-click="goToList(activity.title)">{{activity.title}}</a><div ng-show="activity.type != 'List'">{{activity.title}}</div>
+                <div ng-show="activity.type == 'Text post'">{{activity.post}}</div>
           </div>
         </div>
       </div>  
