@@ -80,7 +80,9 @@ def home():
     return render_template('home.html')
 
 
-
+@app.route('/users')
+def users_home():
+    return render_template('users.html')
 
 @app.route('/my-lists')
 def user_lists():

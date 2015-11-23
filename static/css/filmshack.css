@@ -419,7 +419,7 @@ form .progress {
 /*											*/
 
 
-.account-settings, .profile-settings, .lists, .my-fanclubs, .public-fanclubs, .my-events, .public-events {
+.account-settings, .profile-settings, .lists, .my-users, .my-fanclubs, .public-fanclubs, .my-events, .public-events {
 	background-color: white;
 	display: flex;
     justify-content: center;
@@ -430,7 +430,7 @@ form .progress {
 	margin-top: 25px;
 }
 
-.account-settings h4, .profile-settings h4, .lists h4, .my-fanclubs h4, .public-fanclubs h4, .my-events h4, .public-events h4, .post-content h4{
+.account-settings h4, .profile-settings h4, .lists h4, .my-users h4, .my-fanclubs h4, .public-fanclubs h4, .my-events h4, .public-events h4, .post-content h4{
 	color: #b22222;
 }
 
@@ -439,13 +439,13 @@ form .progress {
 	height: 70px;
 }
 
-.account-settings ul, .profile-settings ul, .lists ul, .my-fanclubs ul, .public-fanclubs ul, .my-events ul, .public-events ul {
+.account-settings ul, .profile-settings ul, .lists ul, .my-users ul, .my-fanclubs ul, .public-fanclubs ul, .my-events ul, .public-events ul {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
 }
 
-.account-settings ul li, .profile-settings ul li, .lists ul li, .my-fanclubs ul li, .public-fanclubs ul li, .my-events ul li, .public-events ul li {
+.account-settings ul li, .profile-settings ul li, .lists ul li, .my-users ul li, .my-fanclubs ul li, .public-fanclubs ul li, .my-events ul li, .public-events ul li {
     border-bottom: 1px solid black;
     background-image: url(../img/arrow-icon.svg);
     background-repeat:no-repeat;
@@ -454,7 +454,7 @@ form .progress {
     padding: 5px;
 }
 
-.account-settings ul li:hover, .profile-settings ul li:hover, .lists ul li:hover, .my-fanclubs ul li:hover, .public-fanclubs ul li:hover, .my-events ul li:hover, .public-events ul li:hover {
+.account-settings ul li:hover, .profile-settings ul li:hover, .lists ul li:hover, .my-users ul li:hover, .my-fanclubs ul li:hover, .public-fanclubs ul li:hover, .my-events ul li:hover, .public-events ul li:hover {
 	cursor: pointer;
 }
 
@@ -485,7 +485,7 @@ form .progress {
 	border: none;
 }
 
-.list-search, .create, .fanclub-search, .movie-search {
+.list-search, .create, .fanclub-search, .movie-search, .user-search {
 	display: flex;
 	flex-direction: row;
 	background-color: #751515;
@@ -568,7 +568,7 @@ form .progress {
 /*	My Fanclubs, Events	*/
 /*						*/
 
-.my-fanclubs, .public-fanclubs, .my-events, .public-events {
+.my-fanclubs, .public-fanclubs, .my-events, .public-events, .my-users {
 	margin-top: 15px;	
 }
 
