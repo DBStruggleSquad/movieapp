@@ -30,7 +30,7 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
       }, 
       { 
         type: 'Password',
-        current: '********', 
+        current: '********',
       },
       {
         type:"Rank",
@@ -39,6 +39,9 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
       {
         type: "Quote",
         current: $scope.userDetails.quote,
+      },
+      {
+        type: 'Log Out'
       }
     ]
   }
@@ -48,7 +51,11 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
       { 
         type: 'Profile Picture',
         current: 'static/img/profile-picture-placeholder.svg',
-      }
+      },
+      {
+        type: 'Quote',
+        current: 'i am groot',
+      },
     ]
   }
 
