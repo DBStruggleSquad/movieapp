@@ -206,6 +206,10 @@ def addUserRoutes(app, mysql, genres, current_user):
             data.append({'name': str(row[0]), 'img': str(row[1]), 'selected': "F"})
         myfriends['data'] = data
         return jsonify(myfriends)
+    
+    @app.route('/recoverpassword/<email>')
+    def recover_password():
+        pass
 
 
     
