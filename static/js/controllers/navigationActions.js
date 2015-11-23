@@ -72,7 +72,7 @@ app.controller('fanClubNav', ['$scope', function($scope){
 
 }]);
 
-app.controller('eventsNav', ['$scope', function($scope){
+app.controller('eventsNav', ['$scope', '$cookies', function($scope, '$cookies'){
     $scope.goToEvents = function(){
         window.location.href = "/events"
     };
@@ -80,6 +80,7 @@ app.controller('eventsNav', ['$scope', function($scope){
     $scope.goToEventPage = function(eventName){
     	localStorage.removeItem("eventName");
         localStorage.setItem("eventName", eventName);
+        $cookie.remove("eventName");
         window.location.href = "/event-page?" + eventName
     }
 

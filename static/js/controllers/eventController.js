@@ -1,7 +1,13 @@
-app.controller('event', ['$scope', '$http', function($scope, $http) {
+app.controller('event', ['$scope', '$http', '$cookies', function($scope, $http, $cookies) {
 	
 	
 	$scope.eventName = localStorage.getItem('eventName');
+	
+	if($cookies.get("eventName")){
+		$scope.eventName = $cookies.get("eventName");
+		window.alert("entro al cookie");
+	}
+	
 	$scope.event = $http.get('/eventinfo/' + $scope.eventName).success(function(data){
 		$scope.event = data;
 	});

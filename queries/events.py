@@ -5,13 +5,19 @@ Created on Nov 21, 2015
 '''
 
 from flask.json import jsonify
-from flask import render_template, request
+from flask import render_template, request, make_response
 from flask.ext.mail import Message
 
 def addEventsRoutes(app, mysql, genres, current_user, mail):
     @app.route('/event-page')
     def event_page():
         return render_template('event-page.html')
+    
+    @app.route('/event-page/<eventname>')
+    def event_page_2(eventname):
+        resp = make_response(render_template('event-page.html'))
+        resp.set_cookie('eventName', str(eventname))
+        return resp
     
     @app.route('/events')
     def events():
@@ -186,8 +192,11 @@ def addEventsRoutes(app, mysql, genres, current_user, mail):
             conn.close()
             userdata = {}
             for email in queryResult:
-                userdata = {'username': user, 'email': email}
-            print userdata
+                userdata = {'user': str(user), 'email': str(email[0])}
+            if('email' in userdata): #queire decir que el email esta en la cuenta
+                print "enviando email"
+                print userdata
+                eventInvite_emailNotification(  userdata, current_user.username, eventName)
         
         return jsonify({})
         
@@ -198,11 +207,17 @@ def addEventsRoutes(app, mysql, genres, current_user, mail):
         msg.html = html_body
         mail.send(msg)
         
-    def eventInvite_emailNotification(followed, follower):
-        send_email(follower + "is now following you!",
+    def eventInvite_emailNotification(receiver, sender, eventName):
+        send_email(sender + " invite you to " + eventName + " event.",
                    "filmshacktest123@gmail.com",
-                   [str(followed['email'])],
-                   render_template("follower_email.txt", 
-                                   user=followed['user'], follower=follower),
-                   render_template("follower_email.html", 
-                                   user=followed['user'], follower=follower))
+                   [str(receiver['email'])],
+                   render_template("event_invite_email.txt", 
+                                   user=receiver['user'], follower=sender, eventName=eventName),
+                   render_template("event_invite_email.html", 
+                                   user=receiver['user'], follower=sender, eventName=eventName))
+        
+        
+        
+        
+        
+        
