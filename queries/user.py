@@ -230,8 +230,9 @@ def addUserRoutes(app, mysql, genres, current_user):
         #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
         conn.commit()
         conn.close()
-        dude = current_user
+        email = current_user.id
         logout_user(current_user)
+        dude = User.get(email)
         login_user(dude)
         print "Quote Changed"
         return jsonify({})
