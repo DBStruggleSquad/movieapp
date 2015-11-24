@@ -24,10 +24,41 @@ app.controller('myLists', ['$scope', '$http', function($scope, $http) {
 	  }else{
 		  window.alert("Title and category have to be indicated");
 	  }
-	  
-	  
-    
   };
+ 
+  //----------------------------
+  //CODIGO PARA DELETE LISTA
+  //----------------------------
+  $scope.deleteList = function(listName){
+	  $http.delete('/deleteList/' + listName).success(function(data){
+		  $.jAlert({
+              'title': data.title,
+              'content': '<center>' + data.data + '</center>',
+              'theme': 'red',
+              'btns': { 'text': 'OK' },
+              'showAnimation': 'zoomIn'
+            });
+		  location.reload(true);
+	  }).error(function(data,status){
+		  if(status == 404){
+			  $.jAlert({
+                  'title': data.title,
+                  'content': '<center>' + data.data + '</center>',
+                  'theme': 'red',
+                  'btns': { 'text': 'Close' },
+                  'showAnimation': 'zoomIn'
+                });
+		  }else{
+			  $.jAlert({
+                  'title': 'Error',
+                  'content': '<center> There was a problem, please try again latter </center>',
+                  'theme': 'red',
+                  'btns': { 'text': 'Close' },
+                  'showAnimation': 'zoomIn'
+                });
+		  }
+	  })
+  }
 
   //EJEMPLO PARA GUARDAR DATA ACCECIBLE A TODOS LOS CONTROLLERS Y PAGES
   //Para llamar funciones de los servicios:

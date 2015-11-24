@@ -3,7 +3,9 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
   $scope.userDetails = {
     name: '',
     rating: 0,
-    quote: ""
+    quote: "",
+    picture: "",
+    Email: "",
   };
 
   $scope.activities = $http.get('/myuserprofileactivity').success(function(data){
