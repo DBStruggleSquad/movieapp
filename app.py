@@ -77,13 +77,14 @@ def login():
     return render_template('login.html')
 
 @app.route('/home')
+@login_required
 def home():
     return render_template('home.html')
 
 
 
 
-@app.route('/list-page')        
+@app.route('/list-page')       
 def list_page():
     print bcolors.INFO + "-----------------LIST PAGE TEMPLATE---------------------" + bcolors.ENDC
     print ""
@@ -113,6 +114,7 @@ def settings():
     return render_template('settings.html')
 
 @app.route('/business-profile')
+@login_required
 def business_profile():
     return render_template('business-profile.html')
 
@@ -283,6 +285,11 @@ def user_Login():
         return jsonify({'data': "Email or password invalid."}), 400
 
     print current_user.username
+    return render_template('profile.html')
+
+@app.route('/userLogout', methods=['POST'])
+def user_Logout():
+    logout_user()
     return render_template('profile.html')
 
 @app.route('/recoverpassword', methods=['POST'])

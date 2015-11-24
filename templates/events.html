@@ -31,7 +31,7 @@
     <div class="header">
         <div class="location">Events</div>
         <div class="filmshack-logo">filmshack</div>
-        <div class="logout"><img ng-src="/static/img/logout-icon.svg"></img></div>
+        <div class="logout"><img ng-controller="logoutNav" ng-click="logout()" ng-src="/static/img/logout-icon.svg"></img></div>
     </div>  
 
 
@@ -79,8 +79,10 @@
         <ul>
 
           <li ng-repeat="event in myEvents | filter:searchEvents"  ng-class="{active:service.active}">
-            <a ng-controller="eventsNav" ng-click="goToEventPage(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a>
-
+              <div style='float: left;'><a ng-controller="eventsNav" ng-click="goToEventPage(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a></div>
+              <div style='float: right;'><button id="delete-button" style=" width: 25px; height: 25px;"></button></div>
+            <div style="clear: both;"></div>
+            <div style="clear: both;"></div>
           </li>
         </ul>
       </div>
@@ -92,8 +94,10 @@
         <ul>
 
           <li ng-repeat="event in publicEvents | filter:searchEvents"  ng-click="goToEvent(event.name)" ng-class="{active:service.active}">
-            <a ng-controller="eventsNav" ng-click="goToEventPage(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a>
-
+              <div style='float: left;'><a ng-controller="eventsNav" ng-click="goToEventPage(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a></div>
+              <div style='float: right;'><button id="delete-button" style=" width: 25px; height: 25px;"></button></div>
+              <div style="clear: both;"></div>
+            </div>
           </li>
         </ul>
       </div>

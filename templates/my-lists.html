@@ -34,7 +34,7 @@
     <div class="header">
         <div class="location">My Lists</div>
         <div class="filmshack-logo">filmshack</div>
-        <div class="logout"><img ng-src="/static/img/logout-icon.svg"></img></div>
+        <div class="logout"><img ng-controller="logoutNav" ng-click="logout()" ng-src="/static/img/logout-icon.svg"></img></div>
     </div>
 
     <div class="enclosure" ng-controller="myLists">
@@ -53,7 +53,11 @@
         <!--      LISTA DE LISTAS     -->
         <ul>
           <li ng-repeat="myList in myLists | filter:searchList" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            <p  ng-click="goToList(myList.name)"><br> {{ myList.name }}</p>
+            <div style='margin: 0 auto;'>
+              <div ng-click="goToList(myList.name)" style='float: left;'>{{ myList.name }}</div>
+              <div style='float: right;'><button id="delete-button" style=" width: 25px; height: 25px;"></button></div>
+            </div>
+            <div style="clear: both;"></div>
           </li>
         </ul>
       </div>

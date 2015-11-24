@@ -240,6 +240,7 @@ def addUserRoutes(app, mysql, genres, current_user):
         return render_template('users.html')
     
     @app.route('/my-lists')
+    @login_required
     def user_lists():
         
         if 'mylist' in request.args:

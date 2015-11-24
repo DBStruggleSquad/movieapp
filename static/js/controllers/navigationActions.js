@@ -34,6 +34,23 @@ app.controller('homeNav', ['$scope','$location', function($scope, $location){
 
 }]);
 
+app.controller('logoutNav', ['$scope', '$http', function($scope,$http){
+    $scope.data2send = {gvar: ""};
+    $scope.logout = function(){
+      $http.post('/userLogout', $scope.data2send).success(function(data){
+        window.location.href =  '/login';
+      }).error(function(data){
+        window.alert("IDK");
+      });
+    };
+    $scope.goToSelectedMovie = function(movieTitle){
+        localStorage.removeItem("movieTitle");
+        localStorage.setItem("movieTitle", movieTitle);
+        window.location.href = "/movie-profile?" + movieTitle;
+    };
+}]);
+
+
 
 app.controller('movieNav', ['$scope', function($scope){
 	$scope.goToSelectedMovie = function(movieTitle){
