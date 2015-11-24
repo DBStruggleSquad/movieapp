@@ -438,6 +438,18 @@ def follow_fanclub():
     fan_follower_notification(dude, current_user.username);
     return jsonify({})
 
+@app.route('/attendevent', methods=['POST'])
+def attend_event():
+    data = request.get_json()
+    print data
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('attendEvent', (current_user.username, data['title']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    return jsonify({})
+
 
 def send_email(subject, sender, recipients, text_body, html_body):
     msg = Message(subject, sender=sender, recipients=recipients)

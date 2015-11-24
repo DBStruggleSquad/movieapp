@@ -40,4 +40,20 @@ app.controller('event', ['$scope', '$http', function($scope, $http) {
     $scope.toggleModal2 = function(){
     	$scope.showModal2 = !$scope.showModal2;
     };
+
+
+
+  $scope.data2sendfollow = {title: $scope.eventName};
+    $scope.addfollowevent = function(){ 
+    //---------------
+    // FOLLOW 
+    //---------------
+    $http.post('/attendevent', $scope.data2sendfollow).success(function(data){
+        location.reload(true)
+    }).error(function(data){
+        window.alert("hola attend event");
+    });
+  };
+
+
 }]);
