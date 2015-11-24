@@ -73,9 +73,9 @@ $scope.tabs = [{
     //--------------------
     //  POST CODE
     //--------------------
-    $scope.data2sendPost = {title: "", post: ""};
+    $scope.data2sendPost = {title: "", post: "",bname: };
     $scope.adduserpost = function(){
-      $http.post('/adduserpost', $scope.data2sendPost).success(function(data){
+      $http.post('/addbusspost', $scope.data2sendPost).success(function(data){
         location.reload(true)
       }).error(function(data, status){
         if(status == 404){

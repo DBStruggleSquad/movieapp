@@ -34,8 +34,21 @@ def addBusinessRoute(app, mysql, genres, current_user):
         result = {'businessinfo': businessinfo, 'businessactivity': businessactivity}
         print result
         return jsonify(result)
-    pass
-
+    
+    @app.route('/addbusspost', methods=['POST'])
+    def add_buss_post():
+        data = request.get_json()
+        if(not data['post']):
+            return jsonify({'data': '<center> This post appears to be blank. <br>Please write something before posting.  </center>', 'title': 'Empty Post'}), 404
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('addBussPost', (data['title'], data['bname'], data['post']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "business post added"
+        return jsonify({})
 
 """
         query = ""
