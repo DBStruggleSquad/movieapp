@@ -447,11 +447,11 @@ form .progress {
 
 .account-settings ul li, .profile-settings ul li, .lists ul li, .my-users ul li, .my-fanclubs ul li, .public-fanclubs ul li, .my-events ul li, .public-events ul li {
     border-bottom: 1px solid black;
-    background-image: url(../img/arrow-icon.svg);
+/*    background-image: url(../img/arrow-icon.svg);
     background-repeat:no-repeat;
     background-size: 25px 25px;
-    background-position:center right;    
-    padding: 5px;
+    background-position:center right;  */  
+    padding: 0.5em;
 }
 
 .account-settings ul li:hover, .profile-settings ul li:hover, .lists ul li:hover, .my-users ul li:hover, .my-fanclubs ul li:hover, .public-fanclubs ul li:hover, .my-events ul li:hover, .public-events ul li:hover {
