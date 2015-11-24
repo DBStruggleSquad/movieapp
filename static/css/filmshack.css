@@ -58,6 +58,10 @@ padding: 0.5em;
 	height: 30px;
 }
 
+.logout:hover {
+	cursor: pointer;
+}
+
 .content {
 	background-color: #eee9e9;
 	height: 100%;
@@ -485,7 +489,7 @@ form .progress {
 	border: none;
 }
 
-.list-search, .create, .fanclub-search, .movie-search, .user-search {
+.list-search, .create, .fanclub-search, .movie-search, .user-search, #add-entry {
 	display: flex;
 	flex-direction: row;
 	background-color: #751515;
@@ -531,7 +535,23 @@ form .progress {
 	padding-right: 0.2em;
 }
 
-.create button, .create-review button {
+#add-entry button, #add-entry button:active {
+	background-color: #B22222;
+	border-color: #581010;
+}
+
+#add-entry button:hover, #add-entry button:focus {
+	background-color: #581010;
+	border-color: #581010;	
+}
+
+#add-entry button img {
+	width: 2em;
+	height: 2em;
+	padding-right: 0.2em;
+}
+
+.create button, .create-review button, #add-entry button {
 	display: inline-block;
 	flex-grow: 1;
 }

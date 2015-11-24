@@ -6,6 +6,12 @@ app.controller('list', ['$scope', '$http', function($scope, $http) {
         console.log(JSON.toString($scope.list))
      });
 
+  $scope.showModal = false;
+  
+  $scope.toggleModal = function(){
+    $scope.showModal = !$scope.showModal;
+  };    
+
     //----------------
     // DELETE ITEM
     //----------------
