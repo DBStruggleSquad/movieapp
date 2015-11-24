@@ -7,9 +7,6 @@ app.controller('login', ['$scope', '$http', function($scope,$http) {
     };
     
 	$scope.opts = [{
-          title: 'Recover Password',
-          url: 'recover.tpl.html'
-        }, {
             title: 'Login',
             url: 'login.tpl.html'
         }, {

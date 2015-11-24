@@ -151,6 +151,21 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         conn.close()
         print "fanclub deleted"
         return jsonify({})
+
+    @app.route('/addfanpost', methods=['POST'])
+    def add_fan_post():
+        data = request.get_json()
+        if(not data['post']):
+            return jsonify({'data': '<center> This post appears to be blank. <br>Please write something before posting.  </center>', 'title': 'Empty Post'}), 404
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('addFanTextPost', (data['title'], current_user.username, data['post'], data['club']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "fanclub post added"
+        return jsonify({})
         
     
 
