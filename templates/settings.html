@@ -98,12 +98,14 @@
               <fieldset>
                   <legend><h4>Business Profile</h4></legend>
                   <ul>
+                  	<!-- CREATE BUSS -->
                     <li ng-click="toggleBusinessModal('Business')" ng-class="{active:service.active}">
                       <div>
-                        Create Business
+                        <a>Create Business</a>
                       </div>
                     </li>
                   </ul>
+                  <!-- SHOW BUSS SI TIENES -->
                   <ul ng-show="getBusiness">
                         <li ng-click="toggleModal('Names')" ng-class="{active:service.active}">
                             <div>
