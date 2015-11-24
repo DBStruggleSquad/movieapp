@@ -95,5 +95,53 @@ $scope.tabs = [{
 
     };
     
+    //-----------------------
+    // codigo para like
+    //-----------------------
+    $scope.businessFollow = $http.get('/isfollowingbuss/' + $scope.businessName).success(function(data){
+        console.log("esta siguiendo: " + data.isFollowing)
+    	$scope.businessFollow = data.isFollowing;
+        
+        console.log($scope.businessFollow );
+    });
+    
+    
+    $scope.onClickOpt = function () {
+    	console.log("entro")
+        if ($scope.businessFollow) 
+            {
+                $scope.unfollowuser();
+            }
+        else
+          {
+            $scope.addfollowuser();
+          } ;
+    };
+    
+    $scope.checkFollow = function() {
+    	if($scope.businessFollow){
+    		return "Unfollow";
+    	}else{
+    		return "Follow";
+    	}
+    };
+
+      $scope.addfollowuser = function(){ 
+    	  $http.get('/followBuss/' + $scope.businessName).success(function(data){
+    		  $scope.businessFollow = true;
+    		  location.reload(true);
+    	  });
+      };
+
+      $scope.unfollowuser = function(){ 
+    	  $http.get('/unfollowBuss/' + $scope.businessName).success(function(data){
+    		  $scope.businessFollow = false;
+    		  location.reload(true);
+    	  });
+      };
+    
+
+    
+    
 }]);
 

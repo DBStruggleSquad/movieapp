@@ -82,6 +82,49 @@ def addBusinessRoute(app, mysql, genres, current_user):
         for row in result:
             data['following'].append({'username': str(row[0])})
         return jsonify(data)
+    
+    @app.route('/isfollowingbuss/<bussname>')
+    def isfollowing_buss(bussname):
+        username = "'" + current_user.username + "'"
+        tempbussname = "'" + bussname + "'"
+        query = """
+        select followsbuss.following_username from followsbuss 
+        where followsbuss.following_username = """ + username + " and followsbuss.buss_user = " + tempbussname
+
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        isfollowing = False
+        for row in queryResult:
+            if str(row[0]) == current_user.username:
+                isfollowing = True
+        
+        print isfollowing
+        
+        return jsonify({"isFollowing": isfollowing})
+    
+    @app.route('/followBuss/<bussName>')
+    def follow_buss(bussName):
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('bussFollow', (current_user.username, bussName))
+        conn.commit()
+        conn.close()
+        
+        return jsonify({"data": "siguiendo buss"})
+    
+    @app.route('/unfollowBuss/<bussName>')
+    def unfollow_buss(bussName):
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('unfollowBuss', (current_user.username, bussName))
+        conn.commit()
+        conn.close()
+        
+        return jsonify({"data": "no siguiendo buss"})
+        
 """
         query = ""
         conn = mysql.connect()

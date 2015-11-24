@@ -117,12 +117,12 @@
     </div>
     <div class="review-post" ng-repeat="review in movieReviews.movies">
       <div class="review-block" style="'display: flex; flex-direction: row'">
-        <div class="review-left-block">
-              <div class="profile-picture-thmb"><img src="/static/img/profile-picture-placeholder.svg"/></div>
-              <div class="review-post-content">
-                <a ng-controller="userNav" ng-click="goToUserProfile(userDetails.name )">{{ review.reviewer }}</a>
+        	<div class="review-left-block">
+              <div class="profile-picture-thmb"><img src="{{review.img}}"/></div>
+              <div class="review-post-content"> 
+                <a ng-controller="userNav" ng-click="goToAnothersUserProfile(review.reviewer )">{{ review.reviewer }}</a>
               </div>
-          </div>
+          	</div>
           <div class="review-right-block">
             <div class="review-title"> {{review.Review_title}} </div>
             <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getReviewerRating(review.Rating) track by $index"/> {{ review.Rating }}</div>
@@ -143,8 +143,6 @@
     <script src="/static/js/controllers/navigationActions.js"></script>
 
     <!-- Directives -->
-    <script src="/static/js/directives/activityPost.js"></script>
-    <script src="/static/js/directives/installApp.js"></script>
     <script src="static/directives/modalDirective.js"></script>
 
     {% endraw %}

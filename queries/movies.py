@@ -121,14 +121,15 @@ def addRoutes(app, mysql, genres):
     @app.route('/moviereviews/<movie_title>')
     def movie_reviews(movie_title):
         movieriviews = {"movies": []}
-        query = "select * from reviews where reviews.Movie_title = '" + movie_title + "'"
+        query = "select reviews.*, users.Image_link from reviews left join users on users.username = reviews.username where reviews.Movie_title = '" + movie_title + "' order by reviews.date_modified desc"
         conn = mysql.connect()
         cur = conn.cursor()
         cur.execute(query)
         qresult = cur.fetchall()
         conn.close()
         for review in qresult:
-            movieriviews["movies"].append({'reviewer': review[1], 'Movie_title': review[2], 'Review_title': review[0], 'Rating': str(review[7]),'review': review[3]})
+            movieriviews["movies"].append({'reviewer': review[1], 'Movie_title': review[2], 'Review_title': review[0], 'Rating': str(review[7]),'review': review[3], 'img': str(review[8])})
+        print movieriviews
         return jsonify(movieriviews)
     
     @app.route('/addmovie2list', methods=['POST'])

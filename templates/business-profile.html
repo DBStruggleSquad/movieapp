@@ -41,12 +41,16 @@
 
 
     <div class="enclosure" ng-controller="business">
+    
+    
       <!-- User-Info, offers user details. -->
       <div class="user-info">
+      	<div class="profile-picture"><img src="static/img/profile-picture-placeholder.svg"/></div>
           <div class="user-details">
-          	
             <div class="user-name"> <p>  {{ tryp.name }} </p></div>
-				<div class="user-quote"><p>   " QUOTE AQUI "</div> <br>
+				<div class="user-quote"><p>   "{{ tryp.quote }}"</div> 
+				<div class="user-follow"><button ng-click="onClickOpt()" class="btn btn-primary ng-scope"><img ng-src="/static/img/{{ checkFollow() }}-icon.svg"/> {{ checkFollow() }}</button></div>
+          
 	          </div>
       </div>
 
