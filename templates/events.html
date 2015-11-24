@@ -80,7 +80,7 @@
 
           <li ng-repeat="event in myEvents | filter:searchEvents"  ng-class="{active:service.active}">
               <div style='float: left;'><a ng-controller="eventsNav" ng-click="goToEventPage(event.name)">{{ event.name }}</a> <br> {{ event.date | date }} <br> Hosted by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(event.host)"> {{ event.host }} </a></div>
-              <div style='float: right;'><button id="delete-button" style=" width: 25px; height: 25px;"></button></div>
+              <div style='float: right;'><button ng-click="delete(event.name)" id="delete-button" style=" width: 25px; height: 25px;"></button></div>
             <div style="clear: both;"></div>
             <div style="clear: both;"></div>
           </li>

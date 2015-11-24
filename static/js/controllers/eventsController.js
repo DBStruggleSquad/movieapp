@@ -11,6 +11,16 @@ app.controller('events', ['$scope', '$http', function($scope, $http) {
 		$scope.publicEvents = data.data;
 	});
 
+	$scope.data2sende = {event: ""};
+    $scope.delete = function(events){ 
+      $scope.data2sende.event = events;
+      $http.post('/deleteEvent', $scope.data2sende).success(function(data){
+    	  location.reload(true);
+      }).error(function(data){
+        window.alert("hola delete event");
+      });
+    };
+
 
   	//codigo para modal
     $scope.showModal = false;
