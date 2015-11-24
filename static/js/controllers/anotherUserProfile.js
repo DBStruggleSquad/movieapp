@@ -36,7 +36,7 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
         if (data['rank']==="None") {$scope.userDetails.rating = "0";} else{$scope.userDetails.rating = data["rank"];};
         $scope.userDetails.name = data["user"];
         $scope.userDetails.quote = data["quote"];
-        $scope.userDetails.image = data["image"];
+        $scope.userDetails.picture = data["picture"];
         $scope.userDetails.email = data["email"];
     });
 
