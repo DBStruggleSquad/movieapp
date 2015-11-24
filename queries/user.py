@@ -176,6 +176,8 @@ def addUserRoutes(app, mysql, genres, current_user):
     @app.route('/adduserpost', methods=['POST'])
     def add_user_post():
         data = request.get_json()
+        if(not data['post']):
+            return jsonify({'data': '<center> This post appears to be blank. <br>Please write something before posting.  </center>', 'title': 'Empty Post'}), 404
         print data
         conn = mysql.connect()
         cur = conn.cursor()

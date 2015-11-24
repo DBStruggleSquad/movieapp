@@ -280,8 +280,7 @@ def user_Login():
         login_user(dude)
     else:
         return jsonify({'data': "Email or password invalid."}), 400
-        
-    print "salio"
+
     print current_user.username
     return render_template('profile.html')
 
