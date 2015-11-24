@@ -112,10 +112,20 @@
     
     <!--  REVIEW TAB -->
     <script type="text/ng-template" id="reviews.tpl.html">
-    <div class="create-review">
-      <button class="btn btn-primary ng-scope" ng-click="toggleReviewModal()">Add a Review</button>
+    <div id="add-entry">
+      <button id="add-list-entry" class="btn btn-primary" ng-click="toggleReviewModal()">
+      <img ng-src="static/img/plus-icon.svg"/> Add a Review
+      </button>    
     </div>
     <div class="review-post" ng-repeat="review in movieReviews.movies">
+        <div style='margin: 0 auto;'>
+        <div style='float: right;'>
+          <div class="list-post-options">
+            <button id="delete-button" ng-click="">
+            </button>
+          </div>
+        </div>
+        </div>
       <div class="review-block" style="'display: flex; flex-direction: row'">
         	<div class="review-left-block">
               <div class="profile-picture-thmb"><img src="{{review.img}}"/></div>

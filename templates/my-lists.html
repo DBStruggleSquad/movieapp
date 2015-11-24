@@ -43,9 +43,11 @@
     <div class="enclosure" ng-controller="myLists">
 
       <div class="list-tools">
-        <div class="create">
-          <button class="create-list" ng-click="toggleModal()">Create a New List</button>
-        </div>
+      <div id="add-entry">
+        <button id="add-list-entry" class="btn btn-primary" ng-click="toggleModal()">
+        <img ng-src="static/img/plus-icon.svg"/> Create a New List
+        </button>    
+      </div>
         <div class="list-search">
           <input class="search-bar" ng-model="searchList" type="text" placeholder="Search..."/>
         </div>        
