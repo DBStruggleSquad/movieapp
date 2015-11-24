@@ -370,6 +370,7 @@ class User(UserMixin):
                 self.rank = x['rank']
                 self.quote = x['quote']
                 self.image = x['image']
+                self.email = x['email']
         #self.username = self.users['username']
 
     def verify_password(self, password):

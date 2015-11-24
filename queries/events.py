@@ -169,6 +169,19 @@ def addEventsRoutes(app, mysql, genres, current_user, mail):
         conn.close()
         print "Event added"
         return jsonify({})
+
+    @app.route('/deleteEvent', methods=['POST'])
+    def delete_event():
+        print "Event is being deleted"
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('deleteEvent', (current_user.username,data['event']))
+        conn.commit()
+        conn.close()
+        print "Event added"
+        return jsonify({})
   
     
     @app.route('/invitetoevent', methods=['POST'])

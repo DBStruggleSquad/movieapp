@@ -1,6 +1,9 @@
-        <div class="profile-picture"><img src="static/img/profile-picture-placeholder.svg"/></div>
+        <div class="profile-picture"></div>
         <div class="user-details">
-          <div class="user-name">{{ userDetails.name }}</div>
-          <div class="user-rating"><img src="static/img/star-icon.svg"/></div>
-          <div class="user-follow"><button class="follow-button">Follow</button></div>
+          <div class="user-name">{{ tryp.name }}</div>
+			<div class="user-follow">
+				<button ng-click="addfollowuser(userName)" class="btn btn-primary ng-scope">
+					<img ng-src="/static/img/Follow-icon.svg"/> Follow
+				</button>
+			</div>
         </div>
