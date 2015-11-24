@@ -90,7 +90,6 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
                   });
 			}
     	});
-
     };
 
   }]);

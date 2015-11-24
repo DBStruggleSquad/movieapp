@@ -52,7 +52,7 @@
           <li ng-repeat="fanclub in myFanclubs | filter:searchFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
             <div style='margin: 0 auto;'>
               <div style='float: left;'><a ng-controller="fanClubNav" ng-click="goToFCPage(fanclub.name)"> {{ fanclub.name }}</a> <br> {{ fanclub.type }} <br> Directed by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(fanclub.creator )"> {{ fanclub.creator }} </a></div>
-              <div style='float: right;'><button id="delete-button" style=" width: 25px; height: 25px;"></button></div>
+              <div style='float: right;'><button ng-click="delete(fanclub.name)" id="delete-button" style=" width: 25px; height: 25px;"></button></div>
             </div>
             <div style="clear: both;"></div>
           </li>
@@ -66,7 +66,7 @@
           <li ng-repeat="fanclub in publicFanclubs | filter:searchFanclubs" ng-click="toggleActive(service)" ng-class="{active:service.active}">
             <div style='margin: 0 auto;'>
               <div style='float: left;'><a ng-controller="fanClubNav" ng-click="goToFCPage(fanclub.name)"> {{ fanclub.name }}</a> <br> {{ fanclub.type }} <br> Directed by <a ng-controller="userNav" ng-click="goToAnothersUserProfile(fanclub.creator )"> {{ fanclub.creator }} </a></div>
-              <div style='float: right;'><button id="delete-button" style=" width: 25px; height: 25px;"></button></div>
+              <div style='float: right;'><button  id="delete-button" style=" width: 25px; height: 25px;"></button></div>
             </div>
             <div style="clear: both;"></div>
           </li>

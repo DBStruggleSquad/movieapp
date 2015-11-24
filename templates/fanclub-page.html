@@ -21,6 +21,13 @@
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+
+    <!-- GLORY -->
+  <link rel="stylesheet" href="/static/jAlert-master/src/jAlert-v3.css" />
+    <script src="/static/jAlert-master/src/jAlert-v3.js"></script>
+    <script src="/static/jAlert-master/src/jAlert-functions.js"></script>
+
+
   </head>
   <body ng-app="myApp">
 	{% raw %}
@@ -38,7 +45,7 @@
         	<div class="fanclub-director">Directed by <a >{{ fanclub.director }}</a></div>
         	<div class="fanclub-options">
           		<button ng-click="addfollowfanclub(fanClubName)" class="btn btn-primary ng-scope"><img ng-src="/static/img/plus-icon.svg"/> Join</button>
-          		<button class="btn btn-primary ng-scope"><img ng-src="/static/img/share-icon.svg"/> Share</button>
+          		<!-- <button class="btn btn-primary ng-scope"><img ng-src="/static/img/share-icon.svg"/> Share</button> -->
           		<button class="btn btn-primary ng-scope"><img ng-src="/static/img/invite-icon.svg"/> Invite</button>                  
         	</div>    
       	</div>      
@@ -66,10 +73,10 @@
           <h4>Posts</h4>
           <div class="fanclub-posts-content">
               <div class="new-post">
-                  <input placeholder="Post Title"></input>
+                  <input ng-model="data2sendPost.title" placeholder="Post Title"></input>
                   <div>
-                    <textarea placeholder="Write something to {{ fanClubName }}..."></textarea>
-                    <button class="btn btn-primary ng-scope">Post</button>
+                    <textarea ng-model="data2sendPost.post" placeholder="Write something to {{ fanClubName }}..."></textarea>
+                    <button ng-click="addfanpost()" class="btn btn-primary ng-scope">Post</button>
                   </div>                  
               </div>
               <div class="activity-post" ng-repeat="post in fanclub.posts">
