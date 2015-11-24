@@ -172,6 +172,20 @@ def addUserRoutes(app, mysql, genres, current_user):
         for row in result:
             data['following'].append({'username': str(row[0])})
         return jsonify(data)           
+    
+    @app.route('/userfollowers')
+    def user_followers():
+        data = {'following' : []}
+        conn = mysql.connect()
+        cur = conn.cursor()        
+        query="select following_username from follows where  followed_username = '" + current_user.username + "'"
+        cur.execute(query)
+        result = cur.fetchall()
+        print result
+        conn.close()
+        for row in result:
+            data['following'].append({'username': str(row[0])})
+        return jsonify(data)   
 
     @app.route('/adduserpost', methods=['POST'])
     def add_user_post():
