@@ -22,7 +22,10 @@
     <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
-    
+    	<!-- GLORY -->
+	<link rel="stylesheet" href="/static/jAlert-master/src/jAlert-v3.css" />
+    <script src="/static/jAlert-master/src/jAlert-v3.js"></script>
+    <script src="/static/jAlert-master/src/jAlert-functions.js"></script>
     
   </head>
   <!-- ------------------ -->
@@ -55,7 +58,7 @@
           <li ng-repeat="myList in myLists | filter:searchList" ng-click="toggleActive(service)" ng-class="{active:service.active}">
             <div style='margin: 0 auto;'>
               <div ng-click="goToList(myList.name)" style='float: left;'>{{ myList.name }}</div>
-              <div style='float: right;'><button id="delete-button" style=" width: 25px; height: 25px;"></button></div>
+              <div style='float: right;'><button ng-click="deleteList(myList.name)" id="delete-button" style=" width: 25px; height: 25px;"></button></div>
             </div>
             <div style="clear: both;"></div>
           </li>

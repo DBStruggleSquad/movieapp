@@ -175,18 +175,18 @@ def user_list_names():
 @app.route('/listinfo/<listName>')
 def listinfo(listName):
     list_info = {'listinfo':{'name': str(listName), 'movies':[]}}
-    
+    print "entro"
     #query
-    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
+    query = "select lists.List_name, movies.Title, movies.Release_year, lists_post.description, movies.Genre, movies.Image_link, lists_post.Title from lists_post, lists, lists_contains, movies where lists_post.List_name = lists.List_name and lists_contains.List_title = lists_post.Title and movies.Title = lists_contains.Movie_title and lists.List_name = '" + listName + "'" 
     conn = mysql.connect()
     cur = conn.cursor()
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-    
+    print "llego auqui"
     for i in result:
-        list_info['listinfo']['movies'].append({'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
-
+        list_info['listinfo']['movies'].append({'postTitle': str(i[6]),'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
+    print list_info
     return jsonify(list_info)
 
 @app.route('/listinfo-nonmovies/<listName>')
@@ -212,6 +212,25 @@ def listinfo_nonmovies(listName):
     
     print bcolors.INFO + "----------------------END LIST INFO---------------------------" + bcolors.ENDC
     return jsonify(list_info)
+
+@app.route('/deleteList/<listname>', methods=['DELETE'])
+def delete_list(listname):
+    
+    if(not listname):
+        return jsonify({'title': 'Delete Problems', 'data': '<center>You have to select a list. </center>'}), 404
+    print "Borrando la siguiente list: " + listname + " para " + current_user.username
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('deleteList', (current_user.username, str(listname)))
+    conn.commit()
+    conn.close()
+    return jsonify({'title': 'List Deleted', 'data': '<center>Your list "' + listname + '" has been deleted.</center>'})
+
+@app.route('/deletemovieitemfromlist/<info>', methods=['DELETE'])
+def delete_movie_item(info):
+    print str(info)
+    return jsonify({'title': 'Movie Item Deleted'})
+    
 #===================================================================================
 #                                POST
 #===================================================================================
@@ -366,6 +385,19 @@ def follow_user():
     conn.close()
     print "user followed"
     follower_notification(data, current_user.username);
+    return jsonify({})
+
+@app.route('/unfollowuser', methods=['POST'])
+def unfollow_user():
+    data = request.get_json()
+    print data
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('unfollow', (current_user.username, data['user']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "user unfollowed"
     return jsonify({})
 
 @app.route('/followfanclub', methods=['POST'])

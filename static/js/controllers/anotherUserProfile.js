@@ -85,21 +85,47 @@ $scope.tabs = [{
     $scope.checkFollow = function() {
       for(var i=0; i < $scope.userFollows.length; i++){
         if($scope.userFollows[i].username == $scope.userName){
+          $scope.userDetails.following = "Unfollow";
           return "Unfollow";
         }
       }
+        $scope.userDetails.following = "Follow";
         return "Follow";
     };
 
+    $scope.onClickOpt = function () {
+    	console.log("entro")
+        if ($scope.userDetails.following  === "Follow") 
+            {
+                $scope.addfollowuser();
+            }
+        else
+          {
+            $scope.unfollowuser();
+          } ;
+    };
+
     $scope.data2sendfollow = {user: "", email:""};
-    $scope.addfollowuser = function(user){ 
-    	$scope.data2sendfollow.user = user;
+    $scope.addfollowuser = function(){ 
+    	$scope.data2sendfollow.user = $scope.userDetails.name;
     	$scope.data2sendfollow.email = $scope.userDetails.email
 	    $http.post('/followuser', $scope.data2sendfollow).success(function(data){
-	      window.alert("worked")
+	      location.reload(true);
 	    }).error(function(data){
 	      window.alert("hola followuser");
 	    });
+    };
+
+    $scope.data2sendfollow = {user: "", email:""};
+    $scope.unfollowuser = function(){ 
+      $scope.data2sendfollow.user = $scope.userDetails.name;
+      $scope.data2sendfollow.email = $scope.userDetails.email
+      console.log("va hacer el unfollow")
+      $http.post('/unfollowuser', $scope.data2sendfollow).success(function(data){
+    	  location.reload(true);
+      }).error(function(data){
+        window.alert("hola unfollow user");
+      });
     };
 
 
