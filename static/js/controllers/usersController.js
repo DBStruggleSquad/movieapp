@@ -4,7 +4,17 @@ app.controller('users', ['$scope', '$http', function($scope,$http) {
         $scope.userFollows = data['following'];
         //window.alert($scope.userFollows[0].username);
     });
+    
+    $scope.userFollowers = $http.get('/userfollowers').success(function(data){
+        $scope.userFollowers = data['following'];
+        //window.alert($scope.userFollows[0].username);
+    });
 
+    $scope.buisinessPages = $http.get('/businesspages').success(function(data){
+        $scope.buisinessPages = data['following'];
+        //window.alert($scope.userFollows[0].username);
+    });
+    
     //===========================================
     //		CODIGO PARA SEARCH
     //===========================================

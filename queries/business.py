@@ -49,7 +49,39 @@ def addBusinessRoute(app, mysql, genres, current_user):
         conn.close()
         print "business post added"
         return jsonify({})
+    
+    @app.route('/isuserownerbuisnesspage/<businesspagename>')
+    def isuserownerbuisnesspage(businesspagename):
+        print businesspagename
+        query = "select account_belong_business.email from account_belong_business where account_belong_business.username = '" + str(businesspagename) + "'"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        tempEmail = ""
+        for row in queryResult:
+            tempEmail = str(row[0])
+        result = {'data': "false"}
+        print tempEmail + "   " + current_user.id
+        if (current_user.id == tempEmail):
+            result['data'] = "true"
 
+        return jsonify(result)
+    
+    @app.route('/businesspages')
+    def business_pages():
+        data = {'following' : []}
+        conn = mysql.connect()
+        cur = conn.cursor()        
+        query="select account_belong_business.username from account_belong_business"
+        cur.execute(query)
+        result = cur.fetchall()
+        print result
+        conn.close()
+        for row in result:
+            data['following'].append({'username': str(row[0])})
+        return jsonify(data)
 """
         query = ""
         conn = mysql.connect()

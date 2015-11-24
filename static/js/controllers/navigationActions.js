@@ -112,6 +112,16 @@ app.controller('listNav', ['$scope', '$rootScope', function($scope, $rootScope){
 	      //se deberia poner algun waiting para que la prox pag no abra antes de q el set se haga en localStorage
 	      window.location.href = "/list-page?" + listName;
 	  };
-
-
 }]);
+
+
+app.controller('businessNav', ['$scope', '$rootScope', function($scope, $rootScope){
+	  $scope.goToBusinessPage = function(businessname){
+	      localStorage.removeItem("businessName");
+	      localStorage.setItem("businessName", businessname);
+
+	      //se deberia poner algun waiting para que la prox pag no abra antes de q el set se haga en localStorage
+	      window.location.href = "/business-profile?" + businessname;
+	  };
+}]);
+

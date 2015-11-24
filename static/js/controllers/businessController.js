@@ -1,6 +1,7 @@
 app.controller('business', ['$scope', '$http', function($scope, $http) {
   
-	$scope.tryp = $http.get('/mybusinessinfo/Idk').success(function(data){
+	$scope.businessName = localStorage.getItem("businessName");
+	$scope.tryp = $http.get('/mybusinessinfo/' + $scope.businessName).success(function(data){
 		//data = {'businessinfo': {'quote': 'idk why we need this', 'name': 'Idk', 'email': 'antoine.cotto@upr.edu'}, 'businessactivity': {'data': [{'text': 'idk why we need this', 'pubdate': '2015-11-24', 'title': 'First'}]}}
 		$scope.tryp = data.businessinfo
 		$scope.tryp['activity'] = data.businessactivity
@@ -13,15 +14,12 @@ app.controller('business', ['$scope', '$http', function($scope, $http) {
 		console.log(status);
 	});
 
-  $scope.checkOwner = function(email){
-    window.alert(email);
-    if(email == $scope.tryp.email){
-      return true;
-    }
-    else {
-      return false;
-    }
-  };
+	//Muestra add post si eres el dueno
+	  $scope.checkOwner = $http.get('/isuserownerbuisnesspage/' + localStorage.getItem("businessName")).success(function(data){
+		  console.log(data.data);
+		  $scope.checkOwner = (data.data == "true");
+		  console.log($scope.checkOwner)
+	  });
 	
 	//
 $scope.userDetails = {
@@ -68,13 +66,11 @@ $scope.tabs = [{
         return tabUrl == $scope.currentTab;
     }
 
-}]);
-
     //--------------------
     //  POST CODE
     //--------------------
-    $scope.data2sendPost = {title: "", post: "",bname: };
-    $scope.adduserpost = function(){
+    $scope.data2sendPost = {title: "", post: "",bname: $scope.businessName};
+    $scope.addbusspost = function(){
       $http.post('/addbusspost', $scope.data2sendPost).success(function(data){
         location.reload(true)
       }).error(function(data, status){
@@ -98,3 +94,6 @@ $scope.tabs = [{
       });
 
     };
+    
+}]);
+

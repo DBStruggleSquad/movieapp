@@ -43,10 +43,31 @@
         <h4>Following</h4>
         <ul>
           <li ng-repeat="user in userFollows | filter:txt2Search" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-            <a ng-click="goToAnothersUserProfile(user.username)"> {{ user.username }}</a>
+            <a ng-controller="userNav" ng-click="goToAnothersUserProfile(user.username)"> {{ user.username }}</a>
           </li>
         </ul>
       </div>
+      
+      <!--      Followers      -->
+      <div class="my-users">
+        <h4>Followers</h4>
+        <ul>
+          <li ng-repeat="user in userFollowers | filter:txt2Search" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+            <a ng-controller="userNav" ng-click="goToAnothersUserProfile(user.username)"> {{ user.username }}</a>
+          </li>
+        </ul>
+      </div>
+      
+            <!--      Business Pages      -->
+      <div class="my-users">
+        <h4>Business Pages</h4>
+        <ul>
+          <li ng-repeat="user in buisinessPages | filter:txt2Search" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+            <a ng-controller="businessNav" ng-click="goToBusinessPage(user.username)"> {{ user.username }}</a>
+          </li>
+        </ul>
+      </div>
+      
     </div>
 
     <!-- Navigation, contains buttons that navigate user through app.-->

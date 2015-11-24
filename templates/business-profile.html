@@ -43,15 +43,11 @@
     <div class="enclosure" ng-controller="business">
       <!-- User-Info, offers user details. -->
       <div class="user-info">
-        <div class="profile-picture"><img ng-src="static/img/img-placeholder.svg"/></div>
           <div class="user-details">
-            <div class="user-name">{{ tryp.name }}</div>
-        <div class="user-follow">
-          <button ng-click="addfollowuser(userName)" class="btn btn-primary ng-scope">
-            <img ng-src="/static/img/Follow-icon.svg"/> Follow
-          </button>
-        </div>
-          </div>
+          	
+            <div class="user-name"> <p>  {{ tryp.name }} </p></div>
+				<div class="user-quote"><p>   " QUOTE AQUI "</div> <br>
+	          </div>
       </div>
 
       <!-- Profile-Tabs, allow navigation in profile.-->
@@ -69,9 +65,8 @@
     </div>
 
     <script type="text/ng-template" id="activity.tpl.html">
-        {% endraw %} 
-        <div class="new-post" ng-show="checkOwner({{ current_user.email }})">
-        {% raw %}
+
+        <div class="new-post" ng-show="checkOwner">
           <input ng-model="data2sendPost.title" placeholder="Post Title"></input>
           <div>
             <textarea ng-model="data2sendPost.post" placeholder="Write something to your followers..."></textarea>
@@ -79,12 +74,11 @@
           </div>
         </div>
 
+
         <div class="activity-post" ng-repeat="activity in tryp.activity.data">
-          <div class="profile-picture-thmb">
-            <img ng-src="static/img/img-placeholder.svg"/>
-          </div>
+
           <div class="activity-post-content">
-            <a ng-controller="userNav" ng-click="goToAnothersUserProfile(activity.name)">{{ tryp.name }}</a> created a new Text post
+            <a >{{ tryp.name }}</a> created a new Text post
               <br>{{ activity.pubdate | date }}
               <br>{{activity.title}}:
               <br>{{activity.text}}</div>
@@ -103,9 +97,7 @@
     <script src="static/js/controllers/businessController.js"></script>
     <script src="/static/js/controllers/navigationActions.js"></script>
 
-    <!-- Directives -->
-    <script src="static/directives/activityPost.js"></script>
-    <script src="static/directives/eventPost.js"></script>
+
 	{% endraw %}
   </body>
 </html>
