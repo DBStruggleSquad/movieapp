@@ -40,12 +40,12 @@
       <div class="search-title">Search results for "<i>{{userSrchTxt}}</i>"</div>
       <div class="activity-post" ng-repeat="user in userSearchTester">
           <div class="list-post-img">
-            <a><img ng-controller="userNav" ng-click="goToAnothersUserProfile({{ user.username }})" ng-src="{{ user.img }}"/></a>
+            <a ng-controller="userNav" ng-click="goToAnothersUserProfile(user.username)"><img ng-src="{{ user.img }}"/></a>
           </div>
           <div class="search-content-wrapper">
             <div class="search-content">
-              <div class="list-post-name-year"><a ng-href="/anotherUserProfile?{{user.username}}">{{ user.username }}</a></div>
-              <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating({{ user.rank }}) track by $index"/>{{ user.rank }}</div>
+              <div class="list-post-name-year"><a ng-controller="userNav" ng-click="goToAnothersUserProfile(user.username)">{{ user.username }}</a></div>
+              <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating(user.rank) track by $index"/></div>
               <div class="list-post-genres">" {{ user.quote }} "</div>
             </div>
           </div>

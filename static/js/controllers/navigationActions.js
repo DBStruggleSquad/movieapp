@@ -45,16 +45,18 @@ app.controller('movieNav', ['$scope', function($scope){
 
 app.controller('userNav', ['$scope', function($scope){
     $scope.goToBusinessProfile = function(username){
-        window.location.href = "/business-profile"
+        window.location.href = "/business-profile";
     };
     $scope.goToUserProfile = function(username){
-        window.location.href = "/profile?" + username
+        window.location.href = "/profile?" + username;
     };
-    
+    $scope.goToUserHome = function(){
+        window.location.href = "/users";
+    };
     $scope.goToAnothersUserProfile = function(username){
     	localStorage.removeItem("userName");
         localStorage.setItem("userName", username);
-    	window.location.href = "/userprofile?" + username
+    	window.location.href = "/userprofile?" + username;
     }
 }]);
 
