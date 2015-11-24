@@ -1,0 +1,18 @@
+select a.username, a.quote, a.email from account_belong_business as a where a.username = "Idk";
+select * from text_business;
+select * from account_belong_business;
+
+insert into account_belong_business (email, username, quote, Sharable) 
+values  ('glorimar.castro@upr.edu', 'Pirate Movies', 'best movies hack', 'yes'),
+		('antoine.cotto@upr.edu', 'Idk', 'idk why we need this', 'yes');
+
+insert into text_business (Title, username, Text_post, Sharable) 
+values  ('First', 'Pirate Movies', 'best movies hack', 'yes'),
+		('First', 'Idk', 'idk why we need this', 'yes');
+
+delete from text_business where username like "Pirate Movies";
+
+select * from account;
+
+select t.Title, t.Text_post, Date(t.date_modified) from text_business as t where t.username = "Idk"
+
