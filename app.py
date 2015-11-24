@@ -122,7 +122,7 @@ def business_profile():
 
 
 
-#===================================================================================
+#==============================================request.get_json()=====================================
 #                                Queries
 #===================================================================================
 
@@ -191,13 +191,11 @@ def listinfo(listName):
 
 @app.route('/listinfo-nonmovies/<listName>')
 def listinfo_nonmovies(listName):
-    print bcolors.INFO + "----------------------LIST INFO---------------------------" + bcolors.ENDC
     print "\n Se esta pidiendo la siguiente lista: " + listName + "\n"
-    list_info = {'listinfo':{'name': str(listName), 'posts':[]}}
+    list_info = {'listinfo':{'name': str(listName), 'content':[]}}
     
     #query
     query = "select lists.List_name, lists_post.Title, lists_post.description from lists, lists_post where lists.List_name = lists_post.List_name and lists.List_name = '" + listName + "'" 
-    print query
     conn = mysql.connect()
     cur = conn.cursor()
     cur.execute(query)
@@ -206,11 +204,10 @@ def listinfo_nonmovies(listName):
     print result 
     
     for i in result:
-        list_info['listinfo']['posts'].append({'title': str(i[1]),'description': str(i[2])})
-    
+        list_info['listinfo']['content'].append({'title': str(i[1]),'description': str(i[2])})
+
     print list_info
     
-    print bcolors.INFO + "----------------------END LIST INFO---------------------------" + bcolors.ENDC
     return jsonify(list_info)
 
 @app.route('/deleteList/<listname>', methods=['DELETE'])
@@ -226,10 +223,30 @@ def delete_list(listname):
     conn.close()
     return jsonify({'title': 'List Deleted', 'data': '<center>Your list "' + listname + '" has been deleted.</center>'})
 
-@app.route('/deletemovieitemfromlist/<info>', methods=['DELETE'])
-def delete_movie_item(info):
-    print str(info)
-    return jsonify({'title': 'Movie Item Deleted'})
+@app.route('/deletemovieitemfromlist', methods=['POST'])
+def delete_movie_item():
+    data = request.get_json()
+    if(not (data['listPostTitle'] and data['listTitle'] and data['movieTitle'])):
+        return jsonify({'title': 'Movie Item Not Deleted', 'data': 'Error deleting'}), 404
+    print "entro"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('deleteListpostM', (str(data['listPostTitle']), str(data['listTitle']), str(data['movieTitle'])  ) )
+    conn.commit()
+    conn.close()
+    return jsonify({'title': 'Movie Item Deleted', 'data': 'Your post with title: "' + str(data['listPostTitle']) +'" has being deleted.'})
+
+@app.route('/deletenonmovieitemfromlist', methods=['POST'])
+def delete_nonmovie_item():
+    data = request.get_json()
+    if(not (data['listPostTitle'] and data['listTitle'])):
+        return jsonify({'title': 'Item Not Deleted', 'data': 'Error deleting'}), 404
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('deleteListpost', (str(data['listPostTitle']), str(data['listTitle']) ) )
+    conn.commit()
+    conn.close()
+    return jsonify({'title': 'Item Deleted', 'data': 'Your post with title: "' + str(data['listPostTitle']) +'" has being deleted.'})
     
 #===================================================================================
 #                                POST
