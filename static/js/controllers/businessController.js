@@ -69,3 +69,32 @@ $scope.tabs = [{
     }
 
 }]);
+
+    //--------------------
+    //  POST CODE
+    //--------------------
+    $scope.data2sendPost = {title: "", post: ""};
+    $scope.adduserpost = function(){
+      $http.post('/adduserpost', $scope.data2sendPost).success(function(data){
+        location.reload(true)
+      }).error(function(data, status){
+        if(status == 404){
+              $.jAlert({
+                    'title': data.title,
+                    'content': data.data,
+                    'theme': 'black',
+                    'btns': { 'text': 'Close' },
+                    'showAnimation': 'zoomIn'
+                  });
+        }else {
+          $.jAlert({
+                    'title': "Connection Error",
+                    'content': "Your request can not be execute, please try again later.",
+                    'theme': 'black',
+                    'btns': { 'text': 'Close' },
+                    'showAnimation': 'zoomIn'
+                  });
+      }
+      });
+
+    };
