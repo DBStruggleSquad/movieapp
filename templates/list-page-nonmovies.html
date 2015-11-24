@@ -64,9 +64,9 @@
                 <label for="title">Post Title</label>
                 <input type="text" class="form-control" id="post-title" ng-model="data2send.title" placeholder="Post Title..." />
                 <label for="text">Post Text</label>
-                <input type="text" class="form-control" id="post-text" ng-model="data2send.text" placeholder="Post Text..." />                
+                <input type="text" class="form-control" id="post-text" ng-model="data2send.description" placeholder="Post Text..." />                
             </div>
-            <button type="submit" class="btn btn-default" ng-click="addlist2user();toggleModal()">Create</button>
+            <button type="submit" class="btn btn-default" ng-click="addpost2list();toggleModal()">Create</button>
         </form>
       </modal>      
 

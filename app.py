@@ -210,6 +210,19 @@ def listinfo_nonmovies(listName):
     
     return jsonify(list_info)
 
+@app.route('/addpost2list', methods=['POST'])
+def add_post2list():
+    data = request.get_json()
+    print "Entro a add post \n\n"
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('addListPost', (data['title'], data['listName'], 'Other' , data['description'], "no" ))
+    conn.commit()
+    conn.close()
+    return jsonify({})
+
+
+
 @app.route('/deleteList/<listname>', methods=['DELETE'])
 def delete_list(listname):
     
