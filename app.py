@@ -52,12 +52,13 @@ class UserNotFoundError(Exception):
     pass
 #=========
 #Route import
-from queries import searches, movies, fanclub, events, user
+from queries import searches, movies, fanclub, events, user, business
 movies.addRoutes(app, mysql, genres)
 searches.addSearchesRouts(app, mysql, genres)
 fanclub.addFanClubRoutes(app, mysql, genres, current_user)
 events.addEventsRoutes(app, mysql, genres, current_user, mail)
 user.addUserRoutes(app, mysql, genres, current_user)
+business.addBusinessRoute(app, mysql, genres, current_user)
 
 
 #===================================================================================
@@ -282,8 +283,7 @@ def user_Login():
         login_user(dude)
     else:
         return jsonify({'data': "Email or password invalid."}), 400
-        
-    print "salio"
+
     print current_user.username
     return render_template('profile.html')
 
