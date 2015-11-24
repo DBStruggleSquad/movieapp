@@ -1,4 +1,15 @@
-<div class="review-movie-title">  Movie: <a ng-controller="movieNav" ng-click="goToSelectedMovie(review.Movie_title)"> {{review.Movie_title}} </a></div>
+<div style='margin: 0 auto;'>
+  <div style='float: left;'>
+    <div class="review-movie-title">  Movie: <a ng-controller="movieNav" ng-click="goToSelectedMovie(review.Movie_title)"> {{review.Movie_title}} </a></div>
+  </div>
+  <div style='float: right;'>
+    <div class="list-post-options">
+      <button id="delete-button" ng-click="">
+      </button>
+    </div>
+  </div>
+</div>
+<div style="clear: both;"></div>
 <div class="review-block" style="'display: flex; flex-direction: row'">
                       <div class="review-left-block">
 
