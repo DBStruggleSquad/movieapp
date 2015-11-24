@@ -94,6 +94,7 @@ $scope.tabs = [{
     };
 
     $scope.onClickOpt = function () {
+    	console.log("entro")
         if ($scope.userDetails.following  === "Follow") 
             {
                 $scope.addfollowuser();
@@ -109,7 +110,7 @@ $scope.tabs = [{
     	$scope.data2sendfollow.user = $scope.userDetails.name;
     	$scope.data2sendfollow.email = $scope.userDetails.email
 	    $http.post('/followuser', $scope.data2sendfollow).success(function(data){
-	      window.alert("worked")
+	      location.reload(true);
 	    }).error(function(data){
 	      window.alert("hola followuser");
 	    });
@@ -119,8 +120,9 @@ $scope.tabs = [{
     $scope.unfollowuser = function(){ 
       $scope.data2sendfollow.user = $scope.userDetails.name;
       $scope.data2sendfollow.email = $scope.userDetails.email
+      console.log("va hacer el unfollow")
       $http.post('/unfollowuser', $scope.data2sendfollow).success(function(data){
-        window.alert("worked")
+    	  location.reload(true);
       }).error(function(data){
         window.alert("hola unfollow user");
       });

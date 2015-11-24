@@ -386,7 +386,7 @@ def follow_user():
     follower_notification(data, current_user.username);
     return jsonify({})
 
-app.route('/unfollowuser', methods=['POST'])
+@app.route('/unfollowuser', methods=['POST'])
 def unfollow_user():
     data = request.get_json()
     print data
