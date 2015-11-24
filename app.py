@@ -386,6 +386,19 @@ def follow_user():
     follower_notification(data, current_user.username);
     return jsonify({})
 
+app.route('/unfollowuser', methods=['POST'])
+def unfollow_user():
+    data = request.get_json()
+    print data
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('unfollow', (current_user.username, data['user']))
+    #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+    conn.commit()
+    conn.close()
+    print "user unfollowed"
+    return jsonify({})
+
 @app.route('/followfanclub', methods=['POST'])
 def follow_fanclub():
     data = request.get_json()
