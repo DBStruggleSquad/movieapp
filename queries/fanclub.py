@@ -137,6 +137,20 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         conn.close()
         print "fanclub added"
         return jsonify({})
+
+    @app.route('/deletefanclub', methods=['POST'])
+    def delete_fan_club():
+        print "Fanclub is being added"
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('deleteFanclub', (current_user.username,data['fan'] ))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "fanclub deleted"
+        return jsonify({})
         
     
 

@@ -9,6 +9,17 @@ app.controller('fanclubs', ['$scope', '$http', function($scope, $http) {
 		$scope.publicFanclubs = data.data;
 	});
 
+	$scope.data2sendf = {fan: ""};
+    $scope.delete = function(fans){ 
+      $scope.data2sendf.fan = fans;
+      $http.post('/deletefanclub', $scope.data2sendf).success(function(data){
+    	  location.reload(true);
+      }).error(function(data){
+        window.alert("hola delete event");
+      });
+    };
+
+
     $scope.showModal = false;
     $scope.toggleModal = function(){
 	    $scope.showModal = !$scope.showModal;
