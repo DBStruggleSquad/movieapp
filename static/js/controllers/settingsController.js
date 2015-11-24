@@ -63,8 +63,6 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     s.active = !s.active;
   };
   
-
-
   $scope.showModal = false;
   $scope.accType = 'Username';
   $scope.currentOpt = 'Unknown';
@@ -72,7 +70,13 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     $scope.showModal = !$scope.showModal;
     if (a === "Names") {$scope.accType = "Username";} else{$scope.accType = a;};
     if (a == 'Password') {$scope.currentOpt = '**********'} else{$scope.currentOpt = $scope.userDetails[a];};
-    
+  }
+
+  $scope.showBusinessModal;
+
+  $scope.toggleBusinessModal = function(a){
+    $scope.showBusinessModal = !$scope.showBusinessModal;
+    $scope.accType = "Business";
   }
 
   $scope.files;
@@ -109,6 +113,9 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
         {
           $scope.changeQuote();
         } 
+        else if (opt === "Business"){
+          $scope.createBusiness();
+        }
         else if (opt  === "Email") 
         {
           $scope.changeEmail();
@@ -118,6 +125,29 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
             $scope.changePass()
           } ;
     };
+
+/*  $scope.getBusiness = $http.get('/myuserank').success(function(data){
+      $scope.userDetails.rating = data["rank"];
+      $scope.userDetails.Names = data["user"];
+      $scope.userDetails.Quote = data["quote"];
+      $scope.userDetails.picture = data["picture"];
+      $scope.userDetails.Email = data["email"];
+    });   */
+
+  //Muestra add post si eres el dueno
+    $scope.getBusiness = $http.get('/ownsbusiness/').success(function(data){
+/*    console.log(data.data);
+      $scope.getBusiness = (data.data == "true");
+      console.log($scope.checkOwner)*/
+      if(data != "false") {
+        $scope.businessDetails.name = data.username;
+        $scope.businessDetails.quote = data.quote;
+        $scope.getBusiness = true;
+      }
+      else {
+        $scope.getBusiness = false;
+      }
+    });
 
   $scope.data2send = {gvar: ""};
     $scope.changeEmail = function(){
