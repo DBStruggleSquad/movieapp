@@ -49,7 +49,23 @@ def addBusinessRoute(app, mysql, genres, current_user):
         conn.close()
         print "business post added"
         return jsonify({})
-    
+
+    @app.route('/ownsbusiness')
+    def owns_business():
+        query = "select account_belong_business.username, account_belong_business.quote from account_belong_business where account_belong_business.email ='" + current_user.id + "'"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        data = []
+        for row in queryResult:
+            data.append({'username': str(row[0]) ,'quote': str(row[1])})
+        if queryResult == "":
+            return "false"
+        else:
+            return jsonify(data)
+
     @app.route('/isuserownerbuisnesspage/<businesspagename>')
     def isuserownerbuisnesspage(businesspagename):
         print businesspagename

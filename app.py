@@ -11,6 +11,7 @@ from flask.json import jsonify
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.mail import Mail, Message
+from flask.ext.testing import TestCase
 
 
 global app, mysql, mail
@@ -523,6 +524,19 @@ def change_email():
     login_user(dude)
     print "email Changed"
     return jsonify({})
+
+class MyTest(TestCase):
+
+    def create_app(self):
+
+        app = Flask(__name__)
+        app.config['TESTING'] = True
+        return app
+
+    def test_thi_db(self):
+        rv = self.app.get("/listinfo/helloooo")
+        print "hi"
+        assert "{'listinfo': {'movies': [{'description': 'hi', 'title': 'Inception', 'poster': 'http://www.filmofilia.com/wp-content/uploads/2010/04/Inception_poster.jpg', 'year': '2010', 'genre': 'Action, Mystery, Sci-Fi', 'postTitle': 'testing tester'}], 'name': 'helloooo'}}" in rv.data
 
 if __name__ == '__main__':
     app.run()
