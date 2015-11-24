@@ -39,8 +39,10 @@
 
       <!-- CREATE AND SEARCH EVENTS -->
       <div class="list-tools">
-        <div class="create">
-          <button class="create-event" ng-click="toggleModal()">Create a New Event</button>
+        <div id="add-entry">
+          <button id="add-list-entry" class="btn btn-primary" ng-click="toggleModal()">
+          <img ng-src="static/img/plus-icon.svg"/> Create a New Event
+          </button>    
         </div>
         <div class="list-search">
           <input class="search-bar" ng-model="searchEvents" type="text" placeholder="Search..."/>
@@ -55,6 +57,8 @@
                 <div class="form-group">
                     <label for="list">Event Name:</label>
                     <input ng-model="data2send.eventName" type="text" class="form-control" id="event-name" placeholder="Event name..." />
+                    <label for="list">Event Type:</label>
+                    <br>
                     <select ng-model="data2send.eventType">
 	              		<option value="Premier">Premier</option>
 	              		<option value="Discussion">Discussion</option>
