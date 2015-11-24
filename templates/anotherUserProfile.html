@@ -41,7 +41,7 @@
             <div class="user-name">{{userName}} </div>
             <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating() track by $index"/></div>
             <div class="user-quote">" {{ userDetails.quote }} "</div>
-            <div class="user-follow"><button ng-click="addfollowuser(userName)" class="btn btn-primary ng-scope"><img ng-src="/static/img/{{ checkFollow() }}-icon.svg"/> {{ checkFollow() }}</button></div>
+            <div class="user-follow"><button ng-click="onClickOpt()" class="btn btn-primary ng-scope"><img ng-src="/static/img/{{ checkFollow() }}-icon.svg"/> {{ checkFollow() }}</button></div>
           </div>
       </div>
       <!-- Profile-Tabs, allow navigation in profile.-->
