@@ -17,6 +17,13 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
       $scope.availableLists = data.lists;
     });
 
+  $scope.isReviewer = function(user, reviewer){
+    console.log(user);
+    console.log(reviewer);
+    if(user == reviewer) return true;
+    else return false;
+  };
+
   $scope.tabs = [{
             title: 'Info',
             url: 'info.tpl.html'

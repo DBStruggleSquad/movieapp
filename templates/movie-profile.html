@@ -86,7 +86,7 @@
             <label for="list">Review:</label>
             <input type="text" class="form-control" ng-model="data2sendReview.review" placeholder="Talk about your experience with this movie..." />                
           </div>
-          <button type="submit" ng-click="addReview(movie.name)"class="btn btn-default">Add</button> 
+          <button type="submit" ng-click="addReview(movie.name);toggleReviewModal()"class="btn btn-default">Add</button> 
           <button type="cancel" ng-click="toggleReviewModal()" class="btn btn-default">Cancel</button>
         </form>
 
@@ -121,8 +121,9 @@
         <div style='margin: 0 auto;'>
         <div style='float: right;'>
           <div class="list-post-options">
-            <button id="delete-button" ng-click="">
+            {% endraw %}<button id="delete-button" ng-show="isReviewer(current_user.username, review.reviewer)" ng-click="">
             </button>
+            {% raw %}
           </div>
         </div>
         </div>
