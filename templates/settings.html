@@ -97,7 +97,7 @@
           <form>
               <fieldset>
                   <legend><h4>Business Profile</h4></legend>
-                  <ul>
+                  <ul ng-show="nothasbusiness">
                   	<!-- CREATE BUSS -->
                     <li ng-click="toggleBusinessModal('Business')" ng-class="{active:service.active}">
                       <div>
@@ -106,18 +106,19 @@
                     </li>
                   </ul>
                   <!-- SHOW BUSS SI TIENES -->
-                  <ul ng-show="getBusiness">
+                  <ul ng-show="hasbusiness">
                         <li ng-click="toggleModal('Names')" ng-class="{active:service.active}">
                             <div>
-                            <p ><strong>Business Username</strong></p><br><p style="text-indent: 2em;">{{ businessDetails.name }}</p>
+                            <p ><strong>Business Username</strong></p><br><p style="text-indent: 2em;">{{bussName}}</p>
                             </div>
                         </li>                      
                         <li ng-click="toggleModal('Quote')" ng-class="{active:service.active}">
                             <div>
-                            <p ><strong>Business Quote</strong></p><br><p style="text-indent: 2em;">{{ businessDetails.quote }}</p>
+                            <p ><strong>Business Quote</strong></p><br><p style="text-indent: 2em;">{{bussQuote}}</p>
                             </div>
                         </li>
                   </ul>
+                  
               </fieldset>
           </form>
       </div>      

@@ -63,6 +63,9 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     s.active = !s.active;
   };
   
+  //----------------------------
+  // MODAL	
+  //----------------------------
   $scope.showModal = false;
   $scope.accType = 'Username';
   $scope.currentOpt = 'Unknown';
@@ -72,13 +75,18 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     if (a == 'Password') {$scope.currentOpt = '**********'} else{$scope.currentOpt = $scope.userDetails[a];};
   }
 
-  $scope.showBusinessModal;
-
+  
+  
+  $scope.showBusinessModal = false;
   $scope.toggleBusinessModal = function(a){
     $scope.showBusinessModal = !$scope.showBusinessModal;
     $scope.accType = "Business";
   }
 
+  
+  
+  
+  
   $scope.files;
   $scope.uploadFiles = function (files) {
     $scope.files = files;
@@ -125,29 +133,28 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
             $scope.changePass()
           } ;
     };
-
-/*  $scope.getBusiness = $http.get('/myuserank').success(function(data){
-      $scope.userDetails.rating = data["rank"];
-      $scope.userDetails.Names = data["user"];
-      $scope.userDetails.Quote = data["quote"];
-      $scope.userDetails.picture = data["picture"];
-      $scope.userDetails.Email = data["email"];
-    });   */
+    
+    //-----------------------------
+    // CODIGO PARA BUSINESS
+    //-----------------------------
+    $scope.hasbusiness = false;
+    $scope.nothasbusiness = !$scope.hasbusiness
+    $scope.bussName = "";
+    $scope.bussQuote = "";
 
   //Muestra add post si eres el dueno
-    $scope.getBusiness = $http.get('/ownsbusiness/').success(function(data){
-/*    console.log(data.data);
-      $scope.getBusiness = (data.data == "true");
-      console.log($scope.checkOwner)*/
-      if(data != "false") {
-        $scope.businessDetails.name = data.username;
-        $scope.businessDetails.quote = data.quote;
-        $scope.getBusiness = true;
-      }
-      else {
-        $scope.getBusiness = false;
-      }
+    $scope.setHasBuss = $http.get('/ownsbusiness').success(function(data){
+    	$scope.hasbusiness = data.data;
+    	$scope.nothasbusiness = !$scope.hasbusiness;
+    	$scope.bussName = data.bussName;
+    	$scope.bussQuote = data.bussQuote;
+    	console.log(data.bussQuote)
     });
+    
+
+    //-----------------------------
+    // CHANGE EMAIL
+    //-----------------------------
 
   $scope.data2send = {gvar: ""};
     $scope.changeEmail = function(){

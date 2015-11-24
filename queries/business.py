@@ -35,6 +35,7 @@ def addBusinessRoute(app, mysql, genres, current_user):
         print result
         return jsonify(result)
     
+    
     @app.route('/addbusspost', methods=['POST'])
     def add_buss_post():
         data = request.get_json()
@@ -52,6 +53,7 @@ def addBusinessRoute(app, mysql, genres, current_user):
 
     @app.route('/ownsbusiness')
     def owns_business():
+        """
         query = "select account_belong_business.username, account_belong_business.quote from account_belong_business where account_belong_business.email ='" + current_user.id + "'"
         conn = mysql.connect()
         cur = conn.cursor()
@@ -65,6 +67,24 @@ def addBusinessRoute(app, mysql, genres, current_user):
             return "false"
         else:
             return jsonify(data)
+            """
+        query = "select account_belong_business.email, account_belong_business.username, account_belong_business.quote  from account_belong_business where account_belong_business.email = '" + current_user.email + "'"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        hasBuss = False
+        bussName = ""
+        bussQuote = ""
+        for email in queryResult:
+            if str(email[0]) == current_user.email:
+                hasBuss = True
+                bussName = str(email[1])
+                bussQuote = str(email[2])
+        
+        return jsonify({'data': hasBuss, 'bussName': bussName, 'bussQuote': bussQuote})
+        
 
     @app.route('/isuserownerbuisnesspage/<businesspagename>')
     def isuserownerbuisnesspage(businesspagename):
