@@ -107,12 +107,12 @@
                   </ul>
                   <!-- SHOW BUSS SI TIENES -->
                   <ul ng-show="hasbusiness">
-                        <li ng-click="toggleModal('Names')" ng-class="{active:service.active}">
+                        <li ng-click="toggleModal('Business Username')" ng-class="{active:service.active}">
                             <div>
                             <p ><strong>Business Username</strong></p><br><p style="text-indent: 2em;">{{bussName}}</p>
                             </div>
                         </li>                      
-                        <li ng-click="toggleModal('Quote')" ng-class="{active:service.active}">
+                        <li ng-click="toggleModal('Business Quote')" ng-class="{active:service.active}">
                             <div>
                             <p ><strong>Business Quote</strong></p><br><p style="text-indent: 2em;">{{bussQuote}}</p>
                             </div>
@@ -123,7 +123,7 @@
           </form>
       </div>      
 
-      <modal title="Change Setting" visible="showModal">
+      <modal title="Change Account Setting" visible="showModal">
         <form role="form">
           <div class="form-group">
             <label for="list"> Current {{accType}} </label>
@@ -138,6 +138,21 @@
         </form>
       </modal>
 
+      <modal title="Change Business Setting" visible="showBussSetModal">
+        <form role="form">
+          <div class="form-group">
+            <label for="list"> Current {{accTBype}} </label>
+            
+            <br>
+            <label for="list"> {{currentBussOpt}} </label>
+            <br>
+            <br>
+            <input type="text" ng-model="data2send.gvar" class="form-control" id="list-name" placeholder="New {{accType}}..." />
+          </div>
+          <button type="submit" class="btn btn-default" ng-click="toggleBussSet(accType); onClickOpt(accType)">Change</button>
+        </form>
+      </modal>      
+
       <modal title="Change Setting" visible="showBusinessModal">
         <form role="form">
           <div class="form-group">
@@ -150,7 +165,7 @@
             <label for="list">{{accType}} Quote:</label>
             <input type="text" ng-model="data2send.gvar" class="form-control" id="list-name" placeholder="{{accType}} Quote..." />            
           </div>
-          <button type="submit" class="btn btn-default" ng-click="toggleModal(accType); onClickOpt(accType)">Create</button>
+          <button type="submit" class="btn btn-default" ng-click="toggleBusinessModal(accType); onClickOpt(accType)">Create</button>
         </form>
       </modal>      
 

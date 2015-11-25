@@ -210,10 +210,10 @@ def listinfo(listName):
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
-    print "llego auqui"
+    #print "llego auqui"
     for i in result:
         list_info['listinfo']['movies'].append({'postTitle': str(i[6]),'title': str(i[1]), 'year': str(i[2]), 'description': str(i[3]), 'genre': str(i[4]), 'poster': str(i[5])})
-    print list_info
+    #print list_info
     return jsonify(list_info)
 
 @app.route('/listinfo-nonmovies/<listName>')
@@ -303,7 +303,7 @@ def add_list2user():
     conn.commit()
     conn.close()
     
-    return jsonify({})
+    return jsonify({'worked':""})
 
 #{movieTitle: "",  title: "", review: "", rating: 0};
 @app.route('/addReview', methods=['POST'])
@@ -351,21 +351,24 @@ def add_Account():
 def user_Login():
     data = request.get_json()
     print "before the get\n\n"
-    
+    print data['email']
     dude = User.get(data['email'])
-    print dude
+    #print dude
     if (dude and dude.verify_password(data['password'])):
         print "IT got here \n\n"
         login_user(dude)
     else:
+        flash('no')
         return jsonify({'data': "Email or password invalid."}), 400
 
     print current_user.username
+    flash('You were logged in')
     return render_template('profile.html')
 
 @app.route('/userLogout', methods=['POST'])
 def user_Logout():
     logout_user()
+    flash('You were logged out')
     return render_template('profile.html')
 
 @app.route('/recoverpassword', methods=['POST'])

@@ -302,6 +302,7 @@ def addUserRoutes(app, mysql, genres, current_user):
             
             conn.close()
             #data returned
+            print data
             return jsonify(data)
         else:
             return render_template('my-lists.html')
