@@ -54,6 +54,7 @@ app.controller('logoutNav', ['$scope', '$http', function($scope,$http){
 
 app.controller('movieNav', ['$scope', function($scope){
 	$scope.goToSelectedMovie = function(movieTitle){
+		console.log("va a ir a la siguiente mocie: " + movieTitle)
         localStorage.removeItem("movieTitle");
         localStorage.setItem("movieTitle", movieTitle);
         window.location.href = "/movie-profile?" + movieTitle;

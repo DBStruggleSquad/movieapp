@@ -182,7 +182,7 @@ def addEventsRoutes(app, mysql, genres, current_user, mail):
         conn.commit()
         conn.close()
         print "Event added"
-        return jsonify({})
+        return jsonify({'worked': ""})
   
     
     @app.route('/invitetoevent', methods=['POST'])
