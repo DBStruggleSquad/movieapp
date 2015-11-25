@@ -51,6 +51,19 @@ def addBusinessRoute(app, mysql, genres, current_user):
         print "business post added"
         return jsonify({})
 
+    @app.route('/createbuss', methods=['POST'])
+    def create_buss():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('createBuss', (current_user.id, data['bname'], data['quote']))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "business post added"
+        return jsonify({})
+
     @app.route('/ownsbusiness')
     def owns_business():
         """

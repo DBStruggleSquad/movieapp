@@ -147,7 +147,7 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
           $scope.changeQuote();
         } 
         else if (opt === "Business"){
-          $scope.createBusiness();
+          /*$scope.createBusiness();*/
         }
         else if (opt  === "Email") 
         {
@@ -162,6 +162,17 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     //-----------------------------
     // CHANGE EMAIL
     //-----------------------------
+
+
+    $scope.data2sendcreate = {bname: "", quote:""};
+    $scope.createbuss = function(){
+      $http.post('/createbuss', $scope.data2sendcreate).success(function(data){
+        location.reload(true)
+      }).error(function(data){
+        window.alert("Business Exists");
+      });
+    };
+
 
   $scope.data2send = {gvar: ""};
     $scope.changeEmail = function(){
