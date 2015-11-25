@@ -101,6 +101,7 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         for row in resultQuery:
             data.append({'name': str(row[0]), 'type': str(row[1]), 'creator': str(row[2])})
         myfanclubs['data'] = data
+        print myfanclubs
         return jsonify(myfanclubs)
         
     @app.route('/mypublicfanclubs')
@@ -136,7 +137,7 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         conn.commit()
         conn.close()
         print "fanclub added"
-        return jsonify({})
+        return jsonify({'worked': ""})
 
     @app.route('/deletefanclub', methods=['POST'])
     def delete_fan_club():
@@ -150,7 +151,7 @@ def addFanClubRoutes(app, mysql, genres, current_user):
         conn.commit()
         conn.close()
         print "fanclub deleted"
-        return jsonify({})
+        return jsonify({'worked': ""})
 
     @app.route('/addfanpost', methods=['POST'])
     def add_fan_post():

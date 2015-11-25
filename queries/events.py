@@ -133,6 +133,7 @@ def addEventsRoutes(app, mysql, genres, current_user, mail):
         for row in resultQuery:
             data.append({'name': str(row[0]), 'date': str(row[1]), 'host': str(row[2])})
         myfanclubs['data'] = data
+        print myfanclubs
         return jsonify(myfanclubs)
     
     @app.route('/searchevents/<data2search>', methods=['GET'])
@@ -168,7 +169,7 @@ def addEventsRoutes(app, mysql, genres, current_user, mail):
         conn.commit()
         conn.close()
         print "Event added"
-        return jsonify({})
+        return jsonify({'worked': ""})
 
     @app.route('/deleteEvent', methods=['POST'])
     def delete_event():
