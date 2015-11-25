@@ -7,6 +7,7 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     picture: "",
     Email: "",
   };
+
   $scope.userRank = $http.get('/myuserank').success(function(data){
       $scope.userDetails.rating = data["rank"];
       $scope.userDetails.Names = data["user"];
@@ -62,6 +63,23 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
   $scope.toggleActive = function(s){
     s.active = !s.active;
   };
+
+    //-----------------------------
+    // CODIGO PARA BUSINESS
+    //-----------------------------
+    $scope.hasbusiness = false;
+    $scope.nothasbusiness = !$scope.hasbusiness
+    $scope.bussName = "";
+    $scope.bussQuote = "";
+
+  //Muestra add post si eres el dueno
+    $scope.setHasBuss = $http.get('/ownsbusiness').success(function(data){
+      $scope.hasbusiness = data.data;
+      $scope.nothasbusiness = !$scope.hasbusiness;
+      $scope.bussName = data.bussName;
+      $scope.bussQuote = data.bussQuote;
+      console.log(data.bussQuote)
+    });  
   
   //----------------------------
   // MODAL	
@@ -69,13 +87,24 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
   $scope.showModal = false;
   $scope.accType = 'Username';
   $scope.currentOpt = 'Unknown';
+  $scope.accTBype= "";
+  $scope.currentBussOpt = "";
+
   $scope.toggleModal = function(a){
     $scope.showModal = !$scope.showModal;
-    if (a === "Names") {$scope.accType = "Username";} else{$scope.accType = a;};
-    if (a == 'Password') {$scope.currentOpt = '**********'} else{$scope.currentOpt = $scope.userDetails[a];};
+    if (a === "Names") {$scope.accType = "Username";} 
+    else if (a == 'Password') {$scope.currentOpt = '**********'} /*else{$scope.currentOpt = $scope.userDetails[a];};*/
+    else if (a == 'Business Username') {$scope.accType = "Business Username"; $scope.currentOpt = $scope.bussName;}
+    else if (a == 'Business Quote') {$scope.accType = "Business Quote"; $scope.currentOpt = $scope.bussQuote;}
+    else{$scope.accType = a;};
   }
 
-  
+  $scope.showBussSetModal = false;
+  $scope.toggleBussSet = function(b){
+    $scope.showBussSetModal = !$scope.showBussSetModal;
+    if(b == "Business Username") {$scope.accBType = b; $scope.currentOpt = $scope.bussName;}
+    else if (b == "Business Quote") {$scope.accTBype = b; $scope.currentOpt = $scope.bussQuote;}    
+  }
   
   $scope.showBusinessModal = false;
   $scope.toggleBusinessModal = function(a){
@@ -83,10 +112,6 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     $scope.accType = "Business";
   }
 
-  
-  
-  
-  
   $scope.files;
   $scope.uploadFiles = function (files) {
     $scope.files = files;
@@ -133,24 +158,6 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
             $scope.changePass()
           } ;
     };
-    
-    //-----------------------------
-    // CODIGO PARA BUSINESS
-    //-----------------------------
-    $scope.hasbusiness = false;
-    $scope.nothasbusiness = !$scope.hasbusiness
-    $scope.bussName = "";
-    $scope.bussQuote = "";
-
-  //Muestra add post si eres el dueno
-    $scope.setHasBuss = $http.get('/ownsbusiness').success(function(data){
-    	$scope.hasbusiness = data.data;
-    	$scope.nothasbusiness = !$scope.hasbusiness;
-    	$scope.bussName = data.bussName;
-    	$scope.bussQuote = data.bussQuote;
-    	console.log(data.bussQuote)
-    });
-    
 
     //-----------------------------
     // CHANGE EMAIL
