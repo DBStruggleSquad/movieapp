@@ -21,7 +21,6 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
