@@ -39,7 +39,7 @@ def addRoutes(app, mysql, genres):
         elif 'bygender' in request.args:
             data = {"genrelist": []}     
             for genre in genres:
-                query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where genre like '%"  + str(genre) + "%' group by Movie_title order by r_num DESC"
+                query = "Select m.* from Movies m where genre like '%"  + str(genre) + "%' order by m.Title desc"
                 conn = mysql.connect()
                 cur = conn.cursor()
                 cur.execute(query)
