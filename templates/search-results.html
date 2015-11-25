@@ -44,7 +44,7 @@
           </div>
           <div class="search-content-wrapper">
             <div class="search-content">
-              <div class="list-post-name-year"><a ng-href="/movie-profile?{{movie.name}}">{{ movie.name }}</a> ({{ movie.year }})</div>
+              <div class="list-post-name-year"><a ng-click="goToSelectedMovie( movie.name)">{{ movie.name }}</a> ({{ movie.year }})</div>
               <div class="list-post-genres">{{ movie.genre }}</div>
               <div class="list-post-synopsis">{{movie.synopsis}}</div>
             </div>
