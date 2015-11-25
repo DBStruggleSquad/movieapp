@@ -146,8 +146,8 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
         {
           $scope.changeQuote();
         } 
-        else if (opt === "Business"){
-          /*$scope.createBusiness();*/
+        else if (opt === "Business Quote"){
+            $scope.changebQuote($scope.bussName);
         }
         else if (opt  === "Email") 
         {
@@ -163,18 +163,19 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     // CHANGE EMAIL
     //-----------------------------
 
-
-    $scope.data2sendcreate = {bname: "", quote:""};
-    $scope.createbuss = function(){
-      $http.post('/createbuss', $scope.data2sendcreate).success(function(data){
+    $scope.data2send = {gvar: "", bname: $scope.bussName};
+    $scope.data2sendb = {quote: "", bname: $scope.bussName};
+    $scope.changebQuote = function(dude){
+      $scope.data2send.bname = dude;
+      $http.post('/changebussquote', $scope.data2send).success(function(data){
         location.reload(true)
       }).error(function(data){
-        window.alert("Business Exists");
+        window.alert("Worst error code ever in post");
       });
     };
 
 
-  $scope.data2send = {gvar: ""};
+  
     $scope.changeEmail = function(){
       $http.post('/changeEmail', $scope.data2send).success(function(data){
         location.reload(true)
