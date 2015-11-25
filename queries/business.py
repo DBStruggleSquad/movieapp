@@ -51,6 +51,20 @@ def addBusinessRoute(app, mysql, genres, current_user):
         print "business post added"
         return jsonify({})
 
+    @app.route('/changebussquote', methods=['POST'])
+    def changebuss_quote():
+        data = request.get_json()
+        print data
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('changeBussQuote', (data['gvar'],data['bname'],current_user.id))
+        #cur.callproc('ListExists', ('dude', 'Jennifer Lawrence', 'Movies' ))
+        conn.commit()
+        conn.close()
+        print "Quote Changed"
+        return jsonify({})
+
+
     @app.route('/createbuss', methods=['POST'])
     def create_buss():
         data = request.get_json()

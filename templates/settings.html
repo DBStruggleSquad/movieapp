@@ -147,9 +147,9 @@
             <label for="list"> {{currentBussOpt}} </label>
             <br>
             <br>
-            <input type="text" ng-model="data2send.gvar" class="form-control" id="list-name" placeholder="New {{accType}}..." />
+            <input type="text" ng-model="data2sendb.quote" class="form-control" id="list-name" placeholder="New {{accType}}..." />
           </div>
-          <button type="submit" class="btn btn-default" ng-click="toggleBussSet(accType); onClickOpt(accType)">Change</button>
+          <button type="submit" class="btn btn-default" ng-click="toggleBussSet(accType); onClickOpt(accType);changebQuote()">Change</button>
         </form>
       </modal>      
 
@@ -165,7 +165,7 @@
             <label for="list">{{accType}} Quote:</label>
             <input type="text" ng-model="data2sendcreate.quote" class="form-control" id="list-name" placeholder="{{accType}} Quote..." />            
           </div>
-          <button type="submit" class="btn btn-default" ng-click="toggleBusinessModal(accType); onClickOpt(accType); createbuss()">Create</button>
+          <button type="submit" class="btn btn-default" ng-click="toggleBusinessModal(accType);createbuss()">Create</button>
         </form>
       </modal>      
 
