@@ -146,7 +146,7 @@ def newsfeed_activity():
     username = "'"+ current_user.username +"'"
     conn = mysql.connect()
     cur = conn.cursor()
-    query = "select Lists.username, List_name, 'List', DATE(Lists.date_modified) d, users.Image_link,''  from Lists, follows, users where follows.followed_username =" + username +" and follows.following_username = Lists.username and follows.following_username = users.username union select Reviews.username, Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link, '' from Reviews, follows, users where follows.followed_username = " + username +" and follows.following_username = Reviews.username and follows.following_username = users.username union select text_user.username, Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link, Text_post from text_user, follows, users where follows.followed_username =" + username + " and follows.following_username = text_user.username and follows.following_username = users.username order by d desc"
+    query = "select Lists.username, List_name, 'List', DATE(Lists.date_modified) d, users.Image_link,''  from Lists, follows, users where follows.following_username =" + username +" and follows.followed_username = Lists.username and follows.followed_username = users.username union select Reviews.username, Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link, '' from Reviews, follows, users where follows.following_username = " + username +" and follows.followed_username = Reviews.username and follows.followed_username = users.username union select text_user.username, Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link, Text_post from text_user, follows, users where follows.following_username =" + username + " and follows.followed_username = text_user.username and follows.followed_username = users.username order by d desc"
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
@@ -447,7 +447,6 @@ def follow_user():
 @app.route('/unfollowuser', methods=['POST'])
 def unfollow_user():
     data = request.get_json()
-    print data
     conn = mysql.connect()
     cur = conn.cursor()
     cur.callproc('unfollow', (current_user.username, data['user']))
@@ -520,7 +519,6 @@ def fan_follower_notification(followed, follower):
 def myuserank():
     dude = User.get(current_user.id)
     data = {'rank' :dude.rank, 'user': dude.username, 'picture': dude.image, 'quote': dude.quote, 'email': dude.id} 
-    query = "select users.Image_link from users where users = '" + current_user + "'"
     return jsonify(data)
 
 @app.route('/changepass', methods=['POST'])

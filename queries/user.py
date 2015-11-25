@@ -97,14 +97,16 @@ def addUserRoutes(app, mysql, genres, current_user):
         username = "'"+ username +"'"
         conn = mysql.connect()
         cur = conn.cursor()
-        query = "select * from Reviews where username = " + username
+        query = "select Reviews.Title, Reviews.username, Reviews.Movie_title, Reviews.Review, Reviews.Sharable, Date(Reviews.date_modified), Reviews.rating from Reviews where username = " + username + " order by Reviews.date_modified desc"
         cur.execute(query)
         result = cur.fetchall()
         conn.close()
     
         for i in result:
-            data['reviews'].append({'Movie_title': str(i[2]),'Review_title': str(i[0]),'Rating': str(i[7]),'review': str(i[3])})
+            data['reviews'].append({'Movie_title': str(i[2]),'Review_title': str(i[0]),'Rating': str(i[6]),'review': str(i[3])})
     
+        print "Review"
+        print data
         return jsonify(data)
     
     
