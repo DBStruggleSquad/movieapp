@@ -1,6 +1,7 @@
 //= require_tree .
 app.controller('profile', ['$scope', '$http', function($scope, $http) {
 	$scope.currentUser = "";
+	
   $scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
       $scope.movie = data;
   }).error(function(data){

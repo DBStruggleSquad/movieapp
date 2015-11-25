@@ -79,26 +79,46 @@ def addRoutes(app, mysql, genres):
     @app.route('/movieinfo/<movie_title>')
     def movieinfo(movie_title):
         result = {}
-        
-        #query = "select * from movies where movies.title = '" + movie_title + "'"
-        query = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where m.title = '" + movie_title + "' group by Movie_title"
-        
+        query = "select Movie_title from  reviews where reviews.Movie_title = '" + movie_title + "'"
         conn = mysql.connect()
         cur = conn.cursor()
         cur.execute(query)
         qresult = cur.fetchall()
         conn.close()
-        for info in qresult:
-            print info
-            result['name'] = str(info[0])
-            result['year'] = str(info[2])
-            result['genres'] = str(info[4])
-            result['poster'] = str(info[3])
-            result['rating'] = str(info[8])
-            result['synopsis'] = str(info[1])
-            print "salio de aqui"
-        
-        
+        for name in qresult:
+            query2 = "Select m.*, avg(rating) r_num from Reviews as r join Movies m on r.Movie_title = m.Title where m.title = '" + movie_title + "' group by Movie_title"
+            print "entro a revie"
+            conn = mysql.connect()
+            cur = conn.cursor()
+            cur.execute(query2)
+            qresult = cur.fetchall()
+            conn.close()
+            for info in qresult:
+                print info
+                result['name'] = str(info[0])
+                result['year'] = str(info[2])
+                result['genres'] = str(info[4])
+                result['poster'] = str(info[3])
+                result['rating'] = str(info[8])
+                result['synopsis'] = str(info[1])
+        if 'name' not in result: 
+            print "no tioene avg"
+            query2 = "select * from movies where movies.Title = '" + movie_title + "'"
+            conn = mysql.connect()
+            cur = conn.cursor()
+            cur.execute(query2)
+            qresult = cur.fetchall()
+            conn.close()
+            for info in qresult:
+                print info
+                result['name'] = str(info[0])
+                result['year'] = str(info[2])
+                result['genres'] = str(info[4])
+                result['poster'] = str(info[3])
+                result['rating'] = 0
+                result['synopsis'] = str(info[1])
+        print "\n\n\n\n\n\n"
+        print "buscando actores"
         #anade los actores que partisiparon en la movie
         query = "select * from actors_in_movie where actors_in_movie.Title_mov = '" + movie_title + "'"
         conn = mysql.connect()
