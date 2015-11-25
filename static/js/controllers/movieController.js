@@ -10,11 +10,19 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
   
   $scope.movieReviews = $http.get('/moviereviews/' + localStorage.getItem("movieTitle")).success(function(data){
       $scope.movieReviews = data;
+      console.log(JSON.toString($scope.movieReviews))
   });
 
   $scope.availableLists = $http.get('/usermovielistnames' ).success(function(data){
       $scope.availableLists = data.lists;
     });
+
+  $scope.isReviewer = function(user, reviewer){
+    console.log(user);
+    console.log(reviewer);
+    if(user == reviewer) return true;
+    else return false;
+  };
 
   $scope.tabs = [{
             title: 'Info',
@@ -87,6 +95,7 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
 		$scope.data2send.movieTitle = moviename;
 		$scope.data2send.listName = selectedlistname;
 		$http.post('/addmovie2list', $scope.data2send).success(function(data){
+			location.reload(true);
 		}).error(function(data){
 			window.alert("hola dentro del addMovie2List rn movieController");
 		});
@@ -97,7 +106,7 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
   $scope.addReview = function(moviename){ 
     $scope.data2sendReview.movieTitle = moviename;
     $http.post('/addReview', $scope.data2sendReview).success(function(data){
-      window.alert("worked")
+       location.reload(true);
     }).error(function(data){
       window.alert("hola review");
     });

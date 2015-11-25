@@ -57,12 +57,6 @@
                             <p ><strong>Password</strong></p><br><p style="text-indent: 2em;">********</p>
                             </div>
                         </li>
-                        <li ng-click="toggleModal('Quote')" ng-class="{active:service.active}">
-                            <div>
-                            <p ><strong>Quote</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Quote }}</p>
-                            </div>
-                        </li>
-
                     </ul>
               </fieldset>
           </form>
@@ -74,7 +68,7 @@
       <div class="profile-settings">
           <form>
               <fieldset>
-                  <legend><h4>Profile</h4></legend>
+                  <legend><h4>Personal Profile</h4></legend>
                   <ul>
                       <li ng-click="toggleActive(service)" ng-class="{active:service.active}">
                           <div>
@@ -86,22 +80,50 @@
                             </span>
                           </div>
                       </li>                          
-<!--                       <li ng-repeat="option in profileOptions.profOptions" ng-click="toggleActive(service)" ng-class="{active:service.active}">
-                          <div>
-                              <p><strong>{{ option.type }}</strong></p><br>
-                              <img ng-show="files[0].name == null" ng-change="option.current = files[0].name.toString()" ng-src="{{option.current}}" style="text-indent: 2em;" class="drop-box" ng-model="profilePic2" ngf-select="uploadFiles($files)"  ngf-drop="uploadFiles($files)"  accept="image/*" ngf-pattern="'image/*'" ngf-drag-over-class="dragover" ng-model-options="profilePic2" ngf-multiple="false" ngf-capture="'camera'" >   </img>
-                              <img class="after-drop" ng-show="files[0].name != null" ngf-src="profilePic2">
-                              <br><span class="progress" ng-show="progress >= 0">
-                                <div class="progress" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-                            </span>
-                          </div>
-                      </li> -->
+                        <li ng-click="toggleModal('Quote')" ng-class="{active:service.active}">
+                            <div>
+                            <p ><strong>Quote</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Quote }}</p>
+                            </div>
+                        </li>
                   </ul>
               </fieldset>
           </form>
       </div>
 
-      <modal title="Change Setting" visible="showModal">
+      <!-- ------------------------------------ -->
+      <!--              BUSINESS SETTINGS        -->
+      <!-- ------------------------------------ -->
+      <div class="business-settings">
+          <form>
+              <fieldset>
+                  <legend><h4>Business Profile</h4></legend>
+                  <ul ng-show="nothasbusiness">
+                  	<!-- CREATE BUSS -->
+                    <li ng-click="toggleBusinessModal('Business')" ng-class="{active:service.active}">
+                      <div>
+                        <a>Create Business</a>
+                      </div>
+                    </li>
+                  </ul>
+                  <!-- SHOW BUSS SI TIENES -->
+                  <ul ng-show="hasbusiness">
+                        <li ng-click="toggleModal('Business Username')" ng-class="{active:service.active}">
+                            <div>
+                            <p ><strong>Business Username</strong></p><br><p style="text-indent: 2em;">{{bussName}}</p>
+                            </div>
+                        </li>                      
+                        <li ng-click="toggleModal('Business Quote')" ng-class="{active:service.active}">
+                            <div>
+                            <p ><strong>Business Quote</strong></p><br><p style="text-indent: 2em;">{{bussQuote}}</p>
+                            </div>
+                        </li>
+                  </ul>
+                  
+              </fieldset>
+          </form>
+      </div>      
+
+      <modal title="Change Account Setting" visible="showModal">
         <form role="form">
           <div class="form-group">
             <label for="list"> Current {{accType}} </label>
@@ -115,6 +137,37 @@
           <button type="submit" class="btn btn-default" ng-click="toggleModal(accType); onClickOpt(accType)">Change</button>
         </form>
       </modal>
+
+      <modal title="Change Business Setting" visible="showBussSetModal">
+        <form role="form">
+          <div class="form-group">
+            <label for="list"> Current {{accTBype}} </label>
+            
+            <br>
+            <label for="list"> {{currentBussOpt}} </label>
+            <br>
+            <br>
+            <input type="text" ng-model="data2send.gvar" class="form-control" id="list-name" placeholder="New {{accType}}..." />
+          </div>
+          <button type="submit" class="btn btn-default" ng-click="toggleBussSet(accType); onClickOpt(accType)">Change</button>
+        </form>
+      </modal>      
+
+      <modal title="Change Setting" visible="showBusinessModal">
+        <form role="form">
+          <div class="form-group">
+            <label for="list">Create a New {{ accType }}</label>
+            <br>
+            <label for="list">{{accType}} Name:</label>
+            <br>
+            <input type="text" ng-model="data2send.gvar" class="form-control" id="list-name" placeholder="New {{accType}}..." />
+            <br>
+            <label for="list">{{accType}} Quote:</label>
+            <input type="text" ng-model="data2send.gvar" class="form-control" id="list-name" placeholder="{{accType}} Quote..." />            
+          </div>
+          <button type="submit" class="btn btn-default" ng-click="toggleBusinessModal(accType); onClickOpt(accType)">Create</button>
+        </form>
+      </modal>      
 
     </div>
 

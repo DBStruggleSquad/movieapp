@@ -71,6 +71,7 @@ app.controller('userNav', ['$scope', function($scope){
         window.location.href = "/users";
     };
     $scope.goToAnothersUserProfile = function(username){
+    	console.log(username)
     	localStorage.removeItem("userName");
         localStorage.setItem("userName", username);
     	window.location.href = "/userprofile?" + username;

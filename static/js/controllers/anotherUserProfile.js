@@ -20,6 +20,7 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
           };
     
     
+    
 	$scope.userName = localStorage.getItem('userName');
 
     $scope.activities = $http.get('/userprofileactivity/' + $scope.userName).success(function(data){
@@ -57,7 +58,7 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
     return new Array(parseInt($scope.userDetails.rating));
   };     
 
-$scope.tabs = [{
+  $scope.tabs = [{
             title: 'Activity',
             url: 'activity.tpl.html'
         }, {

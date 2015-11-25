@@ -25,16 +25,25 @@ def addUserRoutes(app, mysql, genres, current_user):
     def userpofileactivity(username):
         data = {'activity' : []}
         #query
-        username = "'"+ username +"'"
+        username = username 
         conn = mysql.connect()
         cur = conn.cursor()
-        query = "select username, List_name, 'List', DATE(date_modified) d from Lists where username =" + username +"union select username, Title, 'Review', DATE(date_modified) d from Reviews where username = " + username +" union select username, Title, 'Text post', DATE(date_modified) d from text_user where username =" + username + "order by d desc"
+        query = """
+        select Lists.username, Lists.List_name, 'List', DATE(Lists.date_modified) d, users.Image_link
+        from Lists left join users on Lists.username = users.username where Lists.username = '""" + username + "'" + """ 
+        union select Reviews.username, Reviews.Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link from Reviews left join users on Reviews.username = users.username
+        where Reviews.username = '""" + username + "'" + """
+        union select text_user.username, text_user.Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link from text_user left join users on text_user.username = users.username where text_user.username = '""" + username + "'" + """ order by d desc
+    
+        
+        """
+        
         cur.execute(query)
         result = cur.fetchall()
         conn.close()
         print result
         for i in result:
-            data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1])})
+            data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1]), 'img': str(i[4])})
     
         return jsonify(data)
 
@@ -42,16 +51,25 @@ def addUserRoutes(app, mysql, genres, current_user):
     def myuserpofileactivity():
         data = {'activity' : []}
         #query
-        username = "'"+ current_user.username +"'"
+        username = current_user.username 
         conn = mysql.connect()
         cur = conn.cursor()
-        query = "select username, List_name, 'List', DATE(date_modified) d, '' from Lists where username =" + username +"union select username, Title, 'Review', DATE(date_modified) d, '' from Reviews where username = " + username +" union select username, Title, 'Text post', DATE(date_modified) d, Text_post from text_user where username =" + username + "order by d desc"
+        query = """
+        select Lists.username, Lists.List_name, 'List', DATE(Lists.date_modified) d, '', users.Image_link
+        from Lists left join users on Lists.username = users.username where Lists.username = '""" + username + "'" + """ 
+        union select Reviews.username, Reviews.Title, 'Review', DATE(Reviews.date_modified) d, '', users.Image_link from Reviews left join users on Reviews.username = users.username
+        where Reviews.username = '""" + username + "'" + """
+        union select text_user.username, text_user.Title, 'Text post', DATE(text_user.date_modified) d, text_user.Text_post, users.Image_link from text_user left join users on text_user.username = users.username where text_user.username = '""" + username + "'" + """ order by d desc
+    
+        
+        """
+        
         cur.execute(query)
         result = cur.fetchall()
         conn.close()
         print result
         for i in result:
-            data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1]), 'post': str(i[4])})
+            data['activity'].append({'name': str(i[0]),'type': str(i[2]),'pubdate': str(i[3]), 'title' : str(i[1]), 'post': str(i[4]), 'img': str(i[5])})
     
         return jsonify(data)
     
@@ -94,6 +112,8 @@ def addUserRoutes(app, mysql, genres, current_user):
     @app.route('/userank/<username>')
     def userank(username):
         username = "'"+ username +"'"
+        print "user en rank"
+        print username
         conn = mysql.connect()
         cur = conn.cursor()
         query = "select account_belong_user.email, users.username, users.quote, users.user_rank, users.Image_link from account_belong_user, users where account_belong_user.username = users.username and users.username = " + username
@@ -102,7 +122,15 @@ def addUserRoutes(app, mysql, genres, current_user):
         conn.close()
         data = {'rank' :current_user.rank, 'user': username, 'picture': current_user.image, 'quote': current_user.quote}
         for i in result:
-            data = {'rank' :str(i[3]), 'user': str(i[1]), 'picture': str(i[4]), 'quote': str(i[2]), 'email': str(i[0])}
+            print i
+            data['rank'] = str(i[3])
+            data['user'] = str(i[1])
+            data[ 'picture'] = str(i[4])
+            data['quote'] = str(i[2])
+            data['email'] =  str(i[0])
+            
+        print "rank"
+        print data
         return jsonify(data)
     
     @app.route('/myuserlists')

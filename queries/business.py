@@ -35,6 +35,7 @@ def addBusinessRoute(app, mysql, genres, current_user):
         print result
         return jsonify(result)
     
+    
     @app.route('/addbusspost', methods=['POST'])
     def add_buss_post():
         data = request.get_json()
@@ -49,7 +50,42 @@ def addBusinessRoute(app, mysql, genres, current_user):
         conn.close()
         print "business post added"
         return jsonify({})
-    
+
+    @app.route('/ownsbusiness')
+    def owns_business():
+        """
+        query = "select account_belong_business.username, account_belong_business.quote from account_belong_business where account_belong_business.email ='" + current_user.id + "'"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        data = []
+        for row in queryResult:
+            data.append({'username': str(row[0]) ,'quote': str(row[1])})
+        if queryResult == "":
+            return "false"
+        else:
+            return jsonify(data)
+            """
+        query = "select account_belong_business.email, account_belong_business.username, account_belong_business.quote  from account_belong_business where account_belong_business.email = '" + current_user.email + "'"
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        hasBuss = False
+        bussName = ""
+        bussQuote = ""
+        for email in queryResult:
+            if str(email[0]) == current_user.email:
+                hasBuss = True
+                bussName = str(email[1])
+                bussQuote = str(email[2])
+        
+        return jsonify({'data': hasBuss, 'bussName': bussName, 'bussQuote': bussQuote})
+        
+
     @app.route('/isuserownerbuisnesspage/<businesspagename>')
     def isuserownerbuisnesspage(businesspagename):
         print businesspagename
@@ -82,6 +118,49 @@ def addBusinessRoute(app, mysql, genres, current_user):
         for row in result:
             data['following'].append({'username': str(row[0])})
         return jsonify(data)
+    
+    @app.route('/isfollowingbuss/<bussname>')
+    def isfollowing_buss(bussname):
+        username = "'" + current_user.username + "'"
+        tempbussname = "'" + bussname + "'"
+        query = """
+        select followsbuss.following_username from followsbuss 
+        where followsbuss.following_username = """ + username + " and followsbuss.buss_user = " + tempbussname
+
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.execute(query)
+        queryResult = cur.fetchall()
+        conn.close()
+        isfollowing = False
+        for row in queryResult:
+            if str(row[0]) == current_user.username:
+                isfollowing = True
+        
+        print isfollowing
+        
+        return jsonify({"isFollowing": isfollowing})
+    
+    @app.route('/followBuss/<bussName>')
+    def follow_buss(bussName):
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('bussFollow', (current_user.username, bussName))
+        conn.commit()
+        conn.close()
+        
+        return jsonify({"data": "siguiendo buss"})
+    
+    @app.route('/unfollowBuss/<bussName>')
+    def unfollow_buss(bussName):
+        conn = mysql.connect()
+        cur = conn.cursor()
+        cur.callproc('unfollowBuss', (current_user.username, bussName))
+        conn.commit()
+        conn.close()
+        
+        return jsonify({"data": "no siguiendo buss"})
+        
 """
         query = ""
         conn = mysql.connect()

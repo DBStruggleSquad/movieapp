@@ -474,6 +474,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
     msg.html = html_body
     mail.send(msg)
 
+
 def follower_notification(followed, follower):
     send_email(follower + " is now following you!",
                "filmshacktest123@gmail.com",
