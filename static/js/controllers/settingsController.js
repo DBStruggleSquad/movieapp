@@ -112,6 +112,10 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     $scope.accType = "Business";
   }
 
+  
+  //----------------------------
+  // FILESSSS 
+  //----------------------------
   $scope.files;
   $scope.uploadFiles = function (files) {
     $scope.files = files;

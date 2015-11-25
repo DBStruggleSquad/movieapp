@@ -12,7 +12,8 @@ from flask.ext.login import LoginManager, UserMixin, current_user, login_user, l
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.mail import Mail, Message
 from flask.ext.testing import TestCase
-
+import urlparse
+import os
 
 global app, mysql, mail
 
@@ -21,6 +22,12 @@ app = Flask(__name__)
 mysql = MySQL()
 
 
+url = urlparse.urlparse(os.environ['DATABASE_URL'])
+app.config['MYSQL_DATABASE_USER'] = url.username
+app.config['MYSQL_DATABASE_PASSWORD'] = url.password
+app.config['MYSQL_DATABASE_HOST'] = url.hostname
+app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
+app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
 
 
 app.config.update(dict(
