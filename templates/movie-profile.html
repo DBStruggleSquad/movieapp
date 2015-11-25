@@ -121,9 +121,14 @@
         <div style='margin: 0 auto;'>
         <div style='float: right;'>
           <div class="list-post-options">
-            {% endraw %}<button id="delete-button" ng-show="isReviewer(current_user.username, review.reviewer)" ng-click="">
+
+			<!--  		BUTTONNNNNNNNNNNN  			-->
+            <button id="delete-button"  ng-show="isReviewer(review.reviewer)" ng-click="deleteReview(review.Review_title)">
             </button>
-            {% raw %}
+            
+
+
+
           </div>
         </div>
         </div>

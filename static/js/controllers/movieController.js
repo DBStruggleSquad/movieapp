@@ -1,6 +1,6 @@
 //= require_tree .
 app.controller('profile', ['$scope', '$http', function($scope, $http) {
-
+	$scope.currentUser = "";
   $scope.movie = $http.get("/movieinfo/" + localStorage.getItem("movieTitle")).success(function(data){
       $scope.movie = data;
   }).error(function(data){
@@ -13,14 +13,15 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
       console.log(JSON.toString($scope.movieReviews))
   });
 
-  $scope.availableLists = $http.get('/usermovielistnames' ).success(function(data){
-      $scope.availableLists = data.lists;
+  $scope.availableLists = $http.get('/usermovielistnames2' ).success(function(data){
+      $scope.availableLists = data.data.lists;
+      $scope.currentUser = data.currentuser;
     });
 
-  $scope.isReviewer = function(user, reviewer){
-    console.log(user);
+  $scope.isReviewer = function(reviewer){
     console.log(reviewer);
-    if(user == reviewer) return true;
+    console.log($scope.currentUser);
+    if($scope.currentUser == reviewer) return true;
     else return false;
   };
 
@@ -110,6 +111,29 @@ app.controller('profile', ['$scope', '$http', function($scope, $http) {
     }).error(function(data){
       window.alert("hola review");
     });
+  };
+  
+  //----------------
+  // DELETE ITEM
+  //----------------
+  $scope.deleteReview = function(title){
+	  console.log(title);
+  	$http.delete('/deletereview/' + title)
+  	.success(function(data){
+  		console.log("Item deleted");
+  		location.reload(true);
+  	}).error(function(data, status){
+  		/*
+  		if(status==404){
+  			$.jAlert({
+  	              'title': data.title,
+  	              'content': '<center>' + data.data + '</center>',
+  	              'theme': 'red',
+  	              'btns': { 'text': 'OK' },
+  	              'showAnimation': 'zoomIn'
+  	            });
+  		}*/
+  	});
   };
 
 }]);

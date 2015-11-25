@@ -127,6 +127,14 @@ def business_profile():
 #                                Queries
 #===================================================================================
 
+@app.route('/deletereview/<rtitle>', methods=['DELETE'])
+def delete_review(rtitle):
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('deleteReview', (current_user.username, rtitle))
+    conn.commit()
+    conn.close()
+    return jsonify({'data': "review deleted"})
 
 #---------------------------------
 #     Profile RELATED
@@ -171,7 +179,25 @@ def user_list_names():
         print i[0]
         data['lists'].append({'name': str(i[0])})
     print data
+
     return jsonify(data)
+
+@app.route('/usermovielistnames2')
+def user_list_names2():
+    data = {'lists' : []}
+    #query
+    conn = mysql.connect()
+    cur = conn.cursor()
+    query = "select lists.List_name from lists where lists.Category = 'Movies' and lists.username = '" + current_user.username + "'"
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+        
+    for i in result:
+        print i[0]
+        data['lists'].append({'name': str(i[0])})
+    result = {'data': data, 'currentuser': current_user.username}
+    return jsonify(result)
 
 @app.route('/listinfo/<listName>')
 def listinfo(listName):
@@ -494,6 +520,7 @@ def fan_follower_notification(followed, follower):
 def myuserank():
     dude = User.get(current_user.id)
     data = {'rank' :dude.rank, 'user': dude.username, 'picture': dude.image, 'quote': dude.quote, 'email': dude.id} 
+    query = "select users.Image_link from users where users = '" + current_user + "'"
     return jsonify(data)
 
 @app.route('/changepass', methods=['POST'])
