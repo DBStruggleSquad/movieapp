@@ -127,6 +127,14 @@ def business_profile():
 #                                Queries
 #===================================================================================
 
+@app.route('/deletereview/<rtitle>', methods=['DELETE'])
+def delete_review(rtitle):
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('deleteReview', (current_user.username, rtitle))
+    conn.commit()
+    conn.close()
+    return jsonify({'data': "review deleted"})
 
 #---------------------------------
 #     Profile RELATED
@@ -138,7 +146,7 @@ def newsfeed_activity():
     username = "'"+ current_user.username +"'"
     conn = mysql.connect()
     cur = conn.cursor()
-    query = "select Lists.username, List_name, 'List', DATE(Lists.date_modified) d, users.Image_link,''  from Lists, follows, users where follows.followed_username =" + username +" and follows.following_username = Lists.username and follows.following_username = users.username union select Reviews.username, Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link, '' from Reviews, follows, users where follows.followed_username = " + username +" and follows.following_username = Reviews.username and follows.following_username = users.username union select text_user.username, Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link, Text_post from text_user, follows, users where follows.followed_username =" + username + " and follows.following_username = text_user.username and follows.following_username = users.username order by d desc"
+    query = "select Lists.username, List_name, 'List', DATE(Lists.date_modified) d, users.Image_link,''  from Lists, follows, users where follows.following_username =" + username +" and follows.followed_username = Lists.username and follows.followed_username = users.username union select Reviews.username, Title, 'Review', DATE(Reviews.date_modified) d, users.Image_link, '' from Reviews, follows, users where follows.following_username = " + username +" and follows.followed_username = Reviews.username and follows.followed_username = users.username union select text_user.username, Title, 'Text post', DATE(text_user.date_modified) d, users.Image_link, Text_post from text_user, follows, users where follows.following_username =" + username + " and follows.followed_username = text_user.username and follows.followed_username = users.username order by d desc"
     cur.execute(query)
     result = cur.fetchall()
     conn.close()
@@ -171,7 +179,25 @@ def user_list_names():
         print i[0]
         data['lists'].append({'name': str(i[0])})
     print data
+
     return jsonify(data)
+
+@app.route('/usermovielistnames2')
+def user_list_names2():
+    data = {'lists' : []}
+    #query
+    conn = mysql.connect()
+    cur = conn.cursor()
+    query = "select lists.List_name from lists where lists.Category = 'Movies' and lists.username = '" + current_user.username + "'"
+    cur.execute(query)
+    result = cur.fetchall()
+    conn.close()
+        
+    for i in result:
+        print i[0]
+        data['lists'].append({'name': str(i[0])})
+    result = {'data': data, 'currentuser': current_user.username}
+    return jsonify(result)
 
 @app.route('/listinfo/<listName>')
 def listinfo(listName):
@@ -424,7 +450,6 @@ def follow_user():
 @app.route('/unfollowuser', methods=['POST'])
 def unfollow_user():
     data = request.get_json()
-    print data
     conn = mysql.connect()
     cur = conn.cursor()
     cur.callproc('unfollow', (current_user.username, data['user']))

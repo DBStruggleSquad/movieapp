@@ -34,7 +34,9 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
     });
 
     $scope.userRank = $http.get('/userank/' + $scope.userName).success(function(data){
-        if (data['rank']==="None") {$scope.userDetails.rating = "0";} else{$scope.userDetails.rating = data["rank"];};
+        if (data['rank']==="None") {$scope.userDetails.rating = "0";} 
+        else{$scope.userDetails.rating = data["rank"];};
+        
         $scope.userDetails.name = data["user"];
         $scope.userDetails.quote = data["quote"];
         $scope.userDetails.picture = data["picture"];
@@ -42,14 +44,19 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
     });
 
       $scope.userReview = $http.get('/userreviews/' + $scope.userName).success(function(data){
+    	  console.log("entro")
           $scope.userReview = data.reviews;
+    	  console.log("rev")
+    	  console.log(JSON.toString(data))
       }).error(function(data, status){
           window.alert('userreview' + data + status);
       });
+      
 
   //
   // To get each reviewer's rating, we only need to set a bound; users cannot give half stars.
   //
+
   $scope.getReviewerRating = function(number) {
     return new Array(parseInt(number));
   }; 
@@ -57,6 +64,7 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
   $scope.getUserRating = function() {
     return new Array(parseInt($scope.userDetails.rating));
   };     
+
 
   $scope.tabs = [{
             title: 'Activity',
@@ -108,6 +116,7 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
 
     $scope.data2sendfollow = {user: "", email:""};
     $scope.addfollowuser = function(){ 
+    	console.log($scope.userDetails.name)
     	$scope.data2sendfollow.user = $scope.userDetails.name;
     	$scope.data2sendfollow.email = $scope.userDetails.email
 	    $http.post('/followuser', $scope.data2sendfollow).success(function(data){
@@ -119,9 +128,14 @@ app.controller('anotherUserProfile', ['$scope', '$http', function($scope,$http) 
 
     $scope.data2sendfollow = {user: "", email:""};
     $scope.unfollowuser = function(){ 
+    	
       $scope.data2sendfollow.user = $scope.userDetails.name;
       $scope.data2sendfollow.email = $scope.userDetails.email
+      
       console.log("va hacer el unfollow")
+      
+      console.log($scope.userDetails.name)
+      
       $http.post('/unfollowuser', $scope.data2sendfollow).success(function(data){
     	  location.reload(true);
       }).error(function(data){
