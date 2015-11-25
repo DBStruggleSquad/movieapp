@@ -97,3 +97,14 @@ Gotta optimize our time more.
 
 #####Planned work for Sprint 5#####
 * Finish the project.
+
+# Sprint 5
+
+#####What worked well? #####
+Adding the email notifications was relatively straightforward and did not take as much time as we had anticipated. Setting up the RESTful services and user authentification also went well thanks to some of the libraries available to Flask.
+
+#####What didn't work well? #####
+We found some minor issues in our queries, where the data obtained was not the data expected. However, we spotted them on time and were able to fix the issues. Implementing the user and movie search took us more time than expected because we were having issues transferring data from one controller to another. Ultimately, we decided to take advantage of HTML5's local storage to perform this transfer. We also had some issues setting up some of the front-end features (they were not behaving the way we wanted them to) such as modals and positioning divs.
+ 
+#####What we learned? #####
+We gained a lot of experience working with tools that were new to us and got a feel about what it is like to bring to life a heavy project/application. Due to unexpected events, we were not able to follow our work plan as expected. Additionally, some features took us more (or less) time than the duration we had established. This gave us an idea of how we should arrange future work plans to better adjust to unexpected events. Overall, we are satisfied with our achievements regardless of the circumstances and we gained a lot of technical experience (the team had little or no experience working with the technologies that were selected).
