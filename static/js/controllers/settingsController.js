@@ -121,17 +121,10 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
   AWS.config.region = 'us-east-1';
 
   var bucket = new AWS.S3({params: {Bucket: 'filmshak'}});
-  bucket.listObjects(function(err, data){
-	  if(err){
-		  alert("Could not load object");
-	  }else{
-		  var txt = " ";
-		  for (var i = 0; i < data.Contents.length; i++) {
-		        txt += '\n' + data.Contents[i].Key;
-		  }
-		  alert("Hizo load con existo data: " + txt);
-	  }
-  });
+  var params = {Key: 'data.txt', Body: "hola"};
+  bucket.upload(params, function (err, data) {
+      alert(err ? 'ERROR!' : 'SAVED.');
+    });
   
   $scope.uploadFiles = function(file) {
 	  get_signed_request(file);
