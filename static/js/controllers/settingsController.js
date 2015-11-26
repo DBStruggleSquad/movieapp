@@ -112,6 +112,14 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     $scope.accType = "Business";
   }
 
+
+  //----------------------------
+  // FILESSSS 
+  //----------------------------
+  console.log("entrando a la seccion de upload img");
+  AWS.config. update({accessKeyId: "AKIAJMYLTY2I4EHYNUVA", secretAccessKey: "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"});
+  AWS.config.region = 'us-east-1';
+
   var bucket = new AWS.S3({params: {Bucket: 'filmshak'}});
   bucket.listObjects(function(err, data){
 	  if(err){
@@ -124,13 +132,6 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
 		  alert("Hizo load con existo data: " + txt);
 	  }
   });
-  //----------------------------
-  // FILESSSS 
-  //----------------------------
-  console.log("entrando a la seccion de upload img");
-  AWS.config. update({accessKeyId: "AKIAJMYLTY2I4EHYNUVA", secretAccessKey: "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"});
-  AWS.config.region = 'us-east-1';
-
   
   $scope.uploadFiles = function(file) {
 	  get_signed_request(file);
