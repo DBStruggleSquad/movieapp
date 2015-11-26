@@ -15,19 +15,42 @@ from flask.ext.testing import TestCase
 import urlparse
 import os
 
-global app, mysql, mail
+import sha
+import hmac
+from uuid import uuid4
+from json import dumps
+from base64 import b64encode
+from datetime import datetime, timedelta
+from hashlib import sha1
+import time, os, json, base64, hmac, urllib
+
+
+global app, mysql, mail, baseS3Url
 
 app = Flask(__name__)
 
 mysql = MySQL()
+baseS3Url = 'https://filshack.s3.amazonaws.com/'
 
+app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
+app.config['MYSQL_DATABASE_PASSWORD'] = "a28c9ca5243937f"
+app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
+app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
+app.config['FLASKS3_ACTIVE'] = True
+app.config['S3_BUCKET_NAME'] = 'filmshack'
+app.config['AWS_STORAGE_BUCKET_NAME'] = 'filmshack'
+app.config['AWS_ACCESS_KEY_ID'] = 'AKIAJMYLTY2I4EHYNUVA'
+app.config['AWS_SECRET_ACCESS_KEY'] = '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'
+app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
+
+"""
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 app.config['MYSQL_DATABASE_USER'] = url.username
 app.config['MYSQL_DATABASE_PASSWORD'] = url.password
 app.config['MYSQL_DATABASE_HOST'] = url.hostname
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
-
+"""
 
 app.config.update(dict(
     MAIL_SERVER = 'smtp.googlemail.com',
@@ -51,6 +74,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
 class UserNotFoundError(Exception):
     pass
 #=========
@@ -73,6 +97,49 @@ def hello():
     return render_template('profile.html')
 
 
+@app.route('/uploadprofilepicture', methods=['POST'])
+def upload_profile_pic():
+    print "Extrayendo foto para profile pic"
+    data =  request.file
+    #print data['file']
+    return jsonify({'data': "entro"})
+
+
+# Views
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/signed_urls')
+def signed_urls():
+
+    def make_policy():
+        policy_object = {
+            'expiration': (datetime.now() + timedelta(hours=24)).strftime('%Y-%m-%dT%H:%M:%S.000Z'),
+            'conditions': [
+                {'bucket': 'filmshack'},
+                {'acl': 'public-read'},
+                ['starts-with', '$key', 'uploads/'],
+                {'success_action_status': '201'}
+            ]
+        }
+        return b64encode(dumps(policy_object))
+
+    def sign_policy(policy):
+        return b64encode(hmac.new("aGrN6yQoOgMrvrKYaxe0wgJTUkV+wGklvOCxy2BB", policy, sha).digest())
+
+    #path = current_user.email + "/" + title
+    path = uuid4().hex + '/' + "solo intentando"
+    policy = make_policy()
+    print ":esdgf"
+    return jsonify({
+        'expires': policy['expitation'],
+        'policy': policy,
+        'signature': sign_policy(policy),
+        'key': 'uploads/' + path,
+        'success_action_redirect': '/',
+    })
 
 
 @app.route('/login')
