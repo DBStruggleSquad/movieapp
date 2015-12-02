@@ -88,7 +88,7 @@
       	<!-- ----------- -->
       	<!-- PROFILE PIC -->
       	<!-- ----------- -->
-      	 
+      	 {% endraw %}
       	<div id="dialog-form" title="Change Profile Picture">
 		 
 		  <form  action="https://filmshack.s3.amazonaws.com" method="POST" enctype="multipart/form-data" class="direct-upload">
@@ -108,8 +108,8 @@
 		  </form>
 		</div>
 		
-		
-        <div class="profile-picture"><a  id="openUploadModal"><img  src="{{userDetails.picture}}"  /></a></div>
+		{% raw %}
+        <div class="profile-picture" ><img  id="openUploadModal" src="{{userDetails.picture}}"  /></div>
         
         
           <div class="user-details">
