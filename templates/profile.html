@@ -14,20 +14,63 @@
   <script src="static/bower_components/flexslider/jquery.flexslider.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="static/bower_components/angular-flexslider/angular-flexslider.js"></script>
-    <!-- For image uploaded -->
-    <script src="static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
-    <script src="static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.min.js"></script>
-    <script src="static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
-    <script src="static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
-    <script src="static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
-    <script src="static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.min.js"></script>
+
  
 	<!-- GLORY -->
-	<link rel="stylesheet" href="/static/jAlert-master/src/jAlert-v3.css" />
-    <script src="static/jAlert-master/src/jAlert-v3.js"></script>
-    <script src="static/jAlert-master/src/jAlert-functions.js"></script>
+	
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
+    <script src="{{ url_for('.static', filename='jquery.ui.widget.js') }}"></script>
+    <script src="{{ url_for('.static', filename='jquery.fileupload.js') }}"></script>
+    <script src="{{ url_for('.static', filename='upload.js') }}"></script>
 
 
+
+<script>
+  $(function() {
+    var dialog, form,
+ 
+      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+      name = $( "#name" );
+ 
+
+	function changeProfilePic(){
+		$.get('/uploadprofilepicture', function(data){
+			location.reload(true);
+		})
+		
+		console.log("emtro")
+		
+	}
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 'auto',
+      width: 'auto',
+      modal: true,
+      buttons: {
+    	  "Submit": changeProfilePic,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+      }
+    });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      addUser();
+    });
+ 
+    $( "#openUploadModal" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+  });
+  </script>
+  
   </head>
   <body ng-app="myApp">
     {% raw %}
@@ -39,9 +82,36 @@
     </div>
 	<!-- BANER -->
     <div class="enclosure" ng-controller="profile">
+        
       <!-- User-Info, offers user details. -->
       <div class="user-info">
-        <div class="profile-picture"><img src="{{userDetails.picture}}"/></div>
+      	<!-- ----------- -->
+      	<!-- PROFILE PIC -->
+      	<!-- ----------- -->
+      	 
+      	<div id="dialog-form" title="Change Profile Picture">
+		 
+		  <form  action="https://filmshack.s3.amazonaws.com" method="POST" enctype="multipart/form-data" class="direct-upload">
+		    	<input type="hidden" name="key" value="" />
+      			<input type="hidden" name="AWSAccessKeyId" value="AKIAJMYLTY2I4EHYNUVA" />
+      			<input type="hidden" name="acl" value="public-read" />
+      			<input type="hidden" name="policy" value="" />
+      			<input type="hidden" name="signature" value="" />
+      			<input type="hidden" name="success_action_status" value="201" />
+		      	<label >Select Profile Picture</label> <br>
+		      	<img src="#" width="50%" height="50%" class="photo_file" />
+		      	<input name="file" type="file" />
+		 
+		      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+		      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		    
+		  </form>
+		</div>
+		
+		
+        <div class="profile-picture"><a  id="openUploadModal"><img  src="{{userDetails.picture}}"  /></a></div>
+        
+        
           <div class="user-details">
             {% endraw %} <div class="user-name">{{ current_user.username }} </div> {% raw %}
             <div class="user-rating"><img ng-src="/static/img/star-icon.svg" ng-repeat="i in getUserRating() track by $index"/></div>

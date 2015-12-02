@@ -1,4 +1,4 @@
-app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($scope, Upload, $timeout, $http) {
+app.controller('settings', ['$scope', '$timeout', '$http', function($scope, $timeout,$http) {
   $scope.profilePic = '';
   $scope.userDetails = {
     Names: '',
@@ -112,76 +112,8 @@ app.controller('settings', ['$scope', 'Upload', '$timeout', '$http', function($s
     $scope.accType = "Business";
   }
 
-
-  //----------------------------
-  // FILESSSS 
-  //----------------------------
-  console.log("entrando a la seccion de upload img");
-  AWS.config. update({accessKeyId: "AKIAJMYLTY2I4EHYNUVA", secretAccessKey: "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"});
-  AWS.config.region = 'us-east-1';
-
-  var bucket = new AWS.S3({params: {Bucket: 'filmshak'}});
-  var params = {Key: 'data.txt', Body: "hola"};
-  bucket.upload(params, function (err, data) {
-      alert(err ? 'ERROR!' : 'SAVED.');
-    });
-  
-  $scope.uploadFiles = function(file) {
-	  get_signed_request(file);
-	  /*
-	  console.log(file)
-	  console.log($scope.profilePic2)
-	  console.log(file.type)
-	  console.log(file['type'])
-	  console.log("entro")
-	  $http.post('/uploadprofilepicture', $scope.profilePic2).success(function(data){
-		  console.log(data.data);
-	  }).error(function(data){
-		  
-	  });
-	  /*
-	    file.upload = Upload.upload({
-	        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-	        data: {file: file, username: $scope.username},
-	      });
-
-	      file.upload.then(function (response) {
-	        $timeout(function () {
-	          file.result = response.data;
-	        });
-	      }, function (response) {
-	        if (response.status > 0)
-	          $scope.errorMsg = response.status + ': ' + response.data;
-	      }, function (evt) {
-	        // Math.min is to fix IE which reports 200% sometimes
-	        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-	      });*/
-	  /*
-	  $http.get('/signed_urls/' + file.name).success(function(data){
-		  
-		  Upload.upload({
-			    url: 'https://filmshack.s3.amazonaws.com', //S3 upload url including bucket name
-			    method: 'POST',
-			    data: {
-			        key: data.key, // the key to store the file on S3, could be file name or customized
-			        AWSAccessKeyId: "AKIAJMYLTY2I4EHYNUVA",
-			        acl: 'public-read', // sets the access to the uploaded file in the bucket: private, public-read, ...
-			        policy: data.policy, // base64-encoded json policy (see article below)
-			        signature: data.signature, // base64-encoded signature based on policy string (see article below)
-			        "Content-Type": file.type != '' ? file.type : 'application/octet-stream', // content type of the file (NotEmpty)
-			        filename: file.name, // this is needed for Flash polyfill IE8-9
-			        file: file
-			    }
-			});
-	  }).error(function(data){
-		  
-	  })*/
-
-  }
   
 
-  
-  //ng-change="{{userDetails.picture}} = files[0].name.toString()"
 
   $scope.onClickOpt = function (opt) {
         $scope.currentOpt = opt.url;

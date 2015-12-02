@@ -72,7 +72,9 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
     	$http.post('/adduserpost', $scope.data2sendPost).success(function(data){
     		location.reload(true)
     	}).error(function(data, status){
+    		/*
     		if(status == 404){
+    			
             	$.jAlert({
                     'title': data.title,
                     'content': data.data,
@@ -88,8 +90,16 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
                     'btns': { 'text': 'Close' },
                     'showAnimation': 'zoomIn'
                   });
-			}
+			}*/
     	});
+    };
+    
+
+    
+    
+    $scope.uploadPicDialog = function(){
+    	console.log("entro a upload picture dialog box");
+
     };
 
   }]);

@@ -12,8 +12,6 @@ from flask.ext.login import LoginManager, UserMixin, current_user, login_user, l
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.mail import Mail, Message
 from flask.ext.testing import TestCase
-import urlparse
-import os
 
 import sha
 import hmac
@@ -36,9 +34,7 @@ app.config['MYSQL_DATABASE_USER'] = "b0c31b0e5f6108"
 app.config['MYSQL_DATABASE_PASSWORD'] = "a28c9ca5243937f"
 app.config['MYSQL_DATABASE_HOST'] = "us-cdbr-iron-east-03.cleardb.net"
 app.config['MYSQL_DATABASE_DB'] = "heroku_d4e136b9b4dc6f5"
-app.config['FLASKS3_ACTIVE'] = True
-app.config['S3_BUCKET_NAME'] = 'filmshack'
-app.config['AWS_STORAGE_BUCKET_NAME'] = 'filmshack'
+app.config['AWS_S3_BUCKET'] = 'filmshack'
 app.config['AWS_ACCESS_KEY_ID'] = 'AKIAJMYLTY2I4EHYNUVA'
 app.config['AWS_SECRET_ACCESS_KEY'] = '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'
 app.config['SECRET_KEY'] = 'SET T0 4NY SECRET KEY L1KE RAND0M H4SH'
@@ -65,7 +61,8 @@ app.config.update(dict(
 
 
 
-global genres
+global genres, newImgTitle
+newImgTitle = ""
 genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Thriller","War","Western"]
 
 mail = Mail(app)
@@ -97,28 +94,34 @@ def hello():
     return render_template('profile.html')
 
 
-@app.route('/uploadprofilepicture', methods=['POST'])
-def upload_profile_pic():
-    print "Extrayendo foto para profile pic"
-    data =  request.file
-    #print data['file']
-    return jsonify({'data': "entro"})
 
-
-# Views
-@app.route('/')
-def index():
+@app.route('/upload')
+def upload():
     return render_template('index.html')
+
+@app.route('/uploadprofilepicture')
+def upload_profile_pic():
+    global newImgTitle
+
+    profilaPicPath = "https://s3.amazonaws.com/filmshack/uploads/" + str(current_user.username) + '/' + newImgTitle
+    print "profilaPicPath"
+    
+    conn = mysql.connect()
+    cur = conn.cursor()
+    cur.callproc('changeProfilePicture', (profilaPicPath, current_user.username))
+    conn.commit()
+    conn.close()
+    
+    return jsonify({'data': "se cambio la imagen"})
 
 
 @app.route('/signed_urls')
 def signed_urls():
-
     def make_policy():
         policy_object = {
             'expiration': (datetime.now() + timedelta(hours=24)).strftime('%Y-%m-%dT%H:%M:%S.000Z'),
             'conditions': [
-                {'bucket': 'filmshack'},
+                {'bucket': app.config['AWS_S3_BUCKET']},
                 {'acl': 'public-read'},
                 ['starts-with', '$key', 'uploads/'],
                 {'success_action_status': '201'}
@@ -127,19 +130,25 @@ def signed_urls():
         return b64encode(dumps(policy_object))
 
     def sign_policy(policy):
-        return b64encode(hmac.new("aGrN6yQoOgMrvrKYaxe0wgJTUkV+wGklvOCxy2BB", policy, sha).digest())
+        return b64encode(hmac.new(app.config['AWS_SECRET_ACCESS_KEY'], policy, sha).digest())
 
-    #path = current_user.email + "/" + title
-    path = uuid4().hex + '/' + "solo intentando"
+    title = request.args['title']
+    path = str(current_user.username) + '/' + title
+    global newImgTitle
+    newImgTitle = title
     policy = make_policy()
-    print ":esdgf"
+
     return jsonify({
-        'expires': policy['expitation'],
         'policy': policy,
         'signature': sign_policy(policy),
-        'key': 'uploads/' + path,
+        'key': 'uploads/' +  path,
         'success_action_redirect': '/',
     })
+    
+
+
+
+
 
 
 @app.route('/login')
@@ -483,6 +492,7 @@ class User(UserMixin):
                 self.quote = x['quote']
                 self.image = x['image']
                 self.email = x['email']
+                self.newImgUrl = ''
         #self.username = self.users['username']
 
     def verify_password(self, password):

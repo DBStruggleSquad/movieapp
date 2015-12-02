@@ -14,28 +14,13 @@
       <script src="/static/bower_components/angular-flexslider/angular-flexslider.js"></script>
       <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
-      <!-- For image uploaded -->
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.min.js"></script>
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload.js"></script>
-      <script src="/static/bower_components/ng-file-upload-bower-9.0.9/ng-file-upload-all.js"></script>
+      <!--  GLORY -->
+	  <link rel="stylesheet" href="/static/jAlert-master/src/jAlert-v3.css" />
+      <script src="static/jAlert-master/src/jAlert-v3.js"></script>
+      <script src="static/jAlert-master/src/jAlert-functions.js"></script>
+
       
-          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
-    
-    <!--  GLORY -->
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.19.min.js"></script>
-	<link rel="stylesheet" href="/static/jAlert-master/src/jAlert-v3.css" />
-    <script src="static/jAlert-master/src/jAlert-v3.js"></script>
-    <script src="static/jAlert-master/src/jAlert-functions.js"></script>
-    <!-- 
-      <script src="/static/jquery.ui.widget.js"></script>
-      <script src="/static/jquery.fileupload.js"></script>
-      <script src="/static/upload.js"></script>  -->
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+
   </head>
   <body ng-app="myApp">
 	{% raw %}
@@ -81,28 +66,8 @@
       <div class="profile-settings">
           <form>
               <fieldset>
-              <!-- ----------------- -->
-              <!-- 	PROFILE PICTURE  -->
-              <!-- ----------------- -->
                   <legend><h4>Personal Profile</h4></legend>
-                  <ul>
-                      <li ng-click="toggleActive(service)" ng-class="{active:service.active}">
-                          	<div>
-                              	<p><strong>Profile Picture</strong></p><br>
-	                      		<img id="profilpic" ng-show="profilePic2 == null" ng-change="" src="{{userDetails.picture}}" style="text-indent: 2em;" class="drop-box" ng-model="profilePic2" ngf-select  ngf-drop  accept="image/*" ngf-pattern="'image/*'" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-capture="'camera'" >   </img>
-								
-								<img class="after-drop" ng-show="profilePic2 != null" ngf-src="profilePic2">
-								<br>
-	                            <span ng-show="profilePic2">
-	                            	<button ng-click="uploadFiles(profilePic2)">Submit</button><button ng-click="profilePic2 = null">Cancel</button>
-									<span class="progress" ng-show= "progress >=0 && progress < 100"))>
-                                		<div class="progress" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-                            		</span >  
-	                            </span>
-	                            
- 	
-                          	</div>
-                      </li>                          
+                  <ul>                        
                         <li ng-click="toggleModal('Quote')" ng-class="{active:service.active}">
                             <div>
                             <p ><strong>Quote</strong></p><br><p style="text-indent: 2em;">{{ userDetails.Quote }}</p>
@@ -213,4 +178,3 @@
 	{% endraw %}
   </body>
 </html>
-
