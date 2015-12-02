@@ -63,7 +63,12 @@ app.controller('profile', ['$scope', '$http', function($scope,$http) {
       return tabUrl == $scope.currentTab;
     };
 
-
+    $scope.goToSelectedMovie = function(movieTitle){
+        localStorage.removeItem("movieTitle");
+        localStorage.setItem("movieTitle", movieTitle);
+        window.location.href = "/movie-profile?" + movieTitle;
+    };
+    
     //--------------------
     //	POST CODE
     //--------------------

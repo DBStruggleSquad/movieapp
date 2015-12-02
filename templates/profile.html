@@ -80,8 +80,10 @@
         <div class="filmshack-logo">filmshack</div>
         <div class="logout"><img ng-controller="logoutNav" ng-click="logout()" ng-src="/static/img/logout-icon.svg"></img></div>
     </div>
+    
+    
 	<!-- BANER -->
-    <div class="enclosure" ng-controller="profile">
+    <div class="enclosure" ng-controller="profile" >
         
       <!-- User-Info, offers user details. -->
       <div class="user-info">
@@ -156,11 +158,11 @@
         <div class="review-post" ng-repeat="review in userReview" ng-include="'static/directives/userProfileReviewPost2.html'"></div>
     </script>
 
-    </div>
+ 
 
     <!-- Botton part of the page -->
     <!-- Navigation, contains buttons that navigate user through app.-->
-    <nav class="navigation" ng-include="'static/directives/navigation.html'"></nav>
+    <div class="navigation" ng-include="'static/directives/navigation.html'" ></div>
 
     <!-- Modules -->
     <script src="static/js/app.js"></script>
